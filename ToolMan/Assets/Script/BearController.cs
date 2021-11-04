@@ -8,7 +8,7 @@ public class BearController : MonoBehaviour
 
     [SerializeField] private CharacterController characterController;
     private Animator animator;
-    public int cc = 0;
+    public string hi = "hi";
 
     /*[SerializeField] private float movementSpeed, rotationSpeed, gravity;
 
