@@ -5,8 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class ToolableMan : MonoBehaviour
 {
-    [SerializeField] private CharacterController characterController;
-    private Animator animator;
+    protected Animator animator;
     // Start is called before the first frame update
     void Start()
     {
