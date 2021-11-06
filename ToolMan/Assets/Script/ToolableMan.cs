@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(Animator))]
-public class ToolMan : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+public class ToolableMan : MonoBehaviour
 {
     [SerializeField] private CharacterController characterController;
     private Animator animator;
