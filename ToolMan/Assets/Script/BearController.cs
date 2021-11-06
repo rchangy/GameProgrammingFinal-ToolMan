@@ -2,41 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(Animator))]
+[RequireComponent(typeof(Animator))]
 public class BearController : MonoBehaviour
 {
 
-    [SerializeField] private CharacterController characterController;
     private Animator animator;
-    public string hi = "hi";
-
-    /*[SerializeField] private float movementSpeed, rotationSpeed, gravity;
-
-    private Vector3 movementDirection = Vector3.zero;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        characterController = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
-        Debug.Log("start: " + transform.position);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // movement
-        Vector3 inputMovement = transform.forward * movementSpeed * Input.GetAxisRaw("Vertical");
-        characterController.Move(inputMovement * Time.deltaTime);
-
-        transform.Rotate(Vector3.up * Input.GetAxisRaw("Horizontal") * rotationSpeed);
-
-        // gravity (position.y will change according to the height of ground)
-        movementDirection.y -= gravity * Time.deltaTime;
-        characterController.Move(movementDirection * Time.deltaTime);
-
-        animator.SetBool("isWalking", Input.GetAxisRaw("Vertical") != 0);
-    }*/
 
     public Transform mainCameraTrans;
 
@@ -59,9 +29,8 @@ public class BearController : MonoBehaviour
 
             // Move
             Vector3 adjustedMovement = Quaternion.Euler(0, movementAngle, 0) * Vector3.forward; // Relative to mainCameraTrans
-            Debug.Log(adjustedMovement.magnitude);
-            characterController.Move(adjustedMovement * speed * Time.deltaTime);
-
+            adjustedMovement *= speed * Time.deltaTime;
+            transform.position += adjustedMovement;
         }
 
     }
