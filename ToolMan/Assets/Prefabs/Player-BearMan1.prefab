@@ -30,6 +30,71 @@ Transform:
   m_Father: {fileID: 8141339150432000742}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8120786503782209308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1601789046289456249}
+  - component: {fileID: 8972650360473710299}
+  - component: {fileID: 8198801430979652084}
+  m_Layer: 6
+  m_Name: GarbPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1601789046289456249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8120786503782209308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.22, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8141339150432000742}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8972650360473710299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8120786503782209308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91fa2a05c17e5463ca73b483eac56810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabRange: 1.5
+  toolLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  grabbing: 0
+--- !u!54 &8198801430979652084
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8120786503782209308}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &8606767771017526541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -223,7 +288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 816fbe1386d85d9408411f20b311c8c7, type: 3}
       propertyPath: m_Name
-      value: BearMan1
+      value: Player-BearMan1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 816fbe1386d85d9408411f20b311c8c7, type: 3}
       propertyPath: m_Layer
@@ -343,7 +408,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -405,7 +470,7 @@ MonoBehaviour:
   AttackPoint: {fileID: 209168356}
   AttackDelay: 0
   AttackRange: 0.5
---- !u!114 &498561815
+--- !u!114 &4508876683697008210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -414,9 +479,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8912632999888715868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 866d56d72122d91469ad3445381addd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 20557317c6f5148fcb4ad920dccaaab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTool: 0
   mainCameraTrans: {fileID: 0}
-  speed: 10
+  speed: 5
+  jumpForce: 300
+  maxJumpCount: 2
+  currentJumpCount: 0
   combat: {fileID: 498561814}

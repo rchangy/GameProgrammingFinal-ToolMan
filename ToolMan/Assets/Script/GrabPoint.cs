@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GrabPoint : MonoBehaviour
 {
+    public float grabRange = 1.5f;
+    public LayerMask toolLayer;
+
     GameObject targetTool;
     public bool grabbing = false;
 
@@ -12,7 +13,7 @@ public class GrabPoint : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-    }
+   }
 
     // Update is called once per frame
     void Update()
@@ -24,6 +25,13 @@ public class GrabPoint : MonoBehaviour
             else
                 Grab();
         }
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange, toolLayer);
+        foreach (Collider collider in colliders) { targetTool = collider.gameObject; }
+        if (colliders.Length == 0)
+            targetTool = null;
+        //else
+        //    Debug.Log("sth to grab:))");
     }
 
     private void Grab() {
@@ -46,14 +54,8 @@ public class GrabPoint : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnDrawGizmos()
     {
-        if (other.gameObject.CompareTag("Tool"))
-            targetTool = other.gameObject;
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Tool"))
-            targetTool = null;
+        Gizmos.DrawWireSphere(transform.position, grabRange);
     }
 }
