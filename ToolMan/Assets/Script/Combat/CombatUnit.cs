@@ -13,7 +13,7 @@ public abstract class CombatUnit : MonoBehaviour
         set
         {
             _health = Mathf.Max(0, value);
-            
+            _health = Mathf.Min(MaxHealth, _health);
             // change health bar
             if(healthBar != null) healthBar.SetHealth(_health);
             if (_health <= 0) Die();
@@ -34,10 +34,7 @@ public abstract class CombatUnit : MonoBehaviour
         set
         {
             _hasAttacked = value;
-            if (_hasAttacked)
-            {
-                _timeToNextAttack = AttackInterval;
-            }
+            if (_hasAttacked) _timeToNextAttack = AttackInterval;
         }
     }
 
@@ -76,6 +73,12 @@ public abstract class CombatUnit : MonoBehaviour
     {
         Debug.LogFormat("[{0}] Took {1} Damage", name, dmg);
         Health -= dmg;
+    }
+
+    public virtual void Healed(int heal)
+    {
+        Debug.LogFormat("[{0}] Healed {1}", name, heal);
+        Health += heal;
     }
 
     public virtual void Die()

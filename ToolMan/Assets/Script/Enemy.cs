@@ -11,23 +11,27 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected string Name;
 
-    [SerializeField] protected HealthBar healthBar;
+    //[SerializeField] protected HealthBar healthBar;
 
-    [SerializeField] protected int TotalHP;
-    private int _hp;
-    public int HP
-    {
-        get => _hp;
-        set
-        {
-            _hp = Mathf.Max(0, value);
-            healthBar.SetHealth(_hp);
-            if (_hp == 0) Die();
-        }
-    }
+    //[SerializeField] protected int TotalHP;
+    //private int _hp;
+    //public int HP
+    //{
+    //    get => _hp;
+    //    set
+    //    {
+    //        _hp = Mathf.Max(0, value);
+    //        healthBar.SetHealth(_hp);
+    //        if (_hp == 0) Die();
+    //    }
+    //}
 
     public MeleeCombatUnit combat;
-    
+
+    private Transform closestPlayer
+    {
+        get => GetClosestplayer();
+    }
 
     // Patrol
     protected Vector3 walkPoint;
@@ -84,8 +88,8 @@ public class Enemy : MonoBehaviour
         }
 
         // initialize attributes
-        healthBar.SetMaxHealth(TotalHP);
-        HP = TotalHP;
+        //healthBar.SetMaxHealth(TotalHP);
+        //HP = TotalHP;
         AttackInterval = InitAttackInterval;
         AttackRange = InitAttackRange;
     }
@@ -120,24 +124,14 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Chase Mode");
         // compare two players position and chase the closest
-        Transform closestPlayer = GetClosestplayer();
         EnemyAgent.SetDestination(closestPlayer.position);
     }
 
     protected virtual void Attack()
     {
         EnemyAgent.SetDestination(transform.position);
-
-        //if (!AlreadyAttacked)
-        //{
-        //    // attack
-        //    // TODO
-        //    Debug.LogFormat("[{0}] Enemy Attacked", Name);
-        //    AlreadyAttacked = true;
-        //    Invoke(nameof(ResetAttack), AttackInterval);
-        //}
+        transform.LookAt(closestPlayer);
         combat.Attack();
-
     }
 
     protected virtual void ResetAttack()
@@ -173,15 +167,6 @@ public class Enemy : MonoBehaviour
             }
         }
         return target;
-    }
-
-    protected virtual void Damaged(int dmg)
-    {
-        this.HP -= dmg;
-    }
-    protected virtual void Healed(int heal)
-    {
-        this.HP += heal;
     }
 
     protected virtual void Die()
