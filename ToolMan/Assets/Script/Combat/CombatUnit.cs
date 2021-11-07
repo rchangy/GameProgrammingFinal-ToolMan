@@ -24,8 +24,7 @@ public abstract class CombatUnit : MonoBehaviour
     public LayerMask TargetLayers;
 
     public int Atk;
-    public float AttackRange;
-
+    
     public float AttackInterval;
     protected float _timeToNextAttack;
     protected bool _hasAttacked;

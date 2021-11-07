@@ -5,6 +5,8 @@ public class MeleeCombatUnit : CombatUnit
 {
     public Transform AttackPoint;
     public float AttackDelay;
+    public float AttackRange;
+
 
     public override void Attack()
     {
