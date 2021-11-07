@@ -6,10 +6,11 @@ using UnityEngine;
 public class ToolableMan : MonoBehaviour
 {
     protected Animator animator;
+    protected GameObject grabPoint;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //grabPoint = gameObject.transform.Find("GrabPoint").gameObject;
     }
 
     // Update is called once per frame
@@ -56,5 +57,6 @@ public class ToolableMan : MonoBehaviour
         animator.SetBool("isSword", false);
         animator.SetBool("isBoomerang", false);
         animator.SetBool("isPickaxe", false);
+        grabPoint.transform.localPosition = new Vector3(0.0f, -1.2f, 0.0f);
     }
 }

@@ -2,34 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class testBearManAnimation : ToolableMan
+public class testBearManAnimation : MonoBehaviour
 {
+    protected Animator animator;
+    protected GameObject grabPoint;
+    /* Pickaxe, Shield, */
+    List<Tool> tools = new List<Tool>();
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        grabPoint = gameObject.transform.Find("GrabPoint").gameObject;
         toMan();
         animator.SetFloat("velocity_x", 0.0f);
         animator.SetBool("inFlight", false);
         animator.SetBool("isGrounded", true);
         animator.SetBool("isSpinning", false);
         animator.SetBool("Attacking", false);
+        tools.Add(new Pickaxe(animator, grabPoint));
+        tools.Add(new Shield(animator, grabPoint));
+        tools.Add(new FlashBomb(animator, grabPoint));
+        tools.Add(new Boomerang(animator, grabPoint));
+        tools.Add(new LightSaber(animator, grabPoint));
+        Debug.Log(tools[0].getGrabPoint().transform.localPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(tools[0].getGrabPoint().transform.localPosition);
         if (Input.GetKey(KeyCode.M))
         {
             toMan();
         }
         else if (Input.GetKey(KeyCode.P))
         {
-            toPickaxe();
+            tools[0].toTool();
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            toShield();
+            tools[1].toTool();
+        }
+        else if (Input.GetKey(KeyCode.F))
+        {
+            tools[2].toTool();
+        }
+        else if (Input.GetKey(KeyCode.B))
+        {
+            tools[3].toTool();
+        }
+        else if (Input.GetKey(KeyCode.W))
+        {
+            tools[4].toTool();
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
@@ -39,5 +63,15 @@ public class testBearManAnimation : ToolableMan
         {
             animator.SetBool("Attacking", false);
         }
+    }
+    protected void toMan()
+    {
+        animator.SetBool("isTool", false);
+        animator.SetBool("isShield", false);
+        animator.SetBool("isFlashBomb", false);
+        animator.SetBool("isSword", false);
+        animator.SetBool("isBoomerang", false);
+        animator.SetBool("isPickaxe", false);
+        grabPoint.transform.localPosition = new Vector3(0.0f, -1.2f, 0.0f);
     }
 }
