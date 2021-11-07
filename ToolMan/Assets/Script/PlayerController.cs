@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     // ==== Components ====
     private Animator animator;
     private Rigidbody rb;
-    private BoxCollider playerCollider;
+    private CapsuleCollider playerCollider;
 
     int playerNum = 1; // player 1 or player 2
     public bool isTool = false;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public float jumpForce = 300;
    
-    public int maxJumpCount = 2; // It can actaully jump once more 
+    public int maxJumpCount = 1; // It can actaully jump once more 
     public int currentJumpCount = 0;
 
     private float distToGround;
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        playerCollider = GetComponent<BoxCollider>();
+        playerCollider = GetComponent<CapsuleCollider>();
         distToGround = playerCollider.bounds.extents.y;
     }
 
