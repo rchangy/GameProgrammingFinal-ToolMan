@@ -5,32 +5,32 @@ using UnityEngine;
 public class testBearManAnimation : MonoBehaviour
 {
     protected Animator animator;
-    protected GameObject grabPoint;
+    protected GameObject grabbedPoint;
     /* Pickaxe, Shield, */
     List<Tool> tools = new List<Tool>();
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        grabPoint = gameObject.transform.Find("GrabPoint").gameObject;
+        grabbedPoint = gameObject.transform.Find("GrabbedPoint").gameObject;
         toMan();
         animator.SetFloat("velocity_x", 0.0f);
         animator.SetBool("inFlight", false);
         animator.SetBool("isGrounded", true);
         animator.SetBool("isSpinning", false);
         animator.SetBool("Attacking", false);
-        tools.Add(new Pickaxe(animator, grabPoint));
-        tools.Add(new Shield(animator, grabPoint));
-        tools.Add(new FlashBomb(animator, grabPoint));
-        tools.Add(new Boomerang(animator, grabPoint));
-        tools.Add(new LightSaber(animator, grabPoint));
-        Debug.Log(tools[0].getGrabPoint().transform.localPosition);
+        tools.Add(new Pickaxe(animator, grabbedPoint));
+        tools.Add(new Shield(animator, grabbedPoint));
+        tools.Add(new FlashBomb(animator, grabbedPoint));
+        tools.Add(new Boomerang(animator, grabbedPoint));
+        tools.Add(new LightSaber(animator, grabbedPoint));
+        Debug.Log(tools[0].getGrabbedPoint().transform.localPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(tools[0].getGrabPoint().transform.localPosition);
+        Debug.Log(tools[0].getGrabbedPoint().transform.localPosition);
         if (Input.GetKey(KeyCode.M))
         {
             toMan();
@@ -72,6 +72,6 @@ public class testBearManAnimation : MonoBehaviour
         animator.SetBool("isSword", false);
         animator.SetBool("isBoomerang", false);
         animator.SetBool("isPickaxe", false);
-        grabPoint.transform.localPosition = new Vector3(0.0f, -1.2f, 0.0f);
+        grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.2f, 0.0f);
     }
 }

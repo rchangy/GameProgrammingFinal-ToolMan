@@ -4,21 +4,21 @@ using UnityEngine;
 
 public abstract class Tool
 {
-    protected GameObject grabPoint;
+    protected GameObject grabbedPoint;
     protected Animator animator;
     public void setAnimator(Animator animator)
     {
         this.animator = animator;
     }
     
-    public GameObject getGrabPoint()
+    public GameObject getGrabbedPoint()
     {
-        return grabPoint;
+        return grabbedPoint;
     }
 
-    public void setGrabPoint(GameObject grabPoint)
+    public void setGrabbedPoint(GameObject grabPoint)
     {
-        this.grabPoint = grabPoint;
+        this.grabbedPoint = grabPoint;
     }
 
     public abstract void toTool();
