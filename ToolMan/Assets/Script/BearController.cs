@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(Animator))]
 public class BearController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class BearController : MonoBehaviour
     [SerializeField] private float speed = 5;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
+
+    public CombatUnit combat;
 
     private void Update()
     {
@@ -32,6 +35,9 @@ public class BearController : MonoBehaviour
             adjustedMovement *= speed * Time.deltaTime;
             transform.position += adjustedMovement;
         }
-
+        if (Input.GetKeyDown("space"))
+        {
+            combat.Attack();
+        }
     }
 }

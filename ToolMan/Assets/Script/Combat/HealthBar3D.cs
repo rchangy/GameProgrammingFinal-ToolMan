@@ -9,6 +9,6 @@ public class HealthBar3D : MonoBehaviour
     private void LateUpdate()
     {
         _healthBar.position = _cam.WorldToScreenPoint(_targetObject.position + _posOffset);
-        Debug.Log(_targetObject.position);
+        //Debug.Log(_targetObject.position);
     }
 }

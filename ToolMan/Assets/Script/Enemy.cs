@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour
             if (_hp == 0) Die();
         }
     }
+
+    public MeleeCombatUnit combat;
     
 
     // Patrol
@@ -124,17 +126,17 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Attack()
     {
-        Debug.Log("Attack Mode");
         EnemyAgent.SetDestination(transform.position);
 
-        if (!AlreadyAttacked)
-        {
-            // attack
-            // TODO
-            Debug.LogFormat("[{0}] Enemy Attacked", Name);
-            AlreadyAttacked = true;
-            Invoke(nameof(ResetAttack), AttackInterval);
-        }
+        //if (!AlreadyAttacked)
+        //{
+        //    // attack
+        //    // TODO
+        //    Debug.LogFormat("[{0}] Enemy Attacked", Name);
+        //    AlreadyAttacked = true;
+        //    Invoke(nameof(ResetAttack), AttackInterval);
+        //}
+        combat.Attack();
 
     }
 
