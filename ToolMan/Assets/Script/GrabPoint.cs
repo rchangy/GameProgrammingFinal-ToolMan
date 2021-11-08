@@ -3,35 +3,44 @@ using UnityEngine;
 public class GrabPoint : MonoBehaviour
 {
     public float grabRange = 1.5f;
-    public LayerMask toolLayer;
-
+    public LayerMask grabbedPointLayer;
     GameObject targetTool;
     public bool grabbing = false;
 
     Rigidbody rb;
+    PlayerController player;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-   }
+    }
+
+    public void setPlayer(PlayerController p) { player = p;  }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (!player.isTool)
         {
-            if (grabbing)
-                Release();
-            else
-                Grab();
-        }
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                if (grabbing)
+                    Release();
+                else
+                    Grab();
+            }
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange, toolLayer);
-        foreach (Collider collider in colliders) { targetTool = collider.gameObject; }
-        if (colliders.Length == 0)
-            targetTool = null;
-        //else
-        //    Debug.Log("sth to grab:))");
+            Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange, grabbedPointLayer);
+            foreach (Collider collider in colliders)
+            {
+                if (collider.gameObject != gameObject)
+                    targetTool = collider.gameObject;
+            }
+            if (colliders.Length == 0)
+                targetTool = null;
+            //else
+            //    Debug.Log("sth to grab:))");
+        }
     }
 
     private void Grab() {
