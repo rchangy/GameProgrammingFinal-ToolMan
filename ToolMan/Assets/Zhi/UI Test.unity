@@ -552,6 +552,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1670914937}
+  - component: {fileID: 1670914939}
+  - component: {fileID: 1670914938}
   m_Layer: 0
   m_Name: Player-BearMan1 (Missing Prefab)
   m_TagString: Untagged
@@ -573,6 +575,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1670914938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670914936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe88b78117c8f4ff98d595d9296741ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 0
+  healthBar: {fileID: 0}
+  TargetLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  Atk: 0
+  AttackInterval: 0
+  Anim: {fileID: 0}
+  skillDatas: []
+--- !u!114 &1670914939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670914936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9f49e76dfa7c4324972b1fbd193cca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 0
+  healthBar: {fileID: 0}
+  TargetLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  Atk: 0
+  AttackInterval: 0
+  Anim: {fileID: 0}
+  skillDatas: []
+  AttackPoint: {fileID: 0}
+  AttackDelay: 0
+  AttackRange: 0
 --- !u!1 &1685577963
 GameObject:
   m_ObjectHideFlags: 0
