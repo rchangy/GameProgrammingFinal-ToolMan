@@ -7,7 +7,6 @@ public class MeleeCombatUnit : CombatUnit
     public float AttackDelay;
     public float AttackRange;
 
-
     public override void Attack()
     {
         if (HasAttacked) return;
