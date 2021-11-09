@@ -5,10 +5,11 @@ using UnityEngine;
 public class Shield : Tool
 {
 
-    public Shield(Animator animator, GameObject grabPoint)
+    public Shield(Animator animator, GameObject grabPoint, Rigidbody playerRD)
     {
         setAnimator(animator);
         setGrabbedPoint(grabPoint);
+        setPlayerRD(playerRD);
     }
 
     public override void toTool()

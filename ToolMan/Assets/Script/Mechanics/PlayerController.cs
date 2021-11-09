@@ -49,14 +49,14 @@ public class PlayerController : MonoBehaviour
 
         if (playerNum == 1)
         {
-            tools.Add(new Pickaxe(animator, grabbedPoint));
-            tools.Add(new Boomerang(animator, grabbedPoint));
+            tools.Add(new Pickaxe(animator, grabbedPoint, rb));
+            tools.Add(new Boomerang(animator, grabbedPoint, rb));
         }
         else if (playerNum == 2)
         {
-            tools.Add(new Shield(animator, grabbedPoint));
-            tools.Add(new FlashBomb(animator, grabbedPoint));
-            tools.Add(new LightSaber(animator, grabbedPoint));
+            tools.Add(new Shield(animator, grabbedPoint, rb));
+            tools.Add(new FlashBomb(animator, grabbedPoint, rb));
+            tools.Add(new LightSaber(animator, grabbedPoint, rb));
         }
 
         distToGround = playerCollider.bounds.extents.y;

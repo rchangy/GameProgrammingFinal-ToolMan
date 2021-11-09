@@ -5,10 +5,11 @@ using UnityEngine;
 public class Boomerang : Tool
 {
 
-    public Boomerang(Animator animator, GameObject grabPoint)
+    public Boomerang(Animator animator, GameObject grabPoint, Rigidbody playerRD)
     {
         setAnimator(animator);
         setGrabbedPoint(grabPoint);
+        setPlayerRD(playerRD);
     }
 
     public override void toTool()

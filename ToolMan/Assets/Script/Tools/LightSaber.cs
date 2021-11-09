@@ -5,10 +5,11 @@ using UnityEngine;
 public class LightSaber : Tool
 {
 
-    public LightSaber(Animator animator, GameObject grabPoint)
+    public LightSaber(Animator animator, GameObject grabPoint, Rigidbody playerRD)
     {
         setAnimator(animator);
         setGrabbedPoint(grabPoint);
+        setPlayerRD(playerRD);
     }
 
     public override void toTool()

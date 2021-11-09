@@ -5,10 +5,11 @@ using UnityEngine;
 public class FlashBomb : Tool
 {
 
-    public FlashBomb(Animator animator, GameObject grabPoint)
+    public FlashBomb(Animator animator, GameObject grabPoint, Rigidbody playerRD)
     {
         setAnimator(animator);
         setGrabbedPoint(grabPoint);
+        setPlayerRD(playerRD);
     }
 
     public override void toTool()

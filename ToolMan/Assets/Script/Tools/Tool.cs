@@ -6,6 +6,7 @@ public abstract class Tool
 {
     protected GameObject grabbedPoint;
     protected Animator animator;
+    protected Rigidbody playerRD;
     public void setAnimator(Animator animator)
     {
         this.animator = animator;
@@ -19,6 +20,11 @@ public abstract class Tool
     public void setGrabbedPoint(GameObject grabPoint)
     {
         this.grabbedPoint = grabPoint;
+    }
+
+    public void setPlayerRD(Rigidbody playerRD)
+    {
+        this.playerRD = playerRD;
     }
 
     public abstract void toTool();

@@ -19,11 +19,11 @@ public class testBearManAnimation : MonoBehaviour
         animator.SetBool("isGrounded", true);
         animator.SetBool("isSpinning", false);
         animator.SetBool("Attacking", false);
-        tools.Add(new Pickaxe(animator, grabbedPoint));
-        tools.Add(new Shield(animator, grabbedPoint));
-        tools.Add(new FlashBomb(animator, grabbedPoint));
-        tools.Add(new Boomerang(animator, grabbedPoint));
-        tools.Add(new LightSaber(animator, grabbedPoint));
+        //tools.Add(new Pickaxe(animator, grabbedPoint));
+        //tools.Add(new Shield(animator, grabbedPoint));
+        //tools.Add(new FlashBomb(animator, grabbedPoint));
+        //tools.Add(new Boomerang(animator, grabbedPoint));
+        //tools.Add(new LightSaber(animator, grabbedPoint));
         Debug.Log(tools[0].getGrabbedPoint().transform.localPosition);
     }
 
