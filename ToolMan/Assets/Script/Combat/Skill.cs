@@ -4,13 +4,17 @@ using System.Collections;
 /*
  * defines an attack
 */
-[System.Serializable]
-public abstract class Skill
+public abstract class Skill : MonoBehaviour
 {
-    public int a;
-    public abstract void Attack(int Atk);
-    protected IEnumerator ExecuteAfterTime(float time)
-    {
-        yield return new WaitForSeconds(time);
-    }
+    public string SkillName;
+    public float attackInterval;
+    public float attackDelay;
+    // shooting point or attack point
+    public Transform attackPoint;
+
+
+    public abstract IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat , int Atk);
+
+
+    
 }

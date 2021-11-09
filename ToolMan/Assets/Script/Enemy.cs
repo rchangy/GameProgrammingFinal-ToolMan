@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     //    }
     //}
 
-    public MeleeCombatUnit combat;
+    public CombatUnit combat;
 
     private Transform closestPlayer
     {
