@@ -22,7 +22,7 @@ public class GrabPoint : MonoBehaviour
     {
         if (!player.isTool)
         {
-            if (Input.GetKeyDown(KeyCode.G))
+            if ( (Input.GetButtonDown("Grab1") ) || (Input.GetButtonDown("Grab2")) )
             {
                 if (grabbing)
                     Release();
