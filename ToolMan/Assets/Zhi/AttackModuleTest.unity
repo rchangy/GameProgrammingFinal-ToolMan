@@ -216,114 +216,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &134753982 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 134753982, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
-  m_PrefabInstance: {fileID: 636251304}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe88b78117c8f4ff98d595d9296741ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &194646643
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 194646645}
-  - component: {fileID: 194646644}
-  m_Layer: 0
-  m_Name: melee1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &194646644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194646643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3435084182dbe478e84a6fab394b90c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInterval: 1
-  attackDelay: 0
-  attackRange: 4
---- !u!4 &194646645
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194646643}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 200190581}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &200190581 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1840537491, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
-  m_PrefabInstance: {fileID: 636251304}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &465110348
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 465110349}
-  - component: {fileID: 465110350}
-  m_Layer: 6
-  m_Name: LightSaber
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &465110349
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465110348}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1800183904}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &465110350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465110348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3435084182dbe478e84a6fab394b90c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInterval: 0
-  attackDelay: 0
-  attackRange: 0
 --- !u!1001 &636251304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -331,38 +223,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 134753982, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
-      propertyPath: Atk
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 134753982, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
-      propertyPath: currentUsingSkillName
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 134753982, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
-      propertyPath: CurrentUsingSkillSet.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 134753982, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
-      propertyPath: CurrentUsingSkillSet.Array.data[0]
-      value: melee1
-      objectReference: {fileID: 0}
     - target: {fileID: 770012749, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
       propertyPath: _cam
       value: 
       objectReference: {fileID: 718783134}
-    - target: {fileID: 1207400451, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
-      propertyPath: combat
-      value: 
-      objectReference: {fileID: 134753982}
-    - target: {fileID: 1840537490, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
-      propertyPath: skills.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1840537490, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
-      propertyPath: skills.Array.data[0]
-      value: 
-      objectReference: {fileID: 194646644}
     - target: {fileID: 8145379251561204746, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -496,54 +360,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &949013761 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4062801502498740368, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
-  m_PrefabInstance: {fileID: 1179989579}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &949013762 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3686804171520737834, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
-  m_PrefabInstance: {fileID: 1179989579}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &949013763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949013761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe88b78117c8f4ff98d595d9296741ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanAttack: 0
-  CanBeHurt: 0
-  CanMove: 0
-  MaxHealth: 100
-  healthBar: {fileID: 0}
-  Atk: 10
-  Anim: {fileID: 949013765}
-  TargetLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  availableSkillSet: {fileID: 1800183905}
-  CurrentUsingSkillSet:
-  - LightSaber
-  - Shield
-  - FlashBomb
-  currentUsingSkillName: LightSaber
---- !u!95 &949013765 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2087304166, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
-  m_PrefabInstance: {fileID: 1179989579}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &949013767 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 2087304163, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
-  m_PrefabInstance: {fileID: 1179989579}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1179989579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -551,10 +367,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2087304165, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
-      propertyPath: combat
-      value: 
-      objectReference: {fileID: 949013763}
     - target: {fileID: 2087304165, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
       propertyPath: mainCameraTrans
       value: 
@@ -607,55 +419,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2087304164, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
---- !u!1 &1362123652
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1362123653}
-  - component: {fileID: 1362123654}
-  m_Layer: 6
-  m_Name: Shield
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1362123653
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362123652}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1800183904}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1362123654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362123652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f73dce4bba2747bcba1ef409400120f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInterval: 0
-  attackDelay: 0
-  attackRange: 0
 --- !u!1001 &1425725489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -713,104 +478,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a3a7e7e162cb42f5841b34e19575da7, type: 3}
---- !u!1 &1800183903
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1800183904}
-  - component: {fileID: 1800183905}
-  m_Layer: 6
-  m_Name: AvailableSkills
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1800183904
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800183903}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 465110349}
-  - {fileID: 1362123653}
-  - {fileID: 1939867419}
-  m_Father: {fileID: 949013762}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1800183905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800183903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e090a663ae9b4224a8efbb683f8a3ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skills:
-  - {fileID: 465110350}
-  - {fileID: 1362123654}
-  - {fileID: 1939867420}
---- !u!1 &1939867418
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1939867419}
-  - component: {fileID: 1939867420}
-  m_Layer: 6
-  m_Name: FlashBomb
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1939867419
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1939867418}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1800183904}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1939867420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1939867418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3e47f790bb79448ab797b9362d807c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInterval: 0
-  attackDelay: 0
-  rb: {fileID: 949013767}
-  initPos: {fileID: 949013762}
-  force: 300
 --- !u!1001 &1975310159
 PrefabInstance:
   m_ObjectHideFlags: 0

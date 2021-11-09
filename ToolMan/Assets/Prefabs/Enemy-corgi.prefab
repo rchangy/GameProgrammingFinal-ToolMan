@@ -127,6 +127,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _barSprite: {fileID: 10588551}
   _maxHealth: 0
+--- !u!1 &194646643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 194646645}
+  - component: {fileID: 194646644}
+  m_Layer: 0
+  m_Name: melee1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &194646645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194646643}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1840537491}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &194646644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194646643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3435084182dbe478e84a6fab394b90c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackInterval: 1
+  attackDelay: 0
+  attackRange: 4
 --- !u!1 &770012747
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +422,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 194646645}
   m_Father: {fileID: 8145379251561204746}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -392,7 +439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e090a663ae9b4224a8efbb683f8a3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills: []
+  skills:
+  - {fileID: 194646644}
 --- !u!1001 &8538976868976159713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -450,14 +498,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
---- !u!1 &8809572937734870704 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
-  m_PrefabInstance: {fileID: 8538976868976159713}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8145379251561204746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
+  m_PrefabInstance: {fileID: 8538976868976159713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8809572937734870704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
   m_PrefabInstance: {fileID: 8538976868976159713}
   m_PrefabAsset: {fileID: 0}
 --- !u!135 &1207400449
@@ -492,6 +540,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &134753982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8809572937734870704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe88b78117c8f4ff98d595d9296741ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanAttack: 0
+  CanBeHurt: 0
+  CanMove: 0
+  MaxHealth: 100
+  healthBar: {fileID: 164123793}
+  Atk: 0
+  Anim: {fileID: 0}
+  TargetLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  availableSkillSet: {fileID: 1840537490}
+  CurrentUsingSkillSet: []
+  currentUsingSkillName: 0
 --- !u!114 &1207400451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,7 +586,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Name: Corgi
-  combat: {fileID: 0}
+  combat: {fileID: 134753982}
   walkPointRange: 3
   SightRange: 10
   InitAttackInterval: 3
@@ -540,25 +613,3 @@ NavMeshAgent:
   m_BaseOffset: 2
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &134753982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8809572937734870704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe88b78117c8f4ff98d595d9296741ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 100
-  healthBar: {fileID: 164123793}
-  Atk: 0
-  Anim: {fileID: 0}
-  TargetLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  availableSkillSet: {fileID: 1840537490}
-  CurrentUsingSkillSet: []
-  currentUsingSkillName: 
