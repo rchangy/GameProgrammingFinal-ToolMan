@@ -294,10 +294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3435084182dbe478e84a6fab394b90c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: Pickaxe
   attackInterval: 0
   attackDelay: 0
-  attackPoint: {fileID: 5745865488099134471}
   attackRange: 0
 --- !u!1 &762788320478268716
 GameObject:
@@ -913,7 +911,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &2275044503097530540
 CapsuleCollider:
@@ -1434,10 +1432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1162322aff20543b78ebdaae3473dbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: Boomerang(shoot)
   attackInterval: 0
   attackDelay: 0
-  attackPoint: {fileID: 2501385801290856970}
   bulletPrefab: {fileID: 8646793245139639563, guid: cdf4227bcdb564f6e88501aa543e28d1, type: 3}
   shootingForce: 50
 --- !u!1 &4238731380524449517
