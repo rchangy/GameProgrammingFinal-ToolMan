@@ -10,10 +10,15 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider playerCollider;
-
+    public GameObject grabbedPoint;
+    public GrabPoint grabPoint;
     int playerNum = 1; // player 1 or player 2
-    public bool isTool = false;
     // ==== Components ====
+
+    // ==== to Tool ====
+    public bool isTool = false;
+    List<Tool> tools = new List<Tool>();
+    // ==== to Tool ====
 
     // ==== Movement ====
     public Transform mainCameraTrans;
@@ -39,6 +44,20 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
+        grabPoint.setPlayer(this);
+
+        if (playerNum == 1)
+        {
+            tools.Add(new Pickaxe(animator, grabbedPoint));
+            tools.Add(new Boomerang(animator, grabbedPoint));
+        }
+        else if (playerNum == 2)
+        {
+            tools.Add(new Shield(animator, grabbedPoint));
+            tools.Add(new FlashBomb(animator, grabbedPoint));
+            tools.Add(new LightSaber(animator, grabbedPoint));
+        }
+
         distToGround = playerCollider.bounds.extents.y;
     }
 
@@ -46,6 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isTool)
         {
+            // ==== Mvement ====
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
             Vector3 movement = new Vector3(horizontal, 0, vertical).normalized;
@@ -77,6 +97,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f);
             if (isGrounded)
                 currentJumpCount = 0;
+            // ==== Movement ====
         }
 
         else
@@ -91,6 +112,11 @@ public class PlayerController : MonoBehaviour
                     Attack();
              }
         }
+
+        // ==== Man <-> Tool ====
+        if ((Input.GetButtonDown("SelectTool1") && playerNum == 1) || (Input.GetButtonDown("SelectTool2") && playerNum == 2))
+            SelectTool();
+        // ==== Man <-> Tool ====
     }
 
     private void Attack() {
@@ -105,5 +131,19 @@ public class PlayerController : MonoBehaviour
             currentJumpCount++;
         }
 
+    }
+
+    private void SelectTool() {
+        // ==== for testing only ====
+        isTool = !isTool;
+        if (isTool) {
+            tools[0].toTool();
+        }
+        else {
+            tools[0].toMan();
+        }
+        // ==== for testing only ====
+
+        // new sth
     }
 }
