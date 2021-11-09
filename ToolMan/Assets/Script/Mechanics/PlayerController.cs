@@ -49,14 +49,14 @@ public class PlayerController : MonoBehaviour
 
         if (playerNum == 1)
         {
-            tools.Add(new Pickaxe(animator, grabbedPoint, rb));
-            tools.Add(new Boomerang(animator, grabbedPoint, rb));
+            tools.Add(new Pickaxe(gameObject));
+            tools.Add(new Boomerang(gameObject));
         }
         else if (playerNum == 2)
         {
-            tools.Add(new Shield(animator, grabbedPoint, rb));
-            tools.Add(new FlashBomb(animator, grabbedPoint, rb));
-            tools.Add(new LightSaber(animator, grabbedPoint, rb));
+            tools.Add(new Shield(gameObject));
+            tools.Add(new FlashBomb(gameObject));
+            tools.Add(new LightSaber(gameObject));
         }
 
         distToGround = playerCollider.bounds.extents.y;
@@ -159,7 +159,6 @@ public class PlayerController : MonoBehaviour
 
         // === ObjectListUI.Choose ===
         int toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
-        Debug.Log("ToolIdx = " + toolIdx);
         isTool = !isTool;
         if (isTool)
         {
@@ -169,5 +168,20 @@ public class PlayerController : MonoBehaviour
         {
             tools[toolIdx].toMan();
         }
+    }
+
+    public Rigidbody getRigidbody()
+    {
+        return rb;
+    }
+
+    public Animator getAnimator()
+    {
+        return animator;
+    }
+
+    public GameObject getGrabbedPoint()
+    {
+        return grabbedPoint;
     }
 }

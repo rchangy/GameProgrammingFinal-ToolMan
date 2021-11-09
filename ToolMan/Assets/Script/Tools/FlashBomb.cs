@@ -5,16 +5,14 @@ using UnityEngine;
 public class FlashBomb : Tool
 {
 
-    public FlashBomb(Animator animator, GameObject grabPoint, Rigidbody playerRD)
+    public FlashBomb(GameObject player)
     {
-        setAnimator(animator);
-        setGrabbedPoint(grabPoint);
-        setPlayerRD(playerRD);
+        setUp(player);
     }
 
     public override void toTool()
     {
-        animator.SetBool("isTool", true);
+        base.toTool();
         animator.SetBool("isFlashBomb", true);
         grabbedPoint.transform.localPosition = new Vector3(0.0f, 0.2f, 0.7f);
     }

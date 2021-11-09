@@ -5,16 +5,14 @@ using UnityEngine;
 public class Shield : Tool
 {
 
-    public Shield(Animator animator, GameObject grabPoint, Rigidbody playerRD)
+    public Shield(GameObject player)
     {
-        setAnimator(animator);
-        setGrabbedPoint(grabPoint);
-        setPlayerRD(playerRD);
+        setUp(player);
     }
 
     public override void toTool()
     {
-        animator.SetBool("isTool", true);
+        base.toTool();
         animator.SetBool("isShield", true);
         grabbedPoint.transform.localPosition = new Vector3(0.3f, 0.6f, -0.9f);
     }
