@@ -389,14 +389,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f49e76dfa7c4324972b1fbd193cca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanAttack: 0
+  CanBeHurt: 0
+  CanMove: 0
   MaxHealth: 100
   healthBar: {fileID: 0}
+  Atk: 10
+  Anim: {fileID: 0}
   TargetLayers:
     serializedVersion: 2
     m_Bits: 1
-  Atk: 10
-  AttackInterval: 0
-  Anim: {fileID: 0}
+  availableSkillSet: {fileID: 0}
+  CurrentUsingSkillSet: []
+  currentUsingSkillName: 
   AttackPoint: {fileID: 3792191007374923624}
   AttackDelay: 0
   AttackRange: 0.5
@@ -412,8 +417,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20557317c6f5148fcb4ad920dccaaab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toolListUI: {fileID: 0}
   grabbedPoint: {fileID: 4090783293788950025}
   grabPoint: {fileID: 3792191007045564064}
+  playerNum: 1
   isTool: 0
   mainCameraTrans: {fileID: 0}
   speed: 5

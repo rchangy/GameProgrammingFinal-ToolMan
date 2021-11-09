@@ -464,7 +464,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2886008566617098575}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -800,6 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf50a4109cca044e88530d9fecb6feaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentActiveImageNum: 0
   Images:
   - {fileID: 2886008566617098573}
   - {fileID: 2886008567653750230}
@@ -810,6 +811,10 @@ MonoBehaviour:
   Sprites:
   - {fileID: 21300000, guid: 954c21dbdf28d4de7b8c2b08ea6f0972, type: 3}
   - {fileID: 21300000, guid: 439e7f28a36e344edba79ae187049070, type: 3}
+  currentIdx: 0
+  NextButton: Next1
+  PreviousButton: Prev1
+  ChooseButton: Choose1
 --- !u!114 &2886008567046151445
 MonoBehaviour:
   m_ObjectHideFlags: 0
