@@ -25,6 +25,6 @@ public class StandardMeleeSkill : Skill
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireSphere(gameObject.transform.position, attackRange);
     }
 }

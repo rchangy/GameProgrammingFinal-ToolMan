@@ -251,6 +251,54 @@ Transform:
   m_Father: {fileID: 1683709584413011847}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &678693808483786386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5745865488099134471}
+  - component: {fileID: 2399237816403009248}
+  m_Layer: 6
+  m_Name: Pickaxe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5745865488099134471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678693808483786386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6364797506221161057}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2399237816403009248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678693808483786386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3435084182dbe478e84a6fab394b90c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillName: Pickaxe
+  attackInterval: 0
+  attackDelay: 0
+  attackPoint: {fileID: 5745865488099134471}
+  attackRange: 0
 --- !u!1 &762788320478268716
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,11 +870,11 @@ GameObject:
   - component: {fileID: 2275044503097530541}
   - component: {fileID: 2275044503097530540}
   - component: {fileID: 2275044503097530536}
-  - component: {fileID: 2275044503097530538}
   - component: {fileID: 2275044503097530539}
-  m_Layer: 0
+  - component: {fileID: 5792844359700534148}
+  m_Layer: 6
   m_Name: BearMan2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -847,6 +895,7 @@ Transform:
   - {fileID: 3112556110406464550}
   - {fileID: 3112556110072862176}
   - {fileID: 4601097834316089814}
+  - {fileID: 6364797506221161057}
   m_Father: {fileID: 3112556110097776178}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -899,34 +948,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2275044503097530538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2878764001379007454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9f49e76dfa7c4324972b1fbd193cca7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanAttack: 0
-  CanBeHurt: 0
-  CanMove: 0
-  MaxHealth: 100
-  healthBar: {fileID: 0}
-  Atk: 10
-  Anim: {fileID: 0}
-  TargetLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  availableSkillSet: {fileID: 0}
-  CurrentUsingSkillSet: []
-  currentUsingSkillName: 
-  AttackPoint: {fileID: 3112556110406464550}
-  AttackDelay: 0
-  AttackRange: 0.5
 --- !u!114 &2275044503097530539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -949,7 +970,34 @@ MonoBehaviour:
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
-  combat: {fileID: 0}
+  combat: {fileID: 5792844359700534148}
+--- !u!114 &5792844359700534148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2878764001379007454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe88b78117c8f4ff98d595d9296741ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanAttack: 0
+  CanBeHurt: 0
+  CanMove: 0
+  MaxHealth: 100
+  healthBar: {fileID: 0}
+  Atk: 10
+  Anim: {fileID: 2275044503097530536}
+  TargetLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  availableSkillSet: {fileID: 2211985936943263528}
+  CurrentUsingSkillSet:
+  - Pickaxe
+  - Boomerang
+  currentUsingSkillName: Pickaxe
 --- !u!1 &3052720348334434808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,6 +1308,54 @@ Transform:
   m_Father: {fileID: 5606393430366228792}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3672328378897725396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6364797506221161057}
+  - component: {fileID: 2211985936943263528}
+  m_Layer: 6
+  m_Name: AvailableSkills
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6364797506221161057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3672328378897725396}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5745865488099134471}
+  - {fileID: 2501385801290856970}
+  m_Father: {fileID: 3222532481094836580}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2211985936943263528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3672328378897725396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e090a663ae9b4224a8efbb683f8a3ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - {fileID: 2399237816403009248}
+  - {fileID: 5187843501174919846}
 --- !u!1 &3916112268817525956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,6 +1391,55 @@ Transform:
   m_Father: {fileID: 4376670986815356452}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3939139260081431535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2501385801290856970}
+  - component: {fileID: 5187843501174919846}
+  m_Layer: 6
+  m_Name: Boomarang
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2501385801290856970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3939139260081431535}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6364797506221161057}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5187843501174919846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3939139260081431535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1162322aff20543b78ebdaae3473dbd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillName: Boomerang(shoot)
+  attackInterval: 0
+  attackDelay: 0
+  attackPoint: {fileID: 2501385801290856970}
+  bulletPrefab: {fileID: 8646793245139639563, guid: cdf4227bcdb564f6e88501aa543e28d1, type: 3}
+  shootingForce: 50
 --- !u!1 &4238731380524449517
 GameObject:
   m_ObjectHideFlags: 0

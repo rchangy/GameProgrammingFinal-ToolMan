@@ -55,6 +55,11 @@ public class CombatUnit : MonoBehaviour
 
     private Coroutine skillPerforming = null;
 
+    private void Awake()
+    {
+        if (CurrentUsingSkillSet == null) CurrentUsingSkillSet = new List<string>();   
+    }
+
     protected virtual void Start()
     {
         if(healthBar != null) healthBar.SetMaxHealth(MaxHealth);

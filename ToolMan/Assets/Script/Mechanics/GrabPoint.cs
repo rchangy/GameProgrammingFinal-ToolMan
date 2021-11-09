@@ -34,7 +34,11 @@ public class GrabPoint : MonoBehaviour
             foreach (Collider collider in colliders)
             {
                 if (collider.gameObject != gameObject)
-                    targetTool = collider.gameObject;
+                {
+                    var anotherPlayer = collider.gameObject.GetComponent<PlayerController>();
+                    if(anotherPlayer != null && anotherPlayer.isTool) targetTool = collider.gameObject;
+                }
+                    
             }
             if (colliders.Length == 0)
                 targetTool = null;

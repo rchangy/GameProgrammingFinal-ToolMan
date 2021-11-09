@@ -16,7 +16,7 @@ public class AvailableSkillSet : MonoBehaviour
         skillSet = new Dictionary<string, Skill>();
         foreach(Skill skill in skills)
         {
-            var skillName = skill.SkillName;
+            var skillName = skill.getName();
             skillSet.Add(skillName, skill);
         }
     }
