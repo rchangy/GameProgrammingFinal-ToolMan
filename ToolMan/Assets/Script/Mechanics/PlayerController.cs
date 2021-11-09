@@ -11,14 +11,18 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private CapsuleCollider playerCollider;
     public GameObject toolListUI;
+    public GameObject RightHand;
     public GameObject grabbedPoint;
+    public GrabbedPoint grabbedPointClass;
     public GrabPoint grabPoint;
     public int playerNum = 1; // player 1 or player 2
+    private Vector3 rightHandLocalPosition;
     // ==== Components ====
 
     // ==== to Tool ====
     public bool isTool = false;
     List<Tool> tools = new List<Tool>();
+    private int toolIdx;
     // ==== to Tool ====
 
     // ==== Movement ====
@@ -45,7 +49,11 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
+        grabbedPointClass = grabbedPoint.GetComponent<GrabbedPoint>();
         grabPoint.setPlayer(this);
+        grabbedPointClass.setPlayer(this);
+        RightHand = gameObject.transform.Find("RightHand").gameObject;
+        rightHandLocalPosition = new Vector3(RightHand.transform.localPosition.x, RightHand.transform.localPosition.y, RightHand.transform.localPosition.z);
 
         if (playerNum == 1)
         {
@@ -64,6 +72,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        RightHand.transform.localPosition = rightHandLocalPosition;
         if (!isTool)
         {
             // ==== Movement ====
@@ -158,7 +167,7 @@ public class PlayerController : MonoBehaviour
         // new sth
 
         // === ObjectListUI.Choose ===
-        int toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
+        toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
         isTool = !isTool;
         if (isTool)
         {
@@ -184,5 +193,20 @@ public class PlayerController : MonoBehaviour
     public GameObject getGrabbedPoint()
     {
         return grabbedPoint;
+    }
+
+    public void beGrabbed()
+    {
+        tools[toolIdx].beGrabbed();
+        grabbedPoint.GetComponent<Collider>().isTrigger = true;
+        gameObject.GetComponent<Collider>().isTrigger = true;
+        gameObject.transform.position = grabbedPoint.transform.position - new Vector3(0.0f, -1.183f, -0.03900003f);
+    }
+
+    public void beReleased()
+    {
+        tools[toolIdx].beReleased();
+        grabbedPoint.GetComponent<Collider>().isTrigger = false;
+        gameObject.GetComponent<Collider>().isTrigger = false;
     }
 }

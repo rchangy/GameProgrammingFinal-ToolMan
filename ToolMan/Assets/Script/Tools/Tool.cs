@@ -76,4 +76,16 @@ public class Tool
         playerRB.velocity = Vector3.zero;
         playerRB.angularVelocity = Vector3.zero;
     }
+
+    public void beGrabbed()
+    {
+        playerRB.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        player.transform.rotation = Quaternion.Euler(0f, 0f, 26f);
+        resetRigidBody();
+    }
+
+    public void beReleased()
+    {
+        playerRB.constraints = RigidbodyConstraints.None;
+    }
 }
