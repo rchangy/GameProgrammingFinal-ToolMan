@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider playerCollider;
+    public GameObject toolListUI;
     public GameObject grabbedPoint;
     public GrabPoint grabPoint;
     int playerNum = 1; // player 1 or player 2
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // ==== Man <-> Tool ====
-        if ((Input.GetButtonDown("SelectTool1") && playerNum == 1) || (Input.GetButtonDown("SelectTool2") && playerNum == 2))
+        if ((Input.GetButtonDown("choose1") && playerNum == 1) || (Input.GetButtonDown("choose2") && playerNum == 2))
             SelectTool();
         // ==== Man <-> Tool ====
     }
@@ -135,15 +136,26 @@ public class PlayerController : MonoBehaviour
 
     private void SelectTool() {
         // ==== for testing only ====
-        isTool = !isTool;
-        if (isTool) {
-            tools[0].toTool();
-        }
-        else {
-            tools[0].toMan();
-        }
+        //isTool = !isTool;
+        //if (isTool) {
+        //    tools[0].toTool();
+        //}
+        //else {
+        //    tools[0].toMan();
+        //}
         // ==== for testing only ====
 
         // new sth
+
+        // === ObjectListUI.Choose ===
+        int toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
+        if (isTool)
+        {
+            tools[toolIdx].toTool();
+        }
+        else
+        {
+            tools[toolIdx].toMan();
+        }
     }
 }
