@@ -67,8 +67,17 @@ public class PlayerController : MonoBehaviour
         if (!isTool)
         {
             // ==== Movement ====
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
+            float horizontal = 0, vertical = 0;
+            if (playerNum == 1)
+            {
+                horizontal = Input.GetAxisRaw("Horizontal1");
+                vertical = Input.GetAxisRaw("Vertical1");
+            }
+            if (playerNum == 2)
+            {
+                horizontal = Input.GetAxisRaw("Horizontal2");
+                vertical = Input.GetAxisRaw("Vertical2");
+            }
             Vector3 movement = new Vector3(horizontal, 0, vertical).normalized;
 
             if (movement.sqrMagnitude > 0.01f)
