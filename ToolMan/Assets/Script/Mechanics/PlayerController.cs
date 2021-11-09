@@ -163,6 +163,7 @@ public class PlayerController : MonoBehaviour
         if (isTool)
         {
             tools[toolIdx].toTool();
+            combat.SetCurrentUsingSkill(tools[toolIdx].getName());
         }
         else
         {

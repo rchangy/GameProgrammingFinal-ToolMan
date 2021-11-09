@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Tool
 {
+    protected string name;
     protected GameObject player;
     protected GameObject grabbedPoint;
     protected Animator animator;
     protected Rigidbody playerRB;
 
+    public string getName()
+    {
+        return name;
+    }
     public void setUp(GameObject player)
     {
         setPlayer(player);

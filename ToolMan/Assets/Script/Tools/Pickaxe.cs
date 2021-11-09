@@ -7,6 +7,7 @@ public class Pickaxe : Tool
     public Pickaxe(GameObject player)
     {
         setUp(player);
+        name = "Pickaxe";
     }
 
     public override void toTool()

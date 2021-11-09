@@ -8,6 +8,7 @@ public class LightSaber : Tool
     public LightSaber(GameObject player)
     {
         setUp(player);
+        name = "LightSaber";
     }
 
     public override void toTool()

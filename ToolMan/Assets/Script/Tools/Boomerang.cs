@@ -8,6 +8,7 @@ public class Boomerang : Tool
     public Boomerang(GameObject player)
     {
         setUp(player);
+        name = "Boomerang";
     }
 
     public override void toTool()

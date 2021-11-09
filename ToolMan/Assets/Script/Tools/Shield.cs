@@ -8,6 +8,7 @@ public class Shield : Tool
     public Shield(GameObject player)
     {
         setUp(player);
+        name = "Shield";
     }
 
     public override void toTool()

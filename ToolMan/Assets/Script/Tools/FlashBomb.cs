@@ -8,7 +8,9 @@ public class FlashBomb : Tool
     public FlashBomb(GameObject player)
     {
         setUp(player);
+        name = "FlashBomb";
     }
+
 
     public override void toTool()
     {
