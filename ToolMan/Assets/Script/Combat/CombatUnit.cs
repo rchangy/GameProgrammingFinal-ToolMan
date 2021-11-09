@@ -1,9 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 using UnityEngine.Events;
 
-public abstract class CombatUnit : MonoBehaviour
+
+
+public class CombatUnit : MonoBehaviour
 {
+    [Serializable]
+    public enum SkillType
+    {
+        Melee,
+        Shooting
+    }
+
+
+    [Serializable]
+    public class SkillData
+    {
+        string name;
+        SkillType type;
+        Transform AttackPoint;
+        float AttackDelay;
+        float AttackRange;
+        Transform ShootingPoint;
+        GameObject BulletPrefab;
+        float ShootingForce;
+    }
+
+
+
     public int MaxHealth;
     public HealthBar healthBar;
     private int _health;
@@ -39,6 +66,11 @@ public abstract class CombatUnit : MonoBehaviour
     }
 
     public Animator Anim;
+
+    // skills
+    public List<SkillData> skillDatas;
+    public List<Skill> skills;
+    
 
 
     protected virtual void Start()
