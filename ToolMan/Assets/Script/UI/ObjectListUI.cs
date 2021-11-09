@@ -13,9 +13,9 @@ public class ObjectListUI : MonoBehaviour
 
     public int currentIdx;
     private bool[] chosenImages;
-    public string NextButton = "next";
-    public string PreviousButton = "prev";
-    public string ChooseButton = "choose";
+    public string NextButton = "Next1";
+    public string PreviousButton = "Prev1";
+    public string ChooseButton = "Choose1";
     
     
 

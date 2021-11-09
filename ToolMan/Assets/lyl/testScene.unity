@@ -381,7 +381,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360493590}
-  m_LocalRotation: {x: 0.056402203, y: -0.424632, z: 0.026516486, w: 0.9032184}
+  m_LocalRotation: {x: 0.05640221, y: -0.424632, z: 0.026516488, w: 0.9032184}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -455,7 +455,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554328895}
-  m_LocalRotation: {x: 0.07277862, y: -0.4240811, z: 0.034215573, w: 0.90204644}
+  m_LocalRotation: {x: 0.07277862, y: -0.4240811, z: 0.034215573, w: 0.9020465}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -667,7 +667,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613782310}
-  m_LocalRotation: {x: 0.07277863, y: -0.42408106, z: 0.034215566, w: 0.9020465}
+  m_LocalRotation: {x: 0.07277863, y: -0.4240811, z: 0.034215577, w: 0.9020465}
   m_LocalPosition: {x: 3.994783, y: 5, z: -3.309535}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1272,6 +1272,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2886008567046151444, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
+      propertyPath: NextButton
+      value: Next1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886008567046151444, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
+      propertyPath: ChooseButton
+      value: Choose1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886008567046151444, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
+      propertyPath: PreviousButton
+      value: Prev1
+      objectReference: {fileID: 0}
     - target: {fileID: 2886008567068675414, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1362,6 +1374,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
+--- !u!1 &1586473073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2886008567046151447, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
+  m_PrefabInstance: {fileID: 1396241851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1860734971 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
@@ -1405,6 +1422,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2087304165, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
+      propertyPath: toolListUI
+      value: 
+      objectReference: {fileID: 1586473073}
     - target: {fileID: 2087304165, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
       propertyPath: mainCameraTrans
       value: 

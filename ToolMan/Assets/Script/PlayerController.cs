@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // ==== Man <-> Tool ====
-        if ((Input.GetButtonDown("choose1") && playerNum == 1) || (Input.GetButtonDown("choose2") && playerNum == 2))
+        if ((Input.GetButtonDown("Choose1") && playerNum == 1) || (Input.GetButtonDown("Choose2") && playerNum == 2))
             SelectTool();
         // ==== Man <-> Tool ====
     }
@@ -149,6 +149,8 @@ public class PlayerController : MonoBehaviour
 
         // === ObjectListUI.Choose ===
         int toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
+        Debug.Log("ToolIdx = " + toolIdx);
+        isTool = !isTool;
         if (isTool)
         {
             tools[toolIdx].toTool();
