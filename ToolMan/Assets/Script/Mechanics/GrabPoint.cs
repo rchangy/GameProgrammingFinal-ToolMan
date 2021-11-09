@@ -55,7 +55,13 @@ public class GrabPoint : MonoBehaviour
     private void Release() {
         if (targetTool != null) {
             Destroy(targetTool.GetComponent<FixedJoint>());
-            
+
+            // Reset grabbed player rigidbody
+            targetTool.GetComponent<GrabbedPoint>().resetRigidBody();
+
+            // Reset grabbing player rigidbody
+            player.transform.Find("GrabbedPoint").GetComponent<GrabbedPoint>().resetRigidBody();
+
             grabbing = false;
             Debug.Log("release");
         }
