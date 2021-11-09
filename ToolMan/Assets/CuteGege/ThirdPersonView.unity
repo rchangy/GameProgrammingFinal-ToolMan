@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &74292112 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3686804171520737834, guid: 7c8ba37b2c2e24543a390bfa2d69e387, type: 3}
+  m_PrefabInstance: {fileID: 1861146816}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &211709328
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,8 +163,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1924201302}
-  m_Follow: {fileID: 1924201302}
+  m_LookAt: {fileID: 74292112}
+  m_Follow: {fileID: 74292112}
   m_CommonLens: 1
   m_Lens:
     FieldOfView: 40
@@ -913,7 +918,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 616257965}
-  m_LocalRotation: {x: 0.08917433, y: -0.4233886, z: 0.041923728, w: 0.90057343}
+  m_LocalRotation: {x: 0.08917434, y: -0.4233886, z: 0.04192373, w: 0.90057343}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

@@ -22,7 +22,7 @@ public class GrabPoint : MonoBehaviour
     {
         if (!player.isTool)
         {
-            if ( (Input.GetButtonDown("Grab1") ) || (Input.GetButtonDown("Grab2")) )
+            if ( (Input.GetButtonDown("Grab1")&&(player.playerNum == 1) ) || (Input.GetButtonDown("Grab2")&&(player.playerNum == 2)) )
             {
                 if (grabbing)
                     Release();
@@ -38,8 +38,6 @@ public class GrabPoint : MonoBehaviour
             }
             if (colliders.Length == 0)
                 targetTool = null;
-            //else
-            //    Debug.Log("sth to grab:))");
         }
     }
 

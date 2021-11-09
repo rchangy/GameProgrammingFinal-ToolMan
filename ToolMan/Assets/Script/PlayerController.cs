@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject toolListUI;
     public GameObject grabbedPoint;
     public GrabPoint grabPoint;
-    int playerNum = 1; // player 1 or player 2
+    public int playerNum = 1; // player 1 or player 2
     // ==== Components ====
 
     // ==== to Tool ====
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isTool)
         {
-            // ==== Mvement ====
+            // ==== Movement ====
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
             Vector3 movement = new Vector3(horizontal, 0, vertical).normalized;
@@ -101,8 +101,9 @@ public class PlayerController : MonoBehaviour
             // ==== Movement ====
         }
 
-        else
+        else // Tool
         {
+            // Attack
             if (playerNum == 1)
             {
                 if (Input.GetButtonDown("JumpOrAttack1"))
