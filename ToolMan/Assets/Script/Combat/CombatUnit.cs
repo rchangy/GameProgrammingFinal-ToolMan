@@ -141,7 +141,7 @@ public class CombatUnit : MonoBehaviour
     {
         if (!CanBeHurt) return;
         Debug.LogFormat("[{0}] Took {1} Damage", name, dmg);
-
+        Anim.SetTrigger("Hurt");
         if (skillPerforming != null) InterruptAttack();
         Health -= dmg;
     }
