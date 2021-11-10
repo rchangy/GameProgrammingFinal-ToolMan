@@ -6,10 +6,13 @@ public class StandardProjectileSkill : Skill
     public Rigidbody rb;
     public Transform initPos;
     public float force;
+    public PlayerController player;
+
     private bool exploded;
     public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, int Atk)
     {
         anim.SetTrigger("Attack");
+        player.grabPoint.Release();
         exploded = false;
         yield return new WaitForSeconds(attackDelay);
         var dir = initPos.forward;
