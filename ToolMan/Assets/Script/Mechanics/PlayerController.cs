@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void SelectTool() {
+    public void SelectTool() {
         // ==== for testing only ====
         //isTool = !isTool;
         //if (isTool) {

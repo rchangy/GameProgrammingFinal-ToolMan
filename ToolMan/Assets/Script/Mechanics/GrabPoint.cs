@@ -75,7 +75,7 @@ public class GrabPoint : MonoBehaviour
         }
     }
 
-    private void Release() {
+    public void Release() {
         if (targetTool != null) {
             //Destroy(targetTool.GetComponent<FixedJoint>());
             Destroy(gameObject.GetComponent<FixedJoint>());

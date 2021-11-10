@@ -8,6 +8,9 @@ using UnityEngine.Events;
 
 public class CombatUnit : MonoBehaviour
 {
+    public bool isPlayer;
+    public PlayerController playerController;
+
     public bool CanAttack;
     public bool CanBeHurt;
     public bool CanMove;
@@ -57,7 +60,8 @@ public class CombatUnit : MonoBehaviour
 
     private void Awake()
     {
-        if (CurrentUsingSkillSet == null) CurrentUsingSkillSet = new List<string>();   
+        if (CurrentUsingSkillSet == null) CurrentUsingSkillSet = new List<string>();
+
     }
 
     protected virtual void Start()
@@ -70,6 +74,9 @@ public class CombatUnit : MonoBehaviour
         CanAttack = true;
         CanBeHurt = true;
         CanMove = true;
+
+        if ((playerController = gameObject.GetComponent<PlayerController>()) != null) isPlayer = true;
+        else isPlayer = false;
 
         if (currentUsingSkillName != null && currentUsingSkillName.Length > 0) SetCurrentUsingSkill(currentUsingSkillName);
         else if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
@@ -144,6 +151,11 @@ public class CombatUnit : MonoBehaviour
         Anim.SetTrigger("Hurt");
         if (skillPerforming != null) InterruptAttack();
         Health -= dmg;
+        if (isPlayer)
+        {
+            playerController.grabPoint.Release();
+            if (playerController.isTool) playerController.SelectTool();
+        }
     }
 
     public virtual void Healed(int heal)
