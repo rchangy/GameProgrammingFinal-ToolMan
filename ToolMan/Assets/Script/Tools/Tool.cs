@@ -56,6 +56,7 @@ public class Tool
 
     public void toMan()
     {
+        Debug.Log(name + " call to Man");
         animator.SetBool("isTool", false);
         animator.SetBool("isShield", false);
         animator.SetBool("isFlashBomb", false);

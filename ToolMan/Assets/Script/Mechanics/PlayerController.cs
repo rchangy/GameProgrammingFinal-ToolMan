@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!isTool)
         {
+            rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+            
             // ==== Movement ====
             float horizontal = 0, vertical = 0;
             if (playerNum == 1)
@@ -209,6 +211,7 @@ public class PlayerController : MonoBehaviour
 
     public void beReleased()
     {
+        tools[toolIdx].toMan();
         tools[toolIdx].beReleased();
         grabbedPoint.GetComponent<Collider>().isTrigger = false;
         //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
