@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public GrabbedPoint grabbedPointClass;
     public GrabPoint grabPoint;
     public int playerNum = 1; // player 1 or player 2
-    private Vector3 rightHandLocalPosition;
     // ==== Components ====
 
     // ==== to Tool ====
@@ -152,21 +151,6 @@ public class PlayerController : MonoBehaviour
     }
 
     public void SelectTool() {
-        // ==== for testing only ====
-        //isTool = !isTool;
-        //if (isTool) {
-        //    tools[0].toTool();
-        //}
-        //else {
-        //    tools[0].toMan();
-        //}
-        // ==== for testing only ====
-
-        // new sth
-
-        // === ObjectListUI.Choose ===
-        
-
         isTool = !isTool;
         if (isTool)
         {
