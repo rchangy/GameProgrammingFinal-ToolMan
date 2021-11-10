@@ -25,6 +25,7 @@ public class ObjectListUI : MonoBehaviour
     {
         // check current active images
         MaxImageNum = Images.Length;
+        //Debug.Log("MaxImageNum = " + MaxImageNum);
         foreach(Image image in Images)
         {
             if (image.enabled) CurrentActiveImageNum++;
@@ -38,6 +39,7 @@ public class ObjectListUI : MonoBehaviour
 
         // init sprite map
         int spriteMapSize = Mathf.Min(Keys.Length, Sprites.Length);
+        //Debug.Log("spriteMapSize = " + spriteMapSize);
         spriteMap = new Dictionary<string, Sprite>(spriteMapSize);
         for(int i = 0; i < spriteMapSize; i++)
         {
@@ -47,6 +49,7 @@ public class ObjectListUI : MonoBehaviour
         // unchoose every image and point to the first image
         chosenImages = new bool[MaxImageNum];
         ResetChoices();
+        SetSprites(new List<string>(Keys));
     }
 
     private void Update()
