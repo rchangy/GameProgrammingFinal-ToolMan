@@ -16,8 +16,8 @@ public class ObjectListUI : MonoBehaviour
     public string NextButton = "Next1";
     public string PreviousButton = "Prev1";
     public string ChooseButton = "Choose1";
-    
-    
+
+    public int unchoose = -1;
 
     public Dictionary<string, Sprite> spriteMap;
 
@@ -64,8 +64,14 @@ public class ObjectListUI : MonoBehaviour
         }
         else if (Input.GetButtonDown(ChooseButton))
         {
+            
             if (chosenImages[currentIdx]) Unchoose();
             else Choose();
+        }
+        if(unchoose != -1)
+        {
+            UnchooseByIdx(unchoose);
+            unchoose = -1;
         }
     }
 
@@ -142,13 +148,14 @@ public class ObjectListUI : MonoBehaviour
         if (canChoose())
         {
             chosenImages[currentIdx] = true;
-            Images[currentIdx].color = new Color(255, 255, 255, 0f);
+            Images[currentIdx].color = new Color(0, 255, 255, 1f);
         }
     }
 
     public virtual void Unchoose()
     {
         chosenImages[currentIdx] = false;
+        Images[currentIdx].color = new Color(255, 255, 255, 1f);
         Pointing();
     }
 
@@ -159,5 +166,17 @@ public class ObjectListUI : MonoBehaviour
     public virtual void Unpoint()
     {
         if(!chosenImages[currentIdx]) Images[currentIdx].color = new Color(255, 255, 255, .5f);
+    }
+
+    public void UnchooseByIdx(int idx)
+    {
+        chosenImages[idx] = false;
+        Images[idx].color = new Color(255, 255, 255, 1f);
+        UnpointByIdx(idx);
+        Pointing();
+    }
+    public virtual void UnpointByIdx(int idx)
+    {
+        if (!chosenImages[idx]) Images[idx].color = new Color(255, 255, 255, .5f);
     }
 }

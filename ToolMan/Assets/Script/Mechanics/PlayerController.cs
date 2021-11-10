@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private CapsuleCollider playerCollider;
     public GameObject toolListUI;
-    public GameObject RightHand;
     public GameObject grabbedPoint;
     public GrabbedPoint grabbedPointClass;
     public GrabPoint grabPoint;
@@ -52,8 +51,6 @@ public class PlayerController : MonoBehaviour
         grabbedPointClass = grabbedPoint.GetComponent<GrabbedPoint>();
         grabPoint.setPlayer(this);
         grabbedPointClass.setPlayer(this);
-        RightHand = gameObject.transform.Find("RightHand").gameObject;
-        rightHandLocalPosition = new Vector3(RightHand.transform.localPosition.x, RightHand.transform.localPosition.y, RightHand.transform.localPosition.z);
 
         if (playerNum == 1)
         {
@@ -72,7 +69,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        RightHand.transform.localPosition = rightHandLocalPosition;
         if (!isTool)
         {
             // ==== Movement ====
@@ -167,16 +163,19 @@ public class PlayerController : MonoBehaviour
         // new sth
 
         // === ObjectListUI.Choose ===
-        toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
+        
+
         isTool = !isTool;
         if (isTool)
         {
+            toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
             tools[toolIdx].toTool();
             combat.SetCurrentUsingSkill(tools[toolIdx].getName());
         }
         else
         {
             tools[toolIdx].toMan();
+            toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
         }
     }
 
