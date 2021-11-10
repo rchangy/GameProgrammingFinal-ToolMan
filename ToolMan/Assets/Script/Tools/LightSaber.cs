@@ -16,5 +16,6 @@ public class LightSaber : Tool
         base.toTool();
         animator.SetBool("isSword", true);
         grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.3f, 0.0f);
+        point = new Vector3(0.0f, -1.3f, 0.0f);
     }
 }

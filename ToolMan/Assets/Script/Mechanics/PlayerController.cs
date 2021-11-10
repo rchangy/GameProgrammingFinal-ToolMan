@@ -195,18 +195,24 @@ public class PlayerController : MonoBehaviour
         return grabbedPoint;
     }
 
+    public Tool getTool()
+    {
+        return tools[toolIdx];
+    }
+
     public void beGrabbed()
     {
         tools[toolIdx].beGrabbed();
         grabbedPoint.GetComponent<Collider>().isTrigger = true;
+        //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         gameObject.GetComponent<Collider>().isTrigger = true;
-        gameObject.transform.position = grabbedPoint.transform.position - new Vector3(0.0f, -1.183f, -0.03900003f);
     }
 
     public void beReleased()
     {
         tools[toolIdx].beReleased();
         grabbedPoint.GetComponent<Collider>().isTrigger = false;
+        //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         gameObject.GetComponent<Collider>().isTrigger = false;
     }
 }

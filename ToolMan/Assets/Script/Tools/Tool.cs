@@ -9,6 +9,7 @@ public class Tool
     protected GameObject grabbedPoint;
     protected Animator animator;
     protected Rigidbody playerRB;
+    protected Vector3 point;
 
     public string getName()
     {
@@ -20,6 +21,7 @@ public class Tool
         setAnimator(player.GetComponent<PlayerController>().getAnimator());
         setGrabbedPoint(player.GetComponent<PlayerController>().getGrabbedPoint());
         setPlayerRB(player.GetComponent<PlayerController>().getRigidbody());
+        point = new Vector3(0.0f, -1.2f, 0.0f);
     }
     public void setAnimator(Animator animator)
     {
@@ -61,8 +63,10 @@ public class Tool
         animator.SetBool("isBoomerang", false);
         animator.SetBool("isPickaxe", false);
         grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.2f, 0.0f);
+        point = new Vector3(0.0f, -1.2f, 0.0f);
         playerRB.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         player.transform.rotation = Quaternion.identity;
+        player.transform.position = new Vector3(player.transform.position.x, 1.9f, player.transform.position.z);
         resetRigidBody();
     }
 
@@ -87,5 +91,9 @@ public class Tool
     public void beReleased()
     {
         playerRB.constraints = RigidbodyConstraints.None;
+    }
+    public Vector3 getPoint()
+    {
+        return point;
     }
 }

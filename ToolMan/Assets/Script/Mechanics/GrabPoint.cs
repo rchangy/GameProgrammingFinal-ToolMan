@@ -27,7 +27,10 @@ public class GrabPoint : MonoBehaviour
             {
                 Debug.Log("Press Grab1");
                 if (grabbing)
+                {
+                    Debug.Log("Press Release");
                     Release();
+                }
                 else
                     Grab();
             }
@@ -53,16 +56,19 @@ public class GrabPoint : MonoBehaviour
     private void Grab() {
         Debug.Log("In Grab");
         if (targetTool != null) {
-            FixedJoint fj = targetTool.AddComponent<FixedJoint>();
-            fj.connectedBody = rb;
+            // set FixedJoint
+            FixedJoint fj = gameObject.AddComponent<FixedJoint>();
+            fj.connectedBody = anotherPlayer.getRigidbody();
             fj.breakForce = 2147483847;
+            fj.autoConfigureConnectedAnchor = false;
+            //fj.connectedAnchor = anotherPlayer.grabbedPoint.transform.localPosition;
+            fj.connectedAnchor = anotherPlayer.getTool().getPoint();
+            //Debug.Log("getPoint() = " + anotherPlayer.getTool().getPoint() + ", localPosition = " + anotherPlayer.grabbedPoint.transform.localPosition);
+            fj.enableCollision = false;
 
             // set Tool in the status of being grabbed
-            anotherPlayer.beGrabbed();
             anotherPlayer.grabbedPointClass.setAnotherPlayer(player);
-            //GameObject hand = player.RightHand;
-            //anotherPlayer.grabbedPoint.transform.position = hand.transform.position;
-            //anotherPlayer.transform.forward = player.transform.forward;
+            anotherPlayer.beGrabbed();
 
             grabbing = true;
             Debug.Log("grab");
@@ -71,13 +77,13 @@ public class GrabPoint : MonoBehaviour
 
     private void Release() {
         if (targetTool != null) {
-            Destroy(targetTool.GetComponent<FixedJoint>());
-
+            //Destroy(targetTool.GetComponent<FixedJoint>());
+            Destroy(gameObject.GetComponent<FixedJoint>());
             // Reset grabbed player rigidbody
             targetTool.GetComponent<GrabbedPoint>().resetRigidBody();
 
             // Reset grabbing player rigidbody
-            player.transform.Find("GrabbedPoint").GetComponent<GrabbedPoint>().resetRigidBody();
+            player.grabbedPointClass.resetRigidBody();
 
             // set Tool in the status of being released
             anotherPlayer.beReleased();

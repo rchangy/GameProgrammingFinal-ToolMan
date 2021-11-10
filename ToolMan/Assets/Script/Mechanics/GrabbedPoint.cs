@@ -10,10 +10,8 @@ public class GrabbedPoint : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         FixedJoint fj = playerGameObject.AddComponent<FixedJoint>();
-        //FixedJoint fj = player.RightHand.AddComponent<FixedJoint>();
         fj.connectedBody = rb;
         fj.breakForce = 2147483647;
-        //fj.connectedArticulationBody = player.RightHand.GetComponent<ArticulationBody>();
     }
 
     public void setPlayer(PlayerController player)
@@ -35,10 +33,18 @@ public class GrabbedPoint : MonoBehaviour
     public void setAnotherPlayer(PlayerController anotherPlayer)
     {
         this.anotherPlayer = anotherPlayer;
-        Vector3 distance = anotherPlayer.RightHand.transform.position - gameObject.transform.position;
-        Debug.Log("distance = " + distance);
-        gameObject.transform.position = anotherPlayer.RightHand.transform.position;
-        playerGameObject.transform.position += distance;
+        //Vector3 distance;
+        //if (anotherPlayer != null)
+        //{
+        //    distance = anotherPlayer.RightHand.transform.position - gameObject.transform.position;
+        //    gameObject.transform.position = anotherPlayer.RightHand.transform.position;
+        //    distance = anotherPlayer.RightHand.transform.position - gameObject.transform.position;
+        //    playerGameObject.transform.position += distance;
+        //}
+        
+        //
+        //Debug.Log("distance = " + distance);
+        //
     }
 
     private void Update()
@@ -46,8 +52,10 @@ public class GrabbedPoint : MonoBehaviour
         if (anotherPlayer != null)
         {
             playerGameObject.transform.forward = anotherPlayer.gameObject.transform.forward;
-            //playerGameObject.transform.rotation = Quaternion.Euler(0f, anotherPlayer.gameObject.transform.rotation.y, 26f);
-            
+            //player.getGrabbedPoint().transform.position = anotherPlayer.RightHand.transform.position;
+            //playerGameObject.transform.localRotation = Quaternion.E
+            //playerGameObject.transform.rotation = Quaternion.Euler(playerGameObject.transform.rotation.x, playerGameObject.transform.rotation.y, 26f);
+            //playerGameObject.transform.rotation = Quaternion.LookRotation(new Vector3())
             //playerGameObject.transform.rotation = Quaternion.Euler(playerGameObject.transform.rotation.x, playerGameObject.transform.rotation.y, 26f);
             //Debug.Log(anotherPlayer.RightHand.transform.position);
             //Debug.Log(gameObject.transform.position);
