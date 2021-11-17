@@ -10,33 +10,38 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider playerCollider;
-    public GameObject toolListUI;
-    public GameObject grabbedPoint;
-    public GrabbedPoint grabbedPointClass;
+    [SerializeField] private GameObject toolListUI;
+    [SerializeField] private GameObject grabbedPoint;
+    private GrabbedPoint grabbedPointController;
     public GrabPoint grabPoint;
+
+    private State state = new State();
     public int playerNum = 1; // player 1 or player 2
+
+    private KeyboardInputController keyboardInputController;
     // ==== Components ====
 
     // ==== to Tool ====
     public bool isTool = false;
-    List<Tool> tools = new List<Tool>();
+    private List<Tool> tools = new List<Tool>();
     private int toolIdx;
     // ==== to Tool ====
 
-    // ==== Movement ====
+    // ==== Camera Movement ====
     public Transform mainCameraTrans;
-    [SerializeField] private float speed = 5;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
+    // ==== Camera Movement ====
 
+    // ==== Player Movement ====
+    [SerializeField] private float speed = 5;
     public float jumpForce = 300;
-   
     public int maxJumpCount = 1; // It can actaully jump once more 
     public int currentJumpCount = 0;
 
     private float distToGround;
     private bool isGrounded;
-    // ==== Movement ====
+    // ==== Player Movement ====
 
     // ==== Combat ====
     public CombatUnit combat;
@@ -47,9 +52,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
-        grabbedPointClass = grabbedPoint.GetComponent<GrabbedPoint>();
+        grabbedPointController = grabbedPoint.GetComponent<GrabbedPoint>();
         grabPoint.setPlayer(this);
-        grabbedPointClass.setPlayer(this);
+        grabbedPointController.setPlayer(this);
+        state = State.Grounded;
 
         if (playerNum == 1)
         {
@@ -64,26 +70,17 @@ public class PlayerController : MonoBehaviour
         }
 
         distToGround = playerCollider.bounds.extents.y;
+        keyboardInputController = new KeyboardInputController();
     }
 
     private void Update()
     {
         if (!isTool)
-        {
-            rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-            
+        {   
             // ==== Movement ====
             float horizontal = 0, vertical = 0;
-            if (playerNum == 1)
-            {
-                horizontal = Input.GetAxisRaw("Horizontal1");
-                vertical = Input.GetAxisRaw("Vertical1");
-            }
-            if (playerNum == 2)
-            {
-                horizontal = Input.GetAxisRaw("Horizontal2");
-                vertical = Input.GetAxisRaw("Vertical2");
-            }
+            horizontal = keyboardInputController.MoveHorizontal(playerNum);
+            vertical = keyboardInputController.MoveVertical(playerNum);
             Vector3 movement = new Vector3(horizontal, 0, vertical).normalized;
 
             if (movement.sqrMagnitude > 0.01f)
@@ -100,16 +97,8 @@ public class PlayerController : MonoBehaviour
             }
 
             // Jump
-            if (playerNum == 1)
-            {
-                if (Input.GetButtonDown("JumpOrAttack1"))
-                    Jump();
-            }
-            else if (playerNum == 2)
-            {
-                if (Input.GetButtonDown("JumpOrAttack2"))
-                    Jump();
-            }
+            if (keyboardInputController.JumpOrAttack(playerNum))
+                Jump();
             isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f);
             if (isGrounded)
                 currentJumpCount = 0;
@@ -119,19 +108,12 @@ public class PlayerController : MonoBehaviour
         else // Tool
         {
             // Attack
-            if (playerNum == 1)
-            {
-                if (Input.GetButtonDown("JumpOrAttack1"))
-                    Attack();
-            }
-            else if (playerNum == 2) { 
-                if (Input.GetButtonDown("JumpOrAttack2"))
-                    Attack();
-             }
+            if (keyboardInputController.JumpOrAttack(playerNum))
+                Attack();
         }
 
         // ==== Man <-> Tool ====
-        if ((Input.GetButtonDown("Choose1") && playerNum == 1) || (Input.GetButtonDown("Choose2") && playerNum == 2))
+        if (keyboardInputController.Choose(playerNum))
             SelectTool();
         // ==== Man <-> Tool ====
     }
@@ -165,6 +147,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // ==== grab/grabbed ====
+
+    public void Release()
+    {
+        grabbedPointController.resetRigidBody();
+    }
+
+    public void beGrabbed(PlayerController anotherPlayer)
+    {
+        tools[toolIdx].beGrabbed();
+        grabbedPoint.GetComponent<Collider>().isTrigger = true;
+        //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        gameObject.GetComponent<Collider>().isTrigger = true;
+        grabbedPointController.setAnotherPlayer(anotherPlayer);
+    }
+
+    public void beReleased()
+    {
+        tools[toolIdx].beReleased();
+        grabbedPoint.GetComponent<Collider>().isTrigger = false;
+        //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+        gameObject.GetComponent<Collider>().isTrigger = false;
+        grabbedPointController.setAnotherPlayer(null);
+    }
+
+    // ==== getters/status ====
     public Rigidbody getRigidbody()
     {
         return rb;
@@ -185,20 +193,18 @@ public class PlayerController : MonoBehaviour
         return tools[toolIdx];
     }
 
-    public void beGrabbed()
+    public bool inToolState()
     {
-        tools[toolIdx].beGrabbed();
-        grabbedPoint.GetComponent<Collider>().isTrigger = true;
-        //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        gameObject.GetComponent<Collider>().isTrigger = true;
+        return isTool;
     }
 
-    public void beReleased()
+    // ==== State ====
+    public enum State
     {
-        tools[toolIdx].toMan();
-        tools[toolIdx].beReleased();
-        grabbedPoint.GetComponent<Collider>().isTrigger = false;
-        //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
-        gameObject.GetComponent<Collider>().isTrigger = false;
+        Grounded,
+        PrepareToJump,
+        Jumping,
+        InFlight,
+        Landed,
     }
 }
