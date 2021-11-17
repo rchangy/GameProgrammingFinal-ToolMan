@@ -67,8 +67,7 @@ public class GrabPoint : MonoBehaviour
             fj.enableCollision = false;
 
             // set Tool in the status of being grabbed
-            anotherPlayer.grabbedPointClass.setAnotherPlayer(player);
-            anotherPlayer.beGrabbed();
+            anotherPlayer.beGrabbed(player);
 
             grabbing = true;
             Debug.Log("grab");
@@ -83,11 +82,11 @@ public class GrabPoint : MonoBehaviour
             targetTool.GetComponent<GrabbedPoint>().resetRigidBody();
 
             // Reset grabbing player rigidbody
-            player.grabbedPointClass.resetRigidBody();
+            // player.grabbedPointController.resetRigidBody();
+            player.Release();
 
             // set Tool in the status of being released
             anotherPlayer.beReleased();
-            anotherPlayer.grabbedPointClass.setAnotherPlayer(null);
 
             grabbing = false;
             Debug.Log("release");
