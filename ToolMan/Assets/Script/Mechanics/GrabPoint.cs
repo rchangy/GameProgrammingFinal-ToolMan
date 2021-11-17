@@ -8,7 +8,7 @@ namespace Platformer.Mechanics
         public LayerMask grabbedPointLayer;
         GameObject targetTool;
         public bool grabbing = false;
-        PlayerController anotherPlayer;
+        private PlayerController anotherPlayer;
 
         Rigidbody rb;
         PlayerController player;
@@ -50,13 +50,13 @@ namespace Platformer.Mechanics
                 if (colliders.Length == 0 && !grabbing)
                 {
                     targetTool = null;
-                    //Debug.Log("set TargetTool to Null");
                 }
             }
         }
 
-        private void Grab()
+        public void Grab()
         {
+            Debug.Log("player: " + player.playerNum + " grab player " + anotherPlayer.playerNum);
             Debug.Log("In Grab");
             if (targetTool != null)
             {
@@ -65,9 +65,7 @@ namespace Platformer.Mechanics
                 fj.connectedBody = anotherPlayer.getRigidbody();
                 fj.breakForce = 2147483847;
                 fj.autoConfigureConnectedAnchor = false;
-                //fj.connectedAnchor = anotherPlayer.grabbedPoint.transform.localPosition;
                 fj.connectedAnchor = anotherPlayer.getTool().getPoint();
-                //Debug.Log("getPoint() = " + anotherPlayer.getTool().getPoint() + ", localPosition = " + anotherPlayer.grabbedPoint.transform.localPosition);
                 fj.enableCollision = false;
 
                 // set Tool in the status of being grabbed
@@ -96,6 +94,12 @@ namespace Platformer.Mechanics
                 grabbing = false;
                 Debug.Log("release");
             }
+        }
+
+        public void setAnotherPlayerAndTarget(PlayerController anotherPlayer)
+        {
+            this.anotherPlayer = anotherPlayer;
+            this.targetTool = anotherPlayer.getGrabbedPoint();
         }
 
         private void OnDrawGizmos()

@@ -14,9 +14,13 @@ public class PlayerController : ToolableMan
     public GrabPoint grabPoint;
 
     private State state = new State();
-    public int playerNum = 1; // player 1 or player 2
-
+    
     private KeyboardInputController keyboardInputController;
+
+    public int playerNum = 1; // player 1 or player 2
+    [SerializeField] private PlayerController anotherPlayer;
+    [SerializeField] private bool changeable = false;
+
     // ==== Components ====
 
     // ==== Camera Movement ====
@@ -71,6 +75,10 @@ public class PlayerController : ToolableMan
         {
             ManageMovement();
             UpdateState();
+            if (Input.GetKeyDown(KeyCode.Space) && !isTool && anotherPlayer.isTool && changeable)
+            {
+                ToolManChange();
+            }
         }
 
         else // Tool
@@ -149,11 +157,47 @@ public class PlayerController : ToolableMan
             toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
         }
     }
+
+    public void ToolManChange() // Man Player
+    {
+        Debug.Log("ToolManChange!" + ", I am player - " + playerNum);
+        Debug.Log("Player - " + playerNum + " is Tool = " + isTool);
+        Debug.Log("Player - " + anotherPlayer.playerNum + " is Tool = " + anotherPlayer.isTool);
+        // set anotherplayer
+        grabPoint.setAnotherPlayerAndTarget(anotherPlayer);
+        anotherPlayer.grabPoint.setAnotherPlayerAndTarget(this);
+        anotherPlayer.changeable = false;
+
+        // cache position
+        Vector3 manPosition = this.transform.position;
+        Vector3 toolPosition = anotherPlayer.transform.position;
+
+        // Release & Transform
+        grabPoint.Release();
+        //rb.useGravity = false;
+        //anotherPlayer.getRigidbody().useGravity = false;
+        transform.position = toolPosition;
+        anotherPlayer.transform.position = manPosition;
+        anotherPlayer.ToolableManTransform(); // Tool to Man
+        toolIdx = 0;
+        ToolableManTransform(); // Man to Tool
+
+        //// set position & Grab
+        //if (!grabPoint.grabbing)
+        //    grabPoint.Grab();
+
+        if (!anotherPlayer.grabPoint.grabbing)
+        {
+            Debug.Log("in playerController: player " + anotherPlayer.playerNum + " grabs player " + playerNum);
+            anotherPlayer.grabPoint.Grab();
+        }
+    }
+
     // ==== Actions ====
 
 
 
-    // ==== getters ====
+    // ==== getters & setters ====
     public Rigidbody getRigidbody()
     {
         return rb;
@@ -162,6 +206,10 @@ public class PlayerController : ToolableMan
     public Animator getAnimator()
     {
         return animator;
+    }
+    public void setChangeable(bool changeable)
+    {
+        this.changeable = changeable;
     }
     // ==== getters
 
