@@ -21,7 +21,7 @@ public class GrabPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!player.isTool)
+        if (!player.inToolState())
         {
             if ( (Input.GetButtonDown("Grab1")&&(player.playerNum == 1) ) || (Input.GetButtonDown("Grab2")&&(player.playerNum == 2)) )
             {
@@ -41,7 +41,7 @@ public class GrabPoint : MonoBehaviour
                 if (collider.gameObject != gameObject)
                 {
                     anotherPlayer = collider.transform.parent.gameObject.GetComponent<PlayerController>();
-                    if(anotherPlayer != null && anotherPlayer.isTool) targetTool = collider.gameObject;
+                    if(anotherPlayer != null && anotherPlayer.inToolState()) targetTool = collider.gameObject;
                 }
                     
             }
@@ -67,8 +67,7 @@ public class GrabPoint : MonoBehaviour
             fj.enableCollision = false;
 
             // set Tool in the status of being grabbed
-            anotherPlayer.grabbedPointClass.setAnotherPlayer(player);
-            anotherPlayer.beGrabbed();
+            anotherPlayer.beGrabbed(player);
 
             grabbing = true;
             Debug.Log("grab");
@@ -82,12 +81,11 @@ public class GrabPoint : MonoBehaviour
             // Reset grabbed player rigidbody
             targetTool.GetComponent<GrabbedPoint>().resetRigidBody();
 
-            // Reset grabbing player rigidbody
-            player.grabbedPointClass.resetRigidBody();
+            // Reset grabbing player rigidbody? not sure if need this
+            player.Release();
 
             // set Tool in the status of being released
             anotherPlayer.beReleased();
-            anotherPlayer.grabbedPointClass.setAnotherPlayer(null);
 
             grabbing = false;
             Debug.Log("release");
