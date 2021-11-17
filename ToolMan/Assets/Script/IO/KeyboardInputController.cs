@@ -6,16 +6,8 @@ public class KeyboardInputController : InputController
 {
     public bool JumpOrAttack(int playerNum)
     {
-        if (playerNum == 1)
-        {
-            if (Input.GetButtonDown("JumpOrAttack1"))
-                return true;
-        }
-        else if (playerNum == 2)
-        {
-            if (Input.GetButtonDown("JumpOrAttack2"))
-                return true;
-        }
+        if ((playerNum == 1 && Input.GetButtonDown("JumpOrAttack1")) || (playerNum == 2 && Input.GetButtonDown("JumpOrAttack2")))
+            return true;
         return false;
     }
 
@@ -24,7 +16,6 @@ public class KeyboardInputController : InputController
         if (playerNum == 1)
         {
             float h = Input.GetAxisRaw("Horizontal1");
-            Debug.Log("playerNum = " + playerNum + " h = " + h);
             return h;
         }
         else

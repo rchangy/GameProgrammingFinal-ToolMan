@@ -154,7 +154,7 @@ public class CombatUnit : MonoBehaviour
         if (isPlayer)
         {
             playerController.grabPoint.Release();
-            if (playerController.isTool) playerController.SelectTool();
+            if (playerController.isTool) playerController.ToolableManTransform();
         }
     }
 

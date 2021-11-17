@@ -1,99 +1,106 @@
 using UnityEngine;
 
-public class GrabPoint : MonoBehaviour
+namespace Platformer.Mechanics
 {
-    public float grabRange = 1.5f;
-    public LayerMask grabbedPointLayer;
-    GameObject targetTool;
-    public bool grabbing = false;
-    PlayerController anotherPlayer;
-
-    Rigidbody rb;
-    PlayerController player;
-
-    private void Awake()
+    public class GrabPoint : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody>();
-    }
+        public float grabRange = 1.5f;
+        public LayerMask grabbedPointLayer;
+        GameObject targetTool;
+        public bool grabbing = false;
+        PlayerController anotherPlayer;
 
-    public void setPlayer(PlayerController p) { player = p;  }
+        Rigidbody rb;
+        PlayerController player;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!player.inToolState())
+        private void Awake()
         {
-            if ( (Input.GetButtonDown("Grab1")&&(player.playerNum == 1) ) || (Input.GetButtonDown("Grab2")&&(player.playerNum == 2)) )
+            rb = GetComponent<Rigidbody>();
+        }
+
+        public void setPlayer(PlayerController p) { player = p; }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (!player.inToolState())
             {
-                Debug.Log("Press Grab1");
-                if (grabbing)
+                if ((Input.GetButtonDown("Grab1") && (player.playerNum == 1)) || (Input.GetButtonDown("Grab2") && (player.playerNum == 2)))
                 {
-                    Debug.Log("Press Release");
-                    Release();
+                    Debug.Log("Press Grab1");
+                    if (grabbing)
+                    {
+                        Debug.Log("Press Release");
+                        Release();
+                    }
+                    else
+                        Grab();
                 }
-                else
-                    Grab();
-            }
 
-            Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange, grabbedPointLayer);
-            foreach (Collider collider in colliders)
-            {
-                if (collider.gameObject != gameObject)
+                Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange, grabbedPointLayer);
+                foreach (Collider collider in colliders)
                 {
-                    anotherPlayer = collider.transform.parent.gameObject.GetComponent<PlayerController>();
-                    if(anotherPlayer != null && anotherPlayer.inToolState()) targetTool = collider.gameObject;
+                    if (collider.gameObject != gameObject)
+                    {
+                        anotherPlayer = collider.transform.parent.gameObject.GetComponent<PlayerController>();
+                        if (anotherPlayer != null && anotherPlayer.inToolState()) targetTool = collider.gameObject;
+                    }
+
                 }
-                    
+                if (colliders.Length == 0 && !grabbing)
+                {
+                    targetTool = null;
+                    //Debug.Log("set TargetTool to Null");
+                }
             }
-            if (colliders.Length == 0 && !grabbing)
+        }
+
+        private void Grab()
+        {
+            Debug.Log("In Grab");
+            if (targetTool != null)
             {
-                targetTool = null;
-                //Debug.Log("set TargetTool to Null");
+                // set FixedJoint
+                FixedJoint fj = gameObject.AddComponent<FixedJoint>();
+                fj.connectedBody = anotherPlayer.getRigidbody();
+                fj.breakForce = 2147483847;
+                fj.autoConfigureConnectedAnchor = false;
+                //fj.connectedAnchor = anotherPlayer.grabbedPoint.transform.localPosition;
+                fj.connectedAnchor = anotherPlayer.getTool().getPoint();
+                //Debug.Log("getPoint() = " + anotherPlayer.getTool().getPoint() + ", localPosition = " + anotherPlayer.grabbedPoint.transform.localPosition);
+                fj.enableCollision = false;
+
+                // set Tool in the status of being grabbed
+                anotherPlayer.beGrabbed(player);
+
+                grabbing = true;
+                Debug.Log("grab");
             }
         }
-    }
 
-    private void Grab() {
-        Debug.Log("In Grab");
-        if (targetTool != null) {
-            // set FixedJoint
-            FixedJoint fj = gameObject.AddComponent<FixedJoint>();
-            fj.connectedBody = anotherPlayer.getRigidbody();
-            fj.breakForce = 2147483847;
-            fj.autoConfigureConnectedAnchor = false;
-            //fj.connectedAnchor = anotherPlayer.grabbedPoint.transform.localPosition;
-            fj.connectedAnchor = anotherPlayer.getTool().getPoint();
-            //Debug.Log("getPoint() = " + anotherPlayer.getTool().getPoint() + ", localPosition = " + anotherPlayer.grabbedPoint.transform.localPosition);
-            fj.enableCollision = false;
+        public void Release()
+        {
+            if (targetTool != null)
+            {
+                //Destroy(targetTool.GetComponent<FixedJoint>());
+                Destroy(gameObject.GetComponent<FixedJoint>());
+                // Reset grabbed player rigidbody
+                targetTool.GetComponent<GrabbedPoint>().resetRigidBody();
 
-            // set Tool in the status of being grabbed
-            anotherPlayer.beGrabbed(player);
+                // Reset grabbing player rigidbody? not sure if need this
+                player.Release();
 
-            grabbing = true;
-            Debug.Log("grab");
+                // set Tool in the status of being released
+                anotherPlayer.beReleased();
+
+                grabbing = false;
+                Debug.Log("release");
+            }
         }
-    }
 
-    public void Release() {
-        if (targetTool != null) {
-            //Destroy(targetTool.GetComponent<FixedJoint>());
-            Destroy(gameObject.GetComponent<FixedJoint>());
-            // Reset grabbed player rigidbody
-            targetTool.GetComponent<GrabbedPoint>().resetRigidBody();
-
-            // Reset grabbing player rigidbody? not sure if need this
-            player.Release();
-
-            // set Tool in the status of being released
-            anotherPlayer.beReleased();
-
-            grabbing = false;
-            Debug.Log("release");
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(transform.position, grabRange);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, grabRange);
     }
 }
