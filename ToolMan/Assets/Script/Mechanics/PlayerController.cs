@@ -75,10 +75,11 @@ public class PlayerController : ToolableMan
         {
             ManageMovement();
             UpdateState();
-            if (Input.GetKeyDown(KeyCode.Space) && !isTool && anotherPlayer.isTool && changeable)
-            {
-                ToolManChange();
-            }
+            // for testing
+            //if (Input.GetKeyDown(KeyCode.Space) && !isTool && anotherPlayer.isTool && changeable)
+            //{
+            //    ToolManChange();
+            //}
         }
 
         else // Tool
@@ -150,6 +151,7 @@ public class PlayerController : ToolableMan
             toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
             tools[toolIdx].toTool();
             combat.SetCurrentUsingSkill(tools[toolIdx].getName());
+            changeable = false;
         }
         else
         {
@@ -160,9 +162,6 @@ public class PlayerController : ToolableMan
 
     public void ToolManChange() // Man Player
     {
-        Debug.Log("ToolManChange!" + ", I am player - " + playerNum);
-        Debug.Log("Player - " + playerNum + " is Tool = " + isTool);
-        Debug.Log("Player - " + anotherPlayer.playerNum + " is Tool = " + anotherPlayer.isTool);
         // set anotherplayer
         grabPoint.setAnotherPlayerAndTarget(anotherPlayer);
         anotherPlayer.grabPoint.setAnotherPlayerAndTarget(this);
@@ -174,21 +173,14 @@ public class PlayerController : ToolableMan
 
         // Release & Transform
         grabPoint.Release();
-        //rb.useGravity = false;
-        //anotherPlayer.getRigidbody().useGravity = false;
         transform.position = toolPosition;
         anotherPlayer.transform.position = manPosition;
         anotherPlayer.ToolableManTransform(); // Tool to Man
         toolIdx = 0;
         ToolableManTransform(); // Man to Tool
 
-        //// set position & Grab
-        //if (!grabPoint.grabbing)
-        //    grabPoint.Grab();
-
         if (!anotherPlayer.grabPoint.grabbing)
         {
-            Debug.Log("in playerController: player " + anotherPlayer.playerNum + " grabs player " + playerNum);
             anotherPlayer.grabPoint.Grab();
         }
     }
