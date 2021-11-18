@@ -128,7 +128,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (combat.HasAttacked) Idle();
+            if (combat._hasAttacked) Idle();
             else
             {
                 if (!PlayerInSightRange && !PlayerInAttackRange) Patrol();

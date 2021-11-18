@@ -7,13 +7,13 @@ public class StandardShootingSkill : Skill
     public GameObject bulletPrefab;
     public float shootingForce;
 
-    public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, int Atk)
+    public override IEnumerator Attack(Animator anim, LayerMask targetLayer, Stat atk, Stat attackSpeed, CharacterStats stats)
     {
         anim.SetTrigger("Attack");
 
         // wait for delay time
         yield return new WaitForSeconds(attackDelay);
-        Shoot(Atk);
+        Shoot((int)atk.Value);
     }
     public virtual void Shoot(int atk)
     {

@@ -4,47 +4,39 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.Events;
 
-
-
 public class CombatUnit : MonoBehaviour
 {
     public bool isPlayer;
+
+    private CharacterStats stats;
+    private Resource _hp;
+    private Stat _attackSpeed;
+    private Stat _atk;
+
+    private Ability _canAttack;
+    private Ability _canBeHurt;
+    private Ability _canMove;
+
+    public bool CanAttack
+    {
+        get => _canAttack.Value;
+    }
+    public bool CanBeHurt
+    {
+        get => _canBeHurt.Value;
+    }
+    public bool CanMove
+    {
+        get => _canMove.Value;
+    }
+    
+
+    private int _lastHpValue;
+
+    public HealthBar healthBar;
+
     public PlayerController playerController;
 
-    public bool CanAttack;
-    public bool CanBeHurt;
-    public bool CanMove;
-
-    public int MaxHealth;
-    public HealthBar healthBar;
-    private int _health;
-    public int Health
-    {
-        get => _health;
-        set
-        {
-            _health = Mathf.Max(0, value);
-            _health = Mathf.Min(MaxHealth, _health);
-            // change health bar
-            if(healthBar != null) healthBar.SetHealth(_health);
-            if (_health <= 0) Die();
-        }
-
-    }
-
-    public int Atk;
-
-    // for skill cooldown
-    protected float _timeToNextAttack;
-    protected bool _hasAttacked;
-    public bool HasAttacked
-    {
-        get => _hasAttacked;
-        set
-        {
-            _hasAttacked = value;
-        }
-    }
 
     // skills
     public Animator Anim;
@@ -54,9 +46,13 @@ public class CombatUnit : MonoBehaviour
     public List<string> CurrentUsingSkillSet;
     [SerializeField] private string currentUsingSkillName;
     private Skill currentUsingSkill;
-    private bool isUsingSkill;
+    private bool _hasSkillToUse;
 
     private Coroutine skillPerforming = null;
+
+    // for skill cooldown
+    protected float _timeToNextAttack;
+    private bool _hasAttacked;
 
     private void Awake()
     {
@@ -64,13 +60,34 @@ public class CombatUnit : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if(_lastHpValue != _hp.Value)
+        {
+            _lastHpValue = _hp.Value;
+            healthBar.SetHealth(_hp.Value);
+        }
+    }
+
     protected virtual void Start()
     {
-        if(healthBar != null) healthBar.SetMaxHealth(MaxHealth);
-        Health = MaxHealth;
+        _hp = stats.GetResourceByName("hp");
+        if (_hp == null) Debug.Log(gameObject.name + " has no resource hp");
+        _attackSpeed = stats.GetStatByName("attack speed");
+        if (_attackSpeed == null) Debug.Log(gameObject.name + " has no stat attack speed");
+        _atk = stats.GetStatByName("atk");
+        if (_atk == null) Debug.Log(gameObject.name + " has no stat atk");
+
+
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(_hp.MaxValue);
+            healthBar.SetHealth(_hp.Value);
+            _lastHpValue = _hp.Value;
+        }
 
         _hasAttacked = false;
-        isUsingSkill = true;
+        _hasSkillToUse = true;
         CanAttack = true;
         CanBeHurt = true;
         CanMove = true;
@@ -81,14 +98,13 @@ public class CombatUnit : MonoBehaviour
         if (currentUsingSkillName != null && currentUsingSkillName.Length > 0) SetCurrentUsingSkill(currentUsingSkillName);
         else if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
         else SetCurrentUsingSkill(null);
-
     }
 
     public virtual void Attack()
     {
-        if (!isUsingSkill) return;
-        if (HasAttacked) return;
-        HasAttacked = true;
+        if (!_hasSkillToUse) return;
+        if (_hasAttacked) return;
+        _hasAttacked = true;
 
         skillPerforming = StartCoroutine(PerformSkill());
 
@@ -96,9 +112,9 @@ public class CombatUnit : MonoBehaviour
 
     private IEnumerator PerformSkill()
     {
-        yield return StartCoroutine(currentUsingSkill.Attack(Anim, TargetLayers, this, Atk));
-        yield return new WaitForSeconds(currentUsingSkill.attackInterval);
-        HasAttacked = false;
+        yield return StartCoroutine(currentUsingSkill.Attack(Anim, TargetLayers, _atk, _attackSpeed, stats));
+        yield return new WaitForSeconds(currentUsingSkill.attackInterval / _attackSpeed.Value);
+        _hasAttacked = false;
     }
 
     // set skills that can be selected during battle
@@ -118,19 +134,20 @@ public class CombatUnit : MonoBehaviour
         currentUsingSkillName = skillName;
         if (skillName == null)
         {
-            isUsingSkill = false;
+            Debug.Log("No skill is set to " + gameObject.name);
+            _hasSkillToUse = false;
         }
         else
         {
             if (CurrentUsingSkillSet.Contains(skillName))
             {
                 currentUsingSkill = availableSkillSet.GetSkillbyName(currentUsingSkillName);
-                isUsingSkill = true;
+                _hasSkillToUse = true;
             }
             else
             {
                 Debug.Log("Unable use skill " + skillName + ", set current skill to null");
-                isUsingSkill = false;
+                _hasSkillToUse = false;
             }
         }
     }
@@ -140,28 +157,39 @@ public class CombatUnit : MonoBehaviour
         Debug.Log("coroutine stopped");
         StopCoroutine(skillPerforming);
         skillPerforming = null;
-        HasAttacked = false;
+        _hasAttacked = false;
         // animation
     }
 
-    public virtual void TakeDamage(int dmg)
+
+    /**
+     * everything that happens after hit by someone
+     */
+    public virtual void TakeDamage(int rawDmg, CharacterStats attackerStats)
     {
+        // check if this unit can be hurt now
         if (!CanBeHurt) return;
-        Debug.LogFormat("[{0}] Took {1} Damage", name, dmg);
+
+
+        // animation
         Anim.SetTrigger("Hurt");
+
+        // skill interrupt
         if (skillPerforming != null) InterruptAttack();
-        Health -= dmg;
+        // set all skill time variables to there init value
+
+        // check strength
+
         if (isPlayer)
         {
             playerController.grabPoint.Release();
             if (playerController.isTool) playerController.SelectTool();
         }
-    }
 
-    public virtual void Healed(int heal)
-    {
-        Debug.LogFormat("[{0}] Healed {1}", name, heal);
-        Health += heal;
+        // compute complete damage and take damage
+        // compute TODO
+        _hp.ChangeValueBy(-rawDmg);
+        Debug.LogFormat("[{0}] Took {1} Damage", name, rawDmg);
     }
 
     public virtual void Die()

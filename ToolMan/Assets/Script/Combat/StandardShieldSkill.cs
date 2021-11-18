@@ -4,9 +4,9 @@ using System.Collections;
 public class StandardShieldSkill : Skill
 {
     public float attackRange;
-    public CombatUnit friend;
+    public CharacterStats friend;
 
-    public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, int Atk)
+    public override IEnumerator Attack(Animator anim, LayerMask targetLayer, Stat atk, Stat attackSpeed, CharacterStats stats)
     {
         combat.CanBeHurt = false;
         friend.CanBeHurt = false;
