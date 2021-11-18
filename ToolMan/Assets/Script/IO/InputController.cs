@@ -1,0 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public interface InputController
+{
+    public bool JumpOrAttack(int playerNum);
+    public float MoveHorizontal(int playerNum);
+    public float MoveVertical(int playerNum);
+    public bool Choose(int playerNum);
+}

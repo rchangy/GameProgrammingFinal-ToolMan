@@ -1,62 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Platformer.Mechanics;
 
 [RequireComponent(typeof(Animator))]
-public class ToolableMan : MonoBehaviour
+public abstract class ToolableMan : MonoBehaviour
 {
-    protected Animator animator;
-    protected GameObject grabPoint;
-    // Start is called before the first frame update
-    void Start()
+    public bool isTool = false;
+    protected List<Tool> tools = new List<Tool>();
+    protected int toolIdx;
+
+    [SerializeField] protected GameObject grabbedPoint;
+    protected GrabbedPoint grabbedPointController;
+
+    virtual protected void Awake() {}
+
+    virtual protected void Start() {}
+
+    virtual protected void Update() {}
+
+    abstract public void ToolableManTransform();
+
+    // ==== grab/grabbed ====
+
+    public void Release()
     {
-        //grabPoint = gameObject.transform.Find("GrabPoint").gameObject;
+        grabbedPointController.resetRigidBody();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void beGrabbed(PlayerController anotherPlayer)
     {
-        
+        tools[toolIdx].beGrabbed();
+        grabbedPoint.GetComponent<Collider>().isTrigger = true;
+        //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        gameObject.GetComponent<Collider>().isTrigger = true;
+        grabbedPointController.setAnotherPlayer(anotherPlayer);
     }
 
-    protected void toPickaxe()
+    public void beReleased()
     {
-        animator.SetBool("isTool", true);
-        animator.SetBool("isPickaxe", true);
+        tools[toolIdx].beReleased();
+        grabbedPoint.GetComponent<Collider>().isTrigger = false;
+        //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+        gameObject.GetComponent<Collider>().isTrigger = false;
+        grabbedPointController.setAnotherPlayer(null);
     }
 
-    protected void toBoomerang()
+    // ==== getters ====
+    public GameObject getGrabbedPoint()
     {
-        animator.SetBool("isTool", true);
-        animator.SetBool("isBoomerang", true);
+        return grabbedPoint;
     }
 
-    protected void toSword()
+    public Tool getTool()
     {
-        animator.SetBool("isTool", true);
-        animator.SetBool("isSword", true);
+        return tools[toolIdx];
     }
 
-    protected void toFlashBomb()
+    public bool inToolState()
     {
-        animator.SetBool("isTool", true);
-        animator.SetBool("isFlashBomb", true);
-    }
-
-    protected void toShield()
-    {
-        animator.SetBool("isTool", true);
-        animator.SetBool("isShield", true);
-    }
-
-    protected void toMan()
-    {
-        animator.SetBool("isTool", false);
-        animator.SetBool("isShield", false);
-        animator.SetBool("isFlashBomb", false);
-        animator.SetBool("isSword", false);
-        animator.SetBool("isBoomerang", false);
-        animator.SetBool("isPickaxe", false);
-        grabPoint.transform.localPosition = new Vector3(0.0f, -1.2f, 0.0f);
+        return isTool;
     }
 }

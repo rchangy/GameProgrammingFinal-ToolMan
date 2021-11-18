@@ -614,12 +614,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20557317c6f5148fcb4ad920dccaaab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolListUI: {fileID: 0}
+  isTool: 0
   grabbedPoint: {fileID: 4090783293788950025}
-  grabbedPointClass: {fileID: 0}
+  toolListUI: {fileID: 0}
   grabPoint: {fileID: 3792191007045564064}
   playerNum: 1
-  isTool: 0
+  anotherPlayer: {fileID: 0}
+  changeable: 0
   mainCameraTrans: {fileID: 0}
   speed: 5
   jumpForce: 300
