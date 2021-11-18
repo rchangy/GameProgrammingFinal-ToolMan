@@ -88,10 +88,6 @@ public class CombatUnit : MonoBehaviour
 
         _hasAttacked = false;
         _hasSkillToUse = true;
-        CanAttack = true;
-        CanBeHurt = true;
-        CanMove = true;
-
         if ((playerController = gameObject.GetComponent<PlayerController>()) != null) isPlayer = true;
         else isPlayer = false;
 
@@ -183,7 +179,7 @@ public class CombatUnit : MonoBehaviour
         if (isPlayer)
         {
             playerController.grabPoint.Release();
-            if (playerController.isTool) playerController.SelectTool();
+            if (playerController.isTool) playerController.ToolableManTransform();
         }
 
         // compute complete damage and take damage
