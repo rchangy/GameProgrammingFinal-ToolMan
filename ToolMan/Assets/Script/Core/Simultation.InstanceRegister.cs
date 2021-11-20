@@ -1,4 +1,4 @@
-namespace Platformer.Core
+namespace ToolMan.Core
 {
     public static partial class Simulation
     {

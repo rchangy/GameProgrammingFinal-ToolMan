@@ -1,7 +1,7 @@
-using Platformer.Core;
-using Platformer.Mechanics;
+using ToolMan.Core;
+using ToolMan.Mechanics;
 
-namespace Platformer.Gameplay
+namespace ToolMan.Gameplay
 {
     /// <summary>
     /// Fired when the player character lands after being airborne.
