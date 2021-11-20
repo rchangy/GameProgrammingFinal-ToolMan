@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Platformer.Mechanics;
+using ToolMan.Mechanics;
 
 [RequireComponent(typeof(Animator))]
 public abstract class ToolableMan : MonoBehaviour

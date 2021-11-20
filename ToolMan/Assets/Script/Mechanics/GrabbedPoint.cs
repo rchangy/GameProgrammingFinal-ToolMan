@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Platformer.Mechanics
+namespace ToolMan.Mechanics
 {
     public class GrabbedPoint : MonoBehaviour
     {
