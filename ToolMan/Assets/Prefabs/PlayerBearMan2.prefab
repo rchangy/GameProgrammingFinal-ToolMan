@@ -106,11 +106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f73dce4bba2747bcba1ef409400120f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackInterval: 0
+  attackInterval: 0.5
   attackDelay: 0
-  attackRange: 0
+  attackRange: 3
   friend: {fileID: 0}
-  invincibleBuff: {fileID: 0}
+  Buff: {fileID: 11400000, guid: 848e963d68d014db99b15898c8b1d0ec, type: 2}
 --- !u!1 &408826353996347886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,6 +1259,7 @@ GameObject:
   - component: {fileID: 8507911072495564286}
   - component: {fileID: 8507911072495564285}
   - component: {fileID: 4171716028473278162}
+  - component: {fileID: 1120611630}
   m_Layer: 6
   m_Name: PlayerBearMan2
   m_TagString: Player
@@ -1386,6 +1387,35 @@ MonoBehaviour:
   - Shield
   - FlashBomb
   currentUsingSkillName: LightSaber
+--- !u!114 &1120611630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653095584333043336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ebda5edaa86496f86f953d14f9fa88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityInfos:
+  - _statName: Invincible
+    BaseValue: 0
+    _value: 0
+  StatInfos:
+  - _statName: Atk
+    BaseValue: 10
+    _value: 0
+  - _statName: AttackSpeed
+    BaseValue: 1
+    _value: 0
+  ResourceInfos:
+  - _resourceName: Hp
+    MaxValue: 100
+    InitValue: 100
+    _currentValue: 0
+  _inherentTypes: []
 --- !u!1 &5681094873323192337
 GameObject:
   m_ObjectHideFlags: 0

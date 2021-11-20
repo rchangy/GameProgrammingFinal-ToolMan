@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 3346628931965091974}
   - component: {fileID: 3346628930813195875}
   - component: {fileID: 3346628931965091973}
+  - component: {fileID: 2039804826}
   m_Layer: 6
   m_Name: PlayerBearMan1
   m_TagString: Player
@@ -541,7 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 0
   healthBar: {fileID: 0}
-  playerController: {fileID: 0}
+  playerController: {fileID: 3346628931965091973}
   Anim: {fileID: 3346628931965091974}
   TargetLayers:
     serializedVersion: 2
@@ -576,6 +577,35 @@ MonoBehaviour:
   maxJumpCount: 1
   currentJumpCount: 0
   combat: {fileID: 3346628930813195875}
+--- !u!114 &2039804826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589881963645690864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ebda5edaa86496f86f953d14f9fa88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityInfos:
+  - _statName: Invincible
+    BaseValue: 0
+    _value: 0
+  StatInfos:
+  - _statName: Atk
+    BaseValue: 10
+    _value: 0
+  - _statName: AttackSpeed
+    BaseValue: 1
+    _value: 0
+  ResourceInfos:
+  - _resourceName: Hp
+    MaxValue: 100
+    InitValue: 100
+    _currentValue: 0
+  _inherentTypes: []
 --- !u!1 &1636210686992201065
 GameObject:
   m_ObjectHideFlags: 0
