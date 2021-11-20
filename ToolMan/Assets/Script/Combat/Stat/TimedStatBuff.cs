@@ -8,32 +8,47 @@ public class TimedStatBuff : TimedBuff
     private ScriptableStatBuff _statBuff { get; }
     protected int EffectStacks;
     private Dictionary<StatModifier, float> activeMods = new Dictionary<StatModifier, float>();
-    private List<StatModifier> toBeRemoved = new List<StatModifier>();
-
+    private List<StatModifier> _toBeRemoved = new List<StatModifier>();
+    private List<StatModifier> _toBeActivated = new List<StatModifier>();
+    private int _activationStack = 0;
     public TimedStatBuff(ScriptableStatBuff buff, CharacterStats target) : base(buff, target)
     {
-
+        _statBuff = buff;
     }
 
     public override void Tick(float delta)
     {
-        foreach (StatModifier mod in activeMods.Keys)
+        List<StatModifier> keys = new List<StatModifier>(activeMods.Keys);
+        foreach (StatModifier mod in keys)
         {
+            activeMods[mod] += _activationStack * _statBuff.Duration;
+            activeMods[mod] = Mathf.Min(activeMods[mod], Buff.MaxDuration);
             activeMods[mod] -= delta;
             if(activeMods[mod] <= 0)
             {
                 RemoveEffect(mod);
-                toBeRemoved.Add(mod);
+                _toBeRemoved.Add(mod);
             }
         }
+        _activationStack = 0;
 
-        foreach(StatModifier mod in toBeRemoved)
+        foreach(StatModifier mod in _toBeActivated)
+        {
+            if (ApplyEffect(mod))
+            {
+                activeMods.Add(mod, _statBuff.Duration);
+            }
+
+        }
+        _toBeActivated.Clear();
+
+        foreach(StatModifier mod in _toBeRemoved)
         {
             activeMods.Remove(mod);
         }
-        toBeRemoved.Clear();
+        _toBeRemoved.Clear();
 
-        if(activeMods.Count == 0)
+        if (activeMods.Count == 0)
         {
             //End();
             IsFinished = true;
@@ -48,35 +63,31 @@ public class TimedStatBuff : TimedBuff
         StatModifier newMod = null;
         if ((_statBuff.IsEffectStacked && EffectStacks < _statBuff.MaxEffectStack) || newBuff)
         {
-            newMod = ApplyEffect();
-            EffectStacks++;
+            if (Target.HasStat(_statBuff.Target))
+            {
+                newMod = new StatModifier(_statBuff.Value, _statBuff.ModType, this);
+                _toBeActivated.Add(newMod);
+                EffectStacks++;
+                newBuff = false;
+            }
         }
 
-        if (Buff.IsDurationStacked || newBuff)
+        if (Buff.IsDurationStacked)
         {
-            foreach (StatModifier mod in activeMods.Keys)
-            {
-                if (mod == newMod) continue;    // new modifier don't need to refresh
-                activeMods[mod] += Buff.Duration;
-                activeMods[mod] = Mathf.Min(activeMods[mod], Buff.MaxDuration);
-            }
+            _activationStack++;
         }
     }
 
 
-    protected StatModifier ApplyEffect(){
+    protected bool ApplyEffect(StatModifier mod)
+    {
         if (Target.HasStat(_statBuff.Target))
         {
-            var mod = new StatModifier(_statBuff.Value, _statBuff.ModType, this);
             var stat = Target.GetStatByName(_statBuff.Target);
-            if(stat != null)
-            {
-                stat.AddModifier(mod);
-                activeMods.Add(mod, Buff.Duration);
-            }
-            return mod;
+            stat.AddModifier(mod);
+            return true;
         }
-        return null;
+        return false;
     }
 
     protected void RemoveEffect(StatModifier mod)
@@ -85,6 +96,7 @@ public class TimedStatBuff : TimedBuff
         {
             var stat = Target.GetStatByName(_statBuff.Target);
             stat.RemoveModifier(mod);
+            EffectStacks--;
         }
     }
 

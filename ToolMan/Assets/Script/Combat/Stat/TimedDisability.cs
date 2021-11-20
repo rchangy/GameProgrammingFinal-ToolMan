@@ -54,7 +54,7 @@ public class TimedDisability : TimedBuff
             var ability = Target.GetAbilityByName(Buff.Target);
             if (ability != null)
             {
-                ability.Disable();
+                ability.RemoveDisability();
             }
         }
     }

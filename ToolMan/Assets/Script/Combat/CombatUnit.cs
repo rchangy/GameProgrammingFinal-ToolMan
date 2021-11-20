@@ -53,6 +53,10 @@ public class CombatUnit : MonoBehaviour
     // for skill cooldown
     protected float _timeToNextAttack;
     private bool _hasAttacked;
+    public bool HasAttacked
+    {
+        get => _hasAttacked;
+    }
 
     private void Awake()
     {
@@ -60,22 +64,14 @@ public class CombatUnit : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if(_lastHpValue != _hp.Value)
-        {
-            _lastHpValue = _hp.Value;
-            healthBar.SetHealth(_hp.Value);
-        }
-    }
-
     protected virtual void Start()
     {
-        _hp = stats.GetResourceByName("hp");
+        stats = gameObject.GetComponent<CharacterStats>();
+        _hp = stats.GetResourceByName("Hp");
         if (_hp == null) Debug.Log(gameObject.name + " has no resource hp");
-        _attackSpeed = stats.GetStatByName("attack speed");
+        _attackSpeed = stats.GetStatByName("AttackSpeed");
         if (_attackSpeed == null) Debug.Log(gameObject.name + " has no stat attack speed");
-        _atk = stats.GetStatByName("atk");
+        _atk = stats.GetStatByName("Atk");
         if (_atk == null) Debug.Log(gameObject.name + " has no stat atk");
 
 
@@ -83,11 +79,16 @@ public class CombatUnit : MonoBehaviour
         {
             healthBar.SetMaxHealth(_hp.MaxValue);
             healthBar.SetHealth(_hp.Value);
-            _lastHpValue = _hp.Value;
         }
-
+        _lastHpValue = _hp.Value;
         _hasAttacked = false;
         _hasSkillToUse = true;
+
+        if(stats == null)
+        {
+            Debug.Log(gameObject.name + " has no stats component");
+        }
+
         if ((playerController = gameObject.GetComponent<PlayerController>()) != null) isPlayer = true;
         else isPlayer = false;
 
@@ -95,6 +96,16 @@ public class CombatUnit : MonoBehaviour
         else if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
         else SetCurrentUsingSkill(null);
     }
+
+    private void Update()
+    {
+        if(_lastHpValue != _hp.Value && healthBar != null)
+        {
+            _lastHpValue = _hp.Value;
+            healthBar.SetHealth(_hp.Value);
+        }
+    }
+
 
     public virtual void Attack()
     {

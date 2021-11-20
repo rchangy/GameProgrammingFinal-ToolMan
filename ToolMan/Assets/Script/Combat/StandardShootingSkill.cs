@@ -13,14 +13,19 @@ public class StandardShootingSkill : Skill
 
         // wait for delay time
         yield return new WaitForSeconds(attackDelay);
-        Shoot((int)atk.Value);
+        Shoot((int)atk.Value, stats);
     }
-    public virtual void Shoot(int atk)
+    public virtual void Shoot(int atk, CharacterStats stats)
     {
         Debug.Log("Shoot");
         var bulletObject = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
         var bullet = bulletObject.GetComponent<Bullet>();
-        if (bullet != null) bullet.Atk = atk;
+        if (bullet != null)
+        {
+            bullet.Atk = atk;
+            bullet.shooter = stats;
+        }
+        
         var bulletRb = bulletObject.GetComponent<Rigidbody>();
         if (bulletRb != null) bulletRb.AddForce(attackPoint.forward * shootingForce);
     }

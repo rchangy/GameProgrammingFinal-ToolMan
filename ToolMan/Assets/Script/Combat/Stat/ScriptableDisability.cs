@@ -9,4 +9,6 @@ public class ScriptableDisability : ScriptableBuff
         else target.AddBuff(this, new TimedDisability(this, target));
     }
 
+    
+
 }

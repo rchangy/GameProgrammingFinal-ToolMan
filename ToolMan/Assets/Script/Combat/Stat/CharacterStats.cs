@@ -11,6 +11,7 @@ public class CharacterStats : MonoBehaviour
     public List<Stat> StatInfos = new List<Stat>();
     public List<Resource> ResourceInfos = new List<Resource>();
 
+
     private Dictionary<string, Stat> _stats = new Dictionary<string, Stat>();
     private Dictionary<string, Resource> _resources = new Dictionary<string, Resource>();
     private Dictionary<string, Ability> _abilities = new Dictionary<string, Ability>();
@@ -27,15 +28,18 @@ public class CharacterStats : MonoBehaviour
     {
         foreach (Stat s in StatInfos)
         {
-            _stats.Add(s.getName(), s);
+            if (!_stats.ContainsKey(s.getName()))
+                _stats.Add(s.getName(), s);
         }
         foreach(Resource r in ResourceInfos)
         {
-            _resources.Add(r.getName(), r);
+            if (!_resources.ContainsKey(r.getName()))
+                _resources.Add(r.getName(), r);
         }
         foreach(Ability a in AbilityInfos)
         {
-            _abilities.Add(a.getName(), a);
+            if(!_abilities.ContainsKey(a.getName()))
+                _abilities.Add(a.getName(), a);
         }
 
         if(_inherentTypes != null)
@@ -59,6 +63,7 @@ public class CharacterStats : MonoBehaviour
                 _buffs.Remove(buff.Buff);
             }
         }
+        Debug.Log(_stats["Atk"].Value);
     }
 
     public void AddBuff(ScriptableBuff scriptableBuff, TimedBuff buff)

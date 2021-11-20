@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using System;
-using System.Collections.ObjectModel;
 
 
 [Serializable]
@@ -35,6 +33,7 @@ public class Ability
     public Ability()
     {
         _disability = 0;
+        isDirty = true;
     }
 
 
@@ -47,17 +46,19 @@ public class Ability
     public void Disable()
     {
         _disability += 1;
+        isDirty = true;
     }
 
     public void RemoveDisability()
     {
         _disability -= 1;
+        isDirty = true;
     }
 
     private bool CalculateFinalValue()
     {
-        if (_disability > 0) return false;
-        else return true;
+        if (_disability > 0) return !BaseValue;
+        else return BaseValue;
     }
 
 }

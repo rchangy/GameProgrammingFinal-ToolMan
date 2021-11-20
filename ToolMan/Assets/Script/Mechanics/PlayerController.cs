@@ -50,6 +50,7 @@ public class PlayerController : ToolableMan
         playerCollider = GetComponent<CapsuleCollider>();
         grabbedPointController = grabbedPoint.GetComponent<GrabbedPoint>();
         grabPoint.setPlayer(this);
+        grabPoint.setAnotherPlayerAndTarget(anotherPlayer);
         grabbedPointController.setPlayer(this);
         keyboardInputController = new KeyboardInputController();
         state = State.Grounded;

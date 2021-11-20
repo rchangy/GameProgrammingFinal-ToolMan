@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour
 {
+    public CharacterStats shooter;
     public int Atk = 0;
     private void OnCollisionEnter(Collision collision)
     {
@@ -10,7 +11,7 @@ public class Bullet : MonoBehaviour
         var target = collision.gameObject.GetComponent<CombatUnit>();
         if(target != null)
         {
-            target.TakeDamage(Atk);
+            target.TakeDamage(Atk, shooter);
         }
         Destroy(gameObject);
     }
