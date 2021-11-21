@@ -12,21 +12,13 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "94dd88f3-769b-4140-91ee-f17047887a27",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "0d389c52-6db8-41c2-9730-f191d6b9aaf7",
-                    "path": "<DualShock4GampadiOS>/rightStick",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -47,12 +39,12 @@
                 },
                 {
                     "name": "",
-                    "id": "f991802e-f708-439a-a5ac-a6afc5ed8bee",
+                    "id": "cc021bc8-ef6e-404c-87cd-6c7e539c4031",
                     "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -63,10 +55,10 @@
             "id": "90698195-252b-4072-9487-bc7ea2815806",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
+                    "name": "Look",
+                    "type": "PassThrough",
                     "id": "bd1a54e9-3e2d-494b-a3d2-82c75e35bb0a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 }
@@ -75,11 +67,33 @@
                 {
                     "name": "",
                     "id": "b7a1ff07-76d8-4950-a0d4-c50703210e1c",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e26e894-3b08-438c-9d32-af5c16d22f48",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e74aa33-0b04-4522-974e-9d4a81ac8538",
                     "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

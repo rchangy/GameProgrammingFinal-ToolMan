@@ -2,22 +2,14 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "Player1",
-            "id": "1d9d0964-4594-4dfc-95be-f0d1bafb2c82",
+            "name": "Movement",
+            "id": "282c2024-ba37-4a2a-9a53-9683dcebd70f",
             "actions": [
                 {
-                    "name": "Movement",
+                    "name": "Move",
                     "type": "PassThrough",
-                    "id": "58555340-0e15-448e-ab10-35b237a48cd3",
+                    "id": "bfa28989-4c0a-44ce-8c0f-84d6c781828a",
                     "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "5e982a0f-bf7a-454c-b3b1-21d0b61cfdb1",
-                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -25,100 +17,37 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "cdb53b52-a021-43ab-ad4b-09354b10eb45",
-                    "path": "<HID::Unknown DUALSHOCK 4 Wireless Controller>/button5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick1",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "e5e33467-2e2a-4f98-abaf-3299178c0a53",
-                    "path": "2DVector",
+                    "id": "5e483688-0ab5-4f36-9a7d-9ce336bdb4b5",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
+                    "action": "Move",
+                    "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "e97188e7-e1cb-4c14-8f33-f3018f6ed3c4",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "0d84879b-efc4-46e9-be3f-8fcde742de11",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "8be7c60a-9b33-4f32-94a4-a33f2dd31e03",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "3c661d24-0c1d-4e83-8640-b11ab2f9a5ad",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
-                    "id": "ee20f749-8c93-433c-bbc3-149a47bf5b0e",
-                    "path": "<HID::Unknown DUALSHOCK 4 Wireless Controller>/stick",
+                    "id": "048581d9-c844-49e2-b3cf-60a53588b643",
+                    "path": "<Joystick>/stick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick1",
-                    "action": "Movement",
+                    "groups": "",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "Player2",
-            "id": "fcb35275-f168-40d4-b14e-1d35f42be085",
+            "name": "Look",
+            "id": "3aceeeed-6f09-432c-86b1-c471ab6a48be",
             "actions": [
                 {
-                    "name": "Movement",
+                    "name": "Look",
                     "type": "PassThrough",
-                    "id": "bb313569-18e1-4f8d-bb81-a31d6df4c25f",
+                    "id": "2be50336-bb0d-48b0-a379-7de04b676a4a",
                     "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "2dc064e8-df56-4c5a-931d-f1d8278ff3ce",
-                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -126,111 +55,28 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "f0a63762-f609-4ccd-95ff-6878f2238ed7",
-                    "path": "",
+                    "id": "11f5c03a-82be-4ef8-afac-9f8bab5b2775",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "f80e72a7-eb0a-4766-b42a-125e2ff91d86",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "712fe805-aad1-4e2f-981f-2e93ef9b3704",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "f2d8506f-82b4-4a4e-9148-659bf7790f82",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "7cd52a5e-28de-4937-b2f6-624c97704823",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "8682809e-6f17-40ad-965c-c8d5db0eed66",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "15538320-560c-46d8-9cc7-b9d4ca451f62",
-                    "path": "<Joystick>/stick",
+                    "id": "60b627ac-5ffe-41ab-88be-38e34ffe3fe8",
+                    "path": "<DualShockGamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick2",
-                    "action": "Movement",
+                    "groups": "",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": [
-        {
-            "name": "Joystick1",
-            "bindingGroup": "Joystick1",
-            "devices": [
-                {
-                    "devicePath": "<HID::Unknown DUALSHOCK 4 Wireless Controller>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Joystick2",
-            "bindingGroup": "Joystick2",
-            "devices": []
-        },
-        {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        }
-    ]
+    "controlSchemes": []
 }

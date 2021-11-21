@@ -45,7 +45,7 @@ public class NewPlayerController : ToolableMan
     public CombatUnit combat;
     // ==== Combat ====
 
-    override protected void Awake()
+    override protected void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -73,10 +73,10 @@ public class NewPlayerController : ToolableMan
 
     override protected void Update()
     {
-        if (!isTool)
-        {
-            Move();
-        }
+        //if (!isTool)
+        //{
+        //    //Move();
+        //}
 
         //else // Tool
         //{
@@ -92,23 +92,25 @@ public class NewPlayerController : ToolableMan
     }
 
     // ==== Movement ====
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        movementInput = context.ReadValue<Vector2>();
-        //Debug.Log(gameObject.name + " movement input = " + movementInput);
+    //public void OnMove(InputAction.CallbackContext context)
+    //{
+    //    movementInput = context.ReadValue<Vector2>();
+    //    Debug.Log(gameObject.name + " movement input = " + movementInput);
 
-    }
+    //}
+    //public void OnJump(InputAction.CallbackContext context)
+    //{
+    //    jumped = context.action.triggered;
+    //    Debug.Log(gameObject.name + " jump input = " + jumped);
+    //}
 
-    public void OnJump(InputAction.CallbackContext context)
+    public void Move(Vector2 movementInput)
     {
-        jumped = context.action.triggered;
-        //Debug.Log(gameObject.name + " jump input = " + jumped);
-    }
+        if (isTool)
+            return;
 
-    private void Move()
-    {
         Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y).normalized;
-
+        Debug.Log(gameObject.name + " movement = " + movement);
         if (movement.sqrMagnitude > 0.01f)
         {
             // Facing angle (smoothed)
@@ -122,13 +124,13 @@ public class NewPlayerController : ToolableMan
             transform.position += adjustedMovement;
         }
 
-        if (jumped)
-            Jump();
-        isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f);
-        if (isGrounded)
-        {
-            currentJumpCount = 0;
-        }
+        //if (jumped)
+        //    Jump();
+        //isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f);
+        //if (isGrounded)
+        //{
+        //    currentJumpCount = 0;
+        //}
     }
     private void Jump()
     {
