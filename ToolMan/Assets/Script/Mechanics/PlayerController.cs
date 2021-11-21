@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using ToolMan.Mechanics;
+using ToolMan.Combat;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerController : ToolableMan

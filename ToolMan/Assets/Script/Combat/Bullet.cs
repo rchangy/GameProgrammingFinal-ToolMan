@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class Bullet : MonoBehaviour
+namespace ToolMan.Combat
 {
-    public CharacterStats shooter;
-    public int Atk = 0;
-    private void OnCollisionEnter(Collision collision)
+    public class Bullet : MonoBehaviour
     {
-        Debug.Log("Bullet Hit " + collision.gameObject.name);
-        var target = collision.gameObject.GetComponent<CombatUnit>();
-        if(target != null)
+        public CombatUnit shooter;
+        public int Atk = 0;
+        private void OnCollisionEnter(Collision collision)
         {
-            target.TakeDamage(Atk, shooter);
+            Debug.Log("Bullet Hit " + collision.gameObject.name);
+            var target = collision.gameObject.GetComponent<CombatUnit>();
+            if (target != null)
+            {
+                target.TakeDamage(Atk, shooter);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

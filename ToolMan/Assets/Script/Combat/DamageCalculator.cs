@@ -1,40 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class DamageCalculator : ScriptableObject
+namespace ToolMan.Combat
 {
-    [SerializeField]
-    private List<TypeEffectiveness> typeEffects;
-
-    private Dictionary<string, IReadOnlyDictionary<string, float>> typeEffectivenesses;
-
-    private void Awake()
+    [CreateAssetMenu(menuName = "ToolMan/Stat/DamageCalculator")]
+    public class DamageCalculator : ScriptableObject
     {
-        foreach(TypeEffectiveness e in typeEffects)
-        {
-            typeEffectivenesses.Add(e.GetDamageType(), e.GetEffectiveness());
-        }
-    }
+        [SerializeField]
+        private List<TypeEffectiveness> typeEffects;
 
-    public float CalculateDmg(float baseDmg, CharacterStats damager, CharacterStats target)
-    {
-        var damagerTypes = damager.GetCurrentTypes();
-        var targetTypes = target.GetCurrentTypes();
-        float totalMultiplier = 1f;
-        foreach(string damagerType in damagerTypes)
+        private Dictionary<string, IReadOnlyDictionary<string, float>> typeEffectivenesses;
+
+        private void Awake()
         {
-            if (typeEffectivenesses.ContainsKey(damagerType))
+            if (typeEffects == null) return;
+            foreach (TypeEffectiveness e in typeEffects)
             {
-                var resistence = typeEffectivenesses[damagerType];
-                foreach(string targetType in targetTypes)
+                typeEffectivenesses.Add(e.GetDamageType(), e.GetEffectiveness());
+            }
+        }
+
+        public float CalculateDmg(float baseDmg, IReadOnlyCollection<string> damagerTypes, IReadOnlyCollection<string> targetTypes)
+        {
+            float totalMultiplier = 1f;
+            foreach (string damagerType in damagerTypes)
+            {
+                if (typeEffectivenesses.ContainsKey(damagerType))
                 {
-                    if (resistence.ContainsKey(targetType))
+                    var resistence = typeEffectivenesses[damagerType];
+                    foreach (string targetType in targetTypes)
                     {
-                        totalMultiplier *= resistence[targetType];
+                        if (resistence.ContainsKey(targetType))
+                        {
+                            totalMultiplier *= resistence[targetType];
+                        }
                     }
                 }
             }
+            return baseDmg * totalMultiplier;
         }
-        return baseDmg * totalMultiplier;
     }
 }
