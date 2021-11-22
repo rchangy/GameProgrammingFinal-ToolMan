@@ -8,7 +8,7 @@ public class PlayerController : ToolableMan
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider playerCollider;
-    [SerializeField] private GameObject toolListUI;
+    [SerializeField] private ObjectListUI toolListUI;
     public GrabPoint grabPoint;
 
     private State state = new State();
@@ -23,7 +23,6 @@ public class PlayerController : ToolableMan
 
     // ==== Player Movement ====
     Vector2 movementInput = Vector2.zero;
-    bool jumped = false;
     [SerializeField] private float speed = 5;
     public float jumpForce = 300;
     public int maxJumpCount = 1; // It can actaully jump once more 
@@ -71,18 +70,13 @@ public class PlayerController : ToolableMan
     override protected void Update()
     {
         if (!isTool)
-            Move();
-        if (isTool) // Tool
         {
-            //// Attack
-            //if (keyboardInputController.JumpOrAttack(playerNum))
-            //    Attack();
-        }
+            Move();
 
-        // ==== Man <-> Tool ====
-        //if (keyboardInputController.Choose(playerNum))
-        //    ToolableManTransform();
-        // ==== Man <-> Tool ====
+            isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f);
+            if (isGrounded)
+                currentJumpCount = 0;
+        }
     }
 
     // ==== Movement ====
@@ -104,14 +98,19 @@ public class PlayerController : ToolableMan
             adjustedMovement *= speed * Time.deltaTime;
             transform.position += adjustedMovement;
         }
+    }    
+    // ==== Movement ====
 
-        //if (jumped)
-        //    Jump();
-        //isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f);
-        //if (isGrounded)
-        //{
-        //    currentJumpCount = 0;
-        //}
+    // ==== Actions ====
+    public void AttackOrJump() {
+        if (isTool)
+            Attack();
+        else
+            Jump();
+    }
+    private void Attack()
+    {
+        combat.Attack();
     }
     private void Jump()
     {
@@ -122,30 +121,22 @@ public class PlayerController : ToolableMan
         }
 
     }
-    // ==== Movement ====
-
-    //// ==== Actions ====
-    //private void Attack()
-    //{
-    //    //Debug.Log("attack pressed");
-    //    combat.Attack();
-    //}
 
     override public void ToolableManTransform()
     {
-        //    isTool = !isTool;
-        //    if (isTool)
-        //    {
-        //        toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
-        //        tools[toolIdx].toTool();
-        //        combat.SetCurrentUsingSkill(tools[toolIdx].getName());
-        //        changeable = false;
-        //    }
-        //    else
-        //    {
-        //        tools[toolIdx].toMan();
-        //        toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
-        //    }
+        isTool = !isTool;
+        if (isTool)
+        {
+            toolIdx = toolListUI.currentIdx;
+            tools[toolIdx].toTool();
+            combat.SetCurrentUsingSkill(tools[toolIdx].getName());
+            changeable = false;
+        }
+        else
+        {
+            tools[toolIdx].toMan();
+            toolListUI.unchoose = toolIdx;
+        }
     }
 
     //public void ToolManChange() // Man Player
@@ -174,6 +165,12 @@ public class PlayerController : ToolableMan
     //}
     //// ==== Actions ====
 
+
+    // ==== UI control ====
+    public void UI_Prev() { }
+    public void UI_Next() { }
+    public void UI_Choose() { ToolableManTransform(); }
+    // ==== UI control ====
 
 
     // ==== getters & setters ====
