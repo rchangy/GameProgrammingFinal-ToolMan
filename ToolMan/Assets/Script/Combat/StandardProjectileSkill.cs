@@ -9,7 +9,7 @@ public class StandardProjectileSkill : Skill
     public PlayerController player;
 
     private bool exploded;
-    public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, int Atk)
+    public override IEnumerator Attack(Animator anim, LayerMask targetLayer, Stat atk, Stat attackSpeed, CharacterStats stats)
     {
         anim.SetTrigger("Attack");
         player.grabPoint.Release();

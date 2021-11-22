@@ -3,7 +3,7 @@ using System.Collections;
 public class StandardMeleeSkill : Skill
 {
     public float attackRange;
-    public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, int Atk)
+    public override IEnumerator Attack(Animator anim, LayerMask targetLayer, Stat atk, Stat attackSpeed, CharacterStats stats)
     {
         // Animation
         anim.SetTrigger("Attack");
@@ -18,7 +18,7 @@ public class StandardMeleeSkill : Skill
             CombatUnit targetCombat = target.GetComponent<CombatUnit>();
             if (targetCombat != null)
             {
-                targetCombat.TakeDamage(Atk);
+                targetCombat.TakeDamage((int)atk.Value, stats);
             }
         }
     }

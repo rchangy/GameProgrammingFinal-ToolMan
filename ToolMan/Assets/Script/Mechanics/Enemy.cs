@@ -52,30 +52,8 @@ public class Enemy : MonoBehaviour
     protected bool PlayerInSightRange;
 
 
-    // attack
-    [SerializeField] protected float InitAttackInterval;
-    private float _attackInterval;
-    public float AttackInterval
-    {
-        get => _attackInterval;
-        set
-        {
-            _attackInterval = Mathf.Max(0, value);
-        }
-    }
-
-    [SerializeField] protected int InitAttackRange;
+    [SerializeField]
     private int _attackRange;
-    public int AttackRange
-    {
-        get => _attackRange;
-        set
-        {
-            _attackRange = value;
-        }
-    }
-
-    protected bool AlreadyAttacked;
     protected bool PlayerInAttackRange;
 
     // state & attributes (suppressed by what)
@@ -99,8 +77,8 @@ public class Enemy : MonoBehaviour
             Players[i] = PlayerGameObjects[i].transform;
         }
 
-        AttackInterval = InitAttackInterval;
-        AttackRange = InitAttackRange;
+        //AttackInterval = InitAttackInterval;
+        //AttackRange = InitAttackRange;
     }
 
     protected virtual void Update()
@@ -115,7 +93,7 @@ public class Enemy : MonoBehaviour
         }
         // check sight and attack range
         PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
-        PlayerInAttackRange = Physics.CheckSphere(transform.position, AttackRange, PlayerMask);
+        PlayerInAttackRange = Physics.CheckSphere(transform.position, _attackRange, PlayerMask);
         if (isAction)
         {
             Attack();
@@ -174,7 +152,8 @@ public class Enemy : MonoBehaviour
             Debug.Log(act);
         }
 
-        switch (act){
+        switch (act)
+        {
             case 0: // attack
                 combat.Attack();
                 break;
@@ -193,16 +172,6 @@ public class Enemy : MonoBehaviour
         var newDir = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0f);
 
         transform.rotation = Quaternion.LookRotation(newDir);
-    }
-
-    protected virtual void ResetAttack()
-    {
-        AlreadyAttacked = false;
-    }
-
-    public virtual void BeAttacked()
-    {
-
     }
 
     protected void SearchWalkPoint()
@@ -253,7 +222,7 @@ public class Enemy : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, AttackRange);
+        Gizmos.DrawWireSphere(transform.position, _attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, SightRange);
     }

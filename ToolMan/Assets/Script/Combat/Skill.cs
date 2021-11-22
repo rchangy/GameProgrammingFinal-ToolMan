@@ -19,7 +19,7 @@ public abstract class Skill : MonoBehaviour
         return gameObject.name;
     }
 
-    public abstract IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat , int Atk);
+    public abstract IEnumerator Attack(Animator anim, LayerMask targetLayer, Stat atk, Stat attackSpeed, CharacterStats stats);
 
 
     
