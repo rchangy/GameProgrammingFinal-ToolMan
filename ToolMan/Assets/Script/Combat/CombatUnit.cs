@@ -122,6 +122,8 @@ namespace ToolMan.Combat
             SetSkills(InitUsingSkillSet);
             if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
             else SetCurrentUsingSkill(null);
+
+            damageCalculator.checkLoad();
         }
 
         private void Update()

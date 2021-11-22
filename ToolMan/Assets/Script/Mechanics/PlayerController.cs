@@ -39,7 +39,7 @@ public class PlayerController : ToolableMan
     // ==== Player Movement ====
 
     // ==== Combat ====
-    public CombatUnit combat;
+    public PlayerCombat combat;
     // ==== Combat ====
 
     override protected void Awake()
@@ -87,6 +87,11 @@ public class PlayerController : ToolableMan
             // Attack
             if (keyboardInputController.JumpOrAttack(playerNum))
                 Attack();
+            // test combo skill
+            if (Input.GetButtonDown("Combo"))
+            {
+                combat.ComboSkillAttack();
+            }
         }
 
         // ==== Man <-> Tool ====

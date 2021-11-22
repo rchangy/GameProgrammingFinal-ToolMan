@@ -430,6 +430,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2039804826, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: ResourceInfos.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2039804826, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: ResourceInfos.Array.data[0].MaxValue
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2039804826, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: ResourceInfos.Array.data[0]._resourceName
+      value: Energy
+      objectReference: {fileID: 0}
     - target: {fileID: 302402799870251790, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
       propertyPath: _teamMate
       value: 
@@ -519,6 +531,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1120611630, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: ResourceInfos.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120611630, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: ResourceInfos.Array.data[0].MaxValue
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120611630, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: ResourceInfos.Array.data[0]._resourceName
+      value: Energy
+      objectReference: {fileID: 0}
     - target: {fileID: 4987741909099236402, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: m_RootOrder
       value: 4

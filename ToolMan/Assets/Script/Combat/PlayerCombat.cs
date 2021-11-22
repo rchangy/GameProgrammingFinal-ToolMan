@@ -37,6 +37,8 @@ namespace ToolMan.Combat
             if (_energy == null) Debug.Log(gameObject.name + " has no energy resource.");
 
             _playerController = gameObject.GetComponent<PlayerController>();
+
+            comboSkillSet.checkLoad();
         }
 
 
@@ -55,6 +57,7 @@ namespace ToolMan.Combat
 
         public void ComboSkillAttack()
         {
+            Debug.Log("try use combo skill");
             if (!AttackEnabled) return;
             if (!_hasSkillToUse) return;
             if (Attacking) return;
@@ -70,6 +73,8 @@ namespace ToolMan.Combat
         {
             yield return StartCoroutine(skill.Attack(Anim, TargetLayers, this));
             yield return new WaitForSeconds(skill.attackInterval / Aspd);
+            TeamMateCombat.ThisPlayerController.setChangeable(true);
+            TeamMateCombat.ThisPlayerController.ToolManChange();
             skillPerforming = null;
             _vulnerable.RemoveDisability();
         }

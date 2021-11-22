@@ -11,9 +11,54 @@ namespace ToolMan.Combat.Skills
 
         private Dictionary<string, Dictionary<string, ComboSkill>> _comboSkills = new Dictionary<string, Dictionary<string, ComboSkill>>();
 
-        private void Awake()
+        private bool loaded = false;
+
+        public ComboSkill GetComboSkill(PlayerController tool, PlayerController man, PlayerCombat toolCombat)
+        {
+            if (!loaded)
+            {
+                Load();
+            }
+            Debug.Log(_comboSkills.Count);
+
+            string preTool = tool.getTool().getName();
+            string postTool = man.getTool().getName();
+            ComboSkill usingSkill = null;
+            if (_comboSkills.ContainsKey(preTool))
+            {
+
+                if (_comboSkills[preTool].ContainsKey(postTool))
+                {
+                    ComboSkill uncheckedSkill = _comboSkills[preTool][postTool];
+                    if (uncheckedSkill.CheckEnergyCost(toolCombat))
+                    {
+                        usingSkill = uncheckedSkill;
+                    }
+                    else
+                    {
+                        Debug.Log("energy not enough for combo skill");
+                    } 
+                }
+                else Debug.Log("cannot find tool " + postTool);
+            }
+            else Debug.Log("cannot find tool " + preTool);
+
+
+            return usingSkill;
+        }
+
+        public void checkLoad()
+        {
+            if (!loaded)
+            {
+                Load();
+            }
+        }
+
+        private void Load()
         {
             if (_skills.Count == 0) return;
+            Debug.Log("loading combo skills");
             foreach (ComboSkill s in _skills)
             {
                 if (!_comboSkills.ContainsKey(s.getPreTool()))
@@ -22,26 +67,7 @@ namespace ToolMan.Combat.Skills
                 }
                 _comboSkills[s.getPreTool()].Add(s.getPostTool(), s);
             }
-        }
-
-        public ComboSkill GetComboSkill(PlayerController tool, PlayerController man, PlayerCombat toolCombat)
-        {
-            string preTool = tool.getTool().getName();
-            string postTool = man.getTool().getName();
-            ComboSkill usingSkill = null;
-            if (_comboSkills.ContainsKey(preTool))
-            {
-                if (_comboSkills[preTool].ContainsKey(postTool))
-                {
-                    ComboSkill uncheckedSkill = _comboSkills[preTool][postTool];
-                    if (uncheckedSkill.CheckEnergyCost(toolCombat))
-                    {
-                        usingSkill = uncheckedSkill;
-                    }
-                }
-            }
-
-            return usingSkill;
+            loaded = true;
         }
 
     }
