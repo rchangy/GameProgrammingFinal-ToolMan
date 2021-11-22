@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using System.Linq;
 using Cinemachine;
 
-public class PlayerInputHandler : MonoBehaviour
+public class KeyboardPlayerInputHandler : MonoBehaviour
 {
     Vector2 movementInput = Vector2.zero;
     public PlayerController p;
@@ -62,7 +62,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.action.triggered)
             p.UI_Next();
     }
-    public void OnUI_Select(InputAction.CallbackContext context)
+    public void OnUI_Choose(InputAction.CallbackContext context)
     {
         if (context.action.triggered)
             p.UI_Choose();
