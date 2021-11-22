@@ -49,9 +49,8 @@ public class PlayerController : ToolableMan
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
         grabbedPointController = grabbedPoint.GetComponent<GrabbedPoint>();
-        //grabPoint.setPlayer(this);
-        //grabbedPointController.setPlayer(this);
-        //keyboardInputController = new KeyboardInputController();
+        grabPoint.setPlayer(this);
+        grabbedPointController.setPlayer(this);
         state = State.Grounded;
 
         if (playerNum == 1)
@@ -73,12 +72,12 @@ public class PlayerController : ToolableMan
     {
         if (!isTool)
             Move();
-        //if (isTool) // Tool
-        //{
-        //    // Attack
-        //    if (keyboardInputController.JumpOrAttack(playerNum))
-        //        Attack();
-        //}
+        if (isTool) // Tool
+        {
+            //// Attack
+            //if (keyboardInputController.JumpOrAttack(playerNum))
+            //    Attack();
+        }
 
         // ==== Man <-> Tool ====
         //if (keyboardInputController.Choose(playerNum))
