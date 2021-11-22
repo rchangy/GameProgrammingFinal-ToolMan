@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using ToolMan.Mechanics;
 
@@ -23,13 +21,9 @@ public class PlayerController : ToolableMan
 
     // ==== Components ====
 
-    // ==== Camera Movement ====
-    public Transform mainCameraTrans;
-    private float turnSmoothTime = 0.1f;
-    private float turnSmoothVelocity;
-    // ==== Camera Movement ====
-
     // ==== Player Movement ====
+    Vector2 movementInput = Vector2.zero;
+    bool jumped = false;
     [SerializeField] private float speed = 5;
     public float jumpForce = 300;
     public int maxJumpCount = 1; // It can actaully jump once more 
@@ -39,19 +33,25 @@ public class PlayerController : ToolableMan
     private bool isGrounded;
     // ==== Player Movement ====
 
+    // ==== Camera Movement ====
+    public Transform mainCameraTrans;
+    private float turnSmoothTime = 0.1f;
+    private float turnSmoothVelocity;
+    // ==== Camera Movement ====
+
     // ==== Combat ====
     public CombatUnit combat;
     // ==== Combat ====
 
-    override protected void Awake()
+    override protected void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
         grabbedPointController = grabbedPoint.GetComponent<GrabbedPoint>();
-        grabPoint.setPlayer(this);
-        grabbedPointController.setPlayer(this);
-        keyboardInputController = new KeyboardInputController();
+        //grabPoint.setPlayer(this);
+        //grabbedPointController.setPlayer(this);
+        //keyboardInputController = new KeyboardInputController();
         state = State.Grounded;
 
         if (playerNum == 1)
@@ -72,37 +72,27 @@ public class PlayerController : ToolableMan
     override protected void Update()
     {
         if (!isTool)
-        {
-            ManageMovement();
-            UpdateState();
-            // for testing
-            //if (Input.GetKeyDown(KeyCode.Space) && !isTool && anotherPlayer.isTool && changeable)
-            //{
-            //    ToolManChange();
-            //}
-        }
-
-        else // Tool
-        {
-            // Attack
-            if (keyboardInputController.JumpOrAttack(playerNum))
-                Attack();
-        }
+            Move();
+        //if (isTool) // Tool
+        //{
+        //    // Attack
+        //    if (keyboardInputController.JumpOrAttack(playerNum))
+        //        Attack();
+        //}
 
         // ==== Man <-> Tool ====
-        if (keyboardInputController.Choose(playerNum))
-            ToolableManTransform();
+        //if (keyboardInputController.Choose(playerNum))
+        //    ToolableManTransform();
         // ==== Man <-> Tool ====
     }
 
     // ==== Movement ====
-    private void ManageMovement()
-    {
-        float horizontal = 0, vertical = 0;
-        horizontal = keyboardInputController.MoveHorizontal(playerNum);
-        vertical = keyboardInputController.MoveVertical(playerNum);
-        Vector3 movement = new Vector3(horizontal, 0, vertical).normalized;
+    public void SetMovementInput(Vector2 movement) { movementInput = movement; }
 
+    public void Move()
+    {
+        Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y).normalized;
+        //Debug.Log(gameObject.name + " movement = " + movement);
         if (movement.sqrMagnitude > 0.01f)
         {
             // Facing angle (smoothed)
@@ -116,24 +106,14 @@ public class PlayerController : ToolableMan
             transform.position += adjustedMovement;
         }
 
-        // Jump
-        if (keyboardInputController.JumpOrAttack(playerNum))
-            Jump();
-        isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f);
-        if (isGrounded)
-        {
-            currentJumpCount = 0;
-        }
+        //if (jumped)
+        //    Jump();
+        //isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f);
+        //if (isGrounded)
+        //{
+        //    currentJumpCount = 0;
+        //}
     }
-    // ==== Movement ====
-
-    // ==== Actions ====
-    private void Attack()
-    {
-        //Debug.Log("attack pressed");
-        combat.Attack();
-    }
-
     private void Jump()
     {
         if (currentJumpCount < maxJumpCount)
@@ -143,49 +123,57 @@ public class PlayerController : ToolableMan
         }
 
     }
+    // ==== Movement ====
 
-    override public void ToolableManTransform() {
-        isTool = !isTool;
-        if (isTool)
-        {
-            toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
-            tools[toolIdx].toTool();
-            combat.SetCurrentUsingSkill(tools[toolIdx].getName());
-            changeable = false;
-        }
-        else
-        {
-            tools[toolIdx].toMan();
-            toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
-        }
-    }
+    //// ==== Actions ====
+    //private void Attack()
+    //{
+    //    //Debug.Log("attack pressed");
+    //    combat.Attack();
+    //}
 
-    public void ToolManChange() // Man Player
+    override public void ToolableManTransform()
     {
-        // set anotherplayer
-        grabPoint.setAnotherPlayerAndTarget(anotherPlayer);
-        anotherPlayer.grabPoint.setAnotherPlayerAndTarget(this);
-        anotherPlayer.changeable = false;
-
-        // cache position
-        Vector3 manPosition = this.transform.position;
-        Vector3 toolPosition = anotherPlayer.transform.position;
-
-        // Release & Transform
-        grabPoint.Release();
-        transform.position = toolPosition;
-        anotherPlayer.transform.position = manPosition;
-        anotherPlayer.ToolableManTransform(); // Tool to Man
-        toolIdx = 0;
-        ToolableManTransform(); // Man to Tool
-
-        if (!anotherPlayer.grabPoint.grabbing)
-        {
-            anotherPlayer.grabPoint.Grab();
-        }
+        //    isTool = !isTool;
+        //    if (isTool)
+        //    {
+        //        toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
+        //        tools[toolIdx].toTool();
+        //        combat.SetCurrentUsingSkill(tools[toolIdx].getName());
+        //        changeable = false;
+        //    }
+        //    else
+        //    {
+        //        tools[toolIdx].toMan();
+        //        toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
+        //    }
     }
 
-    // ==== Actions ====
+    //public void ToolManChange() // Man Player
+    //{
+    //    // set anotherplayer
+    //    grabPoint.setAnotherPlayerAndTarget(anotherPlayer);
+    //    //anotherPlayer.grabPoint.setAnotherPlayerAndTarget(this);
+    //    //anotherPlayer.changeable = false;
+
+    //    // cache position
+    //    Vector3 manPosition = this.transform.position;
+    //    Vector3 toolPosition = anotherPlayer.transform.position;
+
+    //    // Release & Transform
+    //    grabPoint.Release();
+    //    transform.position = toolPosition;
+    //    anotherPlayer.transform.position = manPosition;
+    //    anotherPlayer.ToolableManTransform(); // Tool to Man
+    //    toolIdx = 0;
+    //    ToolableManTransform(); // Man to Tool
+
+    //    if (!anotherPlayer.grabPoint.grabbing)
+    //    {
+    //        anotherPlayer.grabPoint.Grab();
+    //    }
+    //}
+    //// ==== Actions ====
 
 
 
@@ -204,12 +192,6 @@ public class PlayerController : ToolableMan
         this.changeable = changeable;
     }
     // ==== getters
-
-    // ==== State ====
-    private void UpdateState()
-    {
-
-    }
 
     public enum State
     {

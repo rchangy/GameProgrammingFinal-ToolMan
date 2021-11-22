@@ -61,8 +61,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 831408892740888955}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: OnMove
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -89,9 +89,57 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2be50336-bb0d-48b0-a379-7de04b676a4a
     m_ActionName: Look/Look
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bfbb47f9-c98f-408c-a4aa-a2236d3d11c9
+    m_ActionName: P1Movement/Jump/Attack[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 831408892740888955}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 16432a7f-5d27-4cad-a5b6-e247cadf9f1b
+    m_ActionName: P2Movement/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 074a92db-e6a8-4e94-95de-da6b903e8baf
+    m_ActionName: P2Movement/Jump/Attack[/Keyboard/rightShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9bfa1d46-404e-4f5a-80dc-f602a54d3f08
+    m_ActionName: P1UI/Prev[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9a39b1ab-9ec8-4e94-a239-43a9b775b437
+    m_ActionName: P1UI/Next[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 196ad1cf-2755-4562-ae6c-80f80bf3a16e
+    m_ActionName: P1UI/Select[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fc726eab-d59c-43b7-8a23-1b42431a2efa
+    m_ActionName: P2UI/Prev[/Keyboard/8]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c22f83d-e401-4d82-8fd2-80d8af6b7970
+    m_ActionName: P2UI/Next[/Keyboard/0]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d838c0e5-ae5d-4197-8353-a671771924bf
+    m_ActionName: P2UI/Select[/Keyboard/9]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Movement
+  m_DefaultActionMap: 282c2024-ba37-4a2a-9a53-9683dcebd70f
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &831408892740888955
