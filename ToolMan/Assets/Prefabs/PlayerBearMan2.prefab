@@ -1065,8 +1065,8 @@ GameObject:
   - component: {fileID: 8507911072495564282}
   - component: {fileID: 8507911072495564286}
   - component: {fileID: 8507911072495564285}
-  - component: {fileID: 1120611630}
-  - component: {fileID: 7415212121306142074}
+  - component: {fileID: 8251841730026583821}
+  - component: {fileID: 5024969985467094499}
   m_Layer: 6
   m_Name: PlayerBearMan2
   m_TagString: Player
@@ -1167,8 +1167,8 @@ MonoBehaviour:
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
-  combat: {fileID: 7415212121306142074}
---- !u!114 &1120611630
+  combat: {fileID: 8251841730026583821}
+--- !u!114 &8251841730026583821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1177,28 +1177,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5653095584333043336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ebda5edaa86496f86f953d14f9fa88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HpMaxValue: 1
-  HpInitValue: 1
-  AtkBaseValue: 1
-  DefBaseValue: 1
-  StrBaseValue: 1
-  AbilityInfos: []
-  StatInfos: []
-  ResourceInfos: []
-  _inherentTypes: []
---- !u!114 &7415212121306142074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5653095584333043336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8f76bdebd9a4af79a596bf87c79dc7, type: 3}
+  m_Script: {fileID: 11500000, guid: f79ddaf4308f544a8b93b9f2e2e3f54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageCalculator: {fileID: 11400000, guid: 0a34bbef229d341e9969fd7d90938a83, type: 2}
@@ -1208,12 +1187,34 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   availableSkillSet: {fileID: 11400000, guid: 1008ed4ce9ec8494097f9fde92300974, type: 2}
-  InitUsingSkillSet:
-  - LightSaber
-  - FlashBomb
-  - Shield
+  InitUsingSkillSet: []
   _teamMate: {fileID: 0}
   comboSkillSet: {fileID: 11400000, guid: 325696f57cb9c455e8c69f3ccb1e6b9e, type: 2}
+--- !u!114 &5024969985467094499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653095584333043336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42d4048d51594d52bc8a2be5a45853d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HpMaxValue: 1
+  HpInitValue: 1
+  AtkBaseValue: 1
+  DefBaseValue: 1
+  StrBaseValue: 1
+  AbilityInfos: []
+  StatInfos: []
+  ResourceInfos:
+  - _resourceName: Energy
+    MaxValue: 100
+    InitValue: 0
+    _currentValue: 0
+  _inherentTypes: []
 --- !u!1 &5681094873323192337
 GameObject:
   m_ObjectHideFlags: 0

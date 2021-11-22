@@ -304,15 +304,15 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4280834917926097457, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
   m_PrefabInstance: {fileID: 1095276675}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &268435905 stripped
+--- !u!114 &668107786 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7415212121306142074, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8251841730026583821, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
   m_PrefabInstance: {fileID: 1698433707}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8f76bdebd9a4af79a596bf87c79dc7, type: 3}
+  m_Script: {fileID: 11500000, guid: f79ddaf4308f544a8b93b9f2e2e3f54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1095276675
@@ -430,22 +430,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2039804826, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
-      propertyPath: ResourceInfos.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2039804826, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
-      propertyPath: ResourceInfos.Array.data[0].MaxValue
-      value: 100000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2039804826, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
-      propertyPath: ResourceInfos.Array.data[0]._resourceName
-      value: Energy
-      objectReference: {fileID: 0}
-    - target: {fileID: 302402799870251790, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+    - target: {fileID: 1278623144, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
       propertyPath: _teamMate
       value: 
-      objectReference: {fileID: 268435905}
+      objectReference: {fileID: 668107786}
     - target: {fileID: 1589881963645690864, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
       propertyPath: m_Name
       value: PlayerBearMan1
@@ -508,15 +496,15 @@ PrefabInstance:
       objectReference: {fileID: 170101666}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
---- !u!114 &1299593240 stripped
+--- !u!114 &1278623144 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 302402799870251790, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1278623144, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
   m_PrefabInstance: {fileID: 1278623142}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8f76bdebd9a4af79a596bf87c79dc7, type: 3}
+  m_Script: {fileID: 11500000, guid: f79ddaf4308f544a8b93b9f2e2e3f54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1340090090 stripped
@@ -531,18 +519,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1120611630, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
-      propertyPath: ResourceInfos.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1120611630, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
-      propertyPath: ResourceInfos.Array.data[0].MaxValue
-      value: 100000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1120611630, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
-      propertyPath: ResourceInfos.Array.data[0]._resourceName
-      value: Energy
-      objectReference: {fileID: 0}
     - target: {fileID: 4987741909099236402, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -591,10 +567,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBearMan2
       objectReference: {fileID: 0}
-    - target: {fileID: 7415212121306142074, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+    - target: {fileID: 8251841730026583821, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: _teamMate
       value: 
-      objectReference: {fileID: 1299593240}
+      objectReference: {fileID: 1278623144}
+    - target: {fileID: 8251841730026583821, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: InitUsingSkillSet.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251841730026583821, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: InitUsingSkillSet.Array.data[0]
+      value: LightSaber
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251841730026583821, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: InitUsingSkillSet.Array.data[1]
+      value: FlashBomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251841730026583821, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: InitUsingSkillSet.Array.data[2]
+      value: Shield
+      objectReference: {fileID: 0}
     - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: toolListUI
       value: 
