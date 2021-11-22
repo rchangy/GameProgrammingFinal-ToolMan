@@ -1,24 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-namespace ToolMan.Combat.Skills.NormalSkill
+using System;
+namespace ToolMan.Combat.Skills.Normal
 {
     [CreateAssetMenu(menuName = "ToolMan/Skill/StandardProjectileSkill")]
     public class StandardProjectileSkill : Skill
     {
-        public Rigidbody rb;
-        public Transform initPos;
         public float force;
-        public PlayerController player;
+        private Rigidbody rb;
+        private PlayerController manPlayer;
 
         private bool exploded;
         public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat)
         {
+            rb = combat.gameObject.GetComponent<Rigidbody>();
+            if (rb == null)
+            {
+                Debug.Log("Can't find tool's rigid body for projectile skill " + name);
+                yield return null;
+            }
+            if (typeof(PlayerCombat).IsInstanceOfType(combat))
+            {
+                PlayerCombat toolCombat = (PlayerCombat)combat;
+                manPlayer = toolCombat.TeamMateCombat.ThisPlayerController;
+            }
+            
             anim.SetTrigger("Attack");
-            player.grabPoint.Release();
+            manPlayer.grabPoint.Release();
             exploded = false;
             yield return new WaitForSeconds(attackDelay);
-            var dir = initPos.forward;
+            var dir = manPlayer.gameObject.transform.forward;
             dir.y = 1;
             rb.AddForce(dir * force);
             while (!exploded)

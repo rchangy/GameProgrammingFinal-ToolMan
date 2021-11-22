@@ -2,7 +2,7 @@
 using System.Collections;
 using ToolMan.Combat.Stats.Buff;
     
-namespace ToolMan.Combat.Skills.NormalSkill
+namespace ToolMan.Combat.Skills.Normal
 {
     [CreateAssetMenu(menuName = "ToolMan/Skill/StandardShieldSkill")]
     public class StandardShieldSkill : Skill
@@ -16,7 +16,7 @@ namespace ToolMan.Combat.Skills.NormalSkill
             if (typeof(PlayerCombat).IsInstanceOfType(combat))
             {
                 var playerCombat = (PlayerCombat)combat;
-                anotherPlayerCombat = playerCombat.getAnotherPlayerCombat();
+                anotherPlayerCombat = playerCombat.TeamMateCombat;
             }
             combat.AddBuff(Buff);
             if (anotherPlayerCombat != null) { anotherPlayerCombat.AddBuff(Buff); }

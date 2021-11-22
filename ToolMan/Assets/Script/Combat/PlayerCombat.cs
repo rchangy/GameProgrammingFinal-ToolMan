@@ -7,14 +7,22 @@ namespace ToolMan.Combat
 {
     public class PlayerCombat : CombatUnit
     {
+        private PlayerController _playerController;
         [SerializeField]
-        private PlayerController thisPlayer;
-        [SerializeField]
-        private PlayerController anotherPlayer;
-        [SerializeField]
-        private PlayerCombat anotherPlayerCombat;
+        private PlayerCombat _teamMate;
+
+        public PlayerController ThisPlayerController
+        {
+            get => _playerController;
+        }
+        public PlayerCombat TeamMateCombat
+        {
+            get => _teamMate;
+        }
+
         [SerializeField]
         private ComboSkillSet comboSkillSet;
+
 
         private Resource _energy;
         public int Energy
@@ -27,17 +35,11 @@ namespace ToolMan.Combat
             base.Start();
             _energy = stats.GetResourceByName("Energy");
             if (_energy == null) Debug.Log(gameObject.name + " has no energy resource.");
+
+            _playerController = gameObject.GetComponent<PlayerController>();
         }
 
-        public PlayerController getThisPlayer()
-        {
-            return thisPlayer;
-        }
 
-        public PlayerCombat getAnotherPlayerCombat()
-        {
-            return anotherPlayerCombat;
-        }
 
         public override int TakeDamage(int rawDmg, CombatUnit damager)
         {
@@ -45,8 +47,8 @@ namespace ToolMan.Combat
             // check strength
             if (dmg > Str)
             {
-                thisPlayer.grabPoint.Release();
-                if (thisPlayer.isTool) thisPlayer.ToolableManTransform();
+                ThisPlayerController.grabPoint.Release();
+                if (ThisPlayerController.isTool) ThisPlayerController.ToolableManTransform();
             }
             return dmg;
         }
@@ -57,7 +59,7 @@ namespace ToolMan.Combat
             if (!_hasSkillToUse) return;
             if (Attacking) return;
             ComboSkill checkedComboSkill;
-            if ((checkedComboSkill = comboSkillSet.GetComboSkill(thisPlayer, anotherPlayer, this)) != null)
+            if ((checkedComboSkill = comboSkillSet.GetComboSkill(ThisPlayerController, TeamMateCombat.ThisPlayerController, this)) != null)
             {
                 _vulnerable.Disable();
                 _energy.ChangeValueBy(-checkedComboSkill.Cost);

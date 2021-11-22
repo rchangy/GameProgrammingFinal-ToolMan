@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-namespace ToolMan.Combat.Skills.NormalSkill
+namespace ToolMan.Combat.Skills.Normal
 {
     [CreateAssetMenu(menuName = "ToolMan/Skill/StandardShootingSkill")]
     public class StandardShootingSkill : Skill

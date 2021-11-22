@@ -14,14 +14,20 @@ namespace ToolMan.Combat
         private void Awake()
         {
             if (typeEffects == null) return;
+            typeEffectivenesses = new Dictionary<string, IReadOnlyDictionary<string, float>>();
             foreach (TypeEffectiveness e in typeEffects)
             {
-                typeEffectivenesses.Add(e.GetDamageType(), e.GetEffectiveness());
+                if(e.GetDamageType() != null && e.GetEffectiveness() != null)
+                {
+                    if(!typeEffectivenesses.ContainsKey(e.GetDamageType()))
+                        typeEffectivenesses.Add(e.GetDamageType(), e.GetEffectiveness());
+                }
             }
         }
 
         public float CalculateDmg(float baseDmg, IReadOnlyCollection<string> damagerTypes, IReadOnlyCollection<string> targetTypes)
         {
+            if (typeEffectivenesses == null) return baseDmg;
             float totalMultiplier = 1f;
             foreach (string damagerType in damagerTypes)
             {

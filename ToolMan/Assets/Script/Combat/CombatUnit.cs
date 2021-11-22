@@ -68,9 +68,20 @@ namespace ToolMan.Combat
         public SkillSet availableSkillSet;
         private List<string> CurrentUsingSkillSet;
         public List<string> InitUsingSkillSet;
-        [SerializeField] private string currentUsingSkillName;
         private Skill currentUsingSkill;
-        protected bool _hasSkillToUse;
+        public string currentUsingSkillName
+        {
+            get
+            {
+                if (currentUsingSkill == null) return "";
+                return currentUsingSkill.getName();
+            }
+
+        }
+        protected bool _hasSkillToUse
+        {
+            get => currentUsingSkill != null;
+        }
 
         protected Coroutine skillPerforming = null;
 
@@ -79,12 +90,7 @@ namespace ToolMan.Combat
             get => skillPerforming != null;
         }
 
-        private void Awake()
-        {
-            if (CurrentUsingSkillSet == null) CurrentUsingSkillSet = new List<string>();
-        }
-
-        protected virtual void Start()
+         protected virtual void Start()
         {
             stats = gameObject.GetComponent<CharacterStats>();
             _hp = stats.GetResourceByName("HP");
@@ -104,7 +110,6 @@ namespace ToolMan.Combat
                 healthBar.SetHealth(_hp.Value);
             }
             _lastHpValue = _hp.Value;
-            _hasSkillToUse = true;
 
             if (stats == null)
             {
@@ -151,6 +156,7 @@ namespace ToolMan.Combat
         public void SetSkills(List<string> skillNames)
         {
             CurrentUsingSkillSet = new List<string>();
+            if (skillNames == null || skillNames.Count == 0) return;
             foreach (string skillName in skillNames)
             {
                 if (availableSkillSet.HasSkill(skillName)) CurrentUsingSkillSet.Add(skillName);
@@ -161,24 +167,22 @@ namespace ToolMan.Combat
 #nullable enable
         public void SetCurrentUsingSkill(string? skillName)
         {
-            currentUsingSkillName = skillName;
             if (skillName == null)
             {
                 Debug.Log("No skill is set to " + gameObject.name);
-                _hasSkillToUse = false;
+                currentUsingSkill = null;
             }
             else
             {
                 if (CurrentUsingSkillSet.Contains(skillName))
                 {
-                    currentUsingSkill = availableSkillSet.GetSkillbyName(currentUsingSkillName);
+                    currentUsingSkill = availableSkillSet.GetSkillbyName(skillName);
                     currentUsingSkill.SetAttackPoint(transform);
-                    _hasSkillToUse = true;
                 }
                 else
                 {
                     Debug.Log("Unable use skill " + skillName + ", set current skill to null");
-                    _hasSkillToUse = false;
+                    currentUsingSkill = null;
                 }
             }
         }

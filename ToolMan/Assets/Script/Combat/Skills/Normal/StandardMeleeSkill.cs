@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-namespace ToolMan.Combat.Skills.NormalSkill
+namespace ToolMan.Combat.Skills.Normal
 {
     [CreateAssetMenu(menuName = "ToolMan/Skill/StandardMeleeSkill")]
     public class StandardMeleeSkill : Skill

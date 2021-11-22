@@ -10,9 +10,9 @@ namespace ToolMan.Combat
         private class Effectiveness
         {
             [SerializeField]
-            public string ResistenceType;
+            public string ResistenceType = "";
             [SerializeField]
-            public float Multiplier;
+            public float Multiplier = 0f;
         }
         [SerializeField]
         private string _damageType;
@@ -25,9 +25,13 @@ namespace ToolMan.Combat
         private void Awake()
         {
             if (_effectivenesses == null) return;
+            _effects = new Dictionary<string, float>();
             foreach (Effectiveness e in _effectivenesses)
             {
-                _effects.Add(e.ResistenceType, e.Multiplier);
+                if(e.ResistenceType.Length > 0 && !_effects.ContainsKey(e.ResistenceType))
+                { 
+                    _effects.Add(e.ResistenceType, e.Multiplier);
+                }
             }
         }
         public string GetDamageType()

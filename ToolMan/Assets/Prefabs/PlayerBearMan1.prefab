@@ -355,9 +355,9 @@ GameObject:
   - component: {fileID: 3346628931965091971}
   - component: {fileID: 3346628931965091970}
   - component: {fileID: 3346628931965091974}
-  - component: {fileID: 3346628930813195875}
   - component: {fileID: 3346628931965091973}
   - component: {fileID: 2039804826}
+  - component: {fileID: 302402799870251790}
   m_Layer: 6
   m_Name: PlayerBearMan1
   m_TagString: Player
@@ -434,27 +434,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3346628930813195875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589881963645690864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe88b78117c8f4ff98d595d9296741ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageCalculator: {fileID: 11400000, guid: f220a2a576e1543c08c247fe4aeb8996, type: 2}
-  healthBar: {fileID: 0}
-  Anim: {fileID: 3346628931965091974}
-  TargetLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  availableSkillSet: {fileID: 11400000, guid: db05836e0abd8428192128824df497d3, type: 2}
-  InitUsingSkillSet: []
-  currentUsingSkillName: Pickaxe
 --- !u!114 &3346628931965091973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,7 +458,7 @@ MonoBehaviour:
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
-  combat: {fileID: 3346628930813195875}
+  combat: {fileID: 302402799870251790}
 --- !u!114 &2039804826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,6 +480,30 @@ MonoBehaviour:
   StatInfos: []
   ResourceInfos: []
   _inherentTypes: []
+--- !u!114 &302402799870251790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589881963645690864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8f76bdebd9a4af79a596bf87c79dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCalculator: {fileID: 11400000, guid: 0a34bbef229d341e9969fd7d90938a83, type: 2}
+  healthBar: {fileID: 0}
+  Anim: {fileID: 3346628931965091974}
+  TargetLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  availableSkillSet: {fileID: 11400000, guid: 79e292b1885e84bf79e9c54714219046, type: 2}
+  InitUsingSkillSet:
+  - Pickaxe
+  - Boomarang
+  _teamMate: {fileID: 0}
+  comboSkillSet: {fileID: 11400000, guid: 325696f57cb9c455e8c69f3ccb1e6b9e, type: 2}
 --- !u!1 &1636210686992201065
 GameObject:
   m_ObjectHideFlags: 0
