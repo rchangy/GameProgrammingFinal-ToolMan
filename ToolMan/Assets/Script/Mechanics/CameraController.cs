@@ -1,14 +1,30 @@
 using System.Collections;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
     CinemachineFreeLook cam;
+    CinemachineInputProvider inputProvider;
+
+    public InputActionReference lookAction;
+    public int index = 0;
+    public int GetIndex() { return index; }
 
     private void Awake()
     {
         cam = gameObject.GetComponent<CinemachineFreeLook>();
+        inputProvider = gameObject.GetComponent<CinemachineInputProvider>();
+        DisableCam();
+    }
+
+    public void EnableCam() {
+        inputProvider.XYAxis = lookAction;
+    }
+
+    public void DisableCam() {
+        inputProvider.XYAxis = null;
     }
 
     public void CameraShake(float shakeSpan, float amplitude, float frequency) {

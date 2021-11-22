@@ -73,12 +73,7 @@ public class NewPlayerController : ToolableMan
 
     override protected void Update()
     {
-        //if (!isTool)
-        //{
-        //    //Move();
-        //}
-
-        //else // Tool
+        //if (isTool) // Tool
         //{
         //    // Attack
         //    if (keyboardInputController.JumpOrAttack(playerNum))
