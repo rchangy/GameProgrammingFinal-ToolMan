@@ -356,8 +356,8 @@ GameObject:
   - component: {fileID: 3346628931965091970}
   - component: {fileID: 3346628931965091974}
   - component: {fileID: 3346628931965091973}
-  - component: {fileID: 2039804826}
-  - component: {fileID: 302402799870251790}
+  - component: {fileID: 1278623144}
+  - component: {fileID: 4262108082119883091}
   m_Layer: 6
   m_Name: PlayerBearMan1
   m_TagString: Player
@@ -458,8 +458,8 @@ MonoBehaviour:
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
-  combat: {fileID: 302402799870251790}
---- !u!114 &2039804826
+  combat: {fileID: 1278623144}
+--- !u!114 &1278623144
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -468,28 +468,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1589881963645690864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ebda5edaa86496f86f953d14f9fa88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HpMaxValue: 1
-  HpInitValue: 1
-  AtkBaseValue: 1
-  DefBaseValue: 1
-  StrBaseValue: 1
-  AbilityInfos: []
-  StatInfos: []
-  ResourceInfos: []
-  _inherentTypes: []
---- !u!114 &302402799870251790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589881963645690864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8f76bdebd9a4af79a596bf87c79dc7, type: 3}
+  m_Script: {fileID: 11500000, guid: f79ddaf4308f544a8b93b9f2e2e3f54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageCalculator: {fileID: 11400000, guid: 0a34bbef229d341e9969fd7d90938a83, type: 2}
@@ -504,6 +483,31 @@ MonoBehaviour:
   - Boomarang
   _teamMate: {fileID: 0}
   comboSkillSet: {fileID: 11400000, guid: 325696f57cb9c455e8c69f3ccb1e6b9e, type: 2}
+--- !u!114 &4262108082119883091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589881963645690864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42d4048d51594d52bc8a2be5a45853d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HpMaxValue: 1
+  HpInitValue: 1
+  AtkBaseValue: 1
+  DefBaseValue: 1
+  StrBaseValue: 1
+  AbilityInfos: []
+  StatInfos: []
+  ResourceInfos:
+  - _resourceName: Energy
+    MaxValue: 1000
+    InitValue: 0
+    _currentValue: 0
+  _inherentTypes: []
 --- !u!1 &1636210686992201065
 GameObject:
   m_ObjectHideFlags: 0
