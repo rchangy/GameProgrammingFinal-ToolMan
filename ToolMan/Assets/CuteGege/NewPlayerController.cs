@@ -1,6 +1,5 @@
 using UnityEngine;
 using ToolMan.Mechanics;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator))]
 public class NewPlayerController : ToolableMan

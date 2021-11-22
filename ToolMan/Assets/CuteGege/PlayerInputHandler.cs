@@ -6,25 +6,23 @@ using Cinemachine;
 public class PlayerInputHandler : MonoBehaviour
 {
     Vector2 movementInput = Vector2.zero;
-    NewPlayerController p;
+    public PlayerController p;
     private PlayerInput playerInput;
     CameraController camController;
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-        var players = FindObjectsOfType<NewPlayerController>();
-        var index = playerInput.playerIndex;
-        p = players.FirstOrDefault(p => p.playerNum == index+1);
+        //Debug.Log("no:(( player = " + p.name);
         
-        AssignCamera(index+1);
+        //AssignCamera(index+1);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
-        p.Move(movementInput);
-        
+        p.SetMovementInput(movementInput);
+        Debug.Log("OnMove: " + movementInput);
+
     }
     public void OnJump(InputAction.CallbackContext context)
     {
