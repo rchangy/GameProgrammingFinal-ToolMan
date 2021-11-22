@@ -2,212 +2,292 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using UnityEngine.Events;
+using ToolMan.Combat.Skills;
+using ToolMan.Combat.Stats;
+using ToolMan.Combat.Stats.Buff;
 
-public class CombatUnit : MonoBehaviour
+namespace ToolMan.Combat
 {
-    public bool isPlayer;
-
-    private CharacterStats stats;
-    private Resource _hp;
-    private Stat _attackSpeed;
-    private Stat _atk;
-
-    private Ability _canAttack;
-    private Ability _canBeHurt;
-    private Ability _canMove;
-
-    public bool CanAttack
+    public class CombatUnit : MonoBehaviour
     {
-        get => _canAttack.Value;
-    }
-    public bool CanBeHurt
-    {
-        get => _canBeHurt.Value;
-    }
-    public bool CanMove
-    {
-        get => _canMove.Value;
-    }
-    
-
-    private int _lastHpValue;
-
-    public HealthBar healthBar;
-
-    public PlayerController playerController;
-
-
-    // skills
-    public Animator Anim;
-    public LayerMask TargetLayers;
-
-    public AvailableSkillSet availableSkillSet;
-    public List<string> CurrentUsingSkillSet;
-    [SerializeField] private string currentUsingSkillName;
-    private Skill currentUsingSkill;
-    private bool _hasSkillToUse;
-
-    private Coroutine skillPerforming = null;
-
-    // for skill cooldown
-    protected float _timeToNextAttack;
-    private bool _hasAttacked;
-    public bool HasAttacked
-    {
-        get => _hasAttacked;
-    }
-
-    private void Awake()
-    {
-        if (CurrentUsingSkillSet == null) CurrentUsingSkillSet = new List<string>();
-
-    }
-
-    protected virtual void Start()
-    {
-        stats = gameObject.GetComponent<CharacterStats>();
-        _hp = stats.GetResourceByName("Hp");
-        if (_hp == null) Debug.Log(gameObject.name + " has no resource hp");
-        _attackSpeed = stats.GetStatByName("AttackSpeed");
-        if (_attackSpeed == null) Debug.Log(gameObject.name + " has no stat attack speed");
-        _atk = stats.GetStatByName("Atk");
-        if (_atk == null) Debug.Log(gameObject.name + " has no stat atk");
-
-
-        if (healthBar != null)
+        protected CharacterStats stats;
+        private Resource _hp;
+        public int Hp
         {
-            healthBar.SetMaxHealth(_hp.MaxValue);
-            healthBar.SetHealth(_hp.Value);
-        }
-        _lastHpValue = _hp.Value;
-        _hasAttacked = false;
-        _hasSkillToUse = true;
-
-        if(stats == null)
-        {
-            Debug.Log(gameObject.name + " has no stats component");
+            get => _hp.Value;
         }
 
-        if ((playerController = gameObject.GetComponent<PlayerController>()) != null) isPlayer = true;
-        else isPlayer = false;
-
-        if (currentUsingSkillName != null && currentUsingSkillName.Length > 0) SetCurrentUsingSkill(currentUsingSkillName);
-        else if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
-        else SetCurrentUsingSkill(null);
-    }
-
-    private void Update()
-    {
-        if(_lastHpValue != _hp.Value && healthBar != null)
+        private Stat _aspd;
+        public float Aspd
         {
-            _lastHpValue = _hp.Value;
-            healthBar.SetHealth(_hp.Value);
+            get => _aspd.Value;
         }
-    }
-
-
-    public virtual void Attack()
-    {
-        if (!_hasSkillToUse) return;
-        if (_hasAttacked) return;
-        _hasAttacked = true;
-
-        skillPerforming = StartCoroutine(PerformSkill());
-
-    }
-
-    private IEnumerator PerformSkill()
-    {
-        yield return StartCoroutine(currentUsingSkill.Attack(Anim, TargetLayers, _atk, _attackSpeed, stats));
-        yield return new WaitForSeconds(currentUsingSkill.attackInterval / _attackSpeed.Value);
-        _hasAttacked = false;
-    }
-
-    // set skills that can be selected during battle
-    public void SetSkills(string[] skillNames)
-    {
-        CurrentUsingSkillSet = new List<string>();
-        foreach (string skillName in skillNames)
+        private Stat _atk;
+        public float Atk
         {
-            if (availableSkillSet.HasSkill(skillName)) CurrentUsingSkillSet.Add(skillName);
+            get => _atk.Value;
         }
-    }
-
-    // select a skill to use now
-#nullable enable
-    public void SetCurrentUsingSkill(string? skillName)
-    {
-        currentUsingSkillName = skillName;
-        if (skillName == null)
+        private Stat _def;
+        public float Def
         {
-            Debug.Log("No skill is set to " + gameObject.name);
-            _hasSkillToUse = false;
+            get => _def.Value;
         }
-        else
+        private Stat _str;
+        public float Str
         {
-            if (CurrentUsingSkillSet.Contains(skillName))
+            get => _str.Value;
+        }
+
+        protected Ability _attackEnabled;
+        public bool AttackEnabled
+        {
+            get => _attackEnabled.Value;
+        }
+        protected Ability _vulnerable;
+        public bool Vulnerable
+        {
+            get => _vulnerable.Value;
+        }
+        protected Ability _movable;
+        public bool Movable
+        {
+            get => _movable.Value;
+        }
+
+        [SerializeField]
+        private DamageCalculator damageCalculator;
+
+        // healthBar
+        private int _lastHpValue;
+        public HealthBar healthBar;
+
+        // skills
+        public Animator Anim;
+        public LayerMask TargetLayers;
+
+        public SkillSet availableSkillSet;
+        private List<string> CurrentUsingSkillSet;
+        public List<string> InitUsingSkillSet;
+        private Skill currentUsingSkill;
+        public string currentUsingSkillName
+        {
+            get
             {
-                currentUsingSkill = availableSkillSet.GetSkillbyName(currentUsingSkillName);
-                _hasSkillToUse = true;
+                if (currentUsingSkill == null) return "";
+                return currentUsingSkill.getName();
+            }
+
+        }
+        protected bool _hasSkillToUse
+        {
+            get => currentUsingSkill != null;
+        }
+
+        protected Coroutine skillPerforming = null;
+
+        public bool Attacking
+        {
+            get => skillPerforming != null;
+        }
+
+         protected virtual void Start()
+        {
+            stats = gameObject.GetComponent<CharacterStats>();
+            _hp = stats.GetResourceByName("HP");
+
+            _aspd = stats.GetStatByName("ASPD");
+            _atk = stats.GetStatByName("ATK");
+            _def = stats.GetStatByName("DEF");
+            _str = stats.GetStatByName("STR");
+
+            _attackEnabled = stats.GetAbilityByName("AttackEnabled");
+            _movable = stats.GetAbilityByName("Movable");
+            _vulnerable = stats.GetAbilityByName("Vulnerable");
+
+            if (healthBar != null)
+            {
+                healthBar.SetMaxHealth(_hp.MaxValue);
+                healthBar.SetHealth(_hp.Value);
+            }
+            _lastHpValue = _hp.Value;
+
+            if (stats == null)
+            {
+                Debug.Log(gameObject.name + " has no stats component");
+            }
+
+            availableSkillSet.CheckStatsExsistence(this);
+
+
+            SetSkills(InitUsingSkillSet);
+            if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
+            else SetCurrentUsingSkill(null);
+
+            damageCalculator.checkLoad();
+        }
+
+        private void Update()
+        {
+            if (_lastHpValue != Hp && healthBar != null)
+            {
+                _lastHpValue = Hp;
+                healthBar.SetHealth(Hp);
+            }
+        }
+
+
+        public virtual void Attack()
+        {
+            if (!AttackEnabled) return;
+            if (!_hasSkillToUse) return;
+            if (Attacking) return;
+
+            skillPerforming = StartCoroutine(PerformSkill());
+
+        }
+
+        private IEnumerator PerformSkill()
+        {
+            yield return StartCoroutine(currentUsingSkill.Attack(Anim, TargetLayers, this));
+            yield return new WaitForSeconds(currentUsingSkill.attackInterval / Aspd);
+            skillPerforming = null;
+
+        }
+
+        // set skills that can be selected during battle
+        public void SetSkills(List<string> skillNames)
+        {
+            CurrentUsingSkillSet = new List<string>();
+            if (skillNames == null || skillNames.Count == 0) return;
+            foreach (string skillName in skillNames)
+            {
+                if (availableSkillSet.HasSkill(skillName)) CurrentUsingSkillSet.Add(skillName);
+            }
+        }
+
+        // select a skill to use now
+#nullable enable
+        public void SetCurrentUsingSkill(string? skillName)
+        {
+            if (skillName == null)
+            {
+                Debug.Log("No skill is set to " + gameObject.name);
+                currentUsingSkill = null;
             }
             else
             {
-                Debug.Log("Unable use skill " + skillName + ", set current skill to null");
-                _hasSkillToUse = false;
+                if (CurrentUsingSkillSet.Contains(skillName))
+                {
+                    currentUsingSkill = availableSkillSet.GetSkillbyName(skillName);
+                    currentUsingSkill.SetAttackPoint(transform);
+                }
+                else
+                {
+                    Debug.Log("Unable use skill " + skillName + ", set current skill to null");
+                    currentUsingSkill = null;
+                }
             }
         }
-    }
+#nullable disable
 
-    private void InterruptAttack()
-    {
-        Debug.Log("coroutine stopped");
-        StopCoroutine(skillPerforming);
-        skillPerforming = null;
-        _hasAttacked = false;
-        // animation
-    }
-
-
-    /**
-     * everything that happens after hit by someone
-     */
-    public virtual void TakeDamage(int rawDmg, CharacterStats attackerStats)
-    {
-        // check if this unit can be hurt now
-        if (!CanBeHurt) return;
-
-
-        // animation
-        Anim.SetTrigger("Hurt");
-
-        // skill interrupt
-        if (skillPerforming != null) InterruptAttack();
-        // set all skill time variables to there init value
-
-        // check strength
-
-        if (isPlayer)
+        private void InterruptAttack()
         {
-            playerController.grabPoint.Release();
-            if (playerController.isTool) playerController.ToolableManTransform();
+            Debug.Log(name + " attack interrupted, coroutine stopped");
+            StopCoroutine(skillPerforming);
+            skillPerforming = null;
         }
 
-        // compute complete damage and take damage
-        // compute TODO
-        _hp.ChangeValueBy(-rawDmg);
-        Debug.LogFormat("[{0}] Took {1} Damage", name, rawDmg);
-    }
+        public virtual int TakeDamage(int rawDmg, CombatUnit damager)
+        {
+            // check if this unit can be hurt now
+            if (!Vulnerable) return 0;
 
-    public virtual void Die()
-    {
-        Debug.Log(name + " dies");
-        Destroy(gameObject);
-    }
+            // compute complete damage and take damage
+            float typeEffectedDmg = damageCalculator.CalculateDmg(rawDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
+            float dmg = typeEffectedDmg - Def;
+            // check strength
+            if (dmg > Str)
+            {
+                // skill interrupt
+                if (Attacking) InterruptAttack();
+                Anim.SetTrigger("Hurt");
+            }
+            // set all skill time variables to there init value
+            _hp.ChangeValueBy(-(int)dmg);
+            Debug.LogFormat("[{0}] Took {1} Damage", name, dmg);
+            return (int)dmg;
+        }
 
-    // for attack delay
-    protected IEnumerator ExecuteAfterTime(float time)
-    {
-        yield return new WaitForSeconds(time);
+        public virtual void Die()
+        {
+            Debug.Log(name + " dies");
+            Destroy(gameObject);
+        }
+
+        // for attack delay
+        protected IEnumerator ExecuteAfterTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+        }
+
+        public void AddBuff(ScriptableBuff buff)
+        {
+            buff.AddBuff(stats);
+        }
+
+#nullable enable
+        public float? GetStatValue(String name)
+        {
+            if (stats.HasStat(name))
+            {
+                return stats.GetStatByName(name).Value;
+            }
+            return null;
+        }
+        public float? GetStatBaseValue(String name)
+        {
+            if (stats.HasStat(name))
+            {
+                return stats.GetStatByName(name).BaseValue;
+            }
+            return null;
+        }
+        public float? GetResourceValue(String name)
+        {
+            if (stats.HasResource(name))
+            {
+                return stats.GetResourceByName(name).Value;
+            }
+            return null;
+        }
+        public float? GetResourceMaxValue(String name)
+        {
+            if (stats.HasResource(name))
+            {
+                return stats.GetResourceByName(name).MaxValue;
+            }
+            return null;
+        }
+        public bool? GetAbilityState(String name)
+        {
+            if (stats.HasAbility(name))
+            {
+                return stats.GetAbilityByName(name).Value;
+            }
+            return null;
+        }
+        public bool? GetAbilityInitState(String name)
+        {
+            if (stats.HasAbility(name))
+            {
+                return stats.GetAbilityByName(name).BaseValue;
+            }
+            return null;
+        }
+#nullable disable
+        public IReadOnlyCollection<string> GetCurrentTypes()
+        {
+            return stats.GetCurrentTypes();
+        }
     }
 }

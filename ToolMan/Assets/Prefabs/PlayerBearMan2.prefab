@@ -63,54 +63,6 @@ Transform:
   m_Father: {fileID: 995491356720075042}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &115744654988941472
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3810034573478083325}
-  - component: {fileID: 5689188848313077627}
-  m_Layer: 6
-  m_Name: Shield
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3810034573478083325
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115744654988941472}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 68914388030148117}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5689188848313077627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115744654988941472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f73dce4bba2747bcba1ef409400120f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInterval: 0.5
-  attackDelay: 0
-  attackRange: 3
-  friend: {fileID: 0}
-  Buff: {fileID: 11400000, guid: 848e963d68d014db99b15898c8b1d0ec, type: 2}
 --- !u!1 &408826353996347886
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,55 +277,6 @@ Transform:
   m_Father: {fileID: 6180182425769921292}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2339067661936756356
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3006827395186334862}
-  - component: {fileID: 6257081896329465517}
-  m_Layer: 6
-  m_Name: FlashBomb
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3006827395186334862
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2339067661936756356}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 68914388030148117}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6257081896329465517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2339067661936756356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3e47f790bb79448ab797b9362d807c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInterval: 0
-  attackDelay: 0
-  rb: {fileID: 0}
-  initPos: {fileID: 0}
-  force: 300
-  player: {fileID: 0}
 --- !u!1 &2695234326742081412
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,56 +432,6 @@ Transform:
   m_Father: {fileID: 9199532264014563524}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3159402669907606451
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 68914388030148117}
-  - component: {fileID: 4205403540151853606}
-  m_Layer: 6
-  m_Name: AvailableSkills
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &68914388030148117
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3159402669907606451}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.73, y: -0.18000007, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2565734868741615299}
-  - {fileID: 3810034573478083325}
-  - {fileID: 3006827395186334862}
-  m_Father: {fileID: 4987741909099236402}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4205403540151853606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3159402669907606451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e090a663ae9b4224a8efbb683f8a3ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skills:
-  - {fileID: 4615666931153453325}
-  - {fileID: 5689188848313077627}
-  - {fileID: 6257081896329465517}
 --- !u!1 &3163880929179362992
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,52 +587,6 @@ Transform:
   m_Father: {fileID: 7234186901858125853}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3824475152915673266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2565734868741615299}
-  - component: {fileID: 4615666931153453325}
-  m_Layer: 6
-  m_Name: LightSaber
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2565734868741615299
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3824475152915673266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 68914388030148117}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4615666931153453325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3824475152915673266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3435084182dbe478e84a6fab394b90c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInterval: 0
-  attackDelay: 0
-  attackRange: 0
 --- !u!1 &3833988604311000971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,8 +1065,8 @@ GameObject:
   - component: {fileID: 8507911072495564282}
   - component: {fileID: 8507911072495564286}
   - component: {fileID: 8507911072495564285}
-  - component: {fileID: 4171716028473278162}
   - component: {fileID: 1120611630}
+  - component: {fileID: 7415212121306142074}
   m_Layer: 6
   m_Name: PlayerBearMan2
   m_TagString: Player
@@ -1284,7 +1091,6 @@ Transform:
   - {fileID: 4806112291604789430}
   - {fileID: 6222526604872672384}
   - {fileID: 7602279447490618997}
-  - {fileID: 68914388030148117}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1361,32 +1167,7 @@ MonoBehaviour:
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
-  combat: {fileID: 4171716028473278162}
---- !u!114 &4171716028473278162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5653095584333043336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe88b78117c8f4ff98d595d9296741ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayer: 0
-  healthBar: {fileID: 0}
-  playerController: {fileID: 0}
-  Anim: {fileID: 8507911072495564286}
-  TargetLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  availableSkillSet: {fileID: 4205403540151853606}
-  CurrentUsingSkillSet:
-  - LightSaber
-  - Shield
-  - FlashBomb
-  currentUsingSkillName: LightSaber
+  combat: {fileID: 7415212121306142074}
 --- !u!114 &1120611630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1399,23 +1180,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ebda5edaa86496f86f953d14f9fa88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbilityInfos:
-  - _statName: Invincible
-    BaseValue: 0
-    _value: 0
-  StatInfos:
-  - _statName: Atk
-    BaseValue: 10
-    _value: 0
-  - _statName: AttackSpeed
-    BaseValue: 1
-    _value: 0
-  ResourceInfos:
-  - _resourceName: Hp
-    MaxValue: 100
-    InitValue: 100
-    _currentValue: 0
+  HpMaxValue: 1
+  HpInitValue: 1
+  AtkBaseValue: 1
+  DefBaseValue: 1
+  StrBaseValue: 1
+  AbilityInfos: []
+  StatInfos: []
+  ResourceInfos: []
   _inherentTypes: []
+--- !u!114 &7415212121306142074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653095584333043336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8f76bdebd9a4af79a596bf87c79dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCalculator: {fileID: 11400000, guid: 0a34bbef229d341e9969fd7d90938a83, type: 2}
+  healthBar: {fileID: 0}
+  Anim: {fileID: 8507911072495564286}
+  TargetLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  availableSkillSet: {fileID: 11400000, guid: 1008ed4ce9ec8494097f9fde92300974, type: 2}
+  InitUsingSkillSet:
+  - LightSaber
+  - FlashBomb
+  - Shield
+  _teamMate: {fileID: 0}
+  comboSkillSet: {fileID: 11400000, guid: 325696f57cb9c455e8c69f3ccb1e6b9e, type: 2}
 --- !u!1 &5681094873323192337
 GameObject:
   m_ObjectHideFlags: 0

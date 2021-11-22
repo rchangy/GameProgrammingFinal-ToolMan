@@ -30,53 +30,6 @@ Transform:
   m_Father: {fileID: 2125902509593294423}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &133440040006608334
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3894474042518672233}
-  - component: {fileID: 5934990050176469905}
-  m_Layer: 6
-  m_Name: Boomarang
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3894474042518672233
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133440040006608334}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2763778555862630221}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5934990050176469905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133440040006608334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1162322aff20543b78ebdaae3473dbd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInterval: 0
-  attackDelay: 0
-  bulletPrefab: {fileID: 8646793245139639563, guid: cdf4227bcdb564f6e88501aa543e28d1, type: 3}
-  shootingForce: 50
 --- !u!1 &271759904750796486
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,52 +61,6 @@ Transform:
   m_Father: {fileID: 8948336613253335318}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &324826902703452498
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3535825645814815429}
-  - component: {fileID: 7112978806205408812}
-  m_Layer: 6
-  m_Name: Pickaxe
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3535825645814815429
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324826902703452498}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2763778555862630221}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7112978806205408812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324826902703452498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3435084182dbe478e84a6fab394b90c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInterval: 0
-  attackDelay: 0
-  attackRange: 0
 --- !u!1 &557279770227553514
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,9 +355,9 @@ GameObject:
   - component: {fileID: 3346628931965091971}
   - component: {fileID: 3346628931965091970}
   - component: {fileID: 3346628931965091974}
-  - component: {fileID: 3346628930813195875}
   - component: {fileID: 3346628931965091973}
   - component: {fileID: 2039804826}
+  - component: {fileID: 302402799870251790}
   m_Layer: 6
   m_Name: PlayerBearMan1
   m_TagString: Player
@@ -475,7 +382,6 @@ Transform:
   - {fileID: 1932339910922669518}
   - {fileID: 1024968836622619128}
   - {fileID: 3346628931098774231}
-  - {fileID: 2763778555862630221}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -528,30 +434,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3346628930813195875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589881963645690864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe88b78117c8f4ff98d595d9296741ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayer: 0
-  healthBar: {fileID: 0}
-  playerController: {fileID: 3346628931965091973}
-  Anim: {fileID: 3346628931965091974}
-  TargetLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  availableSkillSet: {fileID: 4493257618674308681}
-  CurrentUsingSkillSet:
-  - Pickaxe
-  - Boomarang
-  currentUsingSkillName: Pickaxe
 --- !u!114 &3346628931965091973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,7 +458,7 @@ MonoBehaviour:
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
-  combat: {fileID: 3346628930813195875}
+  combat: {fileID: 302402799870251790}
 --- !u!114 &2039804826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,23 +471,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ebda5edaa86496f86f953d14f9fa88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbilityInfos:
-  - _statName: Invincible
-    BaseValue: 0
-    _value: 0
-  StatInfos:
-  - _statName: Atk
-    BaseValue: 10
-    _value: 0
-  - _statName: AttackSpeed
-    BaseValue: 1
-    _value: 0
-  ResourceInfos:
-  - _resourceName: Hp
-    MaxValue: 100
-    InitValue: 100
-    _currentValue: 0
+  HpMaxValue: 1
+  HpInitValue: 1
+  AtkBaseValue: 1
+  DefBaseValue: 1
+  StrBaseValue: 1
+  AbilityInfos: []
+  StatInfos: []
+  ResourceInfos: []
   _inherentTypes: []
+--- !u!114 &302402799870251790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589881963645690864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8f76bdebd9a4af79a596bf87c79dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCalculator: {fileID: 11400000, guid: 0a34bbef229d341e9969fd7d90938a83, type: 2}
+  healthBar: {fileID: 0}
+  Anim: {fileID: 3346628931965091974}
+  TargetLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  availableSkillSet: {fileID: 11400000, guid: 79e292b1885e84bf79e9c54714219046, type: 2}
+  InitUsingSkillSet:
+  - Pickaxe
+  - Boomarang
+  _teamMate: {fileID: 0}
+  comboSkillSet: {fileID: 11400000, guid: 325696f57cb9c455e8c69f3ccb1e6b9e, type: 2}
 --- !u!1 &1636210686992201065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,54 +1117,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &3409424165185433227
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2763778555862630221}
-  - component: {fileID: 4493257618674308681}
-  m_Layer: 6
-  m_Name: AvailableSkills
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2763778555862630221
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3409424165185433227}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.73, y: 0.18000007, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 3535825645814815429}
-  - {fileID: 3894474042518672233}
-  m_Father: {fileID: 2115484099242539338}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4493257618674308681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3409424165185433227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e090a663ae9b4224a8efbb683f8a3ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skills:
-  - {fileID: 7112978806205408812}
-  - {fileID: 5934990050176469905}
 --- !u!1 &3423101168987506653
 GameObject:
   m_ObjectHideFlags: 0

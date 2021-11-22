@@ -1,40 +1,47 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
-
-[CreateAssetMenu(menuName = "ToolMan/TypeEffectiveness")]
-public class TypeEffectiveness : ScriptableObject
+namespace ToolMan.Combat
 {
-    [Serializable]
-    private class Effectiveness
+    [CreateAssetMenu(menuName = "ToolMan/Stat/TypeEffectiveness")]
+    public class TypeEffectiveness : ScriptableObject
     {
-        [SerializeField]
-        public string ResistenceType;
-        [SerializeField]
-        public float Multiplier;
-    }
-    [SerializeField]
-    private string _damageType;
-    [SerializeField]
-    private List<Effectiveness> _effectivenesses;
-
-    private Dictionary<string, float> _effects;
-
-
-    private void Awake()
-    {
-        foreach(Effectiveness e in _effectivenesses)
+        [Serializable]
+        private class Effectiveness
         {
-            _effects.Add(e.ResistenceType, e.Multiplier);
+            [SerializeField]
+            public string ResistenceType = "";
+            [SerializeField]
+            public float Multiplier = 0f;
         }
-    }
-    public string GetDamageType()
-    {
-        return _damageType;
-    }
+        [SerializeField]
+        private string _damageType;
+        [SerializeField]
+        private List<Effectiveness> _effectivenesses;
 
-    public IReadOnlyDictionary<string, float> GetEffectiveness()
-    {
-        return _effects;
+        private Dictionary<string, float> _effects;
+
+
+        private void Awake()
+        {
+            if (_effectivenesses == null) return;
+            _effects = new Dictionary<string, float>();
+            foreach (Effectiveness e in _effectivenesses)
+            {
+                if(e.ResistenceType.Length > 0 && !_effects.ContainsKey(e.ResistenceType))
+                { 
+                    _effects.Add(e.ResistenceType, e.Multiplier);
+                }
+            }
+        }
+        public string GetDamageType()
+        {
+            return _damageType;
+        }
+
+        public IReadOnlyDictionary<string, float> GetEffectiveness()
+        {
+            return _effects;
+        }
     }
 }

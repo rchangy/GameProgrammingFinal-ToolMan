@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using ToolMan.Mechanics;
+using ToolMan.Combat;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerController : ToolableMan
@@ -40,7 +39,7 @@ public class PlayerController : ToolableMan
     // ==== Player Movement ====
 
     // ==== Combat ====
-    public CombatUnit combat;
+    public PlayerCombat combat;
     // ==== Combat ====
 
     override protected void Awake()
@@ -88,6 +87,11 @@ public class PlayerController : ToolableMan
             // Attack
             if (keyboardInputController.JumpOrAttack(playerNum))
                 Attack();
+            // test combo skill
+            if (Input.GetButtonDown("Combo"))
+            {
+                combat.ComboSkillAttack();
+            }
         }
 
         // ==== Man <-> Tool ====
