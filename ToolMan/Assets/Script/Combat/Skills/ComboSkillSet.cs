@@ -49,14 +49,12 @@ namespace ToolMan.Combat.Skills
 
         public void checkLoad()
         {
-            if (!loaded)
-            {
-                Load();
-            }
+            Load();
         }
 
         private void Load()
         {
+            Debug.Log("loading");
             if (_skills.Count == 0) return;
             Debug.Log("loading combo skills");
             foreach (ComboSkill s in _skills)
@@ -65,7 +63,8 @@ namespace ToolMan.Combat.Skills
                 {
                     _comboSkills[s.getPreTool()] = new Dictionary<string, ComboSkill>();
                 }
-                _comboSkills[s.getPreTool()].Add(s.getPostTool(), s);
+                if(!_comboSkills[s.getPreTool()].ContainsKey(s.getPostTool()))
+                    _comboSkills[s.getPreTool()].Add(s.getPostTool(), s);
             }
             loaded = true;
         }

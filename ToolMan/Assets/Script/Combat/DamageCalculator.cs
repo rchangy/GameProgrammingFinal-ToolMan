@@ -41,7 +41,7 @@ namespace ToolMan.Combat
 
         public void checkLoad()
         {
-            if (!loaded) Load();
+            Load();
         }
 
         private void Load()
