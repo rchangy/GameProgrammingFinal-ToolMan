@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using ToolMan.Combat;
 
 public class Enemy : MonoBehaviour
 {
@@ -128,7 +129,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (combat.HasAttacked) Idle();
+            if (combat.Attacking) Idle();
             else
             {
                 if (!PlayerInSightRange && !PlayerInAttackRange) Patrol();

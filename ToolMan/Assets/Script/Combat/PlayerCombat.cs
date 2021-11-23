@@ -74,7 +74,7 @@ namespace ToolMan.Combat
             yield return StartCoroutine(skill.Attack(Anim, TargetLayers, this));
             yield return new WaitForSeconds(skill.attackInterval / Aspd);
             TeamMateCombat.ThisPlayerController.setChangeable(true);
-            TeamMateCombat.ThisPlayerController.ToolManChange();
+            //TeamMateCombat.ThisPlayerController.ToolManChange();
             skillPerforming = null;
             _vulnerable.RemoveDisability();
         }

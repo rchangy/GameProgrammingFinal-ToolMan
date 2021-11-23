@@ -1,6 +1,6 @@
 using UnityEngine;
 using ToolMan.Mechanics;
-
+using ToolMan.Combat;
 [RequireComponent(typeof(Animator))]
 public class NewPlayerController : ToolableMan
 {
@@ -41,7 +41,7 @@ public class NewPlayerController : ToolableMan
     // ==== Camera Movement ====
 
     // ==== Combat ====
-    public CombatUnit combat;
+    public PlayerCombat combat;
     // ==== Combat ====
 
     override protected void Start()
