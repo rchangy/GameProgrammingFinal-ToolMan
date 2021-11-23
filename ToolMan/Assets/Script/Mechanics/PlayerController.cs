@@ -139,30 +139,30 @@ public class PlayerController : ToolableMan
         }
     }
 
-    //public void ToolManChange() // Man Player
-    //{
-    //    // set anotherplayer
-    //    grabPoint.setAnotherPlayerAndTarget(anotherPlayer);
-    //    //anotherPlayer.grabPoint.setAnotherPlayerAndTarget(this);
-    //    //anotherPlayer.changeable = false;
+    public void ToolManChange() // Man Player
+    {
+        // set anotherplayer
+        grabPoint.setAnotherPlayerAndTarget(anotherPlayer);
+        anotherPlayer.grabPoint.setAnotherPlayerAndTarget(this);
+        anotherPlayer.changeable = false;
 
-    //    // cache position
-    //    Vector3 manPosition = this.transform.position;
-    //    Vector3 toolPosition = anotherPlayer.transform.position;
+        // cache position
+        Vector3 manPosition = this.transform.position;
+        Vector3 toolPosition = anotherPlayer.transform.position;
 
-    //    // Release & Transform
-    //    grabPoint.Release();
-    //    transform.position = toolPosition;
-    //    anotherPlayer.transform.position = manPosition;
-    //    anotherPlayer.ToolableManTransform(); // Tool to Man
-    //    toolIdx = 0;
-    //    ToolableManTransform(); // Man to Tool
+        // Release & Transform
+        grabPoint.Release();
+        transform.position = toolPosition;
+        anotherPlayer.transform.position = manPosition;
+        anotherPlayer.ToolableManTransform(); // Tool to Man
+        toolIdx = 0;
+        ToolableManTransform(); // Man to Tool
 
-    //    if (!anotherPlayer.grabPoint.grabbing)
-    //    {
-    //        anotherPlayer.grabPoint.Grab();
-    //    }
-    //}
+        if (!anotherPlayer.grabPoint.grabbing)
+        {
+            anotherPlayer.grabPoint.Grab();
+        }
+    }
     //// ==== Actions ====
 
 
