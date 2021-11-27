@@ -46,7 +46,18 @@ namespace ToolMan.Mechanics
         {
             if (anotherPlayer != null)
             {
-                playerGameObject.transform.forward = anotherPlayer.gameObject.transform.forward;
+                if (player.inToolState())
+                {
+                    //playerGameObject.transform.localRotation = Quaternion.Euler(anotherPlayer.transform.localRotation.x, anotherPlayer.transform.localRotation.y, -26f);
+                    Debug.Log("man - rotation: " + anotherPlayer.gameObject.transform.localRotation);
+                    Debug.Log("tool - rotation: " + playerGameObject.transform.localRotation);
+                }
+                else
+                {
+                    Debug.Log("man - rotation: " + anotherPlayer.transform.localRotation);
+                }
+                //playerGameObject.transform.localPosition = new Vector3(2.1f, 1.28f, -1f);
+                //playerGameObject.transform.forward = anotherPlayer.gameObject.transform.forward;
                 //player.getGrabbedPoint().transform.position = anotherPlayer.RightHand.transform.position;
                 //playerGameObject.transform.localRotation = Quaternion.E
                 //playerGameObject.transform.rotation = Quaternion.Euler(playerGameObject.transform.rotation.x, playerGameObject.transform.rotation.y, 26f);

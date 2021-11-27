@@ -56,10 +56,10 @@ namespace ToolMan.Mechanics
 
         public void Grab()
         {
-            Debug.Log("player: " + player.playerNum + " grab player " + anotherPlayer.playerNum);
-            Debug.Log("In Grab");
             if (targetTool != null)
             {
+                Debug.Log("player: " + player.playerNum + " grab player " + anotherPlayer.playerNum);
+                Debug.Log("In Grab");
                 //LayerMask mask = LayerMask.GetMask("Player");
                 //int layer = mask.value;
                 Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), anotherPlayer.gameObject.GetComponent<Collider>(), true);
@@ -103,6 +103,10 @@ namespace ToolMan.Mechanics
                 confJ.autoConfigureConnectedAnchor = false;
                 confJ.connectedAnchor = anotherPlayer.getTool().getPoint();
                 confJ.enableCollision = false;
+                confJ.xMotion = ConfigurableJointMotion.Locked;
+                confJ.yMotion = ConfigurableJointMotion.Locked;
+                confJ.zMotion = ConfigurableJointMotion.Locked;
+                confJ.targetRotation = Quaternion.Euler(0, 0, 5f);
 
                 anotherPlayer.beGrabbed(player);
                 player.transform.position = orignialPos;
