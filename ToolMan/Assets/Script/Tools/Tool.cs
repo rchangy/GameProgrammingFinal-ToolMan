@@ -51,6 +51,7 @@ public class Tool
     public virtual void toTool()
     {
         animator.SetBool("isTool", true);
+        //resetRigidBody();
         playerRB.constraints = RigidbodyConstraints.None;
     }
 
@@ -69,6 +70,9 @@ public class Tool
         player.transform.rotation = Quaternion.identity;
         player.transform.position = new Vector3(player.transform.position.x, 1.9f, player.transform.position.z);
         resetRigidBody();
+        //player.GetComponent<PlayerController>().getRightHand().SetActive(true);
+        //pc.getRightHand().transform.position = new Vector3(0.801f, 0.14f, 0f);
+        //pc.fixRightHand();
     }
 
     public void attack()
@@ -80,12 +84,18 @@ public class Tool
     {
         playerRB.velocity = Vector3.zero;
         playerRB.angularVelocity = Vector3.zero;
+        //PlayerController pc = player.GetComponent<PlayerController>();
+        //pc.GetGrabbedPointController().GetRigidbody().velocity = Vector3.zero;
+        //pc.GetGrabbedPointController().GetRigidbody().angularVelocity = Vector3.zero;
+        //pc.getRightHand().GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //pc.getRightHand().GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
 
     public void beGrabbed()
     {
-        playerRB.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         player.transform.rotation = Quaternion.Euler(0f, 0f, 26f);
+        playerRB.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        //playerRB.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         resetRigidBody();
     }
 

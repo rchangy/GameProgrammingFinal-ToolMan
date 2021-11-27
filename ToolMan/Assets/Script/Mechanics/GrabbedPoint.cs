@@ -8,15 +8,21 @@ namespace ToolMan.Mechanics
         public PlayerController anotherPlayer;
         PlayerController player;
         Rigidbody rb;
-        private void Awake()
+
+        public void FixGrabbedPoint()
         {
             rb = GetComponent<Rigidbody>();
-            FixedJoint fj = playerGameObject.AddComponent<FixedJoint>();
-            fj.connectedBody = rb;
-            fj.breakForce = 2147483647;
+            //FixedJoint fj = playerGameObject.AddComponent<FixedJoint>();
+            //fj.connectedBody = rb;
+            //fj.breakForce = 2147483647;
+            //FixedJoint fj = gameObject.AddComponent<FixedJoint>();
+            //fj.connectedBody = player.getRigidbody();
+            //fj.breakForce = 2147483647;
+            //fj.autoConfigureConnectedAnchor = false;
+            //fj.connectedAnchor = new Vector3(0.0f, -1.2f, 0.0f);
         }
 
-        public void setPlayer(PlayerController player)
+        public void SetPlayer(PlayerController player)
         {
             this.player = player;
         }
@@ -29,24 +35,11 @@ namespace ToolMan.Mechanics
             Rigidbody playerRb = player.getRigidbody();
             playerRb.velocity = Vector3.zero;
             playerRb.angularVelocity = Vector3.zero;
-            //Debug.Log("ccc");
         }
 
         public void setAnotherPlayer(PlayerController anotherPlayer)
         {
             this.anotherPlayer = anotherPlayer;
-            //Vector3 distance;
-            //if (anotherPlayer != null)
-            //{
-            //    distance = anotherPlayer.RightHand.transform.position - gameObject.transform.position;
-            //    gameObject.transform.position = anotherPlayer.RightHand.transform.position;
-            //    distance = anotherPlayer.RightHand.transform.position - gameObject.transform.position;
-            //    playerGameObject.transform.position += distance;
-            //}
-
-            //
-            //Debug.Log("distance = " + distance);
-            //
         }
 
         private void Update()
@@ -62,6 +55,12 @@ namespace ToolMan.Mechanics
                 //Debug.Log(anotherPlayer.RightHand.transform.position);
                 //Debug.Log(gameObject.transform.position);
             }
+        }
+
+        // ==== getters ====
+        public Rigidbody GetRigidbody()
+        {
+            return rb;
         }
     }
 }

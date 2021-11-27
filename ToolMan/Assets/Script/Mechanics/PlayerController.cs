@@ -11,6 +11,7 @@ public class PlayerController : ToolableMan
     private Rigidbody rb;
     private CapsuleCollider playerCollider;
     [SerializeField] private GameObject toolListUI;
+    [SerializeField] private GameObject rightHand;
     public GrabPoint grabPoint;
 
     private State state = new State();
@@ -50,7 +51,7 @@ public class PlayerController : ToolableMan
         playerCollider = GetComponent<CapsuleCollider>();
         grabbedPointController = grabbedPoint.GetComponent<GrabbedPoint>();
         grabPoint.setPlayer(this);
-        grabbedPointController.setPlayer(this);
+        grabbedPointController.SetPlayer(this);
         keyboardInputController = new KeyboardInputController();
         state = State.Grounded;
 
@@ -67,6 +68,8 @@ public class PlayerController : ToolableMan
         }
 
         distToGround = playerCollider.bounds.extents.y;
+        fixRightHand();
+        grabbedPointController.FixGrabbedPoint();
     }
 
     override protected void Update()
@@ -152,12 +155,14 @@ public class PlayerController : ToolableMan
             tools[toolIdx].toTool();
             combat.SetCurrentUsingSkill(tools[toolIdx].getName());
             changeable = false;
+            //grabbedPointController.resetRigidBody();
         }
         else
         {
             tools[toolIdx].toMan();
             toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
         }
+        //grabbedPointController.FixGrabbedPoint();
     }
 
     public void ToolManChange() // Man Player
@@ -187,6 +192,17 @@ public class PlayerController : ToolableMan
 
     // ==== Actions ====
 
+    // ==== Initialize ====
+    public void fixRightHand()
+    {
+        FixedJoint fj = gameObject.AddComponent<FixedJoint>();
+        fj.connectedBody = rightHand.GetComponent<Rigidbody>();
+        //fj.connectedBody = anotherPlayer.getRightHand().GetComponent<Rigidbody>();
+        fj.breakForce = 2147483847;
+        //fj.autoConfigureConnectedAnchor = false;
+        //fj.connectedAnchor = anotherPlayer.getTool().getPoint();
+        //fj.enableCollision = false;
+    }
 
 
     // ==== getters & setters ====
@@ -199,11 +215,22 @@ public class PlayerController : ToolableMan
     {
         return animator;
     }
+
+    public GameObject getRightHand()
+    {
+        return rightHand;
+    }
     public void setChangeable(bool changeable)
     {
         this.changeable = changeable;
     }
-    // ==== getters
+
+    public void ResetRigidbody()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
+    // ==== getters & setters ====
 
     // ==== State ====
     private void UpdateState()

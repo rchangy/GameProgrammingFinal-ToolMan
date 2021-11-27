@@ -33,7 +33,7 @@ public abstract class ToolableMan : MonoBehaviour
         tools[toolIdx].beGrabbed();
         grabbedPoint.GetComponent<Collider>().isTrigger = true;
         //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        gameObject.GetComponent<Collider>().isTrigger = true;
+        //gameObject.GetComponent<Collider>().isTrigger = true;
         grabbedPointController.setAnotherPlayer(anotherPlayer);
     }
 
@@ -42,7 +42,7 @@ public abstract class ToolableMan : MonoBehaviour
         tools[toolIdx].beReleased();
         grabbedPoint.GetComponent<Collider>().isTrigger = false;
         //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
-        gameObject.GetComponent<Collider>().isTrigger = false;
+        //gameObject.GetComponent<Collider>().isTrigger = false;
         grabbedPointController.setAnotherPlayer(null);
     }
 
@@ -50,6 +50,11 @@ public abstract class ToolableMan : MonoBehaviour
     public GameObject getGrabbedPoint()
     {
         return grabbedPoint;
+    }
+
+    public GrabbedPoint GetGrabbedPointController()
+    {
+        return grabbedPointController;
     }
 
     public Tool getTool()
