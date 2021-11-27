@@ -8,7 +8,7 @@ public class KeyboardInputController : InputController
     {
         if ((playerNum == 1 && Input.GetButtonDown("JumpOrAttack1")) || (playerNum == 2 && Input.GetButtonDown("JumpOrAttack2")))
             return true;
-        return false;
+        return false;   
     }
 
     public float MoveHorizontal(int playerNum)

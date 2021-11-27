@@ -29,15 +29,15 @@ public class GamepadPlayerInputHandler : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
-        p.SetMovementInput(movementInput);
+        //p.SetMovementInput(movementInput);
         Debug.Log("OnMove: " + movementInput);
 
     }
     public void OnAttackOrJump(InputAction.CallbackContext context)
     {
         Debug.Log("aaaaaaa " + context.action.triggered);
-        if (context.action.triggered)
-            p.AttackOrJump();
+        //if (context.action.triggered)
+        //    p.AttackOrJump();
     }
     // ==== Movement ====
 
@@ -55,20 +55,20 @@ public class GamepadPlayerInputHandler : MonoBehaviour
 
 
     // ==== UI ====
-    public void OnUI_Prev(InputAction.CallbackContext context)
-    {
-        if (context.action.triggered)
-            p.UI_Prev();
-    }
-    public void OnUI_Next(InputAction.CallbackContext context)
-    {
-        if (context.action.triggered)
-            p.UI_Next();
-    }
-    public void OnUI_Choose(InputAction.CallbackContext context)
-    {
-        if (context.action.triggered)
-            p.UI_Choose();
-    }
+    //public void OnUI_Prev(InputAction.CallbackContext context)
+    //{
+    //    if (context.action.triggered)
+    //        p.UI_Prev();
+    //}
+    //public void OnUI_Next(InputAction.CallbackContext context)
+    //{
+    //    if (context.action.triggered)
+    //        p.UI_Next();
+    //}
+    //public void OnUI_Choose(InputAction.CallbackContext context)
+    //{
+    //    if (context.action.triggered)
+    //        p.UI_Choose();
+    //}
     // ==== UI ====
 }

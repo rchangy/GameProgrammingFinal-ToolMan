@@ -11,8 +11,9 @@ public class KeyboardPlayerInputHandler : MonoBehaviour
     CameraController camController;
 
     private void Awake()
-    {        
+    {
         //AssignCamera(index+1);
+        Debug.Log("player = " + p.name);
     }
     private void AssignCamera(int index)
     {
@@ -22,50 +23,51 @@ public class KeyboardPlayerInputHandler : MonoBehaviour
             camController = GameObject.Find("Player2FreeLook").GetComponent<CameraController>();
     }
 
-    // ==== Movement ====
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        movementInput = context.ReadValue<Vector2>();
-        p.SetMovementInput(movementInput);
-        Debug.Log("OnMove: " + movementInput);
+    //// ==== Movement ====
+    //public void OnMove(InputAction.CallbackContext context)
+    //{
+    //    movementInput = context.ReadValue<Vector2>();
+    //    p.SetMovementInput(movementInput);
+    //    Debug.Log("player = " + p.name + " OnMove = " + movementInput);
+    //    Debug.Log("OnMove: " + movementInput);
 
-    }
-    public void OnAttackOrJump(InputAction.CallbackContext context)
-    {
-        Debug.Log("aaaaaaa " + context.action.triggered);
-        if (context.action.triggered)
-            p.AttackOrJump();
-    }
-    // ==== Movement ====
-
-
-    // ==== Look ====
-    public void OnLook(InputAction.CallbackContext context) {
-        Vector2 lookInput = context.ReadValue<Vector2>();
-        Debug.Log("look = " + lookInput);
-        if (lookInput.magnitude == 0)
-            camController.DisableCam();
-        else
-            camController.EnableCam();
-    }
-    // ==== Look ====
+    //}
+    //public void OnAttackOrJump(InputAction.CallbackContext context)
+    //{
+    //    Debug.Log("aaaaaaa " + context.action.triggered);
+    //    if (context.action.triggered)
+    //        p.AttackOrJump();
+    //}
+    //// ==== Movement ====
 
 
-    // ==== UI ====
-    public void OnUI_Prev(InputAction.CallbackContext context)
-    {
-        if (context.action.triggered)
-            p.UI_Prev();
-    }
-    public void OnUI_Next(InputAction.CallbackContext context)
-    {
-        if (context.action.triggered)
-            p.UI_Next();
-    }
-    public void OnUI_Choose(InputAction.CallbackContext context)
-    {
-        if (context.action.triggered)
-            p.UI_Choose();
-    }
-    // ==== UI ====
+    //// ==== Look ====
+    //public void OnLook(InputAction.CallbackContext context) {
+    //    Vector2 lookInput = context.ReadValue<Vector2>();
+    //    Debug.Log("look = " + lookInput);
+    //    if (lookInput.magnitude == 0)
+    //        camController.DisableCam();
+    //    else
+    //        camController.EnableCam();
+    //}
+    //// ==== Look ====
+
+
+    //// ==== UI ====
+    //public void OnUI_Prev(InputAction.CallbackContext context)
+    //{
+    //    if (context.action.triggered)
+    //        p.UI_Prev();
+    //}
+    //public void OnUI_Next(InputAction.CallbackContext context)
+    //{
+    //    if (context.action.triggered)
+    //        p.UI_Next();
+    //}
+    //public void OnUI_Choose(InputAction.CallbackContext context)
+    //{
+    //    if (context.action.triggered)
+    //        p.UI_Choose();
+    //}
+    //// ==== UI ====
 }
