@@ -12,6 +12,7 @@ namespace ToolMan.Combat.Skills
         public float attackInterval;
         public float attackDelay;
         public float RefractoryPeriod;
+        public float Cd;
 
         // requirements
         private List<string> _requiredStatsName = new List<string>();
@@ -44,7 +45,7 @@ namespace ToolMan.Combat.Skills
 
             foreach (string s in _requiredStatsName)
             {
-                if (combat.GetStatBaseValue(s) == null)
+                if (combat.GetStatValue(s) == null)
                 {
                     Debug.Log(combat.gameObject.name + " can't use skill " + name + " for not having stat " + s);
                     return false;
@@ -52,7 +53,7 @@ namespace ToolMan.Combat.Skills
             }
             foreach (string r in _requiredResourcesName)
             {
-                if (combat.GetResourceMaxValue(r) == null)
+                if (combat.GetResourceValue(r) == null)
                 {
                     Debug.Log(combat.gameObject.name + " can't use skill " + name + " for not having resource " + r);
                     return false;
@@ -60,7 +61,7 @@ namespace ToolMan.Combat.Skills
             }
             foreach (string a in _requiredAbilitiesName)
             {
-                if (combat.GetAbilityInitState(a) == null)
+                if (combat.GetAbilityState(a) == null)
                 {
                     Debug.Log(combat.gameObject.name + " can't use skill " + name + " for not having ability " + a);
                     return false;

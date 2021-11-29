@@ -3,35 +3,50 @@ using System.Collections.Generic;
 
 namespace ToolMan.Combat.Equip
 {
-    public class Shield : CombatUnit
+    public class ForceShield : CombatUnit
     {
         [SerializeField] string[] _collisionTag;
         float hitTime;
-        Material mat = null;
+        private Material _mat;
+
+        private bool _init = false;
+
+        private int _maxHp;
+        private float _defValue;
+
+        private CombatUnit _target;
+
 
         Dictionary<CombatUnit, ContactPoint[]> _contactPoints = new Dictionary<CombatUnit, ContactPoint[]>();
 
         protected override void Start()
         {
             base.Start();
-            if (GetComponent<Renderer>())
-            {
-                mat = GetComponent<Renderer>().sharedMaterial;
-            }
-            if(mat == null)
-            {
-                Debug.Log("Shield has no mat set");
-            }
             _stats.AddType("Shield");
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            if (_init && _hp != null && _def != null)
+            {
+                _hp.Reset(_maxHp, _maxHp);
+                _def.BaseValue = _defValue;
+                _init = false;
+            }
+        }
+
+        public void Setup(Material mat, CombatUnit target)
+        {
+            _mat = mat;
+            _target = target;
+            GetComponent<Renderer>().sharedMaterial = mat;
         }
 
         public void Init(int maxHp, float def)
         {
-            _hp.MaxValue = maxHp;
-            
-            _hp.Reset();
-            _def.BaseValue = def;
-
+            _maxHp = maxHp;
+            _defValue = def;
         }
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
@@ -43,9 +58,9 @@ namespace ToolMan.Combat.Equip
                 ContactPoint[] contacts = _contactPoints[damager];
                 for (int i2 = 0; i2 < contacts.Length; i2++)
                 {
-                    mat.SetVector("_HitPosition", transform.InverseTransformPoint(contacts[i2].point));
+                    _mat.SetVector("_HitPosition", transform.InverseTransformPoint(contacts[i2].point));
                     hitTime = 500;
-                    mat.SetFloat("_HitTime", hitTime);
+                    _mat.SetFloat("_HitTime", hitTime);
                 }
             }
             return (int)dmg;
@@ -66,9 +81,10 @@ namespace ToolMan.Combat.Equip
             }
         }
 
-        public override void Attack()
+        public override bool Attack()
         {
             Debug.Log("Shield cannot attack");
+            return false;
         }
 
         protected override void Die()

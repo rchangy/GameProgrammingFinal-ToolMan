@@ -106,7 +106,7 @@ namespace ToolMan.Combat
         }
 
 
-        public abstract void Attack();
+        public abstract bool Attack();
 
         public virtual int TakeDamage(float baseDmg, CombatUnit damager)
         {
@@ -150,14 +150,14 @@ namespace ToolMan.Combat
             }
             return null;
         }
-        public float? GetResourceMaxValue(String name)
-        {
-            if (_stats.HasResource(name))
-            {
-                return _stats.GetResourceByName(name).MaxValue;
-            }
-            return null;
-        }
+        //public float? GetResourceMaxValue(String name)
+        //{
+        //    if (_stats.HasResource(name))
+        //    {
+        //        return _stats.GetResourceByName(name).MaxValue;
+        //    }
+        //    return null;
+        //}
         public bool? GetAbilityState(String name)
         {
             if (_stats.HasAbility(name))

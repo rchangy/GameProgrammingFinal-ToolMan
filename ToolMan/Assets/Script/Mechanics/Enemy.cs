@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
 using ToolMan.Combat;
+using System.Collections.Generic;
+using System;
 
 public class Enemy : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class Enemy : MonoBehaviour
     public int PatrolWeight;
     public int IdleWeight;
     protected int[] weight;
+    protected int[] skillWeight;
 
     private float _actionLastTime;
     public float ActionLastTime
@@ -54,16 +57,8 @@ public class Enemy : MonoBehaviour
 
 
     // attack
-    [SerializeField] protected float InitAttackInterval;
-    private float _attackInterval;
-    public float AttackInterval
-    {
-        get => _attackInterval;
-        set
-        {
-            _attackInterval = Mathf.Max(0, value);
-        }
-    }
+    private List<string> _skillSet;
+
 
     [SerializeField] protected int InitAttackRange;
     private int _attackRange;
@@ -76,7 +71,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected bool AlreadyAttacked;
     protected bool PlayerInAttackRange;
 
     // state & attributes (suppressed by what)
@@ -99,9 +93,23 @@ public class Enemy : MonoBehaviour
         {
             Players[i] = PlayerGameObjects[i].transform;
         }
-
-        AttackInterval = InitAttackInterval;
         AttackRange = InitAttackRange;
+
+        IReadOnlyCollection<string> skillSet = combat.GetCurrentUsingSkillSet();
+        
+        if (skillSet.Count > 0)
+        {
+            if (skillWeight.Length > skillSet.Count)
+            {
+                var tmp = skillWeight;
+                skillWeight = new int[skillSet.Count];
+                Array.Copy(tmp, skillWeight, skillSet.Count);
+            }
+        }
+        else
+        {
+            skillWeight = null;
+        }
     }
 
     protected virtual void Update()
@@ -119,7 +127,6 @@ public class Enemy : MonoBehaviour
         PlayerInAttackRange = Physics.CheckSphere(transform.position, AttackRange, PlayerMask);
         if (isAction)
         {
-            Attack();
             ActionLastTime -= Time.deltaTime;
             if (ActionLastTime < 0)
             {
@@ -134,9 +141,8 @@ public class Enemy : MonoBehaviour
             {
                 if (!PlayerInSightRange && !PlayerInAttackRange) Patrol();
                 if (PlayerInSightRange && !PlayerInAttackRange) ChasePlayer();
-                if (PlayerInSightRange && PlayerInAttackRange) Attack();
+                if (PlayerInSightRange && PlayerInAttackRange) RandomBehavior();
             }
-
         }
     }
 
@@ -158,26 +164,24 @@ public class Enemy : MonoBehaviour
 
     protected virtual void ChasePlayer()
     {
-        
         Debug.Log("Chase Mode");
         // compare two players position and chase the closest
         EnemyAgent.SetDestination(closestPlayer.position);
     }
 
-    protected virtual void Attack()
+    protected virtual void RandomBehavior()
     {
         Debug.Log("Attack Mode");
         if (!isAction)
         {
             act = GetRandType(weight);
-            ActionLastTime = Random.Range(MinActionTime, MaxActionTime);
+            ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
             isAction = true;
-            Debug.Log(act);
         }
 
         switch (act){
             case 0: // attack
-                combat.Attack();
+                RandomAttackBehavior();
                 break;
             case 1:
                 Patrol();
@@ -196,20 +200,24 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(newDir);
     }
 
-    protected virtual void ResetAttack()
+    protected virtual void RandomAttackBehavior()
     {
-        AlreadyAttacked = false;
-    }
-
-    public virtual void BeAttacked()
-    {
-
+        if (combat.Attacking) return;
+        if (skillWeight == null) return;
+        int attackAct = GetRandType(skillWeight);
+        combat.SetCurrentUsingSkill(_skillSet[attackAct]);
+        if (!combat.Attack())
+        {
+            attackAct = 0;
+            combat.SetCurrentUsingSkill(_skillSet[attackAct]);
+            combat.Attack();
+        }
     }
 
     protected void SearchWalkPoint()
     {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
+        float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, GroundMask)) walkPointSet = true;
@@ -231,16 +239,12 @@ public class Enemy : MonoBehaviour
         return target;
     }
 
-    protected virtual void Die()
-    {
-        Debug.LogFormat("[{0}] Enemy Dies", Name);
-    }
 
     private int GetRandType(int[] weight)
     {
         int total = 0;
         foreach (int w in weight) total += w;
-        int rand = Random.Range(0, total);
+        int rand = UnityEngine.Random.Range(0, total);
         int tmp = 0;
         for(int i = 0; i < weight.Length; i++)
         {
