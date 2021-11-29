@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     public int PatrolWeight;
     public int IdleWeight;
     protected int[] weight;
+
+    [SerializeField]
     protected int[] skillWeight;
 
     private float _actionLastTime;
@@ -57,7 +59,7 @@ public class Enemy : MonoBehaviour
 
 
     // attack
-    private List<string> _skillSet;
+    private List<string> _skillSet = new List<string>();
 
 
     [SerializeField] protected int InitAttackRange;
@@ -96,7 +98,7 @@ public class Enemy : MonoBehaviour
         AttackRange = InitAttackRange;
 
         IReadOnlyCollection<string> skillSet = combat.GetCurrentUsingSkillSet();
-        
+        _skillSet = (List<string>)skillSet;
         if (skillSet.Count > 0)
         {
             if (skillWeight.Length > skillSet.Count)

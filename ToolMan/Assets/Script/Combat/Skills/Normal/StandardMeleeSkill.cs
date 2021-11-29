@@ -11,6 +11,7 @@ namespace ToolMan.Combat.Skills.Normal
         {
             // Animation
             anim.SetTrigger("Attack");
+            Debug.Log("Perform Attack");
             // delay
             yield return new WaitForSeconds(attackDelay);
 
