@@ -4,7 +4,7 @@ using UnityEngine;
 public class EffectController : MonoBehaviour
 {
     [SerializeField] private Transform baseTrans; // Transform of Player or Enemy, etc.
-    [SerializeField] private List<Effect> effectList = new List<Effect>();
+    public List<Effect> effectList = new List<Effect>();
 
     private void Awake()
     {

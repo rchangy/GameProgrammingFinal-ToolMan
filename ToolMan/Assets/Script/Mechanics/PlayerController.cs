@@ -18,6 +18,8 @@ public partial class PlayerController : ToolableMan
     public int playerNum = 1; // player 1 or player 2
     [SerializeField] private PlayerController anotherPlayer;
     [SerializeField] private bool changeable = false;
+
+    [SerializeField] private EffectController effectController;
     // ==== Components ====
 
     // ==== Player Movement ====
