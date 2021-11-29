@@ -11,6 +11,7 @@ namespace ToolMan.Combat.Skills
     {
         public float attackInterval;
         public float attackDelay;
+        public float RefractoryPeriod;
 
         // requirements
         private List<string> _requiredStatsName = new List<string>();

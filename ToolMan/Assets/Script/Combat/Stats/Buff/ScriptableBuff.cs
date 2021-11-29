@@ -17,6 +17,13 @@ namespace ToolMan.Combat.Stats.Buff
         public bool IsDurationStacked;
         public int MaxDuration;
 
+        public ScriptableBuff(string target, float duration, bool isDurationStacked, int maxDuration)
+        {
+            Target = target;
+            Duration = duration;
+            IsDurationStacked = isDurationStacked;
+            MaxDuration = maxDuration;
+        }
         public abstract void AddBuff(CharacterStats target);
     }
 }

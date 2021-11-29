@@ -11,14 +11,9 @@ namespace ToolMan.Combat.Skills
 
         private Dictionary<string, Dictionary<string, ComboSkill>> _comboSkills = new Dictionary<string, Dictionary<string, ComboSkill>>();
 
-        private bool loaded = false;
 
         public ComboSkill GetComboSkill(PlayerController tool, PlayerController man, PlayerCombat toolCombat)
         {
-            if (!loaded)
-            {
-                Load();
-            }
             Debug.Log(_comboSkills.Count);
 
             string preTool = tool.getTool().getName();
@@ -47,12 +42,8 @@ namespace ToolMan.Combat.Skills
             return usingSkill;
         }
 
-        public void checkLoad()
-        {
-            Load();
-        }
 
-        private void Load()
+        public void Load()
         {
             Debug.Log("loading");
             if (_skills.Count == 0) return;
@@ -66,7 +57,6 @@ namespace ToolMan.Combat.Skills
                 if(!_comboSkills[s.getPreTool()].ContainsKey(s.getPostTool()))
                     _comboSkills[s.getPreTool()].Add(s.getPostTool(), s);
             }
-            loaded = true;
         }
 
     }

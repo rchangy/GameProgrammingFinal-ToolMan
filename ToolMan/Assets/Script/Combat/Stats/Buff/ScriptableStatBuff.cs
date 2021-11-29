@@ -4,6 +4,7 @@ namespace ToolMan.Combat.Stats.Buff
     [CreateAssetMenu(menuName = "ToolMan/StatBuff")]
     public class ScriptableStatBuff : ScriptableBuff
     {
+
         public StatModType ModType;
         public float Value;
         /**
@@ -11,6 +12,14 @@ namespace ToolMan.Combat.Stats.Buff
          */
         public bool IsEffectStacked;
         public int MaxEffectStack;
+        public ScriptableStatBuff(string target, float duration, bool isDurationStacked, int maxDuration, StatModType modType, float value, bool isEffectStacked, int maxEffectStack)
+            : base(target, duration, isDurationStacked, maxDuration)
+        {
+            ModType = modType;
+            Value = value;
+            IsEffectStacked = isEffectStacked;
+            MaxEffectStack = maxEffectStack;
+        }
 
         public override void AddBuff(CharacterStats target)
         {

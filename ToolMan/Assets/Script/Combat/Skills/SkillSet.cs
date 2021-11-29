@@ -15,16 +15,6 @@ namespace ToolMan.Combat.Skills
 
         private List<Skill> cannotUseSkills = new List<Skill>();
 
-        //private void Awake()
-        //{
-        //    skillSet = new Dictionary<string, Skill>();
-        //    foreach(Skill skill in skills)
-        //    {
-        //        var skillName = skill.getName();
-        //        skillSet.Add(skillName, skill);
-        //    }
-        //}
-
         public bool HasSkill(string name)
         {
             return skillSet.ContainsKey(name);

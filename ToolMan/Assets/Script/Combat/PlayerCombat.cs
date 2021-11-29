@@ -5,7 +5,7 @@ using ToolMan.Combat.Stats;
 
 namespace ToolMan.Combat
 {
-    public class PlayerCombat : CombatUnit
+    public class PlayerCombat : SkillCombat
     {
         private PlayerController _playerController;
         [SerializeField]
@@ -33,19 +33,19 @@ namespace ToolMan.Combat
         protected override void Start()
         {
             base.Start();
-            _energy = stats.GetResourceByName("Energy");
+            _energy = _stats.GetResourceByName("Energy");
             if (_energy == null) Debug.Log(gameObject.name + " has no energy resource.");
 
             _playerController = gameObject.GetComponent<PlayerController>();
 
-            comboSkillSet.checkLoad();
+            comboSkillSet = manager.Model.ComboSkills;
         }
 
 
 
-        public override int TakeDamage(int rawDmg, CombatUnit damager)
+        public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
-            int dmg = base.TakeDamage(rawDmg, damager);
+            int dmg = base.TakeDamage(baseDmg, damager);
             // check strength
             if (dmg > Str)
             {

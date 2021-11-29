@@ -7,7 +7,6 @@ namespace ToolMan.Combat.Stats
 {
     public class CharacterStats : MonoBehaviour
     {
-        // mandatory stats
         [SerializeField]
         private int HpMaxValue = 1;
         [SerializeField]
@@ -107,6 +106,15 @@ namespace ToolMan.Combat.Stats
             return _buffs.ContainsKey(buff);
         }
 
+        public Stat AddStat(Stat s)
+        {
+            if (!_stats.ContainsKey(s.getName()))
+            {
+                _stats.Add(s.getName(), s);
+            }
+            return _stats[s.getName()];
+        }
+
         public Stat GetStatByName(string name)
         {
             if (_stats.ContainsKey(name))
@@ -125,6 +133,15 @@ namespace ToolMan.Combat.Stats
             return _stats.ContainsKey(name);
         }
 
+        public Resource AddResource(Resource r)
+        {
+            if (!_resources.ContainsKey(r.getName()))
+            {
+                _resources.Add(r.getName(), r);
+            }
+            return _resources[r.getName()];
+        }
+
         public Resource GetResourceByName(string name)
         {
             if (_resources.ContainsKey(name))
@@ -141,6 +158,15 @@ namespace ToolMan.Combat.Stats
         public bool HasResource(string name)
         {
             return _resources.ContainsKey(name);
+        }
+
+        public Ability AddAbility(Ability a)
+        {
+            if (!_abilities.ContainsKey(a.getName()))
+            {
+                _abilities.Add(a.getName(), a);
+            }
+            return _abilities[a.getName()];
         }
 
         public Ability GetAbilityByName(string name)
