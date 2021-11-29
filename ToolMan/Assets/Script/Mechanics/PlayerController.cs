@@ -2,7 +2,7 @@ using UnityEngine;
 using ToolMan.Mechanics;
 using ToolMan.Combat;
 [RequireComponent(typeof(Animator))]
-public class PlayerController : ToolableMan
+public partial class PlayerController : ToolableMan
 {
     // ==== Components ====
     private Animator animator;
@@ -44,9 +44,9 @@ public class PlayerController : ToolableMan
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
-        grabbedPointController = grabbedPoint.GetComponent<GrabbedPoint>();
-        grabPoint.setPlayer(this);
-        grabbedPointController.setPlayer(this);
+        //grabbedPointController = grabbedPoint.GetComponent<GrabbedPoint>();
+        //grabPoint.setPlayer(this);
+        //grabbedPointController.setPlayer(this);
         state = State.Grounded;
         keyboardInputController = new KeyboardInputController();
 
@@ -93,38 +93,7 @@ public class PlayerController : ToolableMan
         {
             ToolableManTransform();
         }
-        // ==== Man <-> Tool ====
-    }
-
-
-    public void ToolManChange() // Man Player
-    {
-        // set anotherplayer
-        grabPoint.setAnotherPlayerAndTarget(anotherPlayer);
-        anotherPlayer.grabPoint.setAnotherPlayerAndTarget(this);
-        anotherPlayer.changeable = false;
-
-        // cache position
-        Vector3 manPosition = this.transform.position;
-        Vector3 toolPosition = anotherPlayer.transform.position;
-
-        // Release & Transform
-        grabPoint.Release();
-        transform.position = toolPosition;
-        anotherPlayer.transform.position = manPosition;
-        anotherPlayer.ToolableManTransform(); // Tool to Man
-        toolIdx = 0;
-        ToolableManTransform(); // Man to Tool
-
-        if (!anotherPlayer.grabPoint.grabbing)
-        {
-            anotherPlayer.grabPoint.Grab();
-        }
-    }
-  
-    public void setChangeable(bool changeable)
-    {
-        this.changeable = changeable;
+        // ==== Select Tool && [Man <-> Tool] ====
     }
 
     // ==== Movement ====
@@ -146,14 +115,6 @@ public class PlayerController : ToolableMan
             currentJumpCount = 0;
         }
     }
-    // ==== Movement ====
-
-    // ==== Actions ====
-    private void Attack()
-    {
-        //Debug.Log("attack pressed");
-        combat.Attack();
-    }
 
     private void Jump()
     {
@@ -164,27 +125,7 @@ public class PlayerController : ToolableMan
         }
 
     }
-
-    override public void ToolableManTransform()
-    {
-        isTool = !isTool;
-        if (isTool)
-        {
-            toolListUI.Choose();
-            toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
-            tools[toolIdx].toTool();
-            //combat.SetCurrentUsingSkill(tools[toolIdx].getName());
-            cam.EnableFreeLook();
-        }
-        else
-        {
-            tools[toolIdx].toMan();
-            toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
-            toolListUI.Unchoose();
-            cam.EnableMain();
-        }
-    }
-    // ==== Actions ====
+    // ==== Movement ====
 
 
 
