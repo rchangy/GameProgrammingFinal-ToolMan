@@ -11,7 +11,7 @@ public abstract class ToolableMan : MonoBehaviour
     protected int toolIdx;
 
     [SerializeField] protected GameObject grabbedPoint;
-    protected GrabbedPoint grabbedPointController;
+    [SerializeField] protected GrabbedPoint grabbedPointController;
 
     virtual protected void Awake() {}
 
