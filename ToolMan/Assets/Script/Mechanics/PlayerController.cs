@@ -22,8 +22,8 @@ public class PlayerController : ToolableMan
     // ==== Components ====
 
     // ==== Player Movement ====
-    Vector2 movementInput = Vector2.zero;
-    [SerializeField] private float speed = 5;
+    [SerializeField] private float speed = 20;
+    public float moveAngleSensitivity = 750f;
     public float jumpForce = 300;
     public int maxJumpCount = 1; // It can actaully jump once more 
     public int currentJumpCount = 0;
@@ -31,12 +31,6 @@ public class PlayerController : ToolableMan
     private float distToGround;
     private bool isGrounded;
     // ==== Player Movement ====
-
-    // ==== Camera Movement ====
-    public Transform mainCameraTrans;
-    private float turnSmoothTime = 0.1f;
-    private float turnSmoothVelocity;
-    // ==== Camera Movement ====
 
     // ==== Combat ====
     public PlayerCombat combat;
@@ -89,65 +83,6 @@ public class PlayerController : ToolableMan
         // ==== Man <-> Tool ====
     }
 
-    //    // ==== Movement ====
-    //    public void SetMovementInput(Vector2 movement) { movementInput = movement; }
-
-    //    public void Move()
-    //    {
-    //        Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y).normalized;
-    //        //Debug.Log(gameObject.name + " movement = " + movement);
-    //        if (movement.sqrMagnitude > 0.01f)
-    //        {
-    //            // Facing angle (smoothed)
-    //            float movementAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg + mainCameraTrans.eulerAngles.y;
-    //            float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, movementAngle, ref turnSmoothVelocity, turnSmoothTime);
-    //            transform.rotation = Quaternion.Euler(0, smoothedAngle, 0);
-
-    //            // Move
-    //            Vector3 adjustedMovement = Quaternion.Euler(0, movementAngle, 0) * Vector3.forward; // Relative to mainCameraTrans
-    //            adjustedMovement *= speed * Time.deltaTime;
-    //            transform.position += adjustedMovement;
-    //        }
-    //    }    
-    //    // ==== Movement ====
-
-    //    // ==== Actions ====
-    //    public void AttackOrJump() {
-    //        if (isTool)
-    //            Attack();
-    //        else
-    //            Jump();
-    //    }
-    //    private void Attack()
-    //    {
-    //        combat.Attack();
-    //    }
-    //    private void Jump()
-    //    {
-    //        if (currentJumpCount < maxJumpCount)
-    //        {
-    //            rb.AddForce(Vector3.up * jumpForce);
-    //            currentJumpCount++;
-    //        }
-
-    //    }
-
-    //    override public void ToolableManTransform()
-    //    {
-    //        isTool = !isTool;
-    //        if (isTool)
-    //        {
-    //            toolIdx = toolListUI.currentIdx;
-    //            tools[toolIdx].toTool();
-    //            combat.SetCurrentUsingSkill(tools[toolIdx].getName());
-    //            changeable = false;
-    //        }
-    //        else
-    //        {
-    //            tools[toolIdx].toMan();
-    //            toolListUI.unchoose = toolIdx;
-    //        }
-    //    }
 
     public void ToolManChange() // Man Player
     {
@@ -173,61 +108,21 @@ public class PlayerController : ToolableMan
             anotherPlayer.grabPoint.Grab();
         }
     }
-    //    //// ==== Actions ====
-
-
-    //    // ==== UI control ====
-    //    public void UI_Prev() { }
-    //    public void UI_Next() { }
-    //    public void UI_Choose() { ToolableManTransform(); }
-    //    // ==== UI control ====
-
-
-    //    // ==== getters & setters ====
-    //    public Rigidbody getRigidbody()
-    //    {
-    //        return rb;
-    //    }
-
-    //    public Animator getAnimator()
-    //    {
-    //        return animator;
-    //    }
+  
     public void setChangeable(bool changeable)
     {
         this.changeable = changeable;
     }
-    //    // ==== getters
 
-    //    public enum State
-    //    {
-    //        Grounded,
-    //        PrepareToJump,
-    //        Jumping,
-    //        InFlight,
-    //        Landed,
-    //    }
-    //    // ==== State ====
     // ==== Movement ====
     private void ManageMovement()
     {
         float horizontal = 0, vertical = 0;
-        horizontal = keyboardInputController.MoveHorizontal(playerNum);
+        horizontal = keyboardInputController.MoveHorizontal(playerNum) * moveAngleSensitivity * Time.deltaTime;
         vertical = keyboardInputController.MoveVertical(playerNum);
-        Vector3 movement = new Vector3(horizontal, 0, vertical).normalized;
 
-        if (movement.sqrMagnitude > 0.01f)
-        {
-            // Facing angle (smoothed)
-            float movementAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg + mainCameraTrans.eulerAngles.y;
-            float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, movementAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0, smoothedAngle, 0);
-
-            // Move
-            Vector3 adjustedMovement = Quaternion.Euler(0, movementAngle, 0) * Vector3.forward; // Relative to mainCameraTrans
-            adjustedMovement *= speed * Time.deltaTime;
-            transform.position += adjustedMovement;
-        }
+        transform.Rotate(Vector3.up * horizontal);
+        transform.position += vertical * transform.forward * speed * Time.deltaTime;
 
         // Jump
         if (keyboardInputController.JumpOrAttack(playerNum))
