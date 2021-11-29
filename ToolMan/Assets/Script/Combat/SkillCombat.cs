@@ -40,15 +40,16 @@ namespace ToolMan.Combat
             get => skillPerforming != null;
         }
 
+        protected Dictionary<string, float> _skillCd;
+
         public bool ColliderEnable = false;
         protected float _hitRefractoryPeriod;
 
         protected Dictionary<CombatUnit, float> _refractoryPeriod = new Dictionary<CombatUnit, float>();
 
-         protected override void Start()
+        private void Awake()
         {
-            base.Start();
-            if(availableSkillSet != null)
+            if (availableSkillSet != null)
             {
                 availableSkillSet.CheckStatsExsistence(this);
                 SetSkills(InitUsingSkillSet);
@@ -78,15 +79,30 @@ namespace ToolMan.Combat
                     }
                 }
             }
+            lock (_skillCd)
+            {
+                if(_skillCd.Count > 0)
+                {
+                    foreach(string skillName in _skillCd.Keys.ToList())
+                    {
+                        if(_skillCd[skillName] > 0)
+                            _skillCd[skillName] -= Time.deltaTime;
+                    }
+                }
+            }
         }
 
-        public override void Attack()
+        public override bool Attack()
         {
-            if (!AttackEnabled) return;
-            if (!_hasSkillToUse) return;
-            if (Attacking) return;
-
-            skillPerforming = StartCoroutine(PerformSkill());
+            if (!AttackEnabled) return false;
+            if (!_hasSkillToUse) return false;
+            if (Attacking) return false;
+            if(_skillCd[currentUsingSkillName] <= 0)
+            { 
+                skillPerforming = StartCoroutine(PerformSkill());
+                return true;
+            }
+            return false;
 
         }
 
@@ -96,18 +112,23 @@ namespace ToolMan.Combat
             yield return StartCoroutine(currentUsingSkill.Attack(Anim, TargetLayers, this));
             yield return new WaitForSeconds(currentUsingSkill.attackInterval / Aspd);
             _refractoryPeriod.Clear();
+            _skillCd[currentUsingSkill.getName()] = currentUsingSkill.Cd;
             skillPerforming = null;
-
         }
 
         // set skills that can be selected during battle
         public void SetSkills(List<string> skillNames)
         {
+            InterruptAttack();
             CurrentUsingSkillSet = new List<string>();
             if (skillNames == null || skillNames.Count == 0) return;
             foreach (string skillName in skillNames)
             {
-                if (availableSkillSet.HasSkill(skillName)) CurrentUsingSkillSet.Add(skillName);
+                if (availableSkillSet.HasSkill(skillName))
+                {
+                    _skillCd.Add(skillName, 0f);
+                    CurrentUsingSkillSet.Add(skillName);
+                }
             }
         }
 
@@ -115,6 +136,7 @@ namespace ToolMan.Combat
 #nullable enable
         public void SetCurrentUsingSkill(string? skillName)
         {
+            if (Attacking) return;
             if (skillName == null)
             {
                 Debug.Log("No skill is set to " + gameObject.name);
@@ -162,12 +184,6 @@ namespace ToolMan.Combat
             Destroy(gameObject);
         }
 
-        // for attack delay
-        protected IEnumerator ExecuteAfterTime(float time)
-        {
-            yield return new WaitForSeconds(time);
-        }
-
         protected virtual void OnTriggerEnter(Collider other)
         {
             if (!ColliderEnable) return;
@@ -182,6 +198,11 @@ namespace ToolMan.Combat
             target.TakeDamage(Atk, this);
 
             _refractoryPeriod.Add(target, _hitRefractoryPeriod);
+        }
+
+        public IReadOnlyCollection<String> GetCurrentUsingSkillSet()
+        {
+            return CurrentUsingSkillSet;
         }
     }
 }

@@ -5,11 +5,9 @@ namespace ToolMan.Combat.Stats
     [Serializable]
     public class Resource
     {
-        [SerializeField]
         private string _resourceName;
         public int MaxValue;
-        public int InitValue;
-        [SerializeField]
+        private int InitValue;
         private int _currentValue;
         public int Value
         {
@@ -28,8 +26,10 @@ namespace ToolMan.Combat.Stats
             _resourceName = name;
         }
 
-        public void Reset()
+        public void Reset(int maxValue, int initValue)
         {
+            MaxValue = maxValue;
+            InitValue = initValue;
             _currentValue = InitValue;
             CheckCurrentValue();
         }
@@ -50,6 +50,7 @@ namespace ToolMan.Combat.Stats
             _currentValue = Mathf.Min(_currentValue, MaxValue);
             _currentValue = Mathf.Max(_currentValue, 0);
         }
+
 
     }
 }
