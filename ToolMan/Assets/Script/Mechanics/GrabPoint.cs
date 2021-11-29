@@ -56,8 +56,6 @@ namespace ToolMan.Mechanics
 
         public void Grab()
         {
-            Debug.Log("player: " + player.playerNum + " grab player " + anotherPlayer.playerNum);
-            Debug.Log("In Grab");
             if (targetTool != null)
             {
                 // set FixedJoint

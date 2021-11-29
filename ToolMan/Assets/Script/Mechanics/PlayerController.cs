@@ -18,7 +18,6 @@ public class PlayerController : ToolableMan
     public int playerNum = 1; // player 1 or player 2
     [SerializeField] private PlayerController anotherPlayer;
     [SerializeField] private bool changeable = false;
-
     // ==== Components ====
 
     // ==== Player Movement ====
@@ -35,6 +34,10 @@ public class PlayerController : ToolableMan
     // ==== Combat ====
     public PlayerCombat combat;
     // ==== Combat ====
+
+    // ==== Camera ====
+    [SerializeField] CameraManager cam;
+    // ==== Camera ====
 
     override protected void Start()
     {
@@ -77,9 +80,19 @@ public class PlayerController : ToolableMan
                 Attack();
         }
 
-        // ==== Man <-> Tool ====
+        // ==== Select Tool && [Man <-> Tool] ====
+        if (toolListUI.canChoose() && keyboardInputController.NextTool(playerNum))
+        {
+            toolListUI.Next();
+        }
+        if (toolListUI.canChoose() && keyboardInputController.PrevTool(playerNum))
+        {
+            toolListUI.Previous();
+        }
         if (keyboardInputController.Choose(playerNum))
+        {
             ToolableManTransform();
+        }
         // ==== Man <-> Tool ====
     }
 
@@ -157,14 +170,18 @@ public class PlayerController : ToolableMan
         isTool = !isTool;
         if (isTool)
         {
+            toolListUI.Choose();
             toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
             tools[toolIdx].toTool();
-            combat.SetCurrentUsingSkill(tools[toolIdx].getName());
+            //combat.SetCurrentUsingSkill(tools[toolIdx].getName());
+            cam.EnableFreeLook();
         }
         else
         {
             tools[toolIdx].toMan();
             toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
+            toolListUI.Unchoose();
+            cam.EnableMain();
         }
     }
     // ==== Actions ====

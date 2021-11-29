@@ -36,4 +36,16 @@ public class KeyboardInputController : InputController
             return true;
         return false;
     }
+    public bool NextTool(int playerNum)
+    {
+        if ((Input.GetButtonDown("Next1") && playerNum == 1) || (Input.GetButtonDown("Next2") && playerNum == 2))
+            return true;
+        return false;
+    }
+    public bool PrevTool(int playerNum)
+    {
+        if ((Input.GetButtonDown("Prev1") && playerNum == 1) || (Input.GetButtonDown("Prev2") && playerNum == 2))
+            return true;
+        return false;
+    }
 }
