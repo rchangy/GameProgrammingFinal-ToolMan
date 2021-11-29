@@ -48,10 +48,17 @@ namespace ToolMan.Combat
          protected override void Start()
         {
             base.Start();
-            availableSkillSet.CheckStatsExsistence(this);
-            SetSkills(InitUsingSkillSet);
-            if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
-            else SetCurrentUsingSkill(null);
+            if(availableSkillSet != null)
+            {
+                availableSkillSet.CheckStatsExsistence(this);
+                SetSkills(InitUsingSkillSet);
+                if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
+                else SetCurrentUsingSkill(null);
+            }
+            else
+            {
+                currentUsingSkill = null;
+            }
         }
 
         protected override void Update()
@@ -139,6 +146,8 @@ namespace ToolMan.Combat
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
             if (!Vulnerable) return 0;
+
+            base.TakeDamage(baseDmg, damager);
             // compute complete damage and take damage
             float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
             float dmg = typeEffectedDmg - Def;

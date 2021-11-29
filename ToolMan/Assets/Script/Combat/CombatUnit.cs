@@ -107,7 +107,13 @@ namespace ToolMan.Combat
 
         public abstract void Attack();
 
-        public abstract int TakeDamage(float baseDmg, CombatUnit damager);
+        public virtual int TakeDamage(float baseDmg, CombatUnit damager)
+        {
+            float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
+            float dmg = typeEffectedDmg - Def;
+            _hp.ChangeValueBy(-(int)dmg);
+            return (int)dmg;
+        }
 
         protected abstract void Die();
 
