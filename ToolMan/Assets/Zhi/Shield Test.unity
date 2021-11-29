@@ -500,6 +500,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1207400451, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
+      propertyPath: skillWeight.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207400451, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
+      propertyPath: skillWeight.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542827208670800066, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
+      propertyPath: InitUsingSkillSet.Array.data[0]
+      value: CorgiNormalAttack
+      objectReference: {fileID: 0}
     - target: {fileID: 8145379251561204746, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
       propertyPath: m_RootOrder
       value: 1

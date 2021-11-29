@@ -83,9 +83,9 @@ namespace ToolMan.Combat
 
             _hp = _stats.AddResource(new Resource("HP", HpMaxValue, HpInitValue));
 
-            _stats.AddAbility(new Ability("AttackEnabled", AttackEnableBaseValue));
-            _stats.AddAbility(new Ability("Movable", MovableBaseValue));
-            _stats.AddAbility(new Ability("Vulnerable", VulnerableBaseValue));
+            _attackEnabled = _stats.AddAbility(new Ability("AttackEnabled", AttackEnableBaseValue));
+            _movable = _stats.AddAbility(new Ability("Movable", MovableBaseValue));
+            _vulnerable = _stats.AddAbility(new Ability("Vulnerable", VulnerableBaseValue));
 
             if (healthBar != null)
             {
