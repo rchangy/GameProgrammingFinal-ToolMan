@@ -19,11 +19,19 @@ namespace ToolMan.Combat.Stats
         public Resource()
         {
             _currentValue = InitValue;
+            CheckCurrentValue();
         }
-        public Resource(int maxValue, int initValue) : this()
+        public Resource(string name, int maxValue, int initValue) : this()
         {
             MaxValue = maxValue;
             InitValue = initValue;
+            _resourceName = name;
+        }
+
+        public void Reset()
+        {
+            _currentValue = InitValue;
+            CheckCurrentValue();
         }
 
         public string getName()
@@ -34,10 +42,14 @@ namespace ToolMan.Combat.Stats
         public void ChangeValueBy(int value)
         {
             _currentValue += value;
+            CheckCurrentValue();
+        }
+
+        private void CheckCurrentValue()
+        {
             _currentValue = Mathf.Min(_currentValue, MaxValue);
             _currentValue = Mathf.Max(_currentValue, 0);
         }
-
 
     }
 }

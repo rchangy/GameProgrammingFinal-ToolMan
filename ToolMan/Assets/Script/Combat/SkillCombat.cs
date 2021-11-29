@@ -145,12 +145,7 @@ namespace ToolMan.Combat
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
-            if (!Vulnerable) return 0;
-
-            base.TakeDamage(baseDmg, damager);
-            // compute complete damage and take damage
-            float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
-            float dmg = typeEffectedDmg - Def;
+            var dmg = base.TakeDamage(baseDmg, damager);
             // check strength
             if (dmg > Str)
             {
@@ -158,9 +153,6 @@ namespace ToolMan.Combat
                 if (Attacking) InterruptAttack();
                 Anim.SetTrigger("Hurt");
             }
-            // set all skill time variables to there init value
-            _hp.ChangeValueBy(-(int)dmg);
-            Debug.LogFormat("[{0}] Took {1} Damage", name, dmg);
             return (int)dmg;
         }
 

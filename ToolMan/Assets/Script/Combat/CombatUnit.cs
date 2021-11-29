@@ -81,7 +81,7 @@ namespace ToolMan.Combat
             _def = _stats.AddStat(new Stat("DEF", DefBaseValue));
             _str = _stats.AddStat(new Stat("STR", StrBaseValue));
 
-            _hp = _stats.AddResource(new Resource(HpMaxValue, HpInitValue));
+            _hp = _stats.AddResource(new Resource("HP", HpMaxValue, HpInitValue));
 
             _stats.AddAbility(new Ability("AttackEnabled", AttackEnableBaseValue));
             _stats.AddAbility(new Ability("Movable", MovableBaseValue));
@@ -110,6 +110,7 @@ namespace ToolMan.Combat
 
         public virtual int TakeDamage(float baseDmg, CombatUnit damager)
         {
+            if (Vulnerable) return 0;
             float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
             float dmg = typeEffectedDmg - Def;
             _hp.ChangeValueBy(-(int)dmg);
