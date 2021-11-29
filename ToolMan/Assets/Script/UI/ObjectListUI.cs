@@ -13,9 +13,9 @@ public class ObjectListUI : MonoBehaviour
 
     public int currentIdx;
     private bool[] chosenImages;
-    public string NextButton = "Next1";
-    public string PreviousButton = "Prev1";
-    public string ChooseButton = "Choose1";
+    //public string NextButton = "Next1";
+    //public string PreviousButton = "Prev1";
+    //public string ChooseButton = "Choose1";
 
     public int unchoose = -1;
 
@@ -54,20 +54,20 @@ public class ObjectListUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown(NextButton))
-        {
-            Next();
-        }
-        else if (Input.GetButtonDown(PreviousButton))
-        {
-            Previous();
-        }
-        else if (Input.GetButtonDown(ChooseButton))
-        {
+        //if (Input.GetButtonDown(NextButton))
+        //{
+        //    Next();
+        //}
+        //else if (Input.GetButtonDown(PreviousButton))
+        //{
+        //    Previous();
+        //}
+        //else if (Input.GetButtonDown(ChooseButton))
+        //{
             
-            if (chosenImages[currentIdx]) Unchoose();
-            else Choose();
-        }
+        //    if (chosenImages[currentIdx]) Unchoose();
+        //    else Choose();
+        //}
         if(unchoose != -1)
         {
             UnchooseByIdx(unchoose);

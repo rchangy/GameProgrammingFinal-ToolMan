@@ -80,9 +80,19 @@ public class PlayerController : ToolableMan
                 Attack();
         }
 
-        // ==== Man <-> Tool ====
+        // ==== Select Tool && [Man <-> Tool] ====
+        if (toolListUI.canChoose() && keyboardInputController.NextTool(playerNum))
+        {
+            toolListUI.Next();
+        }
+        if (toolListUI.canChoose() && keyboardInputController.PrevTool(playerNum))
+        {
+            toolListUI.Previous();
+        }
         if (keyboardInputController.Choose(playerNum))
+        {
             ToolableManTransform();
+        }
         // ==== Man <-> Tool ====
     }
 
@@ -158,9 +168,9 @@ public class PlayerController : ToolableMan
     override public void ToolableManTransform()
     {
         isTool = !isTool;
-        Debug.Log("Noooo");
         if (isTool)
         {
+            toolListUI.Choose();
             toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
             tools[toolIdx].toTool();
             //combat.SetCurrentUsingSkill(tools[toolIdx].getName());
@@ -170,6 +180,7 @@ public class PlayerController : ToolableMan
         {
             tools[toolIdx].toMan();
             toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
+            toolListUI.Unchoose();
             cam.EnableMain();
         }
     }
