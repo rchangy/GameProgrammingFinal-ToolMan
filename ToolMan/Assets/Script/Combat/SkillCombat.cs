@@ -40,7 +40,7 @@ namespace ToolMan.Combat
             get => skillPerforming != null;
         }
 
-        protected Dictionary<string, float> _skillCd;
+        protected Dictionary<string, float> _skillCd = new Dictionary<string, float>();
 
         public bool ColliderEnable = false;
         protected float _hitRefractoryPeriod;
@@ -55,6 +55,7 @@ namespace ToolMan.Combat
                 SetSkills(InitUsingSkillSet);
                 if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
                 else SetCurrentUsingSkill(null);
+                Debug.Log(GetCurrentUsingSkillSet());
             }
             else
             {
@@ -119,7 +120,8 @@ namespace ToolMan.Combat
         // set skills that can be selected during battle
         public void SetSkills(List<string> skillNames)
         {
-            InterruptAttack();
+            if(Attacking)
+                InterruptAttack();
             CurrentUsingSkillSet = new List<string>();
             if (skillNames == null || skillNames.Count == 0) return;
             foreach (string skillName in skillNames)

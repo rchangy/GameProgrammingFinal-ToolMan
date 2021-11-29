@@ -1905,12 +1905,14 @@ MonoBehaviour:
   Anim: {fileID: 8507911072495564286}
   TargetLayers:
     serializedVersion: 2
-    m_Bits: 0
-  availableSkillSet: {fileID: 0}
-  InitUsingSkillSet: []
+    m_Bits: 1
+  availableSkillSet: {fileID: 11400000, guid: 9e7f4c72521264d21af851c189decb46, type: 2}
+  InitUsingSkillSet:
+  - LightSaber
+  - FlashBomb
+  - Shield
   ColliderEnable: 0
   _teamMate: {fileID: 0}
-  comboSkillSet: {fileID: 0}
   hitFeel: {fileID: 0}
 --- !u!1 &5681094873323192337
 GameObject:
