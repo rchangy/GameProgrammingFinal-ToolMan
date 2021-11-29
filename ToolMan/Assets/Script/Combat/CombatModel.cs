@@ -9,7 +9,7 @@ namespace ToolMan.Combat
     public class CombatModel
     {
         [SerializeField]
-        private static DamageCalculator _damageCalculator;
+        private DamageCalculator _damageCalculator;
         public DamageCalculator DmgCalculator
         {
             get => _damageCalculator;

@@ -74,6 +74,7 @@ namespace ToolMan.Combat
         {
             manager = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
             damageCalculator = manager.Model.DmgCalculator;
+            _stats = GetComponent<CharacterStats>();
 
             _atk = _stats.AddStat(new Stat("ATK", AtkBaseValue));
             _aspd = _stats.AddStat(new Stat("ASPD", 1));
