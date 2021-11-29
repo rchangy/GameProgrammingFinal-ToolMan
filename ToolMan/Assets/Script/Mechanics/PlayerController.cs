@@ -18,7 +18,6 @@ public class PlayerController : ToolableMan
     public int playerNum = 1; // player 1 or player 2
     [SerializeField] private PlayerController anotherPlayer;
     [SerializeField] private bool changeable = false;
-
     // ==== Components ====
 
     // ==== Player Movement ====
@@ -35,6 +34,10 @@ public class PlayerController : ToolableMan
     // ==== Combat ====
     public PlayerCombat combat;
     // ==== Combat ====
+
+    // ==== Camera ====
+    [SerializeField] CameraManager cam;
+    // ==== Camera ====
 
     override protected void Start()
     {
@@ -155,16 +158,19 @@ public class PlayerController : ToolableMan
     override public void ToolableManTransform()
     {
         isTool = !isTool;
+        Debug.Log("Noooo");
         if (isTool)
         {
             toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
             tools[toolIdx].toTool();
-            combat.SetCurrentUsingSkill(tools[toolIdx].getName());
+            //combat.SetCurrentUsingSkill(tools[toolIdx].getName());
+            cam.EnableFreeLook();
         }
         else
         {
             tools[toolIdx].toMan();
             toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
+            cam.EnableMain();
         }
     }
     // ==== Actions ====
