@@ -20,7 +20,6 @@ namespace ToolMan.Combat
             get => _teamMate;
         }
 
-        [SerializeField]
         private ComboSkillSet comboSkillSet;
 
 

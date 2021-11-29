@@ -1418,12 +1418,13 @@ MonoBehaviour:
   Anim: {fileID: 3346628931965091974}
   TargetLayers:
     serializedVersion: 2
-    m_Bits: 0
-  availableSkillSet: {fileID: 0}
-  InitUsingSkillSet: []
+    m_Bits: 1
+  availableSkillSet: {fileID: 11400000, guid: d08758d99c5524a6fbdbe135bf5c56b0, type: 2}
+  InitUsingSkillSet:
+  - Pickaxe
+  - Boomarang
   ColliderEnable: 0
   _teamMate: {fileID: 0}
-  comboSkillSet: {fileID: 0}
   hitFeel: {fileID: 0}
 --- !u!114 &323214610
 MonoBehaviour:
