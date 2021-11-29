@@ -30,6 +30,9 @@ namespace ToolMan.Combat
             get => _energy.Value;
         }
 
+        [SerializeField]
+        private HitFeel hitFeel;
+
         protected override void Start()
         {
             base.Start();
@@ -49,6 +52,7 @@ namespace ToolMan.Combat
             // check strength
             if (dmg > Str)
             {
+                hitFeel.MakeHitFeel();
                 ThisPlayerController.grabPoint.Release();
                 if (ThisPlayerController.isTool) ThisPlayerController.ToolableManTransform();
             }
@@ -78,5 +82,12 @@ namespace ToolMan.Combat
             skillPerforming = null;
             _vulnerable.RemoveDisability();
         }
+
+        protected override void Hit(CombatUnit target)
+        {
+            base.Hit(target);
+            hitFeel.MakeHitFeel();
+        }
+
     }
 }

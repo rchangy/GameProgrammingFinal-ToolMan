@@ -181,14 +181,14 @@ namespace ToolMan.Combat
             if (!ColliderEnable) return;
             CombatUnit target = other.gameObject.GetComponent<CombatUnit>();
             if (target == null) return;
+            if (_refractoryPeriod.ContainsKey(target)) return;
             Hit(target);
         }
 
         protected virtual void Hit(CombatUnit target)
         {
-            if (_refractoryPeriod.ContainsKey(target)) return;
-
             target.TakeDamage(Atk, this);
+
             _refractoryPeriod.Add(target, _hitRefractoryPeriod);
         }
     }
