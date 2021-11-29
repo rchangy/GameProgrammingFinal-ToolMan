@@ -44,12 +44,12 @@ public class GamepadPlayerInputHandler : MonoBehaviour
 
     // ==== Look ====
     public void OnLook(InputAction.CallbackContext context) {
-        Vector2 lookInput = context.ReadValue<Vector2>();
-        Debug.Log("look = " + lookInput);
-        if (lookInput.magnitude == 0)
-            camController.DisableCam();
-        else
-            camController.EnableCam();
+        //Vector2 lookInput = context.ReadValue<Vector2>();
+        //Debug.Log("look = " + lookInput);
+        //if (lookInput.magnitude == 0)
+        //    camController.DisableCam();
+        //else
+        //    camController.EnableCam();
     }
     // ==== Look ====
 

@@ -11,9 +11,8 @@ namespace ToolMan.Combat
         float originalTimeScale;
 
         public CameraController cam;
-        public float shakeSpan = 0.1f;
-        public float shakeAmplitude = 1f;
-        public float shakeFrequency = 1f;
+        public float shakeRange = 0.3f;
+        public float shakeSpan = 0.05f;
 
         private void Awake()
         {
@@ -32,7 +31,7 @@ namespace ToolMan.Combat
             {
                 stopping = true;
                 StartCoroutine(TimeStop());
-                cam.CameraShake(shakeSpan, shakeAmplitude, shakeFrequency);
+                StartCoroutine(CamShake());
                 stopping = false;
             }
         }
@@ -48,6 +47,18 @@ namespace ToolMan.Combat
             yield return new WaitForSecondsRealtime(slowTimeSpan);
 
             Time.timeScale = originalTimeScale;
+        }
+
+        IEnumerator CamShake()
+        {
+            Vector3 originalPosition = transform.position;
+
+            cam.transform.position += new Vector3(Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange));
+            yield return new WaitForSeconds(shakeSpan);
+            //cam.transform.position += new Vector3(Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange));
+            //yield return new WaitForSeconds(shakeSpan);
+
+            cam.transform.position = originalPosition;
         }
     }
 }
