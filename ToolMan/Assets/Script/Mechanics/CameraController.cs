@@ -1,22 +1,44 @@
-using System.Collections;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float shakeRange = 0.3f;
-    public float shakeSpan = 0.3f;
+    public PlayerController player;
+    public Vector3 manPosOffset;
+    public Vector3 toolPosOffset;
+    [SerializeField] private Quaternion prevRotation;
+    [SerializeField] private Quaternion originalRotation;
+    [SerializeField] private bool playerIsTool = false;
 
-    public void CameraShake() {
-        StartCoroutine(Shake());
-    }
+    public void setIsTool(bool val) { playerIsTool = val; }
 
-    IEnumerator Shake()
+    private void Awake()
     {
-        Vector3 originalPosition = transform.position;
-        transform.position += new Vector3(Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange));
-
-        yield return new WaitForSeconds(shakeSpan);
-
-        transform.position = originalPosition;
+        originalRotation = transform.rotation;
     }
+
+    private void Update()
+    {
+        if (playerIsTool)
+        {
+            transform.localPosition = toolPosOffset;
+            transform.rotation = prevRotation;
+            // Look at
+            //Debug.Log("prev = " + prevPosition_y);
+        }
+        else
+        {
+            transform.localPosition = manPosOffset;
+            prevRotation = transform.rotation;
+        }
+    }
+
+    //private void LateUpdate()
+    //{
+    //    if (playerIsTool)
+    //    {
+    //        transform.position = new Vector3(transform.position.x, prevPosition_y, transform.position.z);
+    //        Debug.Log("prev, trans = " + transform.position);
+    //    }
+    //}
+
 }
