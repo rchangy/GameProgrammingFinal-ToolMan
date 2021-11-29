@@ -74,13 +74,14 @@ namespace ToolMan.Combat
         {
             manager = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
             damageCalculator = manager.Model.DmgCalculator;
+            _stats = GetComponent<CharacterStats>();
 
             _atk = _stats.AddStat(new Stat("ATK", AtkBaseValue));
             _aspd = _stats.AddStat(new Stat("ASPD", 1));
             _def = _stats.AddStat(new Stat("DEF", DefBaseValue));
             _str = _stats.AddStat(new Stat("STR", StrBaseValue));
 
-            _hp = _stats.AddResource(new Resource(HpMaxValue, HpInitValue));
+            _hp = _stats.AddResource(new Resource("HP", HpMaxValue, HpInitValue));
 
             _stats.AddAbility(new Ability("AttackEnabled", AttackEnableBaseValue));
             _stats.AddAbility(new Ability("Movable", MovableBaseValue));
@@ -109,6 +110,7 @@ namespace ToolMan.Combat
 
         public virtual int TakeDamage(float baseDmg, CombatUnit damager)
         {
+            if (Vulnerable) return 0;
             float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
             float dmg = typeEffectedDmg - Def;
             _hp.ChangeValueBy(-(int)dmg);

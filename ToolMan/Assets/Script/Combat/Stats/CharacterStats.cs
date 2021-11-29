@@ -7,18 +7,6 @@ namespace ToolMan.Combat.Stats
 {
     public class CharacterStats : MonoBehaviour
     {
-        [SerializeField]
-        private int HpMaxValue = 1;
-        [SerializeField]
-        private int HpInitValue = 1;
-        [SerializeField]
-        private float AtkBaseValue = 1f;
-        [SerializeField]
-        private float DefBaseValue = 1f;
-        [SerializeField]
-        private float StrBaseValue = 1f;
-
-
         public List<Ability> AbilityInfos = new List<Ability>();
         public List<Stat> StatInfos = new List<Stat>();
         public List<Resource> ResourceInfos = new List<Resource>();
@@ -38,17 +26,6 @@ namespace ToolMan.Combat.Stats
 
         private void Awake()
         {
-            // must have
-            _stats.Add("ATK", new Stat("ATK", AtkBaseValue));
-            _stats.Add("ASPD", new Stat("ASPD", 1));
-            _stats.Add("DEF", new Stat("DEF", DefBaseValue));
-            _stats.Add("STR", new Stat("STR", StrBaseValue));
-            _resources.Add("HP", new Resource(HpMaxValue, HpInitValue));
-
-            _abilities.Add("AttackEnabled", new Ability("AttackEnabled", true));
-            _abilities.Add("Movable", new Ability("Movable", true));
-            _abilities.Add("Vulnerable", new Ability("Vulnerable", true));
-
             foreach (Stat s in StatInfos)
             {
                 if (!_stats.ContainsKey(s.getName()))

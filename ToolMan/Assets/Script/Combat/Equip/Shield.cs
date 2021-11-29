@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace ToolMan.Combat.Equip
 {
@@ -7,11 +7,9 @@ namespace ToolMan.Combat.Equip
     {
         [SerializeField] string[] _collisionTag;
         float hitTime;
-        Material mat;
+        Material mat = null;
 
-        private ContactPoint[] _contacts;
-
-
+        Dictionary<CombatUnit, ContactPoint[]> _contactPoints = new Dictionary<CombatUnit, ContactPoint[]>();
 
         protected override void Start()
         {
@@ -20,29 +18,52 @@ namespace ToolMan.Combat.Equip
             {
                 mat = GetComponent<Renderer>().sharedMaterial;
             }
+            if(mat == null)
+            {
+                Debug.Log("Shield has no mat set");
+            }
+            _stats.AddType("Shield");
+        }
+
+        public void Init(int maxHp, float def)
+        {
+            _hp.MaxValue = maxHp;
+            
+            _hp.Reset();
+            _def.BaseValue = def;
 
         }
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
-            if (Vulnerable) return 0;
+            var dmg = base.TakeDamage(baseDmg, damager);
 
-            float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
-            float dmg = typeEffectedDmg - Def;
-
-            for (int i2 = 0; i2 < _contacts.Length; i2++)
+            if (_contactPoints.ContainsKey(damager))
             {
-                mat.SetVector("_HitPosition", transform.InverseTransformPoint(_contacts[i2].point));
-                hitTime = 500;
-                mat.SetFloat("_HitTime", hitTime);
+                ContactPoint[] contacts = _contactPoints[damager];
+                for (int i2 = 0; i2 < contacts.Length; i2++)
+                {
+                    mat.SetVector("_HitPosition", transform.InverseTransformPoint(contacts[i2].point));
+                    hitTime = 500;
+                    mat.SetFloat("_HitTime", hitTime);
+                }
             }
-            return 0;
-
+            return (int)dmg;
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            _contacts = collision.contacts;
+            CombatUnit combat = collision.gameObject.GetComponent<CombatUnit>();
+            if (combat == null) return;
+
+            if (_contactPoints.ContainsKey(combat))
+            {
+                _contactPoints[combat] = collision.contacts;
+            }
+            else
+            {
+                _contactPoints.Add(combat, collision.contacts);
+            }
         }
 
         public override void Attack()
@@ -53,6 +74,7 @@ namespace ToolMan.Combat.Equip
         protected override void Die()
         {
             Debug.Log("Shield Finish");
+            Destroy(this);
         }
 
     }
