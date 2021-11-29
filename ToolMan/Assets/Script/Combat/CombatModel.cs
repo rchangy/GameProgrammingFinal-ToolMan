@@ -2,6 +2,7 @@
 using UnityEngine;
 using ToolMan.Combat.Skills;
 
+
 namespace ToolMan.Combat
 {
     [Serializable]
@@ -11,7 +12,7 @@ namespace ToolMan.Combat
         private static DamageCalculator _damageCalculator;
         public DamageCalculator DmgCalculator
         {
-            get => damageCalculator;
+            get => _damageCalculator;
         }
         [SerializeField]
         private ComboSkillSet _comboSkillSet;

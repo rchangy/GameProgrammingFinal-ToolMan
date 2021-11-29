@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
     public float rotateSpeed;
 
 
-    public CombatUnit combat;
+    public SkillCombat combat;
 
     private Transform closestPlayer
     {
