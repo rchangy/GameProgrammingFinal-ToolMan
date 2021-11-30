@@ -33,6 +33,7 @@ public partial class PlayerController
     {
         this.changeable = changeable;
     }
+
     override public void ToolableManTransform()
     {
         isTool = !isTool;
@@ -43,6 +44,10 @@ public partial class PlayerController
             tools[toolIdx].toTool();
             //combat.SetCurrentUsingSkill(tools[toolIdx].getName());
             cam.EnableFreeLook();
+
+            //effect
+            Effect toToolEffect = effectController.effectList.Find(e => e.name == "ToToolEffect");
+            toToolEffect.PlayEffect();
         }
         else
         {
@@ -50,6 +55,11 @@ public partial class PlayerController
             toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
             toolListUI.Unchoose();
             cam.EnableMain();
+
+            //effect
+            Effect toManEffect = effectController.effectList.Find(e => e.name == "ToManEffect");
+            toManEffect.PlayEffect();
+
         }
     }
 }
