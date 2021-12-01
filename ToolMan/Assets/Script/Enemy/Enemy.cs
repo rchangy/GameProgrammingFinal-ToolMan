@@ -6,6 +6,8 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] protected Animator animator;
+
     [SerializeField] protected NavMeshAgent EnemyAgent;
 
     [SerializeField] protected Transform[] Players;
@@ -23,7 +25,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected int[] skillWeight;
 
-    private float _actionLastTime;
+    protected float _actionLastTime;
     public float ActionLastTime
     {
         get => _actionLastTime;
@@ -35,14 +37,14 @@ public class Enemy : MonoBehaviour
 
     public float MaxActionTime;
     public float MinActionTime;
-    private bool isAction;
-    private int act;
+    protected bool isAction;
+    protected int act;
     public float rotateSpeed;
 
 
     public SkillCombat combat;
 
-    private Transform closestPlayer
+    protected Transform closestPlayer
     {
         get => GetClosestplayer();
     }
@@ -59,11 +61,11 @@ public class Enemy : MonoBehaviour
 
 
     // attack
-    private List<string> _skillSet = new List<string>();
+    protected List<string> _skillSet = new List<string>();
 
 
     [SerializeField] protected int InitAttackRange;
-    private int _attackRange;
+    protected int _attackRange;
     public int AttackRange
     {
         get => _attackRange;
@@ -168,7 +170,7 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Chase Mode");
         // compare two players position and chase the closest
-        EnemyAgent.SetDestination(closestPlayer.position);
+        EnemyAgent.SetDestination(new Vector3(closestPlayer.position.x, transform.position.y, closestPlayer.position.z));
     }
 
     protected virtual void RandomBehavior()
@@ -242,7 +244,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private int GetRandType(int[] weight)
+    protected int GetRandType(int[] weight)
     {
         int total = 0;
         foreach (int w in weight) total += w;
@@ -257,7 +259,7 @@ public class Enemy : MonoBehaviour
         return 0;
     }
 
-    private void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, AttackRange);
