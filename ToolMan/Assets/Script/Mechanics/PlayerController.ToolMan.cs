@@ -42,7 +42,7 @@ public partial class PlayerController
             toolListUI.Choose();
             toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
             tools[toolIdx].toTool();
-            //combat.SetCurrentUsingSkill(tools[toolIdx].getName());
+            combat.SetCurrentUsingSkill(tools[toolIdx].getName());
             cam.EnableFreeLook();
 
             //effect

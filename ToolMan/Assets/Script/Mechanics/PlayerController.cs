@@ -119,34 +119,53 @@ public partial class PlayerController : ToolableMan
 
         else // Tool
         {
-            // Combo Skill
-            if (ComboSkillCharged && anotherPlayer.ComboSkillActivateByMan)
+            if (IsGrabbed())
             {
-                ComboSkillAttack();
-                _attackCharging.Value = false;
-            }
-            else
-            {
-                if (IsGrabbed())
+                // Combo Skill
+                if (ComboSkillCharged && anotherPlayer.ComboSkillActivateByMan)
                 {
+                    ComboSkillAttack();
+                    _attackCharging.Value = false;
+                }
+                else
+                { 
                     // Normal Attack
                     if (keyboardInputController.JumpOrAttack(playerNum))
                     {
                         _attackCharging.Value = combat.ComboSkillAvailable();
+                        if(!_attackCharging.Value) Attack();
                         _attackChargingTime.Value = 0;
-                        Attack();
-                    }
-                    else if(_attackCharging.Value && keyboardInputController.JumpOrAttackHolding(playerNum) && combat.ComboSkillAvailable())
-                    {
-                        _attackChargingTime.Value += Time.deltaTime;
                     }
                     else
                     {
-                        _attackCharging.Value = false;
-                        _attackChargingTime.Value = 0;
+                        if(_attackCharging.Value && combat.ComboSkillAvailable())
+                        {
+                            if (keyboardInputController.JumpOrAttackHolding(playerNum))
+                            {
+                                if (combat.ComboSkillAvailable())
+                                { 
+                                    _attackChargingTime.Value += Time.deltaTime;
+                                }
+                                else
+                                {
+                                    _attackCharging.Value = false;
+                                    _attackChargingTime.Value = 0;
+                                }
+                            }
+                            else
+                            {
+                                if(_attackChargingTime.Value <= 0.5f)
+                                {
+                                    Attack();
+                                }
+                                _attackCharging.Value = false;
+                                _attackChargingTime.Value = 0;
+                            }
+                        }
                     }
                 }
             }
+
         }
 
         // ==== Select Tool && [Man <-> Tool] ====

@@ -3,6 +3,7 @@ using System.Collections;
 using ToolMan.Combat.Skills;
 using ToolMan.Combat.Stats;
 using System.Collections.Generic;
+using ToolMan.Util;
 
 namespace ToolMan.Combat
 {
@@ -37,7 +38,6 @@ namespace ToolMan.Combat
 
         protected override void Start()
         {
-            Debug.Log("player start");
             base.Start();
             
             _playerController = gameObject.GetComponent<PlayerController>();
