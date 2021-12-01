@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &130222520 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4349471767006141894, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+  m_PrefabInstance: {fileID: 851168799}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f2c17171219453c806b19424f52b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &206334708
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +416,10 @@ PrefabInstance:
       value: PlayerBearMan2
       objectReference: {fileID: 0}
     - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: combat
+      value: 
+      objectReference: {fileID: 1556619962}
+    - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: toolListUI
       value: 
       objectReference: {fileID: 1151337920}
@@ -412,6 +427,10 @@ PrefabInstance:
       propertyPath: anotherPlayer
       value: 
       objectReference: {fileID: 1966363386}
+    - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: grabbedPointController
+      value: 
+      objectReference: {fileID: 130222520}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
 --- !u!114 &855269549 stripped
@@ -491,6 +510,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf50a4109cca044e88530d9fecb6feaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1170817593 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7210189603365403921, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+  m_PrefabInstance: {fileID: 1970749881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f2c17171219453c806b19424f52b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1556619962 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2522315202409478489, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+  m_PrefabInstance: {fileID: 851168799}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f79ddaf4308f544a8b93b9f2e2e3f54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1573272999
@@ -681,6 +722,10 @@ PrefabInstance:
       propertyPath: anotherPlayer
       value: 
       objectReference: {fileID: 855269549}
+    - target: {fileID: 460149762, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: grabbedPointController
+      value: 
+      objectReference: {fileID: 1170817593}
     - target: {fileID: 1589881963645690864, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
       propertyPath: m_Name
       value: PlayerBearMan1
