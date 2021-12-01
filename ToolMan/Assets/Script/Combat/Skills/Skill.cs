@@ -35,7 +35,6 @@ namespace ToolMan.Combat.Skills
         public abstract IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat);
 
 
-
         //public abstract bool GetRunTimeData(CombatUnit combat);
         //public abstract IEnumerator Action(Animator anim, LayerMask targetLayer, CombatUnit combat);
 

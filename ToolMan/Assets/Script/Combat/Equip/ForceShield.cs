@@ -16,6 +16,8 @@ namespace ToolMan.Combat.Equip
 
         private CombatUnit _target;
 
+        private object _source;
+
 
         Dictionary<CombatUnit, ContactPoint[]> _contactPoints = new Dictionary<CombatUnit, ContactPoint[]>();
 
@@ -36,11 +38,17 @@ namespace ToolMan.Combat.Equip
             }
         }
 
-        public void Setup(Material mat, CombatUnit target)
+        public bool SetBy(object obj)
+        {
+            return obj == _source;
+        }
+
+        public void Setup(Material mat, CombatUnit target, object src)
         {
             _mat = mat;
             _target = target;
             GetComponent<Renderer>().sharedMaterial = mat;
+            _source = src;
         }
 
         public void Init(int maxHp, float def)
