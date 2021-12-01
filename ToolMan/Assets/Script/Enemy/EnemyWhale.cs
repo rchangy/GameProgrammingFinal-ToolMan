@@ -11,18 +11,18 @@ public class EnemyWhale : Enemy
 
     // ==== Patrol ====
     [SerializeField] private bool onPatrolOrbit = false;
-    [SerializeField] private bool onPatrol = false;
+    [SerializeField] private bool patrolStarted = false;
     [SerializeField] private Transform patrolCenter;
     [SerializeField] private float patrolRadius;
     private Vector3 patrolStartPoint;
     private float patrolAngle = 0;
-    [SerializeField] private float patrolAngularVelocity = 0.3f;
+    [SerializeField] private float patrolAngularVelocity = 30;
     // ==== Patrol ====
 
-    
     private void Awake()
     {
         patrolStartPoint = patrolCenter.position + Vector3.forward * patrolRadius;
+        transform.position = new Vector3(transform.position.x, patrolCenter.position.y, transform.position.z);
     }
 
     protected override void RandomBehavior()
@@ -66,39 +66,23 @@ public class EnemyWhale : Enemy
 
     protected override void Patrol()
     {
-        //debug
-        //patrolStartPoint = patrolCenter.position;
-        patrolStartPoint = patrolCenter.position + Vector3.forward * patrolRadius;
-        //debug
-        // Circular patrol route
         animator.SetTrigger("Swim1");
 
-        onPatrolOrbit = Vector3.Distance(transform.position, patrolStartPoint) <= 0.5f;
+        onPatrolOrbit = Vector3.Distance(transform.position, patrolCenter.position) <= 0.5f + patrolRadius;
         if (!onPatrolOrbit)
-            onPatrol = false;
+            patrolStarted = false;
+        
 
-        if (!onPatrol)
+        if (!patrolStarted)
         {
             patrolAngle = 0;
-            if (!onPatrolOrbit)
-            {
-                //EnemyAgent.SetDestination(patrolStartPoint);
-                GoToPatrolStartPoint();
-                Debug.Log("dis = " + Vector3.Distance(transform.position, patrolStartPoint));
-                Debug.Log("dis " + patrolCenter.position + ", " + patrolStartPoint);
-            }
-            else
-            {
-                onPatrol = true;
-            }
-        }            
+            GoToPatrolStartPoint();
+            //Debug.Log("dis = " + Vector3.Distance(transform.position, patrolStartPoint));
+            patrolStarted = Vector3.Distance(transform.position, patrolStartPoint) <= 0.5f;
+        }
         else
         {
-            // x: sin, z: cos
-            patrolAngle += patrolAngularVelocity;
-            float x = patrolCenter.position.x + patrolRadius * Mathf.Sin(patrolAngle);
-            float z = patrolCenter.position.z  + patrolRadius * Mathf.Cos(patrolAngle);
-            transform.position = new Vector3(x, transform.position.y, z);
+            transform.RotateAround(patrolCenter.position, Vector3.up, patrolAngularVelocity*Time.deltaTime);
         }
     }
 
@@ -127,9 +111,10 @@ public class EnemyWhale : Enemy
     private void GoToPatrolStartPoint()
     {
         float angle = Mathf.Atan2(patrolStartPoint.x - transform.position.x, patrolStartPoint.z - transform.position.z) * Mathf.Rad2Deg;
-        Vector3 direction = new Vector3(0f, angle, 0f);    
+        Vector3 direction = new Vector3(0f, angle+180, 0f);
+   
         transform.eulerAngles = direction;
-        transform.position += speed * Time.deltaTime * transform.forward;
+        transform.position -= speed * Time.deltaTime * transform.forward;
     }
 
     private void BigSkill() { // big skill
