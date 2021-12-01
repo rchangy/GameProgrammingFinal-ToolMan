@@ -67,7 +67,7 @@ namespace ToolMan.Mechanics
                 fj.enableCollision = false;
 
                 // set Tool in the status of being grabbed
-                anotherPlayer.beGrabbed(player);
+                anotherPlayer.BeGrabbed(player);
 
                 grabbing = true;
                 Debug.Log("grab");
@@ -87,7 +87,7 @@ namespace ToolMan.Mechanics
                 player.Release();
 
                 // set Tool in the status of being released
-                anotherPlayer.beReleased();
+                anotherPlayer.BeReleased();
 
                 grabbing = false;
                 Debug.Log("release");
@@ -97,7 +97,7 @@ namespace ToolMan.Mechanics
         public void setAnotherPlayerAndTarget(PlayerController anotherPlayer)
         {
             this.anotherPlayer = anotherPlayer;
-            this.targetTool = anotherPlayer.getGrabbedPoint();
+            this.targetTool = anotherPlayer.GetGrabbedPoint().gameObject;
         }
 
         private void OnDrawGizmos()

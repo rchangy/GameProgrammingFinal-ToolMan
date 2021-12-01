@@ -1,9 +1,14 @@
 using UnityEngine;
 using ToolMan.Mechanics;
 using ToolMan.Combat;
+
 [RequireComponent(typeof(Animator))]
 public partial class PlayerController : ToolableMan
 {
+    /// <summary>
+    /// Handle inputs controlling a player.
+    /// </summary>
+    
     private KeyboardInputController keyboardInputController;
 
     // ==== Player Status ====
@@ -99,38 +104,6 @@ public partial class PlayerController : ToolableMan
         }
         // ==== Select Tool && [Man <-> Tool] ====
     }
-
-    // ==== Movement ====
-    private void ManageMovement()
-    {
-        float horizontal = 0, vertical = 0;
-        horizontal = keyboardInputController.MoveHorizontal(playerNum) * moveAngleSensitivity * Time.deltaTime;
-        vertical = keyboardInputController.MoveVertical(playerNum);
-
-        transform.Rotate(Vector3.up * horizontal);
-        transform.position += vertical * transform.forward * speed * Time.deltaTime;
-
-        // Jump
-        if (keyboardInputController.JumpOrAttack(playerNum))
-            Jump();
-        isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f);
-        if (isGrounded)
-        {
-            currentJumpCount = 0;
-        }
-    }
-
-    private void Jump()
-    {
-        if (currentJumpCount < maxJumpCount)
-        {
-            rb.AddForce(Vector3.up * jumpForce);
-            currentJumpCount++;
-        }
-
-    }
-    // ==== Movement ====
-
 
 
     // ==== getters ====

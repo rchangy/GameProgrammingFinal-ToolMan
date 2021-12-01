@@ -19,7 +19,7 @@ public class Tool
     {
         setPlayer(player);
         setAnimator(player.GetComponent<PlayerController>().getAnimator());
-        setGrabbedPoint(player.GetComponent<PlayerController>().getGrabbedPoint());
+        setGrabbedPoint(player.GetComponent<PlayerController>().GetGrabbedPoint().gameObject);
         setPlayerRB(player.GetComponent<PlayerController>().getRigidbody());
         point = new Vector3(0.0f, -1.2f, 0.0f);
     }

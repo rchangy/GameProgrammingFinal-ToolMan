@@ -10,8 +10,7 @@ public abstract class ToolableMan : MonoBehaviour
     protected List<Tool> tools = new List<Tool>();
     protected int toolIdx;
 
-    [SerializeField] protected GameObject grabbedPoint;
-    [SerializeField] protected GrabbedPoint grabbedPointController;
+    [SerializeField] protected GrabbedPoint grabbedPoint;
 
     virtual protected void Awake() {}
 
@@ -21,36 +20,11 @@ public abstract class ToolableMan : MonoBehaviour
 
     abstract public void ToolableManTransform();
 
-    // ==== grab/grabbed ====
+    abstract public void BeGrabbed(PlayerController anotherPlayer);
 
-    public void Release()
-    {
-        grabbedPointController.resetRigidBody();
-    }
-
-    public void beGrabbed(PlayerController anotherPlayer)
-    {
-        tools[toolIdx].beGrabbed();
-        grabbedPoint.GetComponent<Collider>().isTrigger = true;
-        //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        gameObject.GetComponent<Collider>().isTrigger = true;
-        grabbedPointController.setAnotherPlayer(anotherPlayer);
-    }
-
-    public void beReleased()
-    {
-        tools[toolIdx].beReleased();
-        grabbedPoint.GetComponent<Collider>().isTrigger = false;
-        //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
-        gameObject.GetComponent<Collider>().isTrigger = false;
-        grabbedPointController.setAnotherPlayer(null);
-    }
+    abstract public void BeReleased();
 
     // ==== getters ====
-    public GameObject getGrabbedPoint()
-    {
-        return grabbedPoint;
-    }
 
     public Tool getTool()
     {
@@ -61,4 +35,9 @@ public abstract class ToolableMan : MonoBehaviour
     {
         return isTool;
     }
+    public GrabbedPoint GetGrabbedPoint()
+    {
+        return grabbedPoint;
+    }
+    // ==== getters ====
 }

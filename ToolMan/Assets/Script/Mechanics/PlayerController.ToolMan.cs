@@ -62,4 +62,29 @@ public partial class PlayerController
 
         }
     }
+
+    // ==== grab/grabbed ====
+
+    public void Release()
+    {
+        grabbedPoint.resetRigidBody();
+    }
+
+    override public void BeGrabbed(PlayerController anotherPlayer)
+    {
+        tools[toolIdx].beGrabbed();
+        grabbedPoint.gameObject.GetComponent<Collider>().isTrigger = true;
+        //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        playerCollider.isTrigger = true;
+        grabbedPoint.setAnotherPlayer(anotherPlayer);
+    }
+
+    override public void BeReleased()
+    {
+        tools[toolIdx].beReleased();
+        grabbedPoint.gameObject.GetComponent<Collider>().isTrigger = false;
+        //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+        playerCollider.isTrigger = false;
+        grabbedPoint.setAnotherPlayer(null);
+    }
 }
