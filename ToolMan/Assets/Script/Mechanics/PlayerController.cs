@@ -1,6 +1,7 @@
 using UnityEngine;
 using ToolMan.Mechanics;
 using ToolMan.Combat;
+using ToolMan.Util;
 
 [RequireComponent(typeof(Animator))]
 public partial class PlayerController : ToolableMan
@@ -8,7 +9,7 @@ public partial class PlayerController : ToolableMan
     /// <summary>
     /// Handle inputs controlling a player.
     /// </summary>
-    
+
     private KeyboardInputController keyboardInputController;
 
     // ==== Player Status ====
@@ -23,7 +24,7 @@ public partial class PlayerController : ToolableMan
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider playerCollider;
-    
+
     [SerializeField] private GrabPoint grabPoint;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private ObjectListUI toolListUI;
@@ -44,6 +45,23 @@ public partial class PlayerController : ToolableMan
 
     // ==== Combat ====
     public PlayerCombat combat;
+
+    private BoolWrapper _attackCharging = new BoolWrapper();
+    private FloatWrapper _attackChargingTime = new FloatWrapper();
+    [SerializeField]
+    private FloatWrapper _comboSkillChargeTime;
+    public bool ComboSkillCharged
+    {
+        get => (_attackChargingTime.Value >= _comboSkillChargeTime.Value && _attackCharging.Value);
+    }
+    private bool _comboSkillActivateByMan = false;
+    public bool ComboSkillActivateByMan
+    {
+        get => _comboSkillActivateByMan;
+    }
+
+    [SerializeField]
+    private ProgressBar _comboChargeProgress;
     // ==== Combat ====
 
     // ==== Camera ====
@@ -74,21 +92,56 @@ public partial class PlayerController : ToolableMan
         }
 
         distToGround = playerCollider.bounds.extents.y;
+        _attackCharging.Value = false;
+        _attackChargingTime.Value = 0;
+        if(_comboChargeProgress != null)
+        {
+            _comboChargeProgress.Setup(_attackCharging, _comboSkillChargeTime, _attackChargingTime);
+        }
     }
 
     override protected void Update()
     {
         if (!isTool)
         {
-            ManageMovement();
-            UpdateState();
+            _comboSkillActivateByMan = anotherPlayer.ComboSkillCharged && keyboardInputController.JumpOrAttack(playerNum);
+            if (combat.Movable)
+            {
+                ManageMovement();
+                UpdateState();
+            }
         }
 
         else // Tool
         {
-            // Attack
-            if (keyboardInputController.JumpOrAttack(playerNum))
-                Attack();
+            // Combo Skill
+            if (ComboSkillCharged && anotherPlayer.ComboSkillActivateByMan)
+            {
+                ComboSkillAttack();
+                _attackCharging.Value = false;
+            }
+            else
+            {
+                if (IsGrabbed())
+                {
+                    // Normal Attack
+                    if (keyboardInputController.JumpOrAttack(playerNum))
+                    {
+                        _attackCharging.Value = combat.ComboSkillAvailable();
+                        _attackChargingTime.Value = 0;
+                        Attack();
+                    }
+                    else if(_attackCharging.Value && keyboardInputController.JumpOrAttackHolding(playerNum) && combat.ComboSkillAvailable())
+                    {
+                        _attackChargingTime.Value += Time.deltaTime;
+                    }
+                    else
+                    {
+                        _attackCharging.Value = false;
+                        _attackChargingTime.Value = 0;
+                    }
+                }
+            }
         }
 
         // ==== Select Tool && [Man <-> Tool] ====

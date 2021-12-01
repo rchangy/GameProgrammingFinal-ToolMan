@@ -13,9 +13,7 @@ namespace ToolMan.Combat.Skills
 
 
         public ComboSkill GetComboSkill(PlayerController tool, PlayerController man, PlayerCombat toolCombat)
-        {
-            Debug.Log(_comboSkills.Count);
-
+        { 
             string preTool = tool.getTool().getName();
             string postTool = man.getTool().getName();
             ComboSkill usingSkill = null;
@@ -38,14 +36,12 @@ namespace ToolMan.Combat.Skills
             }
             else Debug.Log("cannot find tool " + preTool);
 
-
             return usingSkill;
         }
 
 
         public void Load()
         {
-            Debug.Log("loading");
             if (_skills.Count == 0) return;
             Debug.Log("loading combo skills");
             foreach (ComboSkill s in _skills)
