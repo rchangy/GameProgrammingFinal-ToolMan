@@ -75,15 +75,36 @@ namespace ToolMan.Mechanics
         {
             if (targetPoint != null)
             {
-                // set FixedJoint
-                FixedJoint fj = gameObject.AddComponent<FixedJoint>();
-                //FixedJoint fj = player.gameObject.AddComponent<FixedJoint>();
-                fj.connectedBody = anotherPlayer.getRigidbody();
-                fj.breakForce = 2147483847;
-                fj.autoConfigureConnectedAnchor = false;
-                //fj.anchor = player.GetRightHand().transform.localPosition;
-                fj.connectedAnchor = anotherPlayer.getTool().getPoint();
-                fj.enableCollision = false;
+                int playerLayer = player.GetLayerMask().value;
+                Debug.Log("playerLayer = " + playerLayer);
+                Physics.IgnoreLayerCollision(playerLayer, playerLayer, true);
+                // change position first
+                Vector3 grabbedPointLocalPosition = anotherPlayer.GetGrabbedPoint().transform.localPosition;
+                Vector3 anotherPlayerNewPosition = player.GetRightHand().transform.position - grabbedPointLocalPosition;
+                anotherPlayer.transform.position = anotherPlayerNewPosition;
+
+
+                //ConfigurableJoint confJ = gameObject.AddComponent<ConfigurableJoint>();
+                ConfigurableJoint confJ = player.gameObject.AddComponent<ConfigurableJoint>();
+                confJ.connectedBody = anotherPlayer.getRigidbody();
+                confJ.autoConfigureConnectedAnchor = false;
+                confJ.anchor = player.GetRightHand().transform.localPosition;
+                confJ.connectedAnchor = anotherPlayer.getTool().getPoint();
+                confJ.enableCollision = false;
+                confJ.xMotion = ConfigurableJointMotion.Locked;
+                confJ.yMotion = ConfigurableJointMotion.Locked;
+                confJ.zMotion = ConfigurableJointMotion.Locked;
+                //confJ.targetRotation = Quaternion.Euler(60f, 0, 30f);
+
+                //// set FixedJoint
+                //FixedJoint fj = gameObject.AddComponent<FixedJoint>();
+                ////FixedJoint fj = player.gameObject.AddComponent<FixedJoint>();
+                //fj.connectedBody = anotherPlayer.getRigidbody();
+                //fj.breakForce = 2147483847;
+                //fj.autoConfigureConnectedAnchor = false;
+                ////fj.anchor = player.GetRightHand().transform.localPosition;
+                //fj.connectedAnchor = anotherPlayer.getTool().getPoint();
+                //fj.enableCollision = false;
 
                 // set Tool in the status of being grabbed
                 anotherPlayer.BeGrabbed(player);
@@ -97,8 +118,9 @@ namespace ToolMan.Mechanics
         {
             if (targetPoint != null)
             {
-                //Destroy(targetTool.GetComponent<FixedJoint>());
-                Destroy(gameObject.GetComponent<FixedJoint>());
+                //Destroy(gameObject.GetComponent<ConfigurableJoint>());
+                Destroy(player.gameObject.GetComponent<ConfigurableJoint>());
+                //Destroy(gameObject.GetComponent<FixedJoint>());
                 // Reset grabbed player rigidbody
                 targetPoint.GetComponent<GrabbedPoint>().resetRigidBody();
 
@@ -109,6 +131,8 @@ namespace ToolMan.Mechanics
                 anotherPlayer.BeReleased();
 
                 grabbing = false;
+                int playerLayer = player.GetLayerMask().value;
+                Physics.IgnoreLayerCollision(playerLayer, playerLayer, false);
                 Debug.Log("release");
             }
         }

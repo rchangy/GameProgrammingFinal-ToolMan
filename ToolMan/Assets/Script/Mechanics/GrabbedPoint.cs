@@ -53,7 +53,8 @@ namespace ToolMan.Mechanics
         {
             if (anotherPlayer != null)
             {
-                playerGameObject.transform.forward = anotherPlayer.gameObject.transform.forward;
+                player.gameObject.transform.rotation = Quaternion.Euler(0, anotherPlayer.gameObject.transform.rotation.y, 26f);
+                //playerGameObject.transform.forward = anotherPlayer.gameObject.transform.forward;
                 //player.getGrabbedPoint().transform.position = anotherPlayer.RightHand.transform.position;
                 //playerGameObject.transform.localRotation = Quaternion.E
                 //playerGameObject.transform.rotation = Quaternion.Euler(playerGameObject.transform.rotation.x, playerGameObject.transform.rotation.y, 26f);

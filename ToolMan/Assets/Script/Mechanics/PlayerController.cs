@@ -16,6 +16,7 @@ public partial class PlayerController : ToolableMan
     private State state = new State();
 
     [SerializeField] private bool changeable = false;
+    [SerializeField] private LayerMask playerLayerMask;
     // ==== Player Status ====
 
     // ==== Components ====
@@ -129,6 +130,10 @@ public partial class PlayerController : ToolableMan
     public GameObject GetRightHand()
     {
         return rightHand;
+    }
+    public LayerMask GetLayerMask()
+    {
+        return playerLayerMask;
     }
     // ==== getters
 
