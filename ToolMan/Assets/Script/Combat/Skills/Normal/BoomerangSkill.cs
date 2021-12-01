@@ -19,7 +19,7 @@ namespace ToolMan.Combat.Skills.Normal
             _tool = combat.gameObject;
             if (typeof(PlayerCombat).IsInstanceOfType(combat))
             {
-                PlayerCombat toolCombat = combat;
+                PlayerCombat toolCombat = (PlayerCombat)combat;
                 PlayerCombat manCombat = toolCombat.TeamMateCombat;
                 _man = manCombat.gameObject;
 
