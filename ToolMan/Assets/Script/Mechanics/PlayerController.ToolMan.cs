@@ -36,8 +36,8 @@ public partial class PlayerController
 
     override public void ToolableManTransform()
     {
-        isTool = !isTool;
-        if (isTool)
+        //isTool = !isTool;
+        if (!isTool)
         {
             toolListUI.Choose();
             toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
@@ -48,8 +48,9 @@ public partial class PlayerController
             //effect
             Effect toToolEffect = effectController.effectList.Find(e => e.name == "ToToolEffect");
             toToolEffect.PlayEffect();
+            isTool = !isTool;
         }
-        else
+        else if (!beGrabbed)
         {
             tools[toolIdx].toMan();
             toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
@@ -59,7 +60,7 @@ public partial class PlayerController
             //effect
             Effect toManEffect = effectController.effectList.Find(e => e.name == "ToManEffect");
             toManEffect.PlayEffect();
-
+            isTool = !isTool;
         }
     }
 
@@ -81,6 +82,8 @@ public partial class PlayerController
         //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         playerCollider.isTrigger = true;
         grabbedPoint.setAnotherPlayer(anotherPlayer);
+
+        beGrabbed = true;
     }
 
     override public void BeReleased()
@@ -91,6 +94,7 @@ public partial class PlayerController
         //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         playerCollider.isTrigger = false;
         grabbedPoint.setAnotherPlayer(null);
+        beGrabbed = false;
     }
     public void resetRigidBody()
     {
