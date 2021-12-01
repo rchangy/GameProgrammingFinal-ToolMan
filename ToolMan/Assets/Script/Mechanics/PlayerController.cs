@@ -17,6 +17,9 @@ public partial class PlayerController : ToolableMan
     private State state = new State();
 
     [SerializeField] private bool changeable = false;
+    [SerializeField] private LayerMask playerLayerMask;
+
+    float horizontal, vertical;
     // ==== Player Status ====
 
     // ==== Components ====
@@ -72,7 +75,6 @@ public partial class PlayerController : ToolableMan
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
-        //grabbedPointController = grabbedPoint.GetComponent<GrabbedPoint>();
         grabPoint.setPlayer(this);
         grabbedPoint.setPlayer(this);
         state = State.Grounded;
@@ -120,6 +122,7 @@ public partial class PlayerController : ToolableMan
                 _attackCharging.Value = false;
             }
             else
+<<<<<<< HEAD
             { 
                 // Normal Attack
                 if (keyboardInputController.JumpOrAttack(playerNum))
@@ -153,6 +156,26 @@ public partial class PlayerController : ToolableMan
                             _attackCharging.Value = false;
                             _attackChargingTime.Value = 0;
                         }
+=======
+            {
+                if (IsGrabbed())
+                {
+                    // Normal Attack
+                    if (keyboardInputController.JumpOrAttack(playerNum))
+                    {
+                        _attackCharging.Value = combat.ComboSkillAvailable();
+                        _attackChargingTime.Value = 0;
+                        Attack();
+                    }
+                    else if(_attackCharging.Value && keyboardInputController.JumpOrAttackHolding(playerNum) && combat.ComboSkillAvailable())
+                    {
+                        _attackChargingTime.Value += Time.deltaTime;
+                    }
+                    else
+                    {
+                        _attackCharging.Value = false;
+                        _attackChargingTime.Value = 0;
+>>>>>>> ac2888f8a453ccb7a36217953721601b477c6961
                     }
                 }
             }
@@ -178,6 +201,12 @@ public partial class PlayerController : ToolableMan
         // ==== Select Tool && [Man <-> Tool] ====
     }
 
+    private void FixedUpdate()
+    {
+        transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
+        transform.position += vertical * transform.forward * speed * Time.deltaTime;
+    }
+
 
     // ==== getters ====
     public Rigidbody getRigidbody()
@@ -197,6 +226,10 @@ public partial class PlayerController : ToolableMan
     public GameObject GetRightHand()
     {
         return rightHand;
+    }
+    public LayerMask GetLayerMask()
+    {
+        return playerLayerMask;
     }
     // ==== getters
 

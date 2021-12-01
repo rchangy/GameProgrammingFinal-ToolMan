@@ -10,12 +10,12 @@ public partial class PlayerController
 
     private void ManageMovement()
     {
-        float horizontal = 0, vertical = 0;
-        horizontal = keyboardInputController.MoveHorizontal(playerNum) * moveAngleSensitivity * Time.deltaTime;
+        horizontal = 0;
+        vertical = 0;
+        horizontal = keyboardInputController.MoveHorizontal(playerNum) * moveAngleSensitivity;
         vertical = keyboardInputController.MoveVertical(playerNum);
 
-        transform.Rotate(Vector3.up * horizontal);
-        transform.position += vertical * transform.forward * speed * Time.deltaTime;
+        
 
         // Jump
         if (keyboardInputController.JumpOrAttack(playerNum))
