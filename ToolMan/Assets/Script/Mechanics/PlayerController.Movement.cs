@@ -7,6 +7,26 @@ public partial class PlayerController
     /// <summary>
     /// Handling a player's movement and Animation State
     /// </summary>
+    /// 
+
+    [SerializeField] private float speed = 20;
+    public float moveAngleSensitivity = 750f;
+    public float jumpForce = 300;
+    public int maxJumpCount = 1; // It can actaully jump once more 
+    public int currentJumpCount = 0;
+
+    private bool toolWave = false;
+    private Vector3 specialToolEulerAngle;
+    private Vector3 toolEulerAngle;
+    private Vector3 originalToolEulerAngle;
+    private float waveSpeed;
+    private bool shouldWaveBack;
+    private bool inWaveBack;
+    private bool waveDirChange;
+    private bool waveEnd;
+
+    private float distToGround;
+    private bool isGrounded;
 
     private void ManageMovement()
     {
@@ -36,4 +56,84 @@ public partial class PlayerController
         }
 
     }
+
+    private void beGrabbedMovement()
+    {
+        if (!toolWave)
+        {
+            toolEulerAngle = new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y, -26f);
+        }
+        else
+        {
+            ManageWaving();
+        }
+        transform.eulerAngles = toolEulerAngle;
+    }
+
+    // ==== Wave Tool ====
+    // When Attacking, you can call "SetToolWave(...)" to specify the euler angle of the player-tool
+    // After finishing attacking, please call "ResetSpecialRotate()" to make the player-tool to follow the player-man
+    // There is an exmaple in PlayerController.Update()
+    public void SetToolWave(Vector3 specialToolEulerAngle, float waveSpeed, bool shouldWaveBack)
+    {
+        this.waveSpeed = waveSpeed;
+        this.shouldWaveBack = shouldWaveBack;
+        this.inWaveBack = false;
+        this.waveDirChange = false;
+        this.waveEnd = false;
+        this.toolWave = true;
+        this.specialToolEulerAngle = specialToolEulerAngle;
+        originalToolEulerAngle = new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y, -26f);
+    }
+
+    public void ResetToolWave()
+    {
+        this.toolWave = false;
+    }
+
+    private void ManageWaving()
+    {
+        if (waveEnd)
+            return;
+        if (shouldWaveBack && waveDirChange)
+        {
+            Vector3 tmp = specialToolEulerAngle;
+            specialToolEulerAngle = originalToolEulerAngle;
+            originalToolEulerAngle = tmp;
+        }
+        ComputeToolEulerAngle();
+    }
+
+    private void ComputeToolEulerAngle()
+    {
+        Vector3 newAngle = toolEulerAngle + (specialToolEulerAngle - originalToolEulerAngle) * Time.deltaTime * waveSpeed;
+        if (!IsCBetweenAB(originalToolEulerAngle, specialToolEulerAngle, newAngle))
+        {
+            toolEulerAngle = specialToolEulerAngle;
+            Debug.Log("out");
+        }
+        else
+        {
+            toolEulerAngle = newAngle;
+            Debug.Log("in");
+        }
+        if (toolEulerAngle == specialToolEulerAngle)
+        {
+            if (shouldWaveBack && !inWaveBack)
+            {
+                inWaveBack = true;
+                waveDirChange = true;
+            }
+            else
+                waveEnd = true;
+        }
+        else
+            waveDirChange = false;
+    }
+    bool IsCBetweenAB(Vector3 A, Vector3 B, Vector3 C)
+    {
+        return Vector3.Dot((B - A).normalized, (C - B).normalized) < 0f && Vector3.Dot((A - B).normalized, (C - A).normalized) < 0f;
+    }
+
+    // ==== Wave Tool ====
 }

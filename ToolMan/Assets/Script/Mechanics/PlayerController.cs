@@ -34,21 +34,6 @@ public partial class PlayerController : ToolableMan
     [SerializeField] private EffectController effectController;
     // ==== Components ====
 
-    // ==== Player Movement ====
-    [SerializeField] private float speed = 20;
-    public float moveAngleSensitivity = 750f;
-    public float jumpForce = 300;
-    public int maxJumpCount = 1; // It can actaully jump once more 
-    public int currentJumpCount = 0;
-
-    private bool specialRotate = false;
-    private Vector3 specialToolEulerAngle;
-    private Vector3 toolEulerAngle;
-
-    private float distToGround;
-    private bool isGrounded;
-    // ==== Player Movement ====
-
     // ==== Combat ====
     public PlayerCombat combat;
 
@@ -107,6 +92,14 @@ public partial class PlayerController : ToolableMan
 
     override protected void Update()
     {
+        // ==== for testing (wave tool) ====
+        if (beGrabbed && Input.GetKeyDown(KeyCode.Tab)) {
+            if (!toolWave)
+                SetToolWave(new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y, -60f), 5f, true);
+            else
+                ResetToolWave();
+        }
+        // ==== for testing (wave tool) ====
         if (!isTool)
         {
             _comboSkillActivateByMan = anotherPlayer.ComboSkillCharged && keyboardInputController.JumpOrAttack(playerNum);
@@ -194,18 +187,7 @@ public partial class PlayerController : ToolableMan
         transform.position += vertical * transform.forward * speed * Time.deltaTime;
         if (beGrabbed)
         {
-            // ==== EulerAngle of Tool ====
-            // When Attacking, you can call "SetSpecialRotate(Vector3 specialToolEulerAngle)" to specify the euler angle of the player-tool
-            // After finishing attacking, please call "ResetSpecialRotate()" to make the player-tool to follow the player-man
-            if (!specialRotate)
-            {
-                toolEulerAngle = new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y, -26f);
-            }
-            else
-            {
-                toolEulerAngle = specialToolEulerAngle;
-            }
-            transform.eulerAngles = toolEulerAngle;
+            beGrabbedMovement();
         }
     }
 
@@ -232,15 +214,6 @@ public partial class PlayerController : ToolableMan
     public LayerMask GetLayerMask()
     {
         return playerLayerMask;
-    }
-    public void SetSpecialRotate(Vector3 specialToolEulerAngle)
-    {
-        this.specialRotate = true;
-        this.specialToolEulerAngle = specialToolEulerAngle;
-    }
-    public void ResetSpecialRotate()
-    {
-        this.specialRotate = false;
     }
     // ==== getters
 

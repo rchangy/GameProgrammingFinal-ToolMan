@@ -95,6 +95,7 @@ public partial class PlayerController
         playerCollider.isTrigger = false;
         grabbedPoint.setAnotherPlayer(null);
         beGrabbed = false;
+        ResetToolWave();
     }
     public void resetRigidBody()
     {
