@@ -1,4 +1,5 @@
 using UnityEngine;
+using ToolMan.Util;
 
 namespace ToolMan.Mechanics
 {
@@ -75,7 +76,7 @@ namespace ToolMan.Mechanics
         {
             if (targetPoint != null)
             {
-                int playerLayer = player.GetLayerMask().value;
+                int playerLayer = Converter.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
                 Debug.Log("playerLayer = " + playerLayer);
                 Physics.IgnoreLayerCollision(playerLayer, playerLayer, true);
                 // change position first
