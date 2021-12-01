@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boomerang : Tool
 {
 
-    public Boomerang(GameObject player)
+    public Boomerang(PlayerController player)
     {
         setUp(player);
         name = "Boomerang";

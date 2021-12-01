@@ -1598,7 +1598,6 @@ MonoBehaviour:
   grabbedPointLayer:
     serializedVersion: 2
     m_Bits: 512
-  grabbing: 0
 --- !u!54 &4806112291604789431
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1934,21 +1933,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20557317c6f5148fcb4ad920dccaaab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTool: 0
-  grabbedPoint: {fileID: 5681094873323192337}
-  grabbedPointController: {fileID: 0}
-  toolListUI: {fileID: 0}
-  grabPoint: {fileID: 4806112291604789432}
+  grabbedPoint: {fileID: 4349471767006141894}
   playerNum: 2
-  anotherPlayer: {fileID: 0}
   changeable: 0
+  grabPoint: {fileID: 4806112291604789432}
+  rightHand: {fileID: 7602279447490618996}
+  toolListUI: {fileID: 0}
+  anotherPlayer: {fileID: 0}
   effectController: {fileID: 1888963215}
   speed: 15
   moveAngleSensitivity: 200
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
-  combat: {fileID: 0}
+  combat: {fileID: 2522315202409478489}
   cam: {fileID: 999401815}
 --- !u!114 &4908939906094255086
 MonoBehaviour:

@@ -4,46 +4,49 @@ namespace ToolMan.Mechanics
 {
     public class GrabPoint : MonoBehaviour
     {
-        public float grabRange = 1.5f;
-        public LayerMask grabbedPointLayer;
-        GameObject targetTool;
-        public bool grabbing = false;
+        [SerializeField] private float grabRange = 1.5f;
+        [SerializeField] private LayerMask grabbedPointLayer;
+        
+        private bool grabbing = false;
+        private GameObject targetPoint; // Tool's grabbed point
+        private PlayerController player;
         private PlayerController anotherPlayer;
 
-        Rigidbody rb;
-        PlayerController player;
+        // unused?
+        private Rigidbody rb;
+        
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
         }
 
-        public void setPlayer(PlayerController p) { player = p; }
+        public void setPlayer(PlayerController p)
+        {
+            player = p;
+        }
 
         // Update is called once per frame
         void Update()
         {
             if (!player.inToolState())
             {
-                //if ((Input.GetButtonDown("Grab1") && (player.playerNum == 1)) || (Input.GetButtonDown("Grab2") && (player.playerNum == 2)))
-                //{
-                    
-                //}
-
                 DetectCollisionWithGrabbedPoint();
             }
         }
 
         public void GrabOrRelease()
         {
-            Debug.Log("Press Grab");
             if (grabbing)
             {
                 Debug.Log("Press Release");
                 Release();
             }
             else
+            {
+                Debug.Log("Press Grab");
                 Grab();
+            }
         }
 
         private void DetectCollisionWithGrabbedPoint()
@@ -53,31 +56,32 @@ namespace ToolMan.Mechanics
             {
                 if (collider.gameObject != gameObject)
                 {
-                    anotherPlayer = collider.transform.gameObject.GetComponent<GrabbedPoint>().GetPlayerController();
+                    anotherPlayer = collider.gameObject.GetComponent<GrabbedPoint>().GetPlayerController();
                     if (anotherPlayer != null && anotherPlayer.inToolState())
                     {
-                        Debug.Log("grab grabbed : )");
-                        targetTool = collider.gameObject;
+                        Debug.Log("can grab grabbed : )");
+                        targetPoint = collider.gameObject;
                     }
                 }
 
             }
             if (colliders.Length == 0 && !grabbing)
             {
-                Debug.Log("No collision:(");
-                targetTool = null;
+                targetPoint = null;
             }
         }
 
         public void Grab()
         {
-            if (targetTool != null)
+            if (targetPoint != null)
             {
                 // set FixedJoint
                 FixedJoint fj = gameObject.AddComponent<FixedJoint>();
+                //FixedJoint fj = player.gameObject.AddComponent<FixedJoint>();
                 fj.connectedBody = anotherPlayer.getRigidbody();
                 fj.breakForce = 2147483847;
                 fj.autoConfigureConnectedAnchor = false;
+                //fj.anchor = player.GetRightHand().transform.localPosition;
                 fj.connectedAnchor = anotherPlayer.getTool().getPoint();
                 fj.enableCollision = false;
 
@@ -91,12 +95,12 @@ namespace ToolMan.Mechanics
 
         public void Release()
         {
-            if (targetTool != null)
+            if (targetPoint != null)
             {
                 //Destroy(targetTool.GetComponent<FixedJoint>());
                 Destroy(gameObject.GetComponent<FixedJoint>());
                 // Reset grabbed player rigidbody
-                targetTool.GetComponent<GrabbedPoint>().resetRigidBody();
+                targetPoint.GetComponent<GrabbedPoint>().resetRigidBody();
 
                 // Reset grabbing player rigidbody? not sure if need this
                 player.Release();
@@ -112,7 +116,12 @@ namespace ToolMan.Mechanics
         public void setAnotherPlayerAndTarget(PlayerController anotherPlayer)
         {
             this.anotherPlayer = anotherPlayer;
-            this.targetTool = anotherPlayer.GetGrabbedPoint().gameObject;
+            this.targetPoint = anotherPlayer.GetGrabbedPoint().gameObject;
+        }
+
+        public bool IsGrabbing()
+        {
+            return grabbing;
         }
 
         private void OnDrawGizmos()

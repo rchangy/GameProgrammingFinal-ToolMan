@@ -5,7 +5,7 @@ using UnityEngine;
 public class FlashBomb : Tool
 {
 
-    public FlashBomb(GameObject player)
+    public FlashBomb(PlayerController player)
     {
         setUp(player);
         name = "FlashBomb";

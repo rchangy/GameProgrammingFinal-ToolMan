@@ -1444,14 +1444,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20557317c6f5148fcb4ad920dccaaab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTool: 0
-  grabbedPoint: {fileID: 1636210686992201065}
-  grabbedPointController: {fileID: 0}
-  toolListUI: {fileID: 0}
-  grabPoint: {fileID: 1932339910922669504}
+  grabbedPoint: {fileID: 7210189603365403921}
   playerNum: 1
-  anotherPlayer: {fileID: 0}
   changeable: 0
+  grabPoint: {fileID: 1932339910922669504}
+  rightHand: {fileID: 3346628931098774230}
+  toolListUI: {fileID: 0}
+  anotherPlayer: {fileID: 0}
   effectController: {fileID: 1976549261}
   speed: 15
   moveAngleSensitivity: 200
@@ -1728,7 +1727,6 @@ MonoBehaviour:
   grabbedPointLayer:
     serializedVersion: 2
     m_Bits: 512
-  grabbing: 0
 --- !u!54 &1932339910922669519
 Rigidbody:
   m_ObjectHideFlags: 0

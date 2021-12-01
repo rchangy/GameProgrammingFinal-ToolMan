@@ -23,7 +23,7 @@ public partial class PlayerController
         toolIdx = 0;
         ToolableManTransform(); // Man to Tool
 
-        if (!anotherPlayer.grabPoint.grabbing)
+        if (!anotherPlayer.grabPoint.IsGrabbing())
         {
             anotherPlayer.grabPoint.Grab();
         }
@@ -72,7 +72,11 @@ public partial class PlayerController
 
     override public void BeGrabbed(PlayerController anotherPlayer)
     {
-        tools[toolIdx].beGrabbed();
+        // reset
+        transform.rotation = Quaternion.Euler(0f, 0f, 26f);
+        rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        resetRigidBody();
+
         grabbedPoint.gameObject.GetComponent<Collider>().isTrigger = true;
         //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         playerCollider.isTrigger = true;
@@ -81,10 +85,16 @@ public partial class PlayerController
 
     override public void BeReleased()
     {
-        tools[toolIdx].beReleased();
+        rb.constraints = RigidbodyConstraints.None;
+        
         grabbedPoint.gameObject.GetComponent<Collider>().isTrigger = false;
         //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         playerCollider.isTrigger = false;
         grabbedPoint.setAnotherPlayer(null);
+    }
+    public void resetRigidBody()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 }
