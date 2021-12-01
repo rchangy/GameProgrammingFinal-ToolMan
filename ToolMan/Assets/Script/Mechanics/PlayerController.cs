@@ -18,6 +18,8 @@ public partial class PlayerController : ToolableMan
 
     [SerializeField] private bool changeable = false;
     [SerializeField] private LayerMask playerLayerMask;
+
+    float horizontal, vertical;
     // ==== Player Status ====
 
     // ==== Components ====
@@ -73,7 +75,6 @@ public partial class PlayerController : ToolableMan
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
-        //grabbedPointController = grabbedPoint.GetComponent<GrabbedPoint>();
         grabPoint.setPlayer(this);
         grabbedPoint.setPlayer(this);
         state = State.Grounded;
@@ -162,6 +163,12 @@ public partial class PlayerController : ToolableMan
             grabPoint.GrabOrRelease();
         }
         // ==== Select Tool && [Man <-> Tool] ====
+    }
+
+    private void FixedUpdate()
+    {
+        transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
+        transform.position += vertical * transform.forward * speed * Time.deltaTime;
     }
 
 
