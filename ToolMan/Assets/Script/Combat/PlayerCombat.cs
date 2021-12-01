@@ -2,6 +2,7 @@
 using System.Collections;
 using ToolMan.Combat.Skills;
 using ToolMan.Combat.Stats;
+using System.Collections.Generic;
 
 namespace ToolMan.Combat
 {
@@ -22,12 +23,14 @@ namespace ToolMan.Combat
 
         private ComboSkillSet comboSkillSet;
 
+        private Dictionary<string, Resource> _skillEnergy = new Dictionary<string, Resource>();
 
-        private Resource _energy;
+        private Resource _currentEnergy;
         public int Energy
         {
-            get => _energy.Value;
+            get => _currentEnergy.Value;
         }
+
 
         [SerializeField]
         private HitFeel hitFeel;
@@ -35,15 +38,11 @@ namespace ToolMan.Combat
         protected override void Start()
         {
             base.Start();
-            _energy = _stats.GetResourceByName("Energy");
-            if (_energy == null) Debug.Log(gameObject.name + " has no energy resource.");
-
+            
             _playerController = gameObject.GetComponent<PlayerController>();
 
             comboSkillSet = manager.Model.ComboSkills;
         }
-
-
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
@@ -58,6 +57,30 @@ namespace ToolMan.Combat
             return dmg;
         }
 
+        public int GetEnergyOfTool(string name)
+        {
+            if (_skillEnergy.ContainsKey(name))
+            {
+                return _skillEnergy[name].Value;
+            }
+            return -1;
+        }
+
+        public override bool SetCurrentUsingSkill(string skillName)
+        {
+            bool isSkillSet = base.SetCurrentUsingSkill(skillName);
+            if (isSkillSet && skillName != null)
+            {
+                if (!_skillEnergy.ContainsKey(skillName))
+                {
+                    Resource _newEnergy = _stats.AddResource(new Resource(skillName + "Energy", 100, 0));
+                    _skillEnergy.Add(skillName, _newEnergy);
+                }
+                _currentEnergy = _skillEnergy[skillName];
+            }
+            return isSkillSet;
+        }
+
         public void ComboSkillAttack()
         {
             Debug.Log("try use combo skill");
@@ -68,10 +91,11 @@ namespace ToolMan.Combat
             if ((checkedComboSkill = comboSkillSet.GetComboSkill(ThisPlayerController, TeamMateCombat.ThisPlayerController, this)) != null)
             {
                 _vulnerable.Disable();
-                _energy.ChangeValueBy(-checkedComboSkill.Cost);
+                _currentEnergy.ChangeValueBy(-checkedComboSkill.Cost);
                 skillPerforming = StartCoroutine(PerformComboSkill(checkedComboSkill));
             }
         }
+
         private IEnumerator PerformComboSkill(ComboSkill skill)
         {
             yield return StartCoroutine(skill.Attack(Anim, TargetLayers, this));
