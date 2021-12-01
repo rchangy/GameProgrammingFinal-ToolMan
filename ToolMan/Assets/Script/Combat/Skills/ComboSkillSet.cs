@@ -38,14 +38,12 @@ namespace ToolMan.Combat.Skills
             }
             else Debug.Log("cannot find tool " + preTool);
 
-
             return usingSkill;
         }
 
 
         public void Load()
         {
-            Debug.Log("loading");
             if (_skills.Count == 0) return;
             Debug.Log("loading combo skills");
             foreach (ComboSkill s in _skills)

@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class KeyboardInputController : InputController
 {
+
     public bool JumpOrAttack(int playerNum)
     {
         if ((playerNum == 1 && Input.GetButtonDown("JumpOrAttack1")) || (playerNum == 2 && Input.GetButtonDown("JumpOrAttack2")))
+        {
             return true;
-        return false;   
+        }
+        return false;
+    }
+
+    public bool JumpOrAttackHolding(int playerNum)
+    {
+        if ((playerNum == 1 && Input.GetButton("JumpOrAttack1")) || (playerNum == 2 && Input.GetButton("JumpOrAttack2")))
+        {
+            return true;
+        }
+        return false;
     }
 
     public float MoveHorizontal(int playerNum)

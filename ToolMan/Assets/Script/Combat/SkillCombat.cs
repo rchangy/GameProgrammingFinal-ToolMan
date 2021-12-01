@@ -47,8 +47,10 @@ namespace ToolMan.Combat
 
         protected Dictionary<CombatUnit, float> _refractoryPeriod = new Dictionary<CombatUnit, float>();
 
-        private void Awake()
+        protected override void Start()
         {
+            Debug.Log("skill start");
+            base.Start();
             if (availableSkillSet != null)
             {
                 availableSkillSet.CheckStatsExsistence(this);

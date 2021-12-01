@@ -72,6 +72,7 @@ namespace ToolMan.Combat
 
         protected virtual void Start()
         {
+            Debug.Log("start");
             manager = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
             damageCalculator = manager.Model.DmgCalculator;
             _stats = GetComponent<CharacterStats>();

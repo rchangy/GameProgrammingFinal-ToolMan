@@ -37,6 +37,7 @@ namespace ToolMan.Combat
 
         protected override void Start()
         {
+            Debug.Log("player start");
             base.Start();
             
             _playerController = gameObject.GetComponent<PlayerController>();
@@ -73,12 +74,21 @@ namespace ToolMan.Combat
             {
                 if (!_skillEnergy.ContainsKey(skillName))
                 {
+                    if(_stats == null)
+                    {
+                        Debug.Log("null stat");
+                    }
                     Resource _newEnergy = _stats.AddResource(new Resource(skillName + "Energy", 100, 0));
                     _skillEnergy.Add(skillName, _newEnergy);
                 }
                 _currentEnergy = _skillEnergy[skillName];
             }
             return isSkillSet;
+        }
+
+        public bool ComboSkillAvailable()
+        {
+            return comboSkillSet.GetComboSkill(ThisPlayerController, TeamMateCombat.ThisPlayerController, this) != null;
         }
 
         public void ComboSkillAttack()
