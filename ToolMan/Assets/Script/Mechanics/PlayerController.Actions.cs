@@ -12,4 +12,9 @@ public partial class PlayerController
         //Debug.Log("attack pressed");
         combat.Attack();
     }
+
+    private void ComboSkillAttack()
+    {
+        combat.ComboSkillAttack();
+    }
 }

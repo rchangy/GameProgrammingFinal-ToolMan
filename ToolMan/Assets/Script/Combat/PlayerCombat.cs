@@ -3,6 +3,7 @@ using System.Collections;
 using ToolMan.Combat.Skills;
 using ToolMan.Combat.Stats;
 using System.Collections.Generic;
+using ToolMan.Util;
 
 namespace ToolMan.Combat
 {
@@ -73,12 +74,21 @@ namespace ToolMan.Combat
             {
                 if (!_skillEnergy.ContainsKey(skillName))
                 {
+                    if(_stats == null)
+                    {
+                        Debug.Log("null stat");
+                    }
                     Resource _newEnergy = _stats.AddResource(new Resource(skillName + "Energy", 100, 0));
                     _skillEnergy.Add(skillName, _newEnergy);
                 }
                 _currentEnergy = _skillEnergy[skillName];
             }
             return isSkillSet;
+        }
+
+        public bool ComboSkillAvailable()
+        {
+            return comboSkillSet.GetComboSkill(ThisPlayerController, TeamMateCombat.ThisPlayerController, this) != null;
         }
 
         public void ComboSkillAttack()

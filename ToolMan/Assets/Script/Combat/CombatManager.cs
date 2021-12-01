@@ -13,8 +13,8 @@ namespace ToolMan.Combat
         }
         private void Awake()
         {
-            //Model.DmgCalculator.Load();
-            //Model.ComboSkills.Load();
+            Model.DmgCalculator.Load();
+            Model.ComboSkills.Load();
         }
     }
 }

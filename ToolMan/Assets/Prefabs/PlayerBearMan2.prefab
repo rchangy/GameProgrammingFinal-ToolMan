@@ -1936,6 +1936,9 @@ MonoBehaviour:
   grabbedPoint: {fileID: 4349471767006141894}
   playerNum: 2
   changeable: 0
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   grabPoint: {fileID: 4806112291604789432}
   rightHand: {fileID: 7602279447490618996}
   toolListUI: {fileID: 0}
@@ -1947,6 +1950,9 @@ MonoBehaviour:
   maxJumpCount: 1
   currentJumpCount: 0
   combat: {fileID: 2522315202409478489}
+  _comboSkillChargeTime:
+    Value: 2
+  _comboChargeProgress: {fileID: 0}
   cam: {fileID: 999401815}
 --- !u!114 &4908939906094255086
 MonoBehaviour:
@@ -2010,7 +2016,7 @@ GameObject:
   - component: {fileID: 3832618522116747320}
   - component: {fileID: 9038656772829788635}
   - component: {fileID: 4349471767006141894}
-  - component: {fileID: 5282865370700023332}
+  - component: {fileID: 1844543987}
   m_Layer: 9
   m_Name: GrabbedPoint
   m_TagString: Untagged
@@ -2108,7 +2114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerGameObject: {fileID: 5653095584333043336}
   anotherPlayer: {fileID: 0}
---- !u!54 &5282865370700023332
+--- !u!54 &1844543987
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2116,9 +2122,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5681094873323192337}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
-  m_AngularDrag: 999999
+  m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -2920,7 +2926,6 @@ GameObject:
   - component: {fileID: 7602279447490618997}
   - component: {fileID: 7602279447490618995}
   - component: {fileID: 7602279447490618994}
-  - component: {fileID: 7602279447490618992}
   m_Layer: 6
   m_Name: RightHand
   m_TagString: Untagged
@@ -2991,22 +2996,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7602279447490618996}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &7602279447490618992
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7602279447490618996}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &7727922665149522336
 GameObject:
   m_ObjectHideFlags: 0

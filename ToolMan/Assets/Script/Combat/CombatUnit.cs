@@ -4,6 +4,7 @@ using ToolMan.Combat.Stats.Buff;
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using ToolMan.Util;
 
 namespace ToolMan.Combat
 {
@@ -24,6 +25,7 @@ namespace ToolMan.Combat
         {
             get => _hp.Value;
         }
+        
 
         protected Stat _atk;
         public float Atk
@@ -89,8 +91,7 @@ namespace ToolMan.Combat
 
             if (healthBar != null)
             {
-                healthBar.SetMaxHealth(_hp.MaxValue);
-                healthBar.SetHealth(_hp.Value);
+                healthBar.Setup(_hp);
             }
             _lastHpValue = _hp.Value;
         }
@@ -98,11 +99,6 @@ namespace ToolMan.Combat
 
         protected virtual void Update()
         {
-            if (_lastHpValue != Hp && healthBar != null)
-            {
-                _lastHpValue = Hp;
-                healthBar.SetHealth(Hp);
-            }
         }
 
 

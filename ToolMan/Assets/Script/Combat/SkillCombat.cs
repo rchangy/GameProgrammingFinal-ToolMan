@@ -47,8 +47,9 @@ namespace ToolMan.Combat
 
         protected Dictionary<CombatUnit, float> _refractoryPeriod = new Dictionary<CombatUnit, float>();
 
-        private void Awake()
+        protected override void Start()
         {
+            base.Start();
             if (availableSkillSet != null)
             {
                 availableSkillSet.CheckStatsExsistence(this);
@@ -95,9 +96,13 @@ namespace ToolMan.Combat
 
         public override bool Attack()
         {
+
             if (!AttackEnabled) return false;
+            Debug.Log("Attack");
             if (!_hasSkillToUse) return false;
+            Debug.Log("Attack");
             if (Attacking) return false;
+            Debug.Log("Attack");
             if(_skillCd[currentUsingSkillName] <= 0)
             { 
                 skillPerforming = StartCoroutine(PerformSkill());
@@ -110,6 +115,7 @@ namespace ToolMan.Combat
         private IEnumerator PerformSkill()
         {
             _hitRefractoryPeriod = currentUsingSkill.RefractoryPeriod;
+            Debug.Log("using skill: " + currentUsingSkill.getName());
             yield return StartCoroutine(currentUsingSkill.Attack(Anim, TargetLayers, this));
             yield return new WaitForSeconds(currentUsingSkill.attackInterval / Aspd);
             _refractoryPeriod.Clear();
@@ -149,6 +155,7 @@ namespace ToolMan.Combat
             {
                 if (CurrentUsingSkillSet.Contains(skillName))
                 {
+                    
                     currentUsingSkill = availableSkillSet.GetSkillbyName(skillName);
                     currentUsingSkill.SetAttackPoint(transform);
                     return true;

@@ -1,19 +1,39 @@
 using UnityEngine;
 using UnityEngine.UI;
+using ToolMan.Combat.Stats;
+
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Image _barSprite;
-    public int _maxHealth;
+    private Image _barSprite;
 
-    public void SetMaxHealth(int health)
+    private Resource _hp;
+    private float _lastHealth;
+    private bool isSet = false;
+
+    private void Start()
     {
-        _maxHealth = health;
-        _barSprite.fillAmount = 1f;
+        _barSprite = gameObject.GetComponent<Image>();
+        _barSprite.enabled = false;
     }
-    
-    public void SetHealth(int health)
+
+    private void Update()
     {
-        _barSprite.fillAmount = (float)health / (float)_maxHealth;
+        if (isSet)
+        {
+            if(_hp.Value != _lastHealth)
+            {
+                _barSprite.fillAmount = _hp.Value / _hp.MaxValue;
+                _lastHealth = _hp.Value;
+            }
+        }
+    }
+
+    public void Setup(Resource hp)
+    {
+        _barSprite.enabled = true;
+        _hp = hp;
+        _lastHealth = _hp.Value;
+        isSet = true;
     }
 }

@@ -29,38 +29,18 @@ namespace ToolMan.Mechanics
             Rigidbody playerRb = player.getRigidbody();
             playerRb.velocity = Vector3.zero;
             playerRb.angularVelocity = Vector3.zero;
-            //Debug.Log("ccc");
         }
 
         public void setAnotherPlayer(PlayerController anotherPlayer)
         {
             this.anotherPlayer = anotherPlayer;
-            //Vector3 distance;
-            //if (anotherPlayer != null)
-            //{
-            //    distance = anotherPlayer.RightHand.transform.position - gameObject.transform.position;
-            //    gameObject.transform.position = anotherPlayer.RightHand.transform.position;
-            //    distance = anotherPlayer.RightHand.transform.position - gameObject.transform.position;
-            //    playerGameObject.transform.position += distance;
-            //}
-
-            //
-            //Debug.Log("distance = " + distance);
-            //
         }
 
         private void Update()
         {
             if (anotherPlayer != null)
             {
-                playerGameObject.transform.forward = anotherPlayer.gameObject.transform.forward;
-                //player.getGrabbedPoint().transform.position = anotherPlayer.RightHand.transform.position;
-                //playerGameObject.transform.localRotation = Quaternion.E
-                //playerGameObject.transform.rotation = Quaternion.Euler(playerGameObject.transform.rotation.x, playerGameObject.transform.rotation.y, 26f);
-                //playerGameObject.transform.rotation = Quaternion.LookRotation(new Vector3())
-                //playerGameObject.transform.rotation = Quaternion.Euler(playerGameObject.transform.rotation.x, playerGameObject.transform.rotation.y, 26f);
-                //Debug.Log(anotherPlayer.RightHand.transform.position);
-                //Debug.Log(gameObject.transform.position);
+                player.gameObject.transform.rotation = Quaternion.Euler(0, anotherPlayer.gameObject.transform.eulerAngles.y, -26f);
             }
         }
         public PlayerController GetPlayerController()
