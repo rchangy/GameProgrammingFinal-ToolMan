@@ -452,6 +452,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1966363386}
     - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: _comboChargeProgress
+      value: 
+      objectReference: {fileID: 1294966765}
+    - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: grabbedPointController
       value: 
       objectReference: {fileID: 130222520}
@@ -493,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2793573619670045533, guid: 7a3a7e7e162cb42f5841b34e19575da7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.7482195
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2793573619670045533, guid: 7a3a7e7e162cb42f5841b34e19575da7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -562,6 +566,7 @@ GameObject:
   - component: {fileID: 1294966762}
   - component: {fileID: 1294966764}
   - component: {fileID: 1294966763}
+  - component: {fileID: 1294966765}
   m_Layer: 5
   m_Name: ChargeBar 2
   m_TagString: Untagged
@@ -626,6 +631,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294966761}
   m_CullTransparentMesh: 1
+--- !u!114 &1294966765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294966761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7876fe660b50340b98436516382c5da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1556619962 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2522315202409478489, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
@@ -834,6 +851,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 855269549}
     - target: {fileID: 460149762, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: _comboChargeProgress
+      value: 
+      objectReference: {fileID: 2129109800}
+    - target: {fileID: 460149762, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
       propertyPath: grabbedPointController
       value: 
       objectReference: {fileID: 1170817593}
@@ -902,6 +923,7 @@ GameObject:
   - component: {fileID: 2129109797}
   - component: {fileID: 2129109799}
   - component: {fileID: 2129109798}
+  - component: {fileID: 2129109800}
   m_Layer: 5
   m_Name: ChargeBar 1
   m_TagString: Untagged
@@ -966,6 +988,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129109796}
   m_CullTransparentMesh: 1
+--- !u!114 &2129109800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129109796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7876fe660b50340b98436516382c5da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2133376731 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2886008567046151444, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}

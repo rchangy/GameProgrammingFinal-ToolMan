@@ -13,9 +13,7 @@ namespace ToolMan.Combat.Skills
 
 
         public ComboSkill GetComboSkill(PlayerController tool, PlayerController man, PlayerCombat toolCombat)
-        {
-            Debug.Log(_comboSkills.Count);
-
+        { 
             string preTool = tool.getTool().getName();
             string postTool = man.getTool().getName();
             ComboSkill usingSkill = null;

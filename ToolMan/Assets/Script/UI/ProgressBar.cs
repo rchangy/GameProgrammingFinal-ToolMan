@@ -7,9 +7,7 @@ using ToolMan.Util;
 public class ProgressBar : MonoBehaviour
 {
     private Image _barSprite;
-    //private Renderer _renderer;
     private bool isSet = false;
-
 
     private BoolWrapper _rendererEnable;
     private FloatWrapper _maxValue;
@@ -18,18 +16,17 @@ public class ProgressBar : MonoBehaviour
 
     void Start()
     {
-        //_renderer = gameObject.GetComponent<Renderer>();
-        //_renderer.enabled = false;
-        gameObject.SetActive(false);
         _barSprite = gameObject.GetComponent<Image>();
+        _barSprite.fillAmount = 0;
+        _barSprite.enabled = false;
     }
 
     private void Update()
     {
         if (isSet)
         {
-            gameObject.SetActive(_rendererEnable.Value);
-            _barSprite.fillAmount = Mathf.Max(_value.Value / _maxValue.Value, 1);
+            _barSprite.enabled = _rendererEnable.Value;
+            _barSprite.fillAmount = Mathf.Min(_value.Value / _maxValue.Value, 1);
         }
     }
 
@@ -38,5 +35,6 @@ public class ProgressBar : MonoBehaviour
         _rendererEnable = rendererEnable;
         _maxValue = maxValue;
         _value = value;
+        isSet = true;
     }
 }

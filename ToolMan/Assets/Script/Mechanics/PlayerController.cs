@@ -45,8 +45,8 @@ public partial class PlayerController : ToolableMan
     // ==== Combat ====
     public PlayerCombat combat;
 
-    private BoolWrapper _attackCharging;
-    private FloatWrapper _attackChargingTime;
+    private BoolWrapper _attackCharging = new BoolWrapper();
+    private FloatWrapper _attackChargingTime = new FloatWrapper();
     [SerializeField]
     private FloatWrapper _comboSkillChargeTime;
     public bool ComboSkillCharged
@@ -93,7 +93,6 @@ public partial class PlayerController : ToolableMan
         distToGround = playerCollider.bounds.extents.y;
         _attackCharging.Value = false;
         _attackChargingTime.Value = 0;
-        _comboSkillChargeTime.Value = 0;
         if(_comboChargeProgress != null)
         {
             _comboChargeProgress.Setup(_attackCharging, _comboSkillChargeTime, _attackChargingTime);
@@ -129,7 +128,7 @@ public partial class PlayerController : ToolableMan
                     _attackChargingTime.Value = 0;
                     Attack();
                 }
-                if (_attackCharging.Value && keyboardInputController.JumpOrAttackHolding(playerNum) && combat.ComboSkillAvailable())
+                else if(_attackCharging.Value && keyboardInputController.JumpOrAttackHolding(playerNum) && combat.ComboSkillAvailable())
                 {
                     _attackChargingTime.Value += Time.deltaTime;
                 }

@@ -3,7 +3,7 @@
 namespace ToolMan.Util
 {
     [Serializable]
-    public struct BoolWrapper
+    public class BoolWrapper
     {
         public bool Value;
     }

@@ -2,7 +2,7 @@
 namespace ToolMan.Util
 {
     [Serializable]
-    public struct FloatWrapper
+    public class FloatWrapper
     {
         public float Value;
     }
