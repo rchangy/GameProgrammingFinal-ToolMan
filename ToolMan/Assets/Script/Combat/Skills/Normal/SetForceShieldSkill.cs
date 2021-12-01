@@ -5,6 +5,7 @@ using System;
 
 namespace ToolMan.Combat.Skills.Normal
 {
+    [CreateAssetMenu(menuName = "ToolMan/Skill/SetForceShieldSkill")]
     public class SetForceShieldSkill : Skill
     {
         [SerializeField]

@@ -3,6 +3,7 @@ using System.Collections;
 using ToolMan.Mechanics;
 namespace ToolMan.Combat.Skills.Normal
 {
+    [CreateAssetMenu(menuName = "ToolMan/Skill/BoomerangSkill")]
     public class BoomerangSkill : Skill
     {
         private GameObject _man;
@@ -12,6 +13,7 @@ namespace ToolMan.Combat.Skills.Normal
         private float _flyingTime;
 
         private PlayerController _manController;
+        private PlayerController _toolController;
 
         public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat)
         {
@@ -53,8 +55,7 @@ namespace ToolMan.Combat.Skills.Normal
                 flyingTimeLast -= Time.deltaTime;
                 if(Vector3.Distance(_man.transform.position, _tool.transform.position) < 1.5)
                 {
-                    // grab
-                    // other settings
+                    _toolController.BeGrabbed(_manController);
                 }
                 yield return null;
             }
