@@ -7,13 +7,13 @@ namespace ToolMan.Mechanics
         public GameObject playerGameObject;
         public PlayerController anotherPlayer;
         PlayerController player;
-        //Rigidbody rb;
+        Rigidbody rb;
         private void Awake()
         {
-            //rb = GetComponent<Rigidbody>();
-            //FixedJoint fj = playerGameObject.AddComponent<FixedJoint>();
-            //fj.connectedBody = rb;
-            //fj.breakForce = 2147483647;
+            rb = GetComponent<Rigidbody>();
+            FixedJoint fj = playerGameObject.AddComponent<FixedJoint>();
+            fj.connectedBody = rb;
+            fj.breakForce = 2147483647;
         }
 
         public void setPlayer(PlayerController player)
@@ -21,15 +21,15 @@ namespace ToolMan.Mechanics
             this.player = player;
         }
 
-        //public void resetRigidBody()
-        //{
-        //    rb.velocity = Vector3.zero;
-        //    rb.angularVelocity = Vector3.zero;
+        public void resetRigidBody()
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
 
-        //    Rigidbody playerRb = player.getRigidbody();
-        //    playerRb.velocity = Vector3.zero;
-        //    playerRb.angularVelocity = Vector3.zero;
-        //}
+            Rigidbody playerRb = player.getRigidbody();
+            playerRb.velocity = Vector3.zero;
+            playerRb.angularVelocity = Vector3.zero;
+        }
 
         public void setAnotherPlayer(PlayerController anotherPlayer)
         {

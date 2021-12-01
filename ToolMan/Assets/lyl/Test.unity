@@ -242,8 +242,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 574051571}
     - target: {fileID: 460149762, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
-      propertyPath: playerLayerMask.m_Bits
-      value: 64
+      propertyPath: anotherPlayer
+      value: 
+      objectReference: {fileID: 1229538627}
+    - target: {fileID: 1090252668, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090252668, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: m_Mass
+      value: 0.0000001
       objectReference: {fileID: 0}
     - target: {fileID: 1589881963645690864, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
       propertyPath: m_Name
@@ -293,8 +301,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3346628931098774234, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
 --- !u!114 &323214611 stripped
 MonoBehaviour:
@@ -314,6 +321,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1844543987, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844543987, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: m_Mass
+      value: 0.0000001
+      objectReference: {fileID: 0}
     - target: {fileID: 4987741909099236402, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -362,10 +377,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBearMan2
       objectReference: {fileID: 0}
-    - target: {fileID: 7602279447490618992, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
     - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: toolListUI
       value: 
@@ -374,12 +385,7 @@ PrefabInstance:
       propertyPath: anotherPlayer
       value: 
       objectReference: {fileID: 323214611}
-    - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
-      propertyPath: playerLayerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7602279447490618992, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
 --- !u!1001 &574051570
 PrefabInstance:
@@ -498,6 +504,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf50a4109cca044e88530d9fecb6feaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1229538627 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+  m_PrefabInstance: {fileID: 466201447}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20557317c6f5148fcb4ad920dccaaab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1434319256
