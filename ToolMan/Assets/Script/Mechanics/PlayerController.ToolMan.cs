@@ -68,7 +68,7 @@ public partial class PlayerController
 
     public void Release()
     {
-        grabbedPoint.resetRigidBody();
+        //grabbedPoint.resetRigidBody();
     }
 
     override public void BeGrabbed(PlayerController anotherPlayer)

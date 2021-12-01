@@ -123,7 +123,7 @@ namespace ToolMan.Mechanics
                 Destroy(player.gameObject.GetComponent<ConfigurableJoint>());
                 //Destroy(gameObject.GetComponent<FixedJoint>());
                 // Reset grabbed player rigidbody
-                targetPoint.GetComponent<GrabbedPoint>().resetRigidBody();
+                //targetPoint.GetComponent<GrabbedPoint>().resetRigidBody();
 
                 // Reset grabbing player rigidbody? not sure if need this
                 player.Release();
@@ -132,7 +132,7 @@ namespace ToolMan.Mechanics
                 anotherPlayer.BeReleased();
 
                 grabbing = false;
-                int playerLayer = player.GetLayerMask().value;
+                int playerLayer = Converter.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
                 Physics.IgnoreLayerCollision(playerLayer, playerLayer, false);
                 Debug.Log("release");
             }
