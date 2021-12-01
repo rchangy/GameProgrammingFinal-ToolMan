@@ -115,70 +115,53 @@ public partial class PlayerController : ToolableMan
 
         else // Tool
         {
-            // Combo Skill
-            if (ComboSkillCharged && anotherPlayer.ComboSkillActivateByMan)
+            if (IsGrabbed())
             {
-                ComboSkillAttack();
-                _attackCharging.Value = false;
-            }
-            else
-<<<<<<< HEAD
-            { 
-                // Normal Attack
-                if (keyboardInputController.JumpOrAttack(playerNum))
+                // Combo Skill
+                if (ComboSkillCharged && anotherPlayer.ComboSkillActivateByMan)
                 {
-                    _attackCharging.Value = combat.ComboSkillAvailable();
-                    if(!_attackCharging.Value) Attack();
-                    _attackChargingTime.Value = 0;
+                    ComboSkillAttack();
+                    _attackCharging.Value = false;
                 }
                 else
-                {
-                    if(_attackCharging.Value && combat.ComboSkillAvailable())
-                    {
-                        if (keyboardInputController.JumpOrAttackHolding(playerNum))
-                        {
-                            if (combat.ComboSkillAvailable())
-                            { 
-                                _attackChargingTime.Value += Time.deltaTime;
-                            }
-                            else
-                            {
-                                _attackCharging.Value = false;
-                                _attackChargingTime.Value = 0;
-                            }
-                        }
-                        else
-                        {
-                            if(_attackChargingTime.Value <= 0.5f)
-                            {
-                                Attack();
-                            }
-                            _attackCharging.Value = false;
-                            _attackChargingTime.Value = 0;
-                        }
-=======
-            {
-                if (IsGrabbed())
-                {
+                { 
                     // Normal Attack
                     if (keyboardInputController.JumpOrAttack(playerNum))
                     {
                         _attackCharging.Value = combat.ComboSkillAvailable();
+                        if(!_attackCharging.Value) Attack();
                         _attackChargingTime.Value = 0;
-                        Attack();
-                    }
-                    else if(_attackCharging.Value && keyboardInputController.JumpOrAttackHolding(playerNum) && combat.ComboSkillAvailable())
-                    {
-                        _attackChargingTime.Value += Time.deltaTime;
                     }
                     else
                     {
-                        _attackCharging.Value = false;
-                        _attackChargingTime.Value = 0;
->>>>>>> ac2888f8a453ccb7a36217953721601b477c6961
+                        if(_attackCharging.Value && combat.ComboSkillAvailable())
+                        {
+                            if (keyboardInputController.JumpOrAttackHolding(playerNum))
+                            {
+                                if (combat.ComboSkillAvailable())
+                                { 
+                                    _attackChargingTime.Value += Time.deltaTime;
+                                }
+                                else
+                                {
+                                    _attackCharging.Value = false;
+                                    _attackChargingTime.Value = 0;
+                                }
+                            }
+                            else
+                            {
+                                if(_attackChargingTime.Value <= 0.5f)
+                                {
+                                    Attack();
+                                }
+                                _attackCharging.Value = false;
+                                _attackChargingTime.Value = 0;
+                            }
+                        }
                     }
                 }
             }
+
         }
 
         // ==== Select Tool && [Man <-> Tool] ====
