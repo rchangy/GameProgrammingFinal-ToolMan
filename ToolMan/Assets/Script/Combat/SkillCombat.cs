@@ -136,13 +136,14 @@ namespace ToolMan.Combat
 
         // select a skill to use now
 #nullable enable
-        public void SetCurrentUsingSkill(string? skillName)
+        public virtual bool SetCurrentUsingSkill(string? skillName)
         {
-            if (Attacking) return;
+            if (Attacking) return false;
             if (skillName == null)
             {
                 Debug.Log("No skill is set to " + gameObject.name);
                 currentUsingSkill = null;
+                return false;
             }
             else
             {
@@ -150,11 +151,13 @@ namespace ToolMan.Combat
                 {
                     currentUsingSkill = availableSkillSet.GetSkillbyName(skillName);
                     currentUsingSkill.SetAttackPoint(transform);
+                    return true;
                 }
                 else
                 {
                     Debug.Log("Unable use skill " + skillName + ", set current skill to null");
                     currentUsingSkill = null;
+                    return false;
                 }
             }
         }
