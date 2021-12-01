@@ -5,7 +5,7 @@ using UnityEngine;
 public class LightSaber : Tool
 {
 
-    public LightSaber(GameObject player)
+    public LightSaber(PlayerController player)
     {
         setUp(player);
         name = "LightSaber";

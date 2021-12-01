@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pickaxe : Tool
 {
-    public Pickaxe(GameObject player)
+    public Pickaxe(PlayerController player)
     {
         setUp(player);
         name = "Pickaxe";

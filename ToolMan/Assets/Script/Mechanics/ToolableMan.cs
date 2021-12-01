@@ -6,9 +6,10 @@ using ToolMan.Mechanics;
 [RequireComponent(typeof(Animator))]
 public abstract class ToolableMan : MonoBehaviour
 {
-    public bool isTool = false;
+    protected bool isTool = false;
     protected List<Tool> tools = new List<Tool>();
     protected int toolIdx;
+    protected bool beGrabbed = false;
 
     [SerializeField] protected GrabbedPoint grabbedPoint;
 
@@ -38,6 +39,10 @@ public abstract class ToolableMan : MonoBehaviour
     public GrabbedPoint GetGrabbedPoint()
     {
         return grabbedPoint;
+    }
+    public bool IsGrabbed()
+    {
+        return beGrabbed;
     }
     // ==== getters ====
 }

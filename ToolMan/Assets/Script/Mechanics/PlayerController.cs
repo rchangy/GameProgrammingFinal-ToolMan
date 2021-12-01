@@ -24,6 +24,7 @@ public partial class PlayerController : ToolableMan
     private CapsuleCollider playerCollider;
     
     [SerializeField] private GrabPoint grabPoint;
+    [SerializeField] private GameObject rightHand;
     [SerializeField] private ObjectListUI toolListUI;
     [SerializeField] private PlayerController anotherPlayer;
     [SerializeField] private EffectController effectController;
@@ -61,14 +62,14 @@ public partial class PlayerController : ToolableMan
 
         if (playerNum == 1)
         {
-            tools.Add(new Pickaxe(gameObject));
-            tools.Add(new Boomerang(gameObject));
+            tools.Add(new Pickaxe(this));
+            tools.Add(new Boomerang(this));
         }
         else if (playerNum == 2)
         {
-            tools.Add(new Shield(gameObject));
-            tools.Add(new FlashBomb(gameObject));
-            tools.Add(new LightSaber(gameObject));
+            tools.Add(new Shield(this));
+            tools.Add(new FlashBomb(this));
+            tools.Add(new LightSaber(this));
         }
 
         distToGround = playerCollider.bounds.extents.y;
@@ -124,6 +125,10 @@ public partial class PlayerController : ToolableMan
     public GrabPoint GetGrabPoint()
     {
         return grabPoint;
+    }
+    public GameObject GetRightHand()
+    {
+        return rightHand;
     }
     // ==== getters
 

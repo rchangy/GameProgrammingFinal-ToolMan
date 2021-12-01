@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shield : Tool
 {
 
-    public Shield(GameObject player)
+    public Shield(PlayerController player)
     {
         setUp(player);
         name = "Shield";

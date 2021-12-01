@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tool
 {
     protected string name;
-    protected GameObject player;
+    protected PlayerController player;
     protected GameObject grabbedPoint;
     protected Animator animator;
     protected Rigidbody playerRB;
@@ -15,37 +15,13 @@ public class Tool
     {
         return name;
     }
-    public void setUp(GameObject player)
-    {
-        setPlayer(player);
-        setAnimator(player.GetComponent<PlayerController>().getAnimator());
-        setGrabbedPoint(player.GetComponent<PlayerController>().GetGrabbedPoint().gameObject);
-        setPlayerRB(player.GetComponent<PlayerController>().getRigidbody());
-        point = new Vector3(0.0f, -1.2f, 0.0f);
-    }
-    public void setAnimator(Animator animator)
-    {
-        this.animator = animator;
-    }
-    
-    public GameObject getGrabbedPoint()
-    {
-        return grabbedPoint;
-    }
-
-    public void setGrabbedPoint(GameObject grabPoint)
-    {
-        this.grabbedPoint = grabPoint;
-    }
-
-    public void setPlayerRB(Rigidbody playerRB)
-    {
-        this.playerRB = playerRB;
-    }
-
-    public void setPlayer(GameObject player)
+    public void setUp(PlayerController player)
     {
         this.player = player;
+        this.animator = player.getAnimator();
+        this.grabbedPoint = player.GetGrabbedPoint().gameObject;
+        this.playerRB = player.getRigidbody();
+        point = new Vector3(0.0f, -1.2f, 0.0f);
     }
 
     public virtual void toTool()
@@ -54,47 +30,40 @@ public class Tool
         playerRB.constraints = RigidbodyConstraints.None;
     }
 
+    public virtual void Attack()
+    {
+        animator.SetTrigger("Attack");
+    }
+
     public void toMan()
     {
-        //Debug.Log(name + " call to Man");
+        // reset parameters of animator
         animator.SetBool("isTool", false);
         animator.SetBool("isShield", false);
         animator.SetBool("isFlashBomb", false);
         animator.SetBool("isSword", false);
         animator.SetBool("isBoomerang", false);
         animator.SetBool("isPickaxe", false);
+
+        // reset grabbed point (need to fix this part if changing animation)
         grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.2f, 0.0f);
         point = new Vector3(0.0f, -1.2f, 0.0f);
+
+        // ==== reset player ==== //
         playerRB.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-        player.transform.rotation = Quaternion.identity;
-        player.transform.position = new Vector3(player.transform.position.x, 1.9f, player.transform.position.z);
-        resetRigidBody();
+        player.gameObject.transform.rotation = Quaternion.identity;
+        // when a tool transform to a man, it may stuck into ground and fall down, this may need to be adjust (position.y)
+        player.gameObject.transform.position = new Vector3(player.gameObject.transform.position.x, 1.9f, player.gameObject.transform.position.z);
+        player.resetRigidBody();
+        // ==== reset player ====
     }
 
-    public void attack()
-    {
-        animator.SetBool("Attacking", true);
-    }
-
-    public void resetRigidBody()
-    {
-        playerRB.velocity = Vector3.zero;
-        playerRB.angularVelocity = Vector3.zero;
-    }
-
-    public void beGrabbed()
-    {
-        playerRB.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-        player.transform.rotation = Quaternion.Euler(0f, 0f, 26f);
-        resetRigidBody();
-    }
-
-    public void beReleased()
-    {
-        playerRB.constraints = RigidbodyConstraints.None;
-    }
     public Vector3 getPoint()
     {
         return point;
+    }
+    public GameObject getGrabbedPoint()
+    {
+        return grabbedPoint;
     }
 }
