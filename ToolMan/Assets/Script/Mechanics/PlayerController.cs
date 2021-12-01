@@ -120,22 +120,25 @@ public partial class PlayerController : ToolableMan
                 _attackCharging.Value = false;
             }
             else
-            { 
-                // Normal Attack
-                if (keyboardInputController.JumpOrAttack(playerNum))
+            {
+                if (IsGrabbed())
                 {
-                    _attackCharging.Value = combat.ComboSkillAvailable();
-                    _attackChargingTime.Value = 0;
-                    Attack();
-                }
-                else if(_attackCharging.Value && keyboardInputController.JumpOrAttackHolding(playerNum) && combat.ComboSkillAvailable())
-                {
-                    _attackChargingTime.Value += Time.deltaTime;
-                }
-                else
-                {
-                    _attackCharging.Value = false;
-                    _attackChargingTime.Value = 0;
+                    // Normal Attack
+                    if (keyboardInputController.JumpOrAttack(playerNum))
+                    {
+                        _attackCharging.Value = combat.ComboSkillAvailable();
+                        _attackChargingTime.Value = 0;
+                        Attack();
+                    }
+                    else if(_attackCharging.Value && keyboardInputController.JumpOrAttackHolding(playerNum) && combat.ComboSkillAvailable())
+                    {
+                        _attackChargingTime.Value += Time.deltaTime;
+                    }
+                    else
+                    {
+                        _attackCharging.Value = false;
+                        _attackChargingTime.Value = 0;
+                    }
                 }
             }
         }
