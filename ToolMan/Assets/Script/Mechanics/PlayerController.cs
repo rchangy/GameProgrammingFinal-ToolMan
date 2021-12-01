@@ -54,8 +54,8 @@ public partial class PlayerController : ToolableMan
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
         //grabbedPointController = grabbedPoint.GetComponent<GrabbedPoint>();
-        //grabPoint.setPlayer(this);
-        //grabbedPointController.setPlayer(this);
+        grabPoint.setPlayer(this);
+        grabbedPoint.setPlayer(this);
         state = State.Grounded;
         keyboardInputController = new KeyboardInputController();
 
