@@ -40,7 +40,7 @@ namespace ToolMan.Mechanics
         {
             if (anotherPlayer != null)
             {
-                player.gameObject.transform.rotation = Quaternion.Euler(0, anotherPlayer.gameObject.transform.eulerAngles.y, -26f);
+                //player.gameObject.transform.rotation = Quaternion.Euler(0, anotherPlayer.gameObject.transform.eulerAngles.y, -26f);
             }
         }
         public PlayerController GetPlayerController()

@@ -41,6 +41,10 @@ public partial class PlayerController : ToolableMan
     public int maxJumpCount = 1; // It can actaully jump once more 
     public int currentJumpCount = 0;
 
+    private bool specialRotate = false;
+    private Vector3 specialToolEulerAngle;
+    private Vector3 toolEulerAngle;
+
     private float distToGround;
     private bool isGrounded;
     // ==== Player Movement ====
@@ -169,6 +173,21 @@ public partial class PlayerController : ToolableMan
     {
         transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
         transform.position += vertical * transform.forward * speed * Time.deltaTime;
+        if (beGrabbed)
+        {
+            // ==== EulerAngle of Tool ====
+            // When Attacking, you can call "SetSpecialRotate(Vector3 specialToolEulerAngle)" to specify the euler angle of the player-tool
+            // After finishing attacking, please call "ResetSpecialRotate()" to make the player-tool to follow the player-man
+            if (!specialRotate)
+            {
+                toolEulerAngle = new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y, -26f);
+            }
+            else
+            {
+                toolEulerAngle = specialToolEulerAngle;
+            }
+            transform.eulerAngles = toolEulerAngle;
+        }
     }
 
 
@@ -194,6 +213,15 @@ public partial class PlayerController : ToolableMan
     public LayerMask GetLayerMask()
     {
         return playerLayerMask;
+    }
+    public void SetSpecialRotate(Vector3 specialToolEulerAngle)
+    {
+        this.specialRotate = true;
+        this.specialToolEulerAngle = specialToolEulerAngle;
+    }
+    public void ResetSpecialRotate()
+    {
+        this.specialRotate = false;
     }
     // ==== getters
 
