@@ -102,6 +102,10 @@ public partial class PlayerController : ToolableMan
         {
             ToolableManTransform();
         }
+        if (!isTool && keyboardInputController.GrabOrRelease(playerNum))
+        {
+            grabPoint.GrabOrRelease();
+        }
         // ==== Select Tool && [Man <-> Tool] ====
     }
 

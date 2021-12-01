@@ -25,32 +25,47 @@ namespace ToolMan.Mechanics
         {
             if (!player.inToolState())
             {
-                if ((Input.GetButtonDown("Grab1") && (player.playerNum == 1)) || (Input.GetButtonDown("Grab2") && (player.playerNum == 2)))
+                //if ((Input.GetButtonDown("Grab1") && (player.playerNum == 1)) || (Input.GetButtonDown("Grab2") && (player.playerNum == 2)))
+                //{
+                    
+                //}
+
+                DetectCollisionWithGrabbedPoint();
+            }
+        }
+
+        public void GrabOrRelease()
+        {
+            Debug.Log("Press Grab");
+            if (grabbing)
+            {
+                Debug.Log("Press Release");
+                Release();
+            }
+            else
+                Grab();
+        }
+
+        private void DetectCollisionWithGrabbedPoint()
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange, grabbedPointLayer);
+            foreach (Collider collider in colliders)
+            {
+                if (collider.gameObject != gameObject)
                 {
-                    Debug.Log("Press Grab1");
-                    if (grabbing)
+                    anotherPlayer = collider.transform.gameObject.GetComponent<GrabbedPoint>().GetPlayerController();
+                    if (anotherPlayer != null && anotherPlayer.inToolState())
                     {
-                        Debug.Log("Press Release");
-                        Release();
+                        Debug.Log("grab grabbed : )");
+                        targetTool = collider.gameObject;
                     }
-                    else
-                        Grab();
                 }
 
-                Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange, grabbedPointLayer);
-                foreach (Collider collider in colliders)
-                {
-                    if (collider.gameObject != gameObject)
-                    {
-                        anotherPlayer = collider.transform.parent.gameObject.GetComponent<PlayerController>();
-                        if (anotherPlayer != null && anotherPlayer.inToolState()) targetTool = collider.gameObject;
-                    }
-
-                }
-                if (colliders.Length == 0 && !grabbing)
-                {
-                    targetTool = null;
-                }
+            }
+            if (colliders.Length == 0 && !grabbing)
+            {
+                Debug.Log("No collision:(");
+                targetTool = null;
             }
         }
 

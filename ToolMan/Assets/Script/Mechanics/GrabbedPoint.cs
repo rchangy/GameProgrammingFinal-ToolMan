@@ -63,5 +63,9 @@ namespace ToolMan.Mechanics
                 //Debug.Log(gameObject.transform.position);
             }
         }
+        public PlayerController GetPlayerController()
+        {
+            return player;
+        }
     }
 }

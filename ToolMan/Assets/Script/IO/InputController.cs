@@ -10,4 +10,5 @@ public interface InputController
     public bool Choose(int playerNum);
     public bool NextTool(int playerNum);
     public bool PrevTool(int playerNum);
+    public bool GrabOrRelease(int playerNum);
 }

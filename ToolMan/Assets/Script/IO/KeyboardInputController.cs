@@ -48,4 +48,10 @@ public class KeyboardInputController : InputController
             return true;
         return false;
     }
+    public bool GrabOrRelease(int playerNum)
+    {
+        if ((Input.GetButtonDown("Grab1") && playerNum == 1) || (Input.GetButtonDown("Grab2") && playerNum == 2))
+            return true;
+        return false;
+    }
 }
