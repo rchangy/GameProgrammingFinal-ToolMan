@@ -22,8 +22,8 @@ public partial class PlayerController : ToolableMan
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider playerCollider;
-    private GrabPoint grabPoint;
-
+    
+    [SerializeField] private GrabPoint grabPoint;
     [SerializeField] private ObjectListUI toolListUI;
     [SerializeField] private PlayerController anotherPlayer;
     [SerializeField] private EffectController effectController;
