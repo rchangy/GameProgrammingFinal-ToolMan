@@ -69,7 +69,6 @@ public partial class PlayerController
     public void Release()
     {
         grabbedPoint.resetRigidBody();
-        beGrabbed = false;
     }
 
     override public void BeGrabbed(PlayerController anotherPlayer)
@@ -95,6 +94,7 @@ public partial class PlayerController
         //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         playerCollider.isTrigger = false;
         grabbedPoint.setAnotherPlayer(null);
+        beGrabbed = false;
     }
     public void resetRigidBody()
     {
