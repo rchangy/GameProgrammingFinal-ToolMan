@@ -49,7 +49,6 @@ namespace ToolMan.Combat
 
         protected override void Start()
         {
-            Debug.Log("skill start");
             base.Start();
             if (availableSkillSet != null)
             {
@@ -97,9 +96,13 @@ namespace ToolMan.Combat
 
         public override bool Attack()
         {
+
             if (!AttackEnabled) return false;
+            Debug.Log("Attack");
             if (!_hasSkillToUse) return false;
+            Debug.Log("Attack");
             if (Attacking) return false;
+            Debug.Log("Attack");
             if(_skillCd[currentUsingSkillName] <= 0)
             { 
                 skillPerforming = StartCoroutine(PerformSkill());
@@ -112,6 +115,7 @@ namespace ToolMan.Combat
         private IEnumerator PerformSkill()
         {
             _hitRefractoryPeriod = currentUsingSkill.RefractoryPeriod;
+            Debug.Log("using skill: " + currentUsingSkill.getName());
             yield return StartCoroutine(currentUsingSkill.Attack(Anim, TargetLayers, this));
             yield return new WaitForSeconds(currentUsingSkill.attackInterval / Aspd);
             _refractoryPeriod.Clear();
@@ -151,6 +155,7 @@ namespace ToolMan.Combat
             {
                 if (CurrentUsingSkillSet.Contains(skillName))
                 {
+                    
                     currentUsingSkill = availableSkillSet.GetSkillbyName(skillName);
                     currentUsingSkill.SetAttackPoint(transform);
                     return true;
