@@ -6,16 +6,23 @@ public class EnemyWhale : Enemy
     [SerializeField] private bool rushing = false;
     [SerializeField] private float stopRushDistance = 3f;
     [SerializeField] private float rushSpped = 10f;
-    private float speed;
+    [SerializeField] private float speed = 30;
     // ==== Rush ====
 
-    private Vector3 circularPatrolCenter = Vector3.zero;
+    // ==== Patrol ====
+    [SerializeField] private bool onPatrolOrbit = false;
+    [SerializeField] private bool onPatrol = false;
+    [SerializeField] private Transform patrolCenter;
+    [SerializeField] private float patrolRadius;
+    private Vector3 patrolStartPoint;
     private float patrolAngle = 0;
-    [SerializeField] float circularPatrolRadius = 10f;
+    [SerializeField] private float patrolAngularVelocity = 0.3f;
+    // ==== Patrol ====
 
+    
     private void Awake()
     {
-        speed = EnemyAgent.speed;
+        patrolStartPoint = patrolCenter.position + Vector3.forward * patrolRadius;
     }
 
     protected override void RandomBehavior()
@@ -59,14 +66,40 @@ public class EnemyWhale : Enemy
 
     protected override void Patrol()
     {
+        //debug
+        //patrolStartPoint = patrolCenter.position;
+        patrolStartPoint = patrolCenter.position + Vector3.forward * patrolRadius;
+        //debug
         // Circular patrol route
-        Debug.Log("Patrol Mode");
         animator.SetTrigger("Swim1");
-        if (!walkPointSet) SearchWalkPoint();
-        if (walkPointSet)
-            EnemyAgent.SetDestination(walkPoint);
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
+
+        onPatrolOrbit = Vector3.Distance(transform.position, patrolStartPoint) <= 0.5f;
+        if (!onPatrolOrbit)
+            onPatrol = false;
+
+        if (!onPatrol)
+        {
+            patrolAngle = 0;
+            if (!onPatrolOrbit)
+            {
+                //EnemyAgent.SetDestination(patrolStartPoint);
+                GoToPatrolStartPoint();
+                Debug.Log("dis = " + Vector3.Distance(transform.position, patrolStartPoint));
+                Debug.Log("dis " + patrolCenter.position + ", " + patrolStartPoint);
+            }
+            else
+            {
+                onPatrol = true;
+            }
+        }            
+        else
+        {
+            // x: sin, z: cos
+            patrolAngle += patrolAngularVelocity;
+            float x = patrolCenter.position.x + patrolRadius * Mathf.Sin(patrolAngle);
+            float z = patrolCenter.position.z  + patrolRadius * Mathf.Cos(patrolAngle);
+            transform.position = new Vector3(x, transform.position.y, z);
+        }
     }
 
     private void Rush() {
@@ -81,22 +114,30 @@ public class EnemyWhale : Enemy
         if (distance > stopRushDistance)
         {
             animator.SetTrigger("Swim2");
-            EnemyAgent.SetDestination(new Vector3(closestPlayer.position.x, transform.position.y, closestPlayer.position.z));
-            EnemyAgent.speed = rushSpped;
+            //EnemyAgent.SetDestination(new Vector3(closestPlayer.position.x, transform.position.y, closestPlayer.position.z));
+            //EnemyAgent.speed = rushSpped;
         }
         else
         {
             rushing = false;
-            EnemyAgent.speed = speed;
+            //EnemyAgent.speed = speed;
         }
     }
 
-    private void BigSkill() { // big skill
-        circularPatrolCenter = closestPlayer.transform.position;
+    private void GoToPatrolStartPoint()
+    {
+        float angle = Mathf.Atan2(patrolStartPoint.x - transform.position.x, patrolStartPoint.z - transform.position.z) * Mathf.Rad2Deg;
+        Vector3 direction = new Vector3(0f, angle, 0f);    
+        transform.eulerAngles = direction;
+        transform.position += speed * Time.deltaTime * transform.forward;
+    }
 
-        patrolAngle += Time.deltaTime;
-        float x = circularPatrolCenter.x + circularPatrolRadius * Mathf.Cos(patrolAngle);
-        float z = circularPatrolCenter.z + circularPatrolRadius * Mathf.Cos(patrolAngle);
-        transform.position = new Vector3(x, transform.position.y, z);
+    private void BigSkill() { // big skill
+        //circularPatrolCenter = closestPlayer.transform.position;
+
+        //patrolAngle += Time.deltaTime;
+        //float x = circularPatrolCenter.x + circularPatrolRadius * Mathf.Cos(patrolAngle);
+        //float z = circularPatrolCenter.z + circularPatrolRadius * Mathf.Cos(patrolAngle);
+        //transform.position = new Vector3(x, transform.position.y, z);
     }
 }
