@@ -52,7 +52,7 @@ namespace ToolMan.Combat
             if (dmg > Str)
             {
                 hitFeel.MakeHitFeel();
-                ThisPlayerController.grabPoint.Release();
+                ThisPlayerController.GetGrabPoint().Release();
                 if (ThisPlayerController.isTool) ThisPlayerController.ToolableManTransform();
             }
             return dmg;

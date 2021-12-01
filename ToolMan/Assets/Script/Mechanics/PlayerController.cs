@@ -4,21 +4,23 @@ using ToolMan.Combat;
 [RequireComponent(typeof(Animator))]
 public partial class PlayerController : ToolableMan
 {
+    private KeyboardInputController keyboardInputController;
+
+    // ==== Player Status ====
+    public int playerNum = 1; // player 1 or player 2
+    private State state = new State();
+
+    [SerializeField] private bool changeable = false;
+    // ==== Player Status ====
+
     // ==== Components ====
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider playerCollider;
+    private GrabPoint grabPoint;
+
     [SerializeField] private ObjectListUI toolListUI;
-    public GrabPoint grabPoint;
-
-    private State state = new State();
-    
-    private KeyboardInputController keyboardInputController;
-
-    public int playerNum = 1; // player 1 or player 2
     [SerializeField] private PlayerController anotherPlayer;
-    [SerializeField] private bool changeable = false;
-
     [SerializeField] private EffectController effectController;
     // ==== Components ====
 
@@ -140,6 +142,11 @@ public partial class PlayerController : ToolableMan
     public Animator getAnimator()
     {
         return animator;
+    }
+
+    public GrabPoint GetGrabPoint()
+    {
+        return grabPoint;
     }
     // ==== getters
 

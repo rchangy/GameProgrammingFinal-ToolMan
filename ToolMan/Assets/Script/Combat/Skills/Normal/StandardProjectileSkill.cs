@@ -26,7 +26,7 @@ namespace ToolMan.Combat.Skills.Normal
             }
             
             anim.SetTrigger("Attack");
-            manPlayer.grabPoint.Release();
+            manPlayer.GetGrabPoint().Release();
             exploded = false;
             yield return new WaitForSeconds(attackDelay);
             var dir = manPlayer.gameObject.transform.forward;
