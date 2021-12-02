@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour
     private float _lastHealth;
     private bool isSet = false;
 
-    private void Start()
+    private void Awake()
     {
         _barSprite = gameObject.GetComponent<Image>();
         _barSprite.enabled = false;
@@ -23,7 +23,7 @@ public class HealthBar : MonoBehaviour
         {
             if(_hp.Value != _lastHealth)
             {
-                _barSprite.fillAmount = _hp.Value / _hp.MaxValue;
+                _barSprite.fillAmount = (float)_hp.Value / (float)_hp.MaxValue;
                 _lastHealth = _hp.Value;
             }
         }

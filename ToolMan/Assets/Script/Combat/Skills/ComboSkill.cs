@@ -2,7 +2,7 @@
 using System;
 namespace ToolMan.Combat.Skills
 {
-    public abstract class ComboSkill : Skill
+    public abstract class ComboSkill : PlayerSkill
     {
         protected string _preTool;
         protected string _postTool;

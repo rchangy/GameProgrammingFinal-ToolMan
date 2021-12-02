@@ -4,13 +4,12 @@ using ToolMan.Util;
 
 namespace ToolMan.Combat.Skills.Normal
 {
-    [CreateAssetMenu(menuName = "ToolMan/Skill/StandardProjectileSkill")]
-    public class StandardProjectileSkill : Skill
+    [CreateAssetMenu(menuName = "ToolMan/Skill/PlayerSkill/FlashBomb")]
+    public class FlashBombSkill : PlayerSkill
     {
         [SerializeField]
         private float _force;
         private Rigidbody rb;
-        private PlayerController manPlayer;
 
         [SerializeField]
         private float _explosionRange;
@@ -19,22 +18,12 @@ namespace ToolMan.Combat.Skills.Normal
 
         public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
-            rb = combat.gameObject.GetComponent<Rigidbody>();
-            if (rb == null)
-            {
-                Debug.Log("Can't find tool's rigid body for projectile skill " + name);
-                yield return null;
-            }
-            if (typeof(PlayerCombat).IsInstanceOfType(combat))
-            {
-                PlayerCombat toolCombat = (PlayerCombat)combat;
-                manPlayer = toolCombat.TeamMateCombat.ThisPlayerController;
-            }
-            
+            rb = _tool.GetComponent<Rigidbody>();
+
             anim.SetTrigger("Attack");
             yield return new WaitForSeconds(attackDelay);
-            manPlayer.GetGrabPoint().Release();
-            var dir = manPlayer.gameObject.transform.forward;
+            _manController.GetGrabPoint().Release();
+            var dir = _man.transform.forward;
             dir.y = 1;
             rb.AddForce(dir * _force);
             while (true)

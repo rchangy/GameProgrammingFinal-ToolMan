@@ -36,11 +36,19 @@ namespace ToolMan.Combat
         [SerializeField]
         private HitFeel hitFeel;
 
+        private PlayerSkillSet _availablePlayerSkillSet;
+
+
         protected override void Start()
         {
-            base.Start();
-            
             _playerController = gameObject.GetComponent<PlayerController>();
+
+            if (typeof(PlayerSkillSet).IsInstanceOfType(availableSkillSet))
+            {
+                _availablePlayerSkillSet = (PlayerSkillSet)availableSkillSet;
+                _availablePlayerSkillSet.SetSkillPlayer(TeamMateCombat, this);
+            }
+            base.Start();
 
             comboSkillSet = manager.Model.ComboSkills;
         }
@@ -100,26 +108,27 @@ namespace ToolMan.Combat
             ComboSkill checkedComboSkill;
             if ((checkedComboSkill = comboSkillSet.GetComboSkill(ThisPlayerController, TeamMateCombat.ThisPlayerController, this)) != null)
             {
-                _vulnerable.Disable();
                 _currentEnergy.ChangeValueBy(-checkedComboSkill.Cost);
-                skillPerforming = StartCoroutine(PerformComboSkill(checkedComboSkill));
+                _skillCoroutine = StartCoroutine(PerformComboSkill(checkedComboSkill));
             }
         }
 
+        
+
         private IEnumerator PerformComboSkill(ComboSkill skill)
         {
-            yield return StartCoroutine(skill.Attack(Anim, TargetLayers, this));
-            yield return new WaitForSeconds(skill.attackInterval / Aspd);
+            _vulnerable.Disable();
+            yield return StartCoroutine(skill.Attack(Anim, TargetLayers, this, _collisionEnable));
             TeamMateCombat.ThisPlayerController.setChangeable(true);
             TeamMateCombat.ThisPlayerController.ToolManChange();
-            skillPerforming = null;
             _vulnerable.RemoveDisability();
+            _skillCoroutine = null;
         }
 
         protected override void Hit(CombatUnit target)
         {
             base.Hit(target);
-            hitFeel.MakeHitFeel();
+            //hitFeel.MakeHitFeel();
         }
 
     }

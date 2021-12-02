@@ -14,22 +14,17 @@ namespace ToolMan.Combat.Stats
             get => _currentValue;
         }
 
-        public Resource()
-        {
-            _currentValue = InitValue;
-            CheckCurrentValue();
-        }
-        public Resource(string name, int maxValue, int initValue) : this()
+        public Resource(string name, int maxValue, int initValue)
         {
             MaxValue = maxValue;
-            InitValue = initValue;
+            _currentValue = initValue;
             _resourceName = name;
+            CheckCurrentValue();
         }
 
         public void Reset(int maxValue, int initValue)
         {
             MaxValue = maxValue;
-            InitValue = initValue;
             _currentValue = InitValue;
             CheckCurrentValue();
         }

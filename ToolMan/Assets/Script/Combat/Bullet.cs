@@ -5,7 +5,7 @@ namespace ToolMan.Combat
     public class Bullet : MonoBehaviour
     {
         public CombatUnit shooter;
-        public int Atk = 0;
+        public float Atk = 0;
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log("Bullet Hit " + collision.gameObject.name);

@@ -83,11 +83,13 @@ public partial class PlayerController
         playerCollider.isTrigger = true;
         grabbedPoint.setAnotherPlayer(anotherPlayer);
 
+        rb.mass = 0.000001f;
         beGrabbed = true;
     }
 
     override public void BeReleased()
     {
+        rb.mass = 1;
         rb.constraints = RigidbodyConstraints.None;
         
         grabbedPoint.gameObject.GetComponent<Collider>().isTrigger = false;

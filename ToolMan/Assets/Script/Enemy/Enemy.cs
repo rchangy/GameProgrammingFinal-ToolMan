@@ -101,7 +101,7 @@ public class Enemy : MonoBehaviour
 
         IReadOnlyCollection<string> skillSet = combat.GetCurrentUsingSkillSet();
         _skillSet = (List<string>)skillSet;
-        if (skillSet.Count > 0)
+        if (skillSet != null && skillSet.Count > 0)
         {
             if (skillWeight.Length > skillSet.Count)
             {

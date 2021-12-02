@@ -72,12 +72,11 @@ namespace ToolMan.Combat
         protected int _lastHpValue;
         public HealthBar healthBar;
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             manager = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
             damageCalculator = manager.Model.DmgCalculator;
             _stats = GetComponent<CharacterStats>();
-
             _atk = _stats.AddStat(new Stat("ATK", AtkBaseValue));
             _aspd = _stats.AddStat(new Stat("ASPD", 1));
             _def = _stats.AddStat(new Stat("DEF", DefBaseValue));
@@ -88,7 +87,10 @@ namespace ToolMan.Combat
             _attackEnabled = _stats.AddAbility(new Ability("AttackEnabled", AttackEnableBaseValue));
             _movable = _stats.AddAbility(new Ability("Movable", MovableBaseValue));
             _vulnerable = _stats.AddAbility(new Ability("Vulnerable", VulnerableBaseValue));
+        }
 
+        protected virtual void Start()
+        {
             if (healthBar != null)
             {
                 healthBar.Setup(_hp);
@@ -99,6 +101,11 @@ namespace ToolMan.Combat
 
         protected virtual void Update()
         {
+            Debug.Log(name + " Hp: " + Hp);
+            //if(Hp <= 0)
+            //{
+            //    Die();
+            //}
         }
 
 
@@ -106,10 +113,12 @@ namespace ToolMan.Combat
 
         public virtual int TakeDamage(float baseDmg, CombatUnit damager)
         {
-            if (Vulnerable) return 0;
+            if (!Vulnerable) return 0;
             float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
             float dmg = typeEffectedDmg - Def;
             _hp.ChangeValueBy(-(int)dmg);
+            Debug.Log(name + " takes " + dmg + " damage, Hp: " + Hp);
+
             return (int)dmg;
         }
 
@@ -146,14 +155,14 @@ namespace ToolMan.Combat
             }
             return null;
         }
-        //public float? GetResourceMaxValue(String name)
-        //{
-        //    if (_stats.HasResource(name))
-        //    {
-        //        return _stats.GetResourceByName(name).MaxValue;
-        //    }
-        //    return null;
-        //}
+        public float? GetResourceMaxValue(String name)
+        {
+            if (_stats.HasResource(name))
+            {
+                return _stats.GetResourceByName(name).MaxValue;
+            }
+            return null;
+        }
         public bool? GetAbilityState(String name)
         {
             if (_stats.HasAbility(name))

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using ToolMan.Util;
 namespace ToolMan.Combat.Skills.Combo
 {
     [CreateAssetMenu(menuName = "ToolMan/Skill/Combo/LightSabertoPickaxe")]
@@ -12,11 +13,10 @@ namespace ToolMan.Combat.Skills.Combo
             _postTool = "Pickaxe";
             _cost = 0;
         }
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat)
+        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             Debug.Log("performing lightSaber to Pickaxe combo skill");
             yield return new WaitForSeconds(attackDelay);
-
         }
     }
 }

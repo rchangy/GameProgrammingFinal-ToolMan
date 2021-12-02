@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using ToolMan.Combat.Skills;
-using ToolMan.Combat.Stats;
-using ToolMan.Combat.Stats.Buff;
 using System.Linq;
+using ToolMan.Util;
 
 namespace ToolMan.Combat
 {
@@ -33,26 +32,31 @@ namespace ToolMan.Combat
             get => currentUsingSkill != null;
         }
 
-        protected Coroutine skillPerforming = null;
+        protected Coroutine _skillCoroutine = null;
 
         public bool Attacking
         {
-            get => skillPerforming != null;
+            get =>  _skillCoroutine != null;
         }
 
         protected Dictionary<string, float> _skillCd = new Dictionary<string, float>();
 
-        public bool ColliderEnable = false;
+        protected BoolWrapper _collisionEnable = new BoolWrapper();
+
+        public bool CollisionEnable
+        {
+            get => _collisionEnable.Value;
+        }
         protected float _hitRefractoryPeriod;
 
         protected Dictionary<CombatUnit, float> _refractoryPeriod = new Dictionary<CombatUnit, float>();
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
             if (availableSkillSet != null)
             {
-                availableSkillSet.CheckStatsExsistence(this);
+                availableSkillSet.Load();
                 SetSkills(InitUsingSkillSet);
                 if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
                 else SetCurrentUsingSkill(null);
@@ -61,22 +65,27 @@ namespace ToolMan.Combat
             else
             {
                 currentUsingSkill = null;
+                CurrentUsingSkillSet = null;
             }
         }
-
         protected override void Update()
         {
             base.Update();
-            lock (_refractoryPeriod)
+
+            if (Attacking)
             {
-                if (_refractoryPeriod.Count > 0)
+                // during attack
+                lock (_refractoryPeriod)
                 {
-                    foreach (CombatUnit c in _refractoryPeriod.Keys.ToList())
+                    if (_refractoryPeriod.Count > 0)
                     {
-                        _refractoryPeriod[c] -= Time.deltaTime;
-                        if (_refractoryPeriod[c] <= 0)
+                        foreach (CombatUnit c in _refractoryPeriod.Keys.ToList())
                         {
-                            _refractoryPeriod.Remove(c);
+                            _refractoryPeriod[c] -= Time.deltaTime;
+                            if (_refractoryPeriod[c] <= 0)
+                            {
+                                _refractoryPeriod.Remove(c);
+                            }
                         }
                     }
                 }
@@ -98,14 +107,11 @@ namespace ToolMan.Combat
         {
 
             if (!AttackEnabled) return false;
-            Debug.Log("Attack");
             if (!_hasSkillToUse) return false;
-            Debug.Log("Attack");
             if (Attacking) return false;
-            Debug.Log("Attack");
             if(_skillCd[currentUsingSkillName] <= 0)
-            { 
-                skillPerforming = StartCoroutine(PerformSkill());
+            {
+                _skillCoroutine = StartCoroutine(PerformSkill());
                 return true;
             }
             return false;
@@ -115,12 +121,8 @@ namespace ToolMan.Combat
         private IEnumerator PerformSkill()
         {
             _hitRefractoryPeriod = currentUsingSkill.RefractoryPeriod;
-            Debug.Log("using skill: " + currentUsingSkill.getName());
-            yield return StartCoroutine(currentUsingSkill.Attack(Anim, TargetLayers, this));
-            yield return new WaitForSeconds(currentUsingSkill.attackInterval / Aspd);
-            _refractoryPeriod.Clear();
-            _skillCd[currentUsingSkill.getName()] = currentUsingSkill.Cd;
-            skillPerforming = null;
+            yield return StartCoroutine(currentUsingSkill.Attack(Anim, TargetLayers, this, _collisionEnable));
+            SkillFinish();
         }
 
         // set skills that can be selected during battle
@@ -130,10 +132,12 @@ namespace ToolMan.Combat
                 InterruptAttack();
             CurrentUsingSkillSet = new List<string>();
             if (skillNames == null || skillNames.Count == 0) return;
+            Debug.Log("Setting skills");
             foreach (string skillName in skillNames)
             {
                 if (availableSkillSet.HasSkill(skillName))
                 {
+                    Debug.Log(skillName);
                     _skillCd.Add(skillName, 0f);
                     CurrentUsingSkillSet.Add(skillName);
                 }
@@ -157,7 +161,6 @@ namespace ToolMan.Combat
                 {
                     
                     currentUsingSkill = availableSkillSet.GetSkillbyName(skillName);
-                    currentUsingSkill.SetAttackPoint(transform);
                     return true;
                 }
                 else
@@ -173,8 +176,16 @@ namespace ToolMan.Combat
         private void InterruptAttack()
         {
             Debug.Log(name + " attack interrupted, coroutine stopped");
-            StopCoroutine(skillPerforming);
-            skillPerforming = null;
+            StopCoroutine(_skillCoroutine);
+            SkillFinish();
+        }
+
+        private void SkillFinish()
+        {
+            _collisionEnable.Value = false;
+            _refractoryPeriod.Clear();
+            _skillCd[currentUsingSkill.getName()] = currentUsingSkill.Cd;
+            _skillCoroutine = null;
         }
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
@@ -187,7 +198,7 @@ namespace ToolMan.Combat
                 if (Attacking) InterruptAttack();
                 Anim.SetTrigger("Hurt");
             }
-            return (int)dmg;
+            return dmg;
         }
 
         protected override void Die()
@@ -198,7 +209,7 @@ namespace ToolMan.Combat
 
         protected virtual void OnTriggerEnter(Collider other)
         {
-            if (!ColliderEnable) return;
+            if (!CollisionEnable) return;
             CombatUnit target = other.gameObject.GetComponent<CombatUnit>();
             if (target == null) return;
             if (_refractoryPeriod.ContainsKey(target)) return;
@@ -207,6 +218,7 @@ namespace ToolMan.Combat
 
         protected virtual void Hit(CombatUnit target)
         {
+            Debug.Log(name + " hit " + target.name);
             target.TakeDamage(Atk, this);
 
             _refractoryPeriod.Add(target, _hitRefractoryPeriod);

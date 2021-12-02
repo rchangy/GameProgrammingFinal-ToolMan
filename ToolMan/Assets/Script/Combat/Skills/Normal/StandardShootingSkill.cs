@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using ToolMan.Util;
 namespace ToolMan.Combat.Skills.Normal
 {
     [CreateAssetMenu(menuName = "ToolMan/Skill/StandardShootingSkill")]
@@ -7,16 +8,17 @@ namespace ToolMan.Combat.Skills.Normal
     {
         public GameObject bulletPrefab;
         public float shootingForce;
+        private Transform attackPoint;
 
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat)
+        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             anim.SetTrigger("Attack");
 
             // wait for delay time
             yield return new WaitForSeconds(attackDelay);
-            Shoot((int)combat.Atk, combat);
+            Shoot(combat.Atk, combat);
         }
-        public virtual void Shoot(int atk, CombatUnit combat)
+        public virtual void Shoot(float atk, CombatUnit combat)
         {
             Debug.Log("Shoot");
             var bulletObject = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ToolMan.Combat.Equip;
-using System;
+using ToolMan.Util;
 
 namespace ToolMan.Combat.Skills.Normal
 {
@@ -13,7 +13,7 @@ namespace ToolMan.Combat.Skills.Normal
         [SerializeField]
         private Material mat;
         
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat)
+        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             yield return new WaitForSeconds(attackDelay);
             var shields = combat.gameObject.GetComponentsInChildren<ForceShield>();

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ToolMan.Combat.Stats.Buff;
-    
+using ToolMan.Util;
 namespace ToolMan.Combat.Skills.Normal
 {
     [CreateAssetMenu(menuName = "ToolMan/Skill/StandardShieldSkill")]
@@ -11,7 +11,7 @@ namespace ToolMan.Combat.Skills.Normal
         public ScriptableBuff Buff;
         private PlayerCombat anotherPlayerCombat;
 
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat)
+        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             if (typeof(PlayerCombat).IsInstanceOfType(combat))
             {

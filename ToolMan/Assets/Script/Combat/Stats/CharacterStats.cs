@@ -7,11 +7,6 @@ namespace ToolMan.Combat.Stats
 {
     public class CharacterStats : MonoBehaviour
     {
-        public List<Ability> AbilityInfos = new List<Ability>();
-        public List<Stat> StatInfos = new List<Stat>();
-        public List<Resource> ResourceInfos = new List<Resource>();
-
-
         private Dictionary<string, Stat> _stats = new Dictionary<string, Stat>();
         private Dictionary<string, Resource> _resources = new Dictionary<string, Resource>();
         private Dictionary<string, Ability> _abilities = new Dictionary<string, Ability>();
@@ -26,22 +21,6 @@ namespace ToolMan.Combat.Stats
 
         private void Awake()
         {
-            foreach (Stat s in StatInfos)
-            {
-                if (!_stats.ContainsKey(s.getName()))
-                    _stats.Add(s.getName(), s);
-            }
-            foreach (Resource r in ResourceInfos)
-            {
-                if (!_resources.ContainsKey(r.getName()))
-                    _resources.Add(r.getName(), r);
-            }
-            foreach (Ability a in AbilityInfos)
-            {
-                if (!_abilities.ContainsKey(a.getName()))
-                    _abilities.Add(a.getName(), a);
-            }
-
             if (_inherentTypes != null)
             {
                 foreach (string s in _inherentTypes)

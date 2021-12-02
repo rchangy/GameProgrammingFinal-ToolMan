@@ -16,6 +16,10 @@ public partial class PlayerController
     public int currentJumpCount = 0;
 
     private bool toolWave = false;
+    public bool ToolWave
+    {
+        get => toolWave;
+    }
     private Vector3 specialToolEulerAngle;
     private Vector3 toolEulerAngle;
     private Vector3 originalToolEulerAngle;
@@ -24,6 +28,10 @@ public partial class PlayerController
     private bool inWaveBack;
     private bool waveDirChange;
     private bool waveEnd;
+    public bool WaveEnd
+    {
+        get => waveEnd;
+    }
 
     private float distToGround;
     private bool isGrounded;
@@ -61,7 +69,7 @@ public partial class PlayerController
     {
         if (!toolWave)
         {
-            toolEulerAngle = new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y, -26f);
+            toolEulerAngle = new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y + 90, -26f);
         }
         else
         {
@@ -83,7 +91,7 @@ public partial class PlayerController
         this.waveEnd = false;
         this.toolWave = true;
         this.specialToolEulerAngle = specialToolEulerAngle;
-        originalToolEulerAngle = new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y, -26f);
+        originalToolEulerAngle = new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y + 90, -26f);
     }
 
     public void ResetToolWave()

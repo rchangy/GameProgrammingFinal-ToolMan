@@ -1,25 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
-using ToolMan.Mechanics;
+using ToolMan.Util;
+
 namespace ToolMan.Combat.Skills.Normal
 {
-    [CreateAssetMenu(menuName = "ToolMan/Skill/BoomerangSkill")]
-    public class BoomerangSkill : Skill
+    [CreateAssetMenu(menuName = "ToolMan/Skill/PlayerSkill/Boomerang")]
+    public class BoomerangSkill : PlayerSkill
     {
-        private GameObject _man;
-        private GameObject _tool;
-
         [SerializeField]
         private float _flyingTime;
 
-        private PlayerController _manController;
-        private PlayerController _toolController;
-
-
-
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat)
+        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
-            attackInterval = _flyingTime * 2.5f;
             yield return new WaitForSeconds(attackDelay);
             _tool = combat.gameObject;
             if (typeof(PlayerCombat).IsInstanceOfType(combat))
@@ -36,14 +28,16 @@ namespace ToolMan.Combat.Skills.Normal
                 yield break;
             }
 
+            collisionEnable.Value = true;
+
             // release
             _manController.GetGrabPoint().GrabOrRelease();
 
             // set target (closest enemy or something)
             Vector3 targetPos = _man.transform.position + _man.transform.forward * 10;
-
             _tool.transform.Rotate(0, 180, 0);
 
+            // to target
             float flyingTimeLast = _flyingTime;
             while (flyingTimeLast > 0)
             {
@@ -53,6 +47,8 @@ namespace ToolMan.Combat.Skills.Normal
                 // return if collide with border 
                 yield return null;
             }
+
+            // return
             flyingTimeLast = _flyingTime * 1.5f;
             while (flyingTimeLast > 0)
             {
@@ -64,13 +60,12 @@ namespace ToolMan.Combat.Skills.Normal
                     _manController.GetGrabPoint().GrabOrRelease();
                     if (_toolController.IsGrabbed())
                     {
+                        collisionEnable.Value = false;
                         yield break;
                     }
                 }
                 yield return null;
             }
-
-
         }
     }
 }
