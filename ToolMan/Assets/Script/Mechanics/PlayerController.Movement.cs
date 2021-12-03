@@ -69,13 +69,13 @@ public partial class PlayerController
     {
         if (!toolWave)
         {
-            toolEulerAngle = new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y + 90, -26f);
+            toolEulerAngle = new Vector3(0, 90f, -26f);
         }
         else
         {
             ManageWaving();
         }
-        transform.eulerAngles = toolEulerAngle;
+        transform.eulerAngles = anotherPlayer.transform.eulerAngles + toolEulerAngle;
     }
 
     // ==== Wave Tool ====
@@ -91,7 +91,7 @@ public partial class PlayerController
         this.waveEnd = false;
         this.toolWave = true;
         this.specialToolEulerAngle = specialToolEulerAngle;
-        originalToolEulerAngle = new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y + 90, -26f);
+        originalToolEulerAngle = new Vector3(0, 90f, -26f);
     }
 
     public void ResetToolWave()
@@ -118,12 +118,24 @@ public partial class PlayerController
         if (!IsCBetweenAB(originalToolEulerAngle, specialToolEulerAngle, newAngle))
         {
             toolEulerAngle = specialToolEulerAngle;
-            Debug.Log("out");
+            //if (waveDirChange == true)
+            //{
+            //    Debug.Log("out");
+            //    Debug.Log("new: " + newAngle);
+            //    Debug.Log("origin: " + originalToolEulerAngle);
+            //    Debug.Log("special: " + specialToolEulerAngle);
+            //}
         }
         else
         {
             toolEulerAngle = newAngle;
-            Debug.Log("in");
+            //if (waveDirChange == true)
+            //{
+            //    Debug.Log("in");
+            //    Debug.Log("new: " + newAngle);
+            //    Debug.Log("origin: " + originalToolEulerAngle);
+            //    Debug.Log("special: " + specialToolEulerAngle);
+            //}
         }
         if (toolEulerAngle == specialToolEulerAngle)
         {

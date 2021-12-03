@@ -16,7 +16,7 @@ namespace ToolMan.Combat.Skills
             collisionEnable.Value = true;
             if (!_toolController.ToolWave)
             {
-                _toolController.SetToolWave(new Vector3(0, _man.transform.eulerAngles.y + 90, 90f), 1f, true);
+                _toolController.SetToolWave(new Vector3(0, 90, 90f), 1f, true);
             }
             while (!_toolController.WaveEnd)
             {

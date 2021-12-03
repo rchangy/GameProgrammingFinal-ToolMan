@@ -60,7 +60,7 @@ namespace ToolMan.Mechanics
                     anotherPlayer = collider.gameObject.GetComponent<GrabbedPoint>().GetPlayerController();
                     if (anotherPlayer != null && anotherPlayer.inToolState())
                     {
-                        Debug.Log("can grab grabbed : )");
+                        //Debug.Log("can grab grabbed : )");
                         targetPoint = collider.gameObject;
                     }
                 }

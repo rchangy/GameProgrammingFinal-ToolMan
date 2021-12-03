@@ -95,7 +95,7 @@ public partial class PlayerController : ToolableMan
         // ==== for testing (wave tool) ====
         if (beGrabbed && Input.GetKeyDown(KeyCode.Tab)) {
             if (!toolWave)
-                SetToolWave(new Vector3(0, anotherPlayer.gameObject.transform.eulerAngles.y, -120f), 10f, true);
+                SetToolWave(new Vector3(0, 90f, -120f), 1f, true);
             else
                 ResetToolWave();
         }
