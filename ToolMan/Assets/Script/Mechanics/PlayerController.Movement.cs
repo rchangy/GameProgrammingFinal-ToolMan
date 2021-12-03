@@ -40,7 +40,8 @@ public partial class PlayerController
         // Jump
         if (keyboardInputController.JumpOrAttack(playerNum))
             Jump();
-        isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f);
+        Debug.Log("++= " + transform.position + playerCollider.center);
+        isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f, groundLayerMask.value);
         if (isGrounded)
         {
             currentJumpCount = 0;
@@ -136,4 +137,9 @@ public partial class PlayerController
     }
 
     // ==== Wave Tool ====
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position + playerCollider.center, transform.position + playerCollider.center - new Vector3(0, distToGround + 0.1f, 0));
+    }
 }

@@ -18,6 +18,7 @@ public partial class PlayerController : ToolableMan
 
     [SerializeField] private bool changeable = false;
     [SerializeField] private LayerMask playerLayerMask;
+    [SerializeField] private LayerMask groundLayerMask;
 
     float horizontal, vertical;
     // ==== Player Status ====
@@ -216,20 +217,4 @@ public partial class PlayerController : ToolableMan
         return playerLayerMask;
     }
     // ==== getters
-
-    // ==== State ====
-    private void UpdateState()
-    {
-
-    }
-
-    public enum State
-    {
-        Grounded,
-        PrepareToJump,
-        Jumping,
-        InFlight,
-        Landed,
-    }
-    // ==== State ====
 }
