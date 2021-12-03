@@ -10,12 +10,14 @@ public partial class PlayerController
         {
             animator.SetBool("inFlight", true);
             animator.SetBool("isGrounded", false);
+            animator.SetFloat("jumpVelocity", rb.velocity.y);
         }
         else
         {
             Debug.Log("isGrounded = " + isGrounded);
             Debug.Log("distToGround = " + distToGround);
-            animator.SetFloat("velocity_x", Mathf.Abs(vertical));
+            animator.SetFloat("verticalVelocity", Mathf.Abs(vertical));
+            animator.SetFloat("jumpVelocity", 0);
             animator.SetBool("inFlight", false);
             animator.SetBool("isGrounded", true);
         }
