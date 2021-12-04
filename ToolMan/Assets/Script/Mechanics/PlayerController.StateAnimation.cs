@@ -30,7 +30,12 @@ public partial class PlayerController
 
     public void AnimationHurt()
     {
+        animator.SetTrigger("Hurt");
+    }
 
+    public void AnimationDie()
+    {
+        animator.SetBool("isDead", true);
     }
 
     public enum State

@@ -206,6 +206,7 @@ namespace ToolMan.Combat
         {
             Debug.Log(name + " dies");
             Destroy(gameObject);
+            player.AnimationDie();
         }
 
         protected virtual void OnTriggerEnter(Collider other)
