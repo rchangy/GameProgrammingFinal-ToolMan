@@ -27,9 +27,9 @@ public class Tool
 
     public virtual void toTool()
     {
+        grabbedPoint.SetActive(false);
         animator.SetBool("isTool", true);
         playerRB.constraints = RigidbodyConstraints.None;
-        grabbedPoint.SetActive(false);
     }
 
     public void toMan()
