@@ -8,6 +8,7 @@ public class Pickaxe : Tool
     {
         setUp(player);
         name = "Pickaxe";
+        theToolEulerAngle = new Vector3(0f, 90f, -26f);
     }
 
     public override void toTool()

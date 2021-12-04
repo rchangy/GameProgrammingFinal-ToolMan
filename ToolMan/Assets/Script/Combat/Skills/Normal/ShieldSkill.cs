@@ -9,12 +9,12 @@ namespace ToolMan.Combat.Skills.Normal
     {
         public ScriptableBuff Buff;
 
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             _toolCombat.AddBuff(Buff);
             _manCombat.AddBuff(Buff);
             // Animation
-            anim.SetTrigger("Attack");
+            player.AnimationAttack();
             // delay
             yield return new WaitForSeconds(attackDelay);
         }

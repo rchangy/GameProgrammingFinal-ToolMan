@@ -20,9 +20,9 @@ public partial class PlayerController
     {
         get => toolWave;
     }
-    private Vector3 specialToolEulerAngle;
-    private Vector3 toolEulerAngle;
-    private Vector3 originalToolEulerAngle;
+    private Vector3 specialToolEulerAngle; // the euler angle at the ending of waving
+    private Vector3 toolEulerAngle; // current euler angle of the player - tool
+    private Vector3 originalToolEulerAngle; // the euler angle before starting waving
     private float waveSpeed;
     private bool shouldWaveBack;
     private bool inWaveBack;
@@ -70,7 +70,7 @@ public partial class PlayerController
     {
         if (!toolWave)
         {
-            toolEulerAngle = new Vector3(0, 90f, -26f);
+            toolEulerAngle = tools[toolIdx].getTheToolEulerAngle();
         }
         else
         {
@@ -92,7 +92,7 @@ public partial class PlayerController
         this.waveEnd = false;
         this.toolWave = true;
         this.specialToolEulerAngle = specialToolEulerAngle;
-        originalToolEulerAngle = new Vector3(0, 90f, -26f);
+        originalToolEulerAngle = tools[toolIdx].getTheToolEulerAngle();
     }
 
     public void ResetToolWave()

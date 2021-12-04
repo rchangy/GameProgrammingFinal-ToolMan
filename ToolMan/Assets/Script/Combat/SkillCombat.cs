@@ -11,7 +11,7 @@ namespace ToolMan.Combat
     public class SkillCombat : CombatUnit
     {
         // skills
-        public Animator Anim;
+        public PlayerController player;
         public LayerMask TargetLayers;
 
         public SkillSet availableSkillSet;
@@ -121,7 +121,7 @@ namespace ToolMan.Combat
         private IEnumerator PerformSkill()
         {
             _hitRefractoryPeriod = currentUsingSkill.RefractoryPeriod;
-            yield return StartCoroutine(currentUsingSkill.Attack(Anim, TargetLayers, this, _collisionEnable));
+            yield return StartCoroutine(currentUsingSkill.Attack(player, TargetLayers, this, _collisionEnable));
             SkillFinish();
         }
 
@@ -196,7 +196,8 @@ namespace ToolMan.Combat
             {
                 // skill interrupt
                 if (Attacking) InterruptAttack();
-                Anim.SetTrigger("Hurt");
+                player.AnimationHurt();
+                
             }
             return dmg;
         }

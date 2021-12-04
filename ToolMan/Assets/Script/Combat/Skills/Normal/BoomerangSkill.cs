@@ -10,7 +10,7 @@ namespace ToolMan.Combat.Skills.Normal
         [SerializeField]
         private float _flyingTime;
 
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             yield return new WaitForSeconds(attackDelay);
             _tool = combat.gameObject;

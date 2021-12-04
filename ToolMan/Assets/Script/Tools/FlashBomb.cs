@@ -9,6 +9,7 @@ public class FlashBomb : Tool
     {
         setUp(player);
         name = "FlashBomb";
+        theToolEulerAngle = new Vector3(0f, 0f, 0f);
     }
 
 

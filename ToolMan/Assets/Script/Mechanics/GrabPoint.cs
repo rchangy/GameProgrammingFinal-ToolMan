@@ -125,9 +125,6 @@ namespace ToolMan.Mechanics
                 // Reset grabbed player rigidbody
                 //targetPoint.GetComponent<GrabbedPoint>().resetRigidBody();
 
-                // Reset grabbing player rigidbody? not sure if need this
-                player.Release();
-
                 // set Tool in the status of being released
                 anotherPlayer.BeReleased();
 

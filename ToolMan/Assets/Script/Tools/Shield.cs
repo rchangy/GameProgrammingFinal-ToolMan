@@ -9,6 +9,7 @@ public class Shield : Tool
     {
         setUp(player);
         name = "Shield";
+        theToolEulerAngle = new Vector3(0f, 0f, 0f);
     }
 
     public override void toTool()

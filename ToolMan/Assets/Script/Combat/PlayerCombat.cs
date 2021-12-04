@@ -118,7 +118,7 @@ namespace ToolMan.Combat
         private IEnumerator PerformComboSkill(ComboSkill skill)
         {
             _vulnerable.Disable();
-            yield return StartCoroutine(skill.Attack(Anim, TargetLayers, this, _collisionEnable));
+            yield return StartCoroutine(skill.Attack(_playerController, TargetLayers, this, _collisionEnable));
             TeamMateCombat.ThisPlayerController.setChangeable(true);
             TeamMateCombat.ThisPlayerController.ToolManChange();
             _vulnerable.RemoveDisability();

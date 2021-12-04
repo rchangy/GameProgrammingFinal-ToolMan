@@ -23,6 +23,16 @@ public partial class PlayerController
         }
     }
 
+    public void AnimationAttack()
+    {
+        animator.SetTrigger("Attack");
+    }
+
+    public void AnimationHurt()
+    {
+
+    }
+
     public enum State
     {
         Grounded,

@@ -10,6 +10,7 @@ public class Tool
     protected Animator animator;
     protected Rigidbody playerRB;
     protected Vector3 point;
+    protected Vector3 theToolEulerAngle; // the specific enuler angle when the player-tool is being grabbed
 
     public string getName()
     {
@@ -28,11 +29,7 @@ public class Tool
     {
         animator.SetBool("isTool", true);
         playerRB.constraints = RigidbodyConstraints.None;
-    }
-
-    public virtual void Attack()
-    {
-        animator.SetTrigger("Attack");
+        grabbedPoint.SetActive(false);
     }
 
     public void toMan()
@@ -56,14 +53,15 @@ public class Tool
         player.gameObject.transform.position = new Vector3(player.gameObject.transform.position.x, 1.9f, player.gameObject.transform.position.z);
         player.resetRigidBody();
         // ==== reset player ====
+        grabbedPoint.SetActive(true);
     }
 
     public Vector3 getPoint()
     {
         return point;
     }
-    public GameObject getGrabbedPoint()
+    public Vector3 getTheToolEulerAngle()
     {
-        return grabbedPoint;
+        return theToolEulerAngle;
     }
 }

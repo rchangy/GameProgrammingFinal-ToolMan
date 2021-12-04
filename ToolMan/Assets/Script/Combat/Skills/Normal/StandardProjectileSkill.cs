@@ -17,7 +17,7 @@ namespace ToolMan.Combat.Skills.Normal
         [SerializeField]
         private float _atkMultiplier;
 
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             rb = combat.gameObject.GetComponent<Rigidbody>();
             if (rb == null)
@@ -30,8 +30,8 @@ namespace ToolMan.Combat.Skills.Normal
                 PlayerCombat toolCombat = (PlayerCombat)combat;
                 manPlayer = toolCombat.TeamMateCombat.ThisPlayerController;
             }
-            
-            anim.SetTrigger("Attack");
+
+            player.AnimationAttack();
             yield return new WaitForSeconds(attackDelay);
             manPlayer.GetGrabPoint().Release();
             var dir = manPlayer.gameObject.transform.forward;

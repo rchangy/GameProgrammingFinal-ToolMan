@@ -16,11 +16,11 @@ namespace ToolMan.Combat.Skills.Normal
         [SerializeField]
         private float _atkMultiplier;
 
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             rb = _tool.GetComponent<Rigidbody>();
 
-            anim.SetTrigger("Attack");
+            player.AnimationAttack();
             yield return new WaitForSeconds(attackDelay);
             _manController.GetGrabPoint().Release();
             var dir = _man.transform.forward;
