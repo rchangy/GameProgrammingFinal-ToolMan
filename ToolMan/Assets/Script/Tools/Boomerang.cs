@@ -16,7 +16,7 @@ public class Boomerang : Tool
     {
         base.toTool();
         animator.SetBool("isBoomerang", true);
-        grabbedPoint.transform.localPosition = new Vector3(-0.4f, -1.1f, 0.0f);
-        point = new Vector3(-0.4f, -1.1f, 0.0f);
+        //grabbedPoint.transform.localPosition = new Vector3(-0.46f, -1f, 0f);
+        point = new Vector3(-0.46f, -1f, 0f);
     }
 }

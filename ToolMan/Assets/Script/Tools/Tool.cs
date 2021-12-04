@@ -22,7 +22,7 @@ public class Tool
         this.animator = player.getAnimator();
         this.grabbedPoint = player.GetGrabbedPoint().gameObject;
         this.playerRB = player.getRigidbody();
-        point = new Vector3(0.0f, -1.2f, 0.0f);
+        //point = new Vector3(0.0f, -1.2f, 0.0f);
     }
 
     public virtual void toTool()
@@ -43,7 +43,7 @@ public class Tool
 
         // reset grabbed point (need to fix this part if changing animation)
         grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.2f, 0.0f);
-        point = new Vector3(0.0f, -1.2f, 0.0f);
+        //point = new Vector3(0.0f, -1.2f, 0.0f);
 
         // ==== reset player ==== //
         playerRB.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;

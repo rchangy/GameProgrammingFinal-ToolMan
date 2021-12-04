@@ -17,7 +17,7 @@ public class FlashBomb : Tool
     {
         base.toTool();
         animator.SetBool("isFlashBomb", true);
-        grabbedPoint.transform.localPosition = new Vector3(0.0f, 0.25f, 0.7f);
-        point = new Vector3(0.0f, 0.25f, 0.7f);
+        //grabbedPoint.transform.localPosition = new Vector3(0.0f, 0.2f, 0.6f);
+        point = new Vector3(0.0f, 0.2f, 0.6f);
     }
 }
