@@ -1912,7 +1912,7 @@ Animator:
   m_GameObject: {fileID: 5653095584333043336}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e5d8a1d12baf2cc43865145dad2784f0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01ce55a0160ab0a4a9a9aa674f72c225, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1934,21 +1934,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbedPoint: {fileID: 4349471767006141894}
-  playerNum: 2
-  changeable: 0
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  grabPoint: {fileID: 4806112291604789432}
-  rightHand: {fileID: 7602279447490618996}
-  toolListUI: {fileID: 0}
-  anotherPlayer: {fileID: 0}
-  effectController: {fileID: 1888963215}
   speed: 15
   moveAngleSensitivity: 200
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
+  playerNum: 2
+  changeable: 0
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  playerCollider: {fileID: 8507911072495564282}
+  grabPoint: {fileID: 4806112291604789432}
+  rightHand: {fileID: 7602279447490618996}
+  toolListUI: {fileID: 0}
+  anotherPlayer: {fileID: 0}
+  effectController: {fileID: 1888963215}
   combat: {fileID: 2522315202409478489}
   _comboSkillChargeTime:
     Value: 2
@@ -1966,9 +1970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42d4048d51594d52bc8a2be5a45853d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbilityInfos: []
-  StatInfos: []
-  ResourceInfos: []
   _inherentTypes: []
 --- !u!114 &2522315202409478489
 MonoBehaviour:
@@ -2000,7 +2001,6 @@ MonoBehaviour:
   - LightSaber
   - FlashBomb
   - Shield
-  ColliderEnable: 0
   _teamMate: {fileID: 0}
   hitFeel: {fileID: 0}
 --- !u!1 &5681094873323192337
