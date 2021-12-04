@@ -14,8 +14,8 @@ public partial class PlayerController
         }
         else
         {
-            Debug.Log("isGrounded = " + isGrounded);
-            Debug.Log("distToGround = " + distToGround);
+            //Debug.Log("isGrounded = " + isGrounded);
+            //Debug.Log("distToGround = " + distToGround);
             animator.SetFloat("verticalVelocity", Mathf.Abs(vertical));
             animator.SetFloat("jumpVelocity", 0);
             animator.SetBool("inFlight", false);

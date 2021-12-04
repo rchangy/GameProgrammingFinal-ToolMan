@@ -26,8 +26,8 @@ public partial class PlayerController : ToolableMan
     // ==== Components ====
     private Animator animator;
     private Rigidbody rb;
-    private CapsuleCollider playerCollider;
 
+    [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private GrabPoint grabPoint;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private ObjectListUI toolListUI;
@@ -64,7 +64,7 @@ public partial class PlayerController : ToolableMan
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        playerCollider = GetComponent<CapsuleCollider>();
+        //playerCollider = GetComponent<CapsuleCollider>();
         grabPoint.setPlayer(this);
         grabbedPoint.setPlayer(this);
         state = State.Grounded;

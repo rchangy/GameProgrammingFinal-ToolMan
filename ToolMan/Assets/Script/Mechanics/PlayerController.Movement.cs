@@ -48,7 +48,7 @@ public partial class PlayerController
         // Jump
         if (keyboardInputController.JumpOrAttack(playerNum))
             Jump();
-        Debug.Log("++= " + transform.position + playerCollider.center);
+        //Debug.Log("++= " + transform.position + playerCollider.center);
         isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f, groundLayerMask.value);
         if (isGrounded)
         {
