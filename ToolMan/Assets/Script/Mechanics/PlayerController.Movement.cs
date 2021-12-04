@@ -157,9 +157,4 @@ public partial class PlayerController
     }
 
     // ==== Wave Tool ====
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position + playerCollider.center, transform.position + playerCollider.center - new Vector3(0, distToGround + 0.1f, 0));
-    }
 }

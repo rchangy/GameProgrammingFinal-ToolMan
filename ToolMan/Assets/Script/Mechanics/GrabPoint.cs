@@ -77,7 +77,6 @@ namespace ToolMan.Mechanics
             if (targetPoint != null)
             {
                 int playerLayer = Converter.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
-                Debug.Log("playerLayer = " + playerLayer);
                 Physics.IgnoreLayerCollision(playerLayer, playerLayer, true);
                 // change position first
                 Vector3 grabbedPointLocalPosition = anotherPlayer.GetGrabbedPoint().transform.localPosition;
@@ -95,23 +94,13 @@ namespace ToolMan.Mechanics
                 confJ.xMotion = ConfigurableJointMotion.Locked;
                 confJ.yMotion = ConfigurableJointMotion.Locked;
                 confJ.zMotion = ConfigurableJointMotion.Locked;
-                //confJ.targetRotation = Quaternion.Euler(60f, 0, 30f);
 
-                //// set FixedJoint
-                //FixedJoint fj = gameObject.AddComponent<FixedJoint>();
-                ////FixedJoint fj = player.gameObject.AddComponent<FixedJoint>();
-                //fj.connectedBody = anotherPlayer.getRigidbody();
-                //fj.breakForce = 2147483847;
-                //fj.autoConfigureConnectedAnchor = false;
-                ////fj.anchor = player.GetRightHand().transform.localPosition;
-                //fj.connectedAnchor = anotherPlayer.getTool().getPoint();
-                //fj.enableCollision = false;
 
                 // set Tool in the status of being grabbed
                 anotherPlayer.BeGrabbed(player);
 
+                player.Grab(confJ);
                 grabbing = true;
-                Debug.Log("grab");
             }
         }
 
@@ -119,19 +108,14 @@ namespace ToolMan.Mechanics
         {
             if (targetPoint != null)
             {
-                //Destroy(gameObject.GetComponent<ConfigurableJoint>());
                 Destroy(player.gameObject.GetComponent<ConfigurableJoint>());
-                //Destroy(gameObject.GetComponent<FixedJoint>());
-                // Reset grabbed player rigidbody
-                //targetPoint.GetComponent<GrabbedPoint>().resetRigidBody();
 
                 // set Tool in the status of being released
                 anotherPlayer.BeReleased();
-
+                player.Release();
                 grabbing = false;
                 int playerLayer = Converter.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
                 Physics.IgnoreLayerCollision(playerLayer, playerLayer, false);
-                Debug.Log("release");
             }
         }
 

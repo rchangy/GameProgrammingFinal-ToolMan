@@ -27,7 +27,6 @@ public class Tool
 
     public virtual void toTool()
     {
-        grabbedPoint.SetActive(false);
         animator.SetBool("isTool", true);
         playerRB.constraints = RigidbodyConstraints.None;
     }
@@ -53,7 +52,6 @@ public class Tool
         player.gameObject.transform.position = new Vector3(player.gameObject.transform.position.x, 1.9f, player.gameObject.transform.position.z);
         player.resetRigidBody();
         // ==== reset player ====
-        grabbedPoint.SetActive(true);
     }
 
     public Vector3 getPoint()

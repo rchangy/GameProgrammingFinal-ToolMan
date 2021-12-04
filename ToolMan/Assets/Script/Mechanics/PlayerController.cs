@@ -26,6 +26,7 @@ public partial class PlayerController : ToolableMan
     // ==== Components ====
     private Animator animator;
     private Rigidbody rb;
+    private ConfigurableJoint confJ = null;
 
     [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private GrabPoint grabPoint;
@@ -186,6 +187,10 @@ public partial class PlayerController : ToolableMan
     {
         transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
         transform.position += vertical * transform.forward * speed * Time.deltaTime;
+        if (!isTool && confJ!= null)
+        {
+            confJ.anchor = rightHand.transform.localPosition;
+        }
         if (beGrabbed)
         {
             beGrabbedMovement();
