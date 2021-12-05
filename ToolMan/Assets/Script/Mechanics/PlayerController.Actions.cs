@@ -28,4 +28,15 @@ public partial class PlayerController
     {
         this.confJ = null;
     }
+
+    public void Die()
+    {
+        isDead = true;
+        AnimationDie();
+    }
+
+    public void Hurt()
+    {
+        AnimationHurt();
+    }
 }

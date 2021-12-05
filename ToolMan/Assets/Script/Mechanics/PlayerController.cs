@@ -15,6 +15,7 @@ public partial class PlayerController : ToolableMan
     // ==== Player Status ====
     public int playerNum = 1; // player 1 or player 2
     private State state = new State();
+    private bool isDead = false;
 
     [SerializeField] private bool changeable = false;
     [SerializeField] private LayerMask playerLayerMask;
@@ -221,5 +222,9 @@ public partial class PlayerController : ToolableMan
     {
         return playerLayerMask;
     }
-    // ==== getters
+    public bool IsDead()
+    {
+        return isDead;
+    }
+    // ==== getters ====
 }

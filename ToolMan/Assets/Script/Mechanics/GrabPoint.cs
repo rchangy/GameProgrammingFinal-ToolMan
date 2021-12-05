@@ -40,12 +40,12 @@ namespace ToolMan.Mechanics
         {
             if (grabbing)
             {
-                Debug.Log("Press Release");
+                //Debug.Log("Press Release");
                 Release();
             }
             else
             {
-                Debug.Log("Press Grab");
+                //Debug.Log("Press Grab");
                 Grab();
             }
         }

@@ -196,7 +196,7 @@ namespace ToolMan.Combat
             {
                 // skill interrupt
                 if (Attacking) InterruptAttack();
-                player.AnimationHurt();
+                player.Hurt();
                 
             }
             return dmg;
@@ -206,7 +206,7 @@ namespace ToolMan.Combat
         {
             Debug.Log(name + " dies");
             Destroy(gameObject);
-            player.AnimationDie();
+            player.Die();
         }
 
         protected virtual void OnTriggerEnter(Collider other)
