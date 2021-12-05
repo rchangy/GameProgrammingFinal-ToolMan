@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
 
     // state & attributes (suppressed by what)
     // health bar https://www.youtube.com/watch?v=37hEX3Lrc0A
-    private void Awake()
+    protected virtual void Awake()
     {
         weight = new int[] { AttackWeight, PatrolWeight, IdleWeight };
         isAction = false;
