@@ -6,7 +6,11 @@ public partial class PlayerController
 {
     private void UpdateState()
     {
-        if (!isGrounded)
+        if (isDead)
+        {
+            animator.SetBool("isDead", true);
+        }
+        else if (!isGrounded)
         {
             animator.SetBool("inFlight", true);
             animator.SetBool("isGrounded", false);
@@ -14,8 +18,6 @@ public partial class PlayerController
         }
         else
         {
-            //Debug.Log("isGrounded = " + isGrounded);
-            //Debug.Log("distToGround = " + distToGround);
             animator.SetFloat("verticalVelocity", Mathf.Abs(vertical));
             animator.SetFloat("jumpVelocity", 0);
             animator.SetBool("inFlight", false);
@@ -31,20 +33,5 @@ public partial class PlayerController
     public void AnimationHurt()
     {
         animator.SetTrigger("Hurt");
-    }
-
-    public void AnimationDie()
-    {
-        animator.SetBool("isDead", true);
-    }
-
-    public enum State
-    {
-        Grounded,
-        PrepareToJump,
-        Jumping,
-        InFlight,
-        Landed,
-        Tool
     }
 }

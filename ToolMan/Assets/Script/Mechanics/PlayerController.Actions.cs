@@ -45,7 +45,6 @@ public partial class PlayerController
     public void Die()
     {
         isDead = true;
-        AnimationDie();
     }
 
     public void Hurt()

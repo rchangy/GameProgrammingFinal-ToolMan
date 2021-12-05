@@ -14,7 +14,6 @@ public partial class PlayerController : ToolableMan
 
     // ==== Player Status ====
     public int playerNum = 1; // player 1 or player 2
-    private State state = new State();
     private bool isDead = false;
 
     [SerializeField] private bool changeable = false;
@@ -69,7 +68,6 @@ public partial class PlayerController : ToolableMan
         //playerCollider = GetComponent<CapsuleCollider>();
         grabPoint.setPlayer(this);
         grabbedPoint.setPlayer(this);
-        state = State.Grounded;
         keyboardInputController = new KeyboardInputController();
 
         if (playerNum == 1)
@@ -95,14 +93,14 @@ public partial class PlayerController : ToolableMan
 
     override protected void Update()
     {
-        // ==== for testing (wave tool) ====
-        if (beGrabbed && Input.GetKeyDown(KeyCode.Tab)) {
-            if (!toolWave)
-                SetToolWave(new Vector3(0, 90f, -120f), 1f, true);
-            else
-                ResetToolWave();
-        }
-        // ==== for testing (wave tool) ====
+        //// ==== for testing (wave tool) ====
+        //if (beGrabbed && Input.GetKeyDown(KeyCode.Tab)) {
+        //    if (!toolWave)
+        //        SetToolWave(new Vector3(0, 90f, -120f), 1f, true);
+        //    else
+        //        ResetToolWave();
+        //}
+        //// ==== for testing (wave tool) ====
         if (!isTool)
         {
             _comboSkillActivateByMan = anotherPlayer.ComboSkillCharged && keyboardInputController.JumpOrAttack(playerNum);
