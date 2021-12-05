@@ -52,6 +52,7 @@ public class Tool
         player.gameObject.transform.position = new Vector3(player.gameObject.transform.position.x, 1.9f, player.gameObject.transform.position.z);
         player.resetRigidBody();
         // ==== reset player ====
+        player.GetMaterial().DisableKeyword("_EMISSION");
     }
 
     public Vector3 getPoint()
