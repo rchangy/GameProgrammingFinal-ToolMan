@@ -33,7 +33,7 @@ namespace ToolMan.Combat.Skills.Normal
 
             player.AnimationAttack();
             yield return new WaitForSeconds(attackDelay);
-            manPlayer.GetGrabPoint().Release();
+            manPlayer.Release();
             var dir = manPlayer.gameObject.transform.forward;
             dir.y = 1;
             rb.AddForce(dir * _force);

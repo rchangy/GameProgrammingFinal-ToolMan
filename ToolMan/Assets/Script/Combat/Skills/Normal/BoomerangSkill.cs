@@ -31,7 +31,7 @@ namespace ToolMan.Combat.Skills.Normal
             collisionEnable.Value = true;
 
             // release
-            _manController.GetGrabPoint().GrabOrRelease();
+            _manController.GrabOrRelease();
 
             // set target (closest enemy or something)
             Vector3 targetPos = _man.transform.position + _man.transform.forward * 10;
@@ -57,7 +57,7 @@ namespace ToolMan.Combat.Skills.Normal
                 flyingTimeLast -= Time.deltaTime;
                 if (Vector3.Distance(_man.transform.position, _tool.transform.position) < 1.5)
                 {
-                    _manController.GetGrabPoint().GrabOrRelease();
+                    _manController.GrabOrRelease();
                     if (_toolController.IsGrabbed())
                     {
                         collisionEnable.Value = false;

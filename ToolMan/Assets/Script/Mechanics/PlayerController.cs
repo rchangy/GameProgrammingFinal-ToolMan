@@ -179,7 +179,7 @@ public partial class PlayerController : ToolableMan
         }
         if (!isTool && keyboardInputController.GrabOrRelease(playerNum))
         {
-            grabPoint.GrabOrRelease();
+            GrabOrRelease();
         }
         // ==== Select Tool && [Man <-> Tool] ====
     }
@@ -225,6 +225,10 @@ public partial class PlayerController : ToolableMan
     public bool IsDead()
     {
         return isDead;
+    }
+    public bool IsGrabbing()
+    {
+        return grabPoint.IsGrabbing();
     }
     // ==== getters ====
 }

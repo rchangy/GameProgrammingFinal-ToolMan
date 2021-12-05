@@ -60,7 +60,7 @@ namespace ToolMan.Combat
             if (dmg > Str)
             {
                 hitFeel.MakeHitFeel();
-                ThisPlayerController.GetGrabPoint().Release();
+                ThisPlayerController.Release();
                 if (ThisPlayerController.inToolState()) ThisPlayerController.ToolableManTransform();
             }
             return dmg;

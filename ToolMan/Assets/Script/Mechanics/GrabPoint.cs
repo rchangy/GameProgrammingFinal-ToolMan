@@ -36,20 +36,6 @@ namespace ToolMan.Mechanics
             }
         }
 
-        public void GrabOrRelease()
-        {
-            if (grabbing)
-            {
-                //Debug.Log("Press Release");
-                Release();
-            }
-            else
-            {
-                //Debug.Log("Press Grab");
-                Grab();
-            }
-        }
-
         private void DetectCollisionWithGrabbedPoint()
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange, grabbedPointLayer);
@@ -60,7 +46,6 @@ namespace ToolMan.Mechanics
                     anotherPlayer = collider.gameObject.GetComponent<GrabbedPoint>().GetPlayerController();
                     if (anotherPlayer != null && anotherPlayer.inToolState())
                     {
-                        //Debug.Log("can grab grabbed : )");
                         targetPoint = collider.gameObject;
                     }
                 }
@@ -72,7 +57,7 @@ namespace ToolMan.Mechanics
             }
         }
 
-        public void Grab()
+        public ConfigurableJoint Grab()
         {
             if (targetPoint != null)
             {
@@ -83,8 +68,6 @@ namespace ToolMan.Mechanics
                 Vector3 anotherPlayerNewPosition = player.GetRightHand().transform.position - grabbedPointLocalPosition;
                 anotherPlayer.transform.position = anotherPlayerNewPosition;
 
-
-                //ConfigurableJoint confJ = gameObject.AddComponent<ConfigurableJoint>();
                 ConfigurableJoint confJ = player.gameObject.AddComponent<ConfigurableJoint>();
                 confJ.connectedBody = anotherPlayer.getRigidbody();
                 confJ.autoConfigureConnectedAnchor = false;
@@ -99,9 +82,11 @@ namespace ToolMan.Mechanics
                 // set Tool in the status of being grabbed
                 anotherPlayer.BeGrabbed(player);
 
-                player.Grab(confJ);
+                //player.Grab(confJ);
                 grabbing = true;
+                return confJ;
             }
+            return null;
         }
 
         public void Release()
@@ -112,7 +97,7 @@ namespace ToolMan.Mechanics
 
                 // set Tool in the status of being released
                 anotherPlayer.BeReleased();
-                player.Release();
+                //player.Release();
                 grabbing = false;
                 int playerLayer = Converter.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
                 Physics.IgnoreLayerCollision(playerLayer, playerLayer, false);

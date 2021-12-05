@@ -19,13 +19,26 @@ public partial class PlayerController
         combat.ComboSkillAttack();
     }
 
-    public void Grab(ConfigurableJoint confJ)
+    public void GrabOrRelease()
     {
-        this.confJ = confJ;
+        if (!grabPoint.IsGrabbing())
+        {
+            Grab();
+        }
+        else
+        {
+            Release();
+        }
+    }
+
+    public void Grab()
+    {
+        this.confJ = grabPoint.Grab();
     }
 
     public void Release()
     {
+        grabPoint.Release();
         this.confJ = null;
     }
 

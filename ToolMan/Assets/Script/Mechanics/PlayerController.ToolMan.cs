@@ -16,16 +16,16 @@ public partial class PlayerController
         Vector3 toolPosition = anotherPlayer.transform.position;
 
         // Release & Transform
-        grabPoint.Release();
+        Release();
         transform.position = toolPosition;
         anotherPlayer.transform.position = manPosition;
         anotherPlayer.ToolableManTransform(); // Tool to Man
         toolIdx = 0;
         ToolableManTransform(); // Man to Tool
 
-        if (!anotherPlayer.grabPoint.IsGrabbing())
+        if (!anotherPlayer.IsGrabbing())
         {
-            anotherPlayer.grabPoint.Grab();
+            anotherPlayer.Grab();
         }
     }
 

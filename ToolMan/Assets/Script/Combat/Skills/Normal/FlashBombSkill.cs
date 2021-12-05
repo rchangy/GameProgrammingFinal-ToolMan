@@ -22,7 +22,7 @@ namespace ToolMan.Combat.Skills.Normal
 
             player.AnimationAttack();
             yield return new WaitForSeconds(attackDelay);
-            _manController.GetGrabPoint().Release();
+            _manController.Release();
             var dir = _man.transform.forward;
             dir.y = 1;
             rb.AddForce(dir * _force);
