@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour
     // chase player
     [SerializeField] protected float SightRange;
     protected bool PlayerInSightRange;
+    [SerializeField] protected float speed;
 
 
     // attack
