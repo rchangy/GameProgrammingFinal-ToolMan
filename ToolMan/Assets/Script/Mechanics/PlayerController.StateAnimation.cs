@@ -34,4 +34,9 @@ public partial class PlayerController
     {
         animator.SetTrigger("Hurt");
     }
+
+    public void AnimationDie()
+    {
+        animator.SetTrigger("isDead");
+    }
 }
