@@ -45,10 +45,28 @@ public partial class PlayerController
     public void Die()
     {
         isDead = true;
+        if (isTool)
+        {
+            ToolableManTransform();
+        }
+        AnimationDie();
     }
 
     public void Hurt()
     {
         AnimationHurt();
+    }
+
+    public void Win()
+    {
+        if (isTool)
+            ToolableManTransform();
+        animator.SetTrigger("startSpinning");
+        animator.SetBool("isSpinning", true);
+        winOrLose = true;
+    }
+    public void Lose()
+    {
+        winOrLose = true;
     }
 }

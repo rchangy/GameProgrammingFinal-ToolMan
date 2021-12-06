@@ -14,7 +14,8 @@ public partial class PlayerController : ToolableMan
 
     // ==== Player Status ====
     public int playerNum = 1; // player 1 or player 2
-    private bool isDead = false;
+    [SerializeField] private bool isDead = false;
+    private bool winOrLose = false;
 
     [SerializeField] private bool changeable = false;
     [SerializeField] private LayerMask playerLayerMask;
@@ -101,6 +102,9 @@ public partial class PlayerController : ToolableMan
         //        ResetToolWave();
         //}
         //// ==== for testing (wave tool) ====
+
+        if (winOrLose || isDead)
+            return;
         if (!isTool)
         {
             _comboSkillActivateByMan = anotherPlayer.ComboSkillCharged && keyboardInputController.JumpOrAttack(playerNum);
@@ -162,24 +166,14 @@ public partial class PlayerController : ToolableMan
 
         }
 
-        // ==== Select Tool && [Man <-> Tool] ====
-        if (toolListUI.canChoose() && keyboardInputController.NextTool(playerNum))
-        {
-            toolListUI.Next();
-        }
-        if (toolListUI.canChoose() && keyboardInputController.PrevTool(playerNum))
-        {
-            toolListUI.Previous();
-        }
-        if (keyboardInputController.Choose(playerNum))
-        {
-            ToolableManTransform();
-        }
+        // Select Tool
+        CheckToolSelecting();
+
+        // Grab Or Release
         if (!isTool && keyboardInputController.GrabOrRelease(playerNum))
         {
             GrabOrRelease();
         }
-        // ==== Select Tool && [Man <-> Tool] ====
     }
 
     private void FixedUpdate()
@@ -193,6 +187,22 @@ public partial class PlayerController : ToolableMan
         if (beGrabbed)
         {
             beGrabbedMovement();
+        }
+    }
+
+    private void CheckToolSelecting()
+    {
+        if (toolListUI.canChoose() && keyboardInputController.NextTool(playerNum))
+        {
+            toolListUI.Next();
+        }
+        if (toolListUI.canChoose() && keyboardInputController.PrevTool(playerNum))
+        {
+            toolListUI.Previous();
+        }
+        if (keyboardInputController.Choose(playerNum))
+        {
+            ToolableManTransform();
         }
     }
 
