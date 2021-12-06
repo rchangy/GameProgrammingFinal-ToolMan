@@ -49,6 +49,7 @@ namespace ToolMan.Combat.Equip
             _target = target;
             GetComponent<Renderer>().sharedMaterial = mat;
             _source = src;
+            
         }
 
         public void Init(int maxHp, float def)
@@ -71,10 +72,10 @@ namespace ToolMan.Combat.Equip
                     _mat.SetFloat("_HitTime", hitTime);
                 }
             }
-            return (int)dmg;
+            return dmg;
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionStay(Collision collision)
         {
             CombatUnit combat = collision.gameObject.GetComponent<CombatUnit>();
             if (combat == null) return;

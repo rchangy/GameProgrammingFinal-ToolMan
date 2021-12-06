@@ -84,6 +84,7 @@ public partial class PlayerController
         grabbedPoint.setAnotherPlayer(anotherPlayer);
 
         rb.mass = 0.000001f;
+        animator.SetBool("isGrabbed", true);
         beGrabbed = true;
     }
 
@@ -97,6 +98,7 @@ public partial class PlayerController
         playerCollider.isTrigger = false;
         grabbedPoint.setAnotherPlayer(null);
         beGrabbed = false;
+        animator.SetBool("isGrabbed", false);
         ResetToolWave();
     }
     public void resetRigidBody()

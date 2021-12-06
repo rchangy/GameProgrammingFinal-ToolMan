@@ -9,6 +9,12 @@ namespace ToolMan.Combat.Skills.Normal
     {
         [SerializeField]
         private float _flyingTime;
+        [SerializeField]
+        private float _attackRange;
+        [SerializeField]
+        private float _sightRangeAngle;
+        [SerializeField]
+        private float _floatingTime;
 
         public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
@@ -33,8 +39,37 @@ namespace ToolMan.Combat.Skills.Normal
             // release
             _manController.GetGrabPoint().GrabOrRelease();
 
+
+            Vector3 targetPos = Vector3.zero;
+            bool targetSelected = false;
+            float minDist = float.MaxValue;
             // set target (closest enemy or something)
-            Vector3 targetPos = _man.transform.position + _man.transform.forward * 10;
+            Collider[] targets = Physics.OverlapSphere(_man.transform.position, _attackRange, targetLayer);
+            foreach(Collider t in targets)
+            {
+                
+                Vector3 targetDirection = t.gameObject.transform.position - _man.transform.position;
+                if (Vector3.Angle(_man.transform.forward, targetDirection) <= _sightRangeAngle)
+                {
+                    float dist = 0;
+                    if((dist = Vector3.Distance(t.gameObject.transform.position, _man.transform.position)) <= _attackRange)
+                    {
+                        if(dist < minDist)
+                        {
+                            targetSelected = true;
+                            targetPos = t.gameObject.transform.position;
+                        }
+                    }
+                }
+            }
+            if(!targetSelected)
+            {
+                targetPos = _man.transform.position + _man.transform.forward * _attackRange;
+            }
+            else
+            {
+                targetPos = _man.transform.position + Vector3.Normalize(targetPos - _man.transform.position) * _attackRange;
+            }
             _tool.transform.Rotate(0, 180, 0);
 
             // to target
@@ -44,7 +79,19 @@ namespace ToolMan.Combat.Skills.Normal
                 _tool.transform.Rotate(0, 0, Time.deltaTime * 800);
                 _tool.transform.position = Vector3.MoveTowards(_tool.transform.position, targetPos, Time.deltaTime * 40);
                 flyingTimeLast -= Time.deltaTime;
+                if(_tool.transform.position == targetPos)
+                {
+                    break;
+                }
                 // return if collide with border 
+                yield return null;
+            }
+
+            float floatingTime = _floatingTime;
+            while(floatingTime > 0)
+            {
+                _tool.transform.Rotate(0, 0, Time.deltaTime * 800);
+                floatingTime -= Time.deltaTime;
                 yield return null;
             }
 

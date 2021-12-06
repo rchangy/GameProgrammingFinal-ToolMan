@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8b2bf7cc76924270ad34e8a531022d7, type: 3}
-  m_Name: Boomerang
+  m_Script: {fileID: 11500000, guid: c76c9478bc22f40d89a9e12597286e77, type: 3}
+  m_Name: SetForceShield
   m_EditorClassIdentifier: 
   attackDelay: 0
-  RefractoryPeriod: 0.1
-  Cd: 0
-  _flyingTime: 3
-  _attackRange: 10
-  _sightRangeAngle: 60
-  _floatingTime: 3
+  RefractoryPeriod: 0
+  Cd: 10
+  shieldPrefab: {fileID: 8759886588682070743, guid: fdf2f2d97bf984cabaeab790efcd947c, type: 3}
+  mat: {fileID: 2100000, guid: e9ded56fd9bca47e799a8ac7f264c0e4, type: 2}

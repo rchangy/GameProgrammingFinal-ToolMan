@@ -59,7 +59,7 @@ namespace ToolMan.Combat
             // check strength
             if (dmg > Str)
             {
-                hitFeel.MakeHitFeel();
+                //hitFeel.MakeHitFeel();
                 ThisPlayerController.GetGrabPoint().Release();
                 if (ThisPlayerController.inToolState()) ThisPlayerController.ToolableManTransform();
             }

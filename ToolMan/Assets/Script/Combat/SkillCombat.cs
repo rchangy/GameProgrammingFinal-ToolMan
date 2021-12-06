@@ -215,7 +215,15 @@ namespace ToolMan.Combat
             if (_refractoryPeriod.ContainsKey(target)) return;
             Hit(target);
         }
-
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!CollisionEnable) return;
+            if (TargetLayers != (TargetLayers | 1 << collision.gameObject.layer)) return;
+            CombatUnit target = collision.gameObject.GetComponent<CombatUnit>();
+            if (target == null) return;
+            if (_refractoryPeriod.ContainsKey(target)) return;
+            Hit(target);
+        }
         protected virtual void Hit(CombatUnit target)
         {
             Debug.Log(name + " hit " + target.name);
