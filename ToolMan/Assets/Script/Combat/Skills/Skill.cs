@@ -15,7 +15,7 @@ namespace ToolMan.Combat.Skills
         public float RefractoryPeriod;
         public float Cd;
 
-        public abstract IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable);
+        public abstract IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable);
 
         public string getName()
         {

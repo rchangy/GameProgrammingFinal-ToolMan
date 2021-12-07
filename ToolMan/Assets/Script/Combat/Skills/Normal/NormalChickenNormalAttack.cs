@@ -2,19 +2,16 @@
 using System.Collections;
 using ToolMan.Util;
 
-namespace ToolMan.Combat.Skills.Normal
-{
-    [CreateAssetMenu(menuName = "ToolMan/Skill/StandardMeleeSkill")]
-    public class StandardMeleeSkill : Skill
+namespace ToolMan.Combat.Skills.Normal{
+    public class NormalChickenNormalAttack : Skill
     {
-        //public float attackRange;
+        [SerializeField]
+        private float _collisionTime;
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
-            Debug.Log("Perform Attack");
-            // delay
             yield return new WaitForSeconds(attackDelay);
             collisionEnable.Value = true;
-            // rotate
+            yield return new WaitForSeconds(_collisionTime);
             collisionEnable.Value = false;
         }
 

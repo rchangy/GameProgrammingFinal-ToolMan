@@ -151,4 +151,14 @@ public class EnemyBigChicken : Enemy
         transform.eulerAngles = direction;
         transform.position += speed * Time.deltaTime * transform.forward;
     }
+
+    private void CrazyMode()
+    {
+        combat.SetCurrentUsingSkill("BigChickenLayEgg");
+    }
+
+    public void ChickKilled()
+    {
+        CrazyMode();
+    }
 }

@@ -11,7 +11,7 @@ namespace ToolMan.Combat.Skills.Normal
         public ScriptableBuff Buff;
         private PlayerCombat anotherPlayerCombat;
 
-        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
             if (typeof(PlayerCombat).IsInstanceOfType(combat))
             {
@@ -20,8 +20,6 @@ namespace ToolMan.Combat.Skills.Normal
             }
             combat.AddBuff(Buff);
             if (anotherPlayerCombat != null) { anotherPlayerCombat.AddBuff(Buff); }
-            // Animation
-            player.AnimationAttack();
             // delay
             yield return new WaitForSeconds(attackDelay);
         }

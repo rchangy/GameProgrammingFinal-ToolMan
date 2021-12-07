@@ -13,7 +13,7 @@ namespace ToolMan.Combat.Skills.Normal
         [SerializeField]
         private Material mat;
         
-        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
             yield return new WaitForSeconds(attackDelay);
             var shields = combat.gameObject.GetComponentsInChildren<ForceShield>();

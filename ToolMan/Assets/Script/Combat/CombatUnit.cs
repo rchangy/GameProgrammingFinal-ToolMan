@@ -102,10 +102,10 @@ namespace ToolMan.Combat
         protected virtual void Update()
         {
             Debug.Log(name + " Hp: " + Hp);
-            //if(Hp <= 0)
-            //{
-            //    Die();
-            //}
+            if(Hp <= 0)
+            {
+                Die();
+            }
         }
 
 

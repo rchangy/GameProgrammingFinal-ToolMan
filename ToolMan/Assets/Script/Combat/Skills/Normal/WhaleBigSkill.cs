@@ -4,19 +4,19 @@ using ToolMan.Util;
 
 namespace ToolMan.Combat.Skills.Normal
 {
-    [CreateAssetMenu(menuName = "ToolMan/Skill/StandardMeleeSkill")]
-    public class StandardMeleeSkill : Skill
+    public class WhaleBigSkill : Skill
     {
-        //public float attackRange;
+        [SerializeField]
+        private float _lastingTime;
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
-            Debug.Log("Perform Attack");
-            // delay
+            // sound
             yield return new WaitForSeconds(attackDelay);
+            // anim
             collisionEnable.Value = true;
-            // rotate
+            yield return new WaitForSeconds(_lastingTime);
+            // effect
             collisionEnable.Value = false;
         }
-
     }
 }
