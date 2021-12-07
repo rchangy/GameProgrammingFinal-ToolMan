@@ -5,6 +5,7 @@ using ToolMan.Combat.Equip;
 
 namespace ToolMan.Combat.Skills.Normal
 {
+    [CreateAssetMenu(menuName = "ToolMan/Skill/Enemy/SardineMissle")]
     public class WhaleSardineMissle : Skill
     {
         [SerializeField]

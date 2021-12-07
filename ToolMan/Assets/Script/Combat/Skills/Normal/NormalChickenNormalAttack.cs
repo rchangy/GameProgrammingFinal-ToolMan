@@ -3,6 +3,7 @@ using System.Collections;
 using ToolMan.Util;
 
 namespace ToolMan.Combat.Skills.Normal{
+    [CreateAssetMenu(menuName = "ToolMan/Skill/Enemy/ChickenNormal")]
     public class NormalChickenNormalAttack : Skill
     {
         [SerializeField]

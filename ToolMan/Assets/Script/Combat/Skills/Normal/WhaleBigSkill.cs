@@ -4,6 +4,7 @@ using ToolMan.Util;
 
 namespace ToolMan.Combat.Skills.Normal
 {
+    [CreateAssetMenu(menuName = "ToolMan/Skill/Enemy/WhaleBig")]
     public class WhaleBigSkill : Skill
     {
         [SerializeField]

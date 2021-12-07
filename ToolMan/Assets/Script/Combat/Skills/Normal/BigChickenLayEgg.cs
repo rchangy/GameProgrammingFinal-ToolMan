@@ -5,6 +5,7 @@ using ToolMan.Combat.Equip;
 
 namespace ToolMan.Combat.Skills.Normal
 {
+    [CreateAssetMenu(menuName = "ToolMan/Skill/Enemy/LayEgg")]
     public class BigChickenLayEgg : Skill
     {
         [SerializeField]
