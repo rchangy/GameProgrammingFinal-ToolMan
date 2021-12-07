@@ -1352,7 +1352,11 @@ Transform:
   - {fileID: 9199532264014563524}
   m_Father: {fileID: 1231777424350956283}
   m_RootOrder: 0
+<<<<<<< HEAD
   m_LocalEulerAnglesHint: {x: -77.39567, y: -157.09993, z: -175.1667}
+=======
+  m_LocalEulerAnglesHint: {x: 10.902775, y: 1.8503579, z: 34.606026}
+>>>>>>> a0ed280cedc3706d2781e2d8db4376d2dad6ec5a
 --- !u!1 &4078632375685215902
 GameObject:
   m_ObjectHideFlags: 3
@@ -1912,7 +1916,7 @@ Animator:
   m_GameObject: {fileID: 5653095584333043336}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e5d8a1d12baf2cc43865145dad2784f0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01ce55a0160ab0a4a9a9aa674f72c225, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1944,6 +1948,10 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  playerCollider: {fileID: 8507911072495564282}
   grabPoint: {fileID: 4806112291604789432}
   rightHand: {fileID: 7602279447490618996}
   toolListUI: {fileID: 0}
@@ -1988,7 +1996,7 @@ MonoBehaviour:
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
-  Anim: {fileID: 8507911072495564286}
+  player: {fileID: 8507911072495564285}
   TargetLayers:
     serializedVersion: 2
     m_Bits: 1
@@ -2042,7 +2050,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5681094873323192337}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -2054,7 +2062,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5681094873323192337}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2281,7 +2289,11 @@ Transform:
   - {fileID: 641420108469663913}
   m_Father: {fileID: 2989673172451329963}
   m_RootOrder: 0
+<<<<<<< HEAD
   m_LocalEulerAnglesHint: {x: -77.39564, y: 157.09988, z: 175.16666}
+=======
+  m_LocalEulerAnglesHint: {x: 10.902776, y: -1.8503554, z: -34.606033}
+>>>>>>> a0ed280cedc3706d2781e2d8db4376d2dad6ec5a
 --- !u!1 &6282933582004973398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2533,7 +2545,11 @@ Transform:
   - {fileID: 1231777424350956283}
   m_Father: {fileID: 6142267717820060530}
   m_RootOrder: 0
+<<<<<<< HEAD
   m_LocalEulerAnglesHint: {x: 80.5454, y: 179.99998, z: 179.99998}
+=======
+  m_LocalEulerAnglesHint: {x: 80.5454, y: 180, z: 180}
+>>>>>>> a0ed280cedc3706d2781e2d8db4376d2dad6ec5a
 --- !u!1 &6997576048333272074
 GameObject:
   m_ObjectHideFlags: 0
@@ -2688,7 +2704,11 @@ Transform:
   - {fileID: 6237834583707546567}
   m_Father: {fileID: 5513558572608540395}
   m_RootOrder: 0
+<<<<<<< HEAD
   m_LocalEulerAnglesHint: {x: 11.384949, y: -3.8438091, z: 88.48334}
+=======
+  m_LocalEulerAnglesHint: {x: 33.296642, y: -87.75728, z: 31.9976}
+>>>>>>> a0ed280cedc3706d2781e2d8db4376d2dad6ec5a
 --- !u!1 &7319567186008341671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,7 +2930,11 @@ Transform:
   - {fileID: 7234186901858125853}
   m_Father: {fileID: 6879004712332351859}
   m_RootOrder: 0
+<<<<<<< HEAD
   m_LocalEulerAnglesHint: {x: 11.384937, y: 3.8437982, z: -88.483345}
+=======
+  m_LocalEulerAnglesHint: {x: 33.296658, y: 87.75727, z: -31.997618}
+>>>>>>> a0ed280cedc3706d2781e2d8db4376d2dad6ec5a
 --- !u!1 &7602279447490618996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,7 +2974,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7602279447490618996}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

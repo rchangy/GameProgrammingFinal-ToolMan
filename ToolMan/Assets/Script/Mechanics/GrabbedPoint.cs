@@ -8,9 +8,11 @@ namespace ToolMan.Mechanics
         public PlayerController anotherPlayer;
         PlayerController player;
         Rigidbody rb;
+        private Collider grabbedPointCollider;
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            grabbedPointCollider = GetComponent<SphereCollider>();
             FixedJoint fj = playerGameObject.AddComponent<FixedJoint>();
             fj.connectedBody = rb;
             fj.breakForce = 2147483647;

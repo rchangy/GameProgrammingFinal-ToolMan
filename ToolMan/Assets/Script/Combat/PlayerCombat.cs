@@ -59,8 +59,13 @@ namespace ToolMan.Combat
             // check strength
             if (dmg > Str)
             {
+<<<<<<< HEAD
                 //hitFeel.MakeHitFeel();
                 ThisPlayerController.GetGrabPoint().Release();
+=======
+                hitFeel.MakeHitFeel();
+                ThisPlayerController.Release();
+>>>>>>> a0ed280cedc3706d2781e2d8db4376d2dad6ec5a
                 if (ThisPlayerController.inToolState()) ThisPlayerController.ToolableManTransform();
             }
             return dmg;
@@ -118,7 +123,7 @@ namespace ToolMan.Combat
         private IEnumerator PerformComboSkill(ComboSkill skill)
         {
             _vulnerable.Disable();
-            yield return StartCoroutine(skill.Attack(Anim, TargetLayers, this, _collisionEnable));
+            yield return StartCoroutine(skill.Attack(_playerController, TargetLayers, this, _collisionEnable));
             TeamMateCombat.ThisPlayerController.setChangeable(true);
             TeamMateCombat.ThisPlayerController.ToolManChange();
             _vulnerable.RemoveDisability();

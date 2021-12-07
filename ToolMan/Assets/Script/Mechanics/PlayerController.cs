@@ -14,10 +14,12 @@ public partial class PlayerController : ToolableMan
 
     // ==== Player Status ====
     public int playerNum = 1; // player 1 or player 2
-    private State state = new State();
+    [SerializeField] private bool isDead = false;
+    private bool winOrLose = false;
 
     [SerializeField] private bool changeable = false;
     [SerializeField] private LayerMask playerLayerMask;
+    [SerializeField] private LayerMask groundLayerMask;
 
     float horizontal, vertical;
     // ==== Player Status ====
@@ -25,8 +27,9 @@ public partial class PlayerController : ToolableMan
     // ==== Components ====
     private Animator animator;
     private Rigidbody rb;
-    private CapsuleCollider playerCollider;
+    private ConfigurableJoint confJ = null;
 
+    [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private GrabPoint grabPoint;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private ObjectListUI toolListUI;
@@ -63,10 +66,9 @@ public partial class PlayerController : ToolableMan
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        playerCollider = GetComponent<CapsuleCollider>();
+        //playerCollider = GetComponent<CapsuleCollider>();
         grabPoint.setPlayer(this);
         grabbedPoint.setPlayer(this);
-        state = State.Grounded;
         keyboardInputController = new KeyboardInputController();
 
         if (playerNum == 1)
@@ -92,14 +94,17 @@ public partial class PlayerController : ToolableMan
 
     override protected void Update()
     {
-        // ==== for testing (wave tool) ====
-        if (beGrabbed && Input.GetKeyDown(KeyCode.Tab)) {
-            if (!toolWave)
-                SetToolWave(new Vector3(0, 90f, -120f), 1f, true);
-            else
-                ResetToolWave();
-        }
-        // ==== for testing (wave tool) ====
+        //// ==== for testing (wave tool) ====
+        //if (beGrabbed && Input.GetKeyDown(KeyCode.Tab)) {
+        //    if (!toolWave)
+        //        SetToolWave(new Vector3(0, 90f, -120f), 1f, true);
+        //    else
+        //        ResetToolWave();
+        //}
+        //// ==== for testing (wave tool) ====
+
+        if (winOrLose || isDead)
+            return;
         if (!isTool)
         {
             _comboSkillActivateByMan = anotherPlayer.ComboSkillCharged && keyboardInputController.JumpOrAttack(playerNum);
@@ -161,7 +166,32 @@ public partial class PlayerController : ToolableMan
 
         }
 
-        // ==== Select Tool && [Man <-> Tool] ====
+        // Select Tool
+        CheckToolSelecting();
+
+        // Grab Or Release
+        if (!isTool && keyboardInputController.GrabOrRelease(playerNum))
+        {
+            GrabOrRelease();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
+        transform.position += vertical * transform.forward * speed * Time.deltaTime;
+        if (!isTool && confJ!= null)
+        {
+            confJ.anchor = rightHand.transform.localPosition;
+        }
+        if (beGrabbed)
+        {
+            beGrabbedMovement();
+        }
+    }
+
+    private void CheckToolSelecting()
+    {
         if (toolListUI.canChoose() && keyboardInputController.NextTool(playerNum))
         {
             toolListUI.Next();
@@ -173,21 +203,6 @@ public partial class PlayerController : ToolableMan
         if (keyboardInputController.Choose(playerNum))
         {
             ToolableManTransform();
-        }
-        if (!isTool && keyboardInputController.GrabOrRelease(playerNum))
-        {
-            grabPoint.GrabOrRelease();
-        }
-        // ==== Select Tool && [Man <-> Tool] ====
-    }
-
-    private void FixedUpdate()
-    {
-        transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
-        transform.position += vertical * transform.forward * speed * Time.deltaTime;
-        if (beGrabbed)
-        {
-            beGrabbedMovement();
         }
     }
 
@@ -215,21 +230,13 @@ public partial class PlayerController : ToolableMan
     {
         return playerLayerMask;
     }
-    // ==== getters
-
-    // ==== State ====
-    private void UpdateState()
+    public bool IsDead()
     {
-
+        return isDead;
     }
-
-    public enum State
+    public bool IsGrabbing()
     {
-        Grounded,
-        PrepareToJump,
-        Jumping,
-        InFlight,
-        Landed,
+        return grabPoint.IsGrabbing();
     }
-    // ==== State ====
+    // ==== getters ====
 }

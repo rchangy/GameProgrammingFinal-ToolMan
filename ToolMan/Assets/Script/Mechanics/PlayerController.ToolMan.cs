@@ -16,16 +16,16 @@ public partial class PlayerController
         Vector3 toolPosition = anotherPlayer.transform.position;
 
         // Release & Transform
-        grabPoint.Release();
+        Release();
         transform.position = toolPosition;
         anotherPlayer.transform.position = manPosition;
         anotherPlayer.ToolableManTransform(); // Tool to Man
         toolIdx = 0;
         ToolableManTransform(); // Man to Tool
 
-        if (!anotherPlayer.grabPoint.IsGrabbing())
+        if (!anotherPlayer.IsGrabbing())
         {
-            anotherPlayer.grabPoint.Grab();
+            anotherPlayer.Grab();
         }
     }
 
@@ -36,9 +36,9 @@ public partial class PlayerController
 
     override public void ToolableManTransform()
     {
-        //isTool = !isTool;
         if (!isTool)
         {
+            // To Tool
             toolListUI.Choose();
             toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
             tools[toolIdx].toTool();
@@ -49,9 +49,11 @@ public partial class PlayerController
             Effect toToolEffect = effectController.effectList.Find(e => e.name == "ToToolEffect");
             toToolEffect.PlayEffect();
             isTool = !isTool;
+            animator.SetTrigger("changeToTool");
         }
         else if (!beGrabbed)
         {
+            // To Man
             tools[toolIdx].toMan();
             toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
             toolListUI.Unchoose();
@@ -65,11 +67,6 @@ public partial class PlayerController
     }
 
     // ==== grab/grabbed ====
-
-    public void Release()
-    {
-        //grabbedPoint.resetRigidBody();
-    }
 
     override public void BeGrabbed(PlayerController anotherPlayer)
     {

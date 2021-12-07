@@ -7,10 +7,10 @@ namespace ToolMan.Combat.Skills
     [CreateAssetMenu(menuName = "ToolMan/Skill/PlayerSkill/LightSaber")]
     public class LightSaberSkill : PlayerSkill
     {
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             // Animation
-            anim.SetTrigger("Attack");
+            player.AnimationAttack();
             Debug.Log("Light Saber Attack");
             // delay
             yield return new WaitForSeconds(attackDelay);

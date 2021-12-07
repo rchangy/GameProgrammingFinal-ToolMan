@@ -16,7 +16,7 @@ namespace ToolMan.Combat.Skills.Normal
         [SerializeField]
         private float _floatingTime;
 
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             yield return new WaitForSeconds(attackDelay);
             _tool = combat.gameObject;
@@ -37,7 +37,7 @@ namespace ToolMan.Combat.Skills.Normal
             collisionEnable.Value = true;
 
             // release
-            _manController.GetGrabPoint().GrabOrRelease();
+            _manController.GrabOrRelease();
 
 
             Vector3 targetPos = Vector3.zero;
@@ -104,7 +104,7 @@ namespace ToolMan.Combat.Skills.Normal
                 flyingTimeLast -= Time.deltaTime;
                 if (Vector3.Distance(_man.transform.position, _tool.transform.position) < 1.5)
                 {
-                    _manController.GetGrabPoint().GrabOrRelease();
+                    _manController.GrabOrRelease();
                     if (_toolController.IsGrabbed())
                     {
                         collisionEnable.Value = false;

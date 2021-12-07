@@ -8,10 +8,10 @@ namespace ToolMan.Combat.Skills.Normal
     public class StandardMeleeSkill : Skill
     {
         //public float attackRange;
-        public override IEnumerator Attack(Animator anim, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
         {
             // Animation
-            anim.SetTrigger("Attack");
+            player.AnimationAttack();
             Debug.Log("Perform Attack");
             // delay
             yield return new WaitForSeconds(attackDelay);

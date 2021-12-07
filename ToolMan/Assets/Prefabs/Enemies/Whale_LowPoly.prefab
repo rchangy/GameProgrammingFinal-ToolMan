@@ -251,7 +251,7 @@ BoxCollider:
   m_GameObject: {fileID: 3582877014822275613}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 7.896984, y: 7.6885986, z: 18.090757}
   m_Center: {x: -0.28294182, y: -0.55638885, z: -0.8205042}
@@ -276,14 +276,13 @@ MonoBehaviour:
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
-  Anim: {fileID: 0}
+  player: {fileID: 0}
   TargetLayers:
     serializedVersion: 2
     m_Bits: 1
   availableSkillSet: {fileID: 11400000, guid: f4fba6c1089154b20ab23d451e10f582, type: 2}
   InitUsingSkillSet:
   - WhaleNormal
-  ColliderEnable: 0
 --- !u!114 &1807708414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,9 +295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42d4048d51594d52bc8a2be5a45853d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbilityInfos: []
-  StatInfos: []
-  ResourceInfos: []
   _inherentTypes: []
 --- !u!114 &1807708416
 MonoBehaviour:
@@ -324,24 +320,25 @@ MonoBehaviour:
   Name: Whale
   AttackWeight: 0
   PatrolWeight: 1
-  IdleWeight: 0
+  IdleWeight: 1
   skillWeight: 
   MaxActionTime: 1
   MinActionTime: 0.5
   rotateSpeed: 3
   combat: {fileID: 1807708413}
   walkPointRange: 3
-  SightRange: 15
-  InitAttackRange: 10
+  SightRange: 50
+  speed: 3
+  InitAttackRange: 20
   rushing: 0
   stopRushDistance: 3
   rushSpped: 5
-  speed: 15
   onPatrolOrbit: 0
   patrolStarted: 0
   patrolCenter: {fileID: 0}
   patrolRadius: 30
-  patrolAngularVelocity: 30
+  patrolAxis: {x: 0, y: 0, z: 0}
+  patrolAngularVelocity: 10
 --- !u!1 &4138075529841327174
 GameObject:
   m_ObjectHideFlags: 0

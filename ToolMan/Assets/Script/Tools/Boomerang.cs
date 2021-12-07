@@ -9,13 +9,14 @@ public class Boomerang : Tool
     {
         setUp(player);
         name = "Boomerang";
+        theToolEulerAngle = new Vector3(0f, 90f, -26f);
     }
 
     public override void toTool()
     {
         base.toTool();
         animator.SetBool("isBoomerang", true);
-        grabbedPoint.transform.localPosition = new Vector3(-0.4f, -1.1f, 0.0f);
-        point = new Vector3(-0.4f, -1.1f, 0.0f);
+        //grabbedPoint.transform.localPosition = new Vector3(-0.46f, -1f, 0f);
+        point = new Vector3(-0.46f, -1f, 0f);
     }
 }
