@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class EnemyChicken : Enemy
+public class EnemyNormalChicken : Enemy
 {
     // ==== Rush ====
     [SerializeField] private bool rushing = false;

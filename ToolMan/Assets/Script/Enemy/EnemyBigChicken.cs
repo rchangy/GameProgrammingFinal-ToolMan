@@ -2,16 +2,18 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class EnemySlimeRabbit : Enemy
+public class EnemyBigChicken : Enemy
 {
-    // ==== Actions ====
-    //if (other enemy){
-    //}
-    // ==== Actions ====
+    // ==== Rush ====
+    [SerializeField] private bool rushing = false;
+    [SerializeField] private float rushSpped = 10f;
+    private float tmpSpeed;
+    // ==== Rush ====
 
     protected override void Awake()
     {
         base.Awake();
+        tmpSpeed = speed;
     }
 
     protected override void Start()
@@ -55,45 +57,49 @@ public class EnemySlimeRabbit : Enemy
             isAction = true;
         }
 
-        switch (act)
+        if (rushing)
+            Rush();
+
+        else
         {
-            case 0: // attack
-                RandomAttackBehavior();
-                Debug.Log("Attack Mode;)");
-                break;
-            case 1:
-                Patrol();
-                break;
-            case 2:
-                Idle();
-                break;
-            default:
-                break;
+            switch (act)
+            {
+                case 0: // attack
+                    RandomAttackBehavior();
+                    Debug.Log("Attack Mode;)");
+                    break;
+                case 1:
+                    Patrol();
+                    break;
+                case 2:
+                    Idle();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     protected override void Idle()
     {
-        //SetAllAnimationFalse();
-        animator.SetBool("Idle", true);
+        SetAllAnimationFalse(); // Idle animation
+        if (UnityEngine.Random.Range(0, 1) > 0.7f) // TurnHead animation
+            animator.SetBool("TurnHead", true);
     }
 
     protected override void ChasePlayer()
     {
         Debug.Log("Chase Mode");
-        //SetAllAnimationFalse();
-        animator.SetBool("Move", true);
-        //animator.SetTrigger("Move");
-
-        Vector3 p = GetClosestplayer().position;
-        GoToPoint(p);
+        // compare two players position and chase the closest
+        Rush();
     }
 
     protected override void Patrol()
     {
         Debug.Log("Patrol Mode");
-        //SetAllAnimationFalse();
-        animator.SetBool("Move", true);
+
+        SetAllAnimationFalse();
+        animator.SetBool("Walk", true);
 
         if (!walkPointSet) SearchWalkPoint();
         if (walkPointSet)
@@ -103,16 +109,42 @@ public class EnemySlimeRabbit : Enemy
         if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
     }
 
-    private void SetAllAnimationFalse()
-    {
-        animator.SetBool("Idle", false);
-        animator.SetBool("Move", false);
-        animator.SetBool("Damage", false);
-        animator.SetBool("Death", false);
+    private void Rush() {
+        Debug.Log("Rush Mode");
+        rushing = true;
+
+        Vector3 p = GetClosestplayer().transform.position;
+        p = new Vector3(p.x, 0, p.z); // No need to consider y
+        Vector3 w = new Vector3(transform.position.x, 0, transform.position.z);
+
+        float distance = Vector3.Distance(p, w);
+
+        SetAllAnimationFalse();
+        if (distance > AttackRange)
+        {
+            animator.SetBool("Run", true);
+            tmpSpeed = speed;
+            speed = rushSpped;
+            GoToPoint(p);
+        }
+        else
+        {
+            rushing = false;
+            speed = tmpSpeed;
+            RandomAttackBehavior();
+        }
+    }
+
+    private void SetAllAnimationFalse() {
+        animator.SetBool("Walk", false);
+        animator.SetBool("Run", false);
+        animator.SetBool("Eat", false);
+        animator.SetBool("TurnHead", false);
     }
 
     private void GoToPoint(Vector3 point)
     {
+        Debug.Log("mode point: " + point);
         float angle = Mathf.Atan2(point.x - transform.position.x, point.z - transform.position.z) * Mathf.Rad2Deg;
         Vector3 direction = new Vector3(0f, angle, 0f);
 
