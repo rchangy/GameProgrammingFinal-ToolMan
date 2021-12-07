@@ -302,6 +302,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1833032176}
     m_Modifications:
+    - target: {fileID: 1115122342, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: availableSkillSet
+      value: 
+      objectReference: {fileID: 11400000, guid: a1ee8114c5ed846308c4b9e604b2884c, type: 2}
+    - target: {fileID: 1115122342, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: TargetLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122342, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: InitUsingSkillSet.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122342, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: InitUsingSkillSet.Array.data[0]
+      value: RabbitShield
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122342, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: InitUsingSkillSet.Array.data[1]
+      value: RabbitShield
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: AttackWeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: followOffset.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: followOffset.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: InitAttackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: skillWeight.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: skillWeight.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1773656247975474, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
       propertyPath: m_Name
       value: SlimeRabbit_Prefab
@@ -1917,6 +1961,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Toon Chicken
       objectReference: {fileID: 0}
+    - target: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4303844821561524, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1927,7 +1975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4303844821561524, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.78
       objectReference: {fileID: 0}
     - target: {fileID: 4303844821561524, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: m_LocalPosition.z
