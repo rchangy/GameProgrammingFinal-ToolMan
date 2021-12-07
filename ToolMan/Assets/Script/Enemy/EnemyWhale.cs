@@ -91,37 +91,41 @@ public class EnemyWhale : Enemy
         //PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
         //PlayerInAttackRange = Physics.CheckSphere(transform.position, AttackRange, PlayerMask);
 
-        if (isAction)
+        if (!combat.Attacking)
         {
-            ActionLastTime -= Time.deltaTime;
-            if (ActionLastTime < 0)
+            if (isAction)
             {
-                isAction = false;
-                walkPointSet = false;
+                ActionLastTime -= Time.deltaTime;
+                if (ActionLastTime < 0)
+                {
+                    isAction = false;
+                    walkPointSet = false;
+                }
+                switch (state)
+                {
+                    case State.Idle:
+                        Idle();
+                        break;
+                    case State.BigSkill:
+                        BigSkill();
+                        break;
+                    case State.Patrol:
+                        Patrol();
+                        break;
+                    case State.Sardine:
+                        Sardine();
+                        break;
+                    case State.Chase:
+                        ChasePlayer();
+                        break;
+                }
             }
-            switch (state) {
-                case State.Idle:
-                    Idle();
-                    break;
-                case State.BigSkill:
-                    BigSkill();
-                    break;
-                case State.Patrol:
-                    Patrol();
-                    break;
-                case State.Sardine:
-                    Sardine();
-                    break;
-                case State.Chase:
-                    ChasePlayer();
-                    break;
+            else
+            {
+                ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
+                isAction = true;
+                RandomBehavior();
             }
-        }
-        else
-        {
-            ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
-            isAction = true;
-            RandomBehavior();
         }
 
         // Hp
@@ -277,9 +281,17 @@ public class EnemyWhale : Enemy
         //}
     }
 
-    private void BigSkill() { }
+    public void BigSkill() {
+        state = State.BigSkill;
+        // combat.attacking
+    }
 
-    private void Sardine() { }
+    public void Sardine()
+    {
+        state = State.Sardine;
+    }
+
+    public Animator GetAnimator() { return animator; }
 
     private void GoToPoint(Vector3 point)
     {
