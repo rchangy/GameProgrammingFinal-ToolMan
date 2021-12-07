@@ -6,7 +6,6 @@ public class EnemyChicken : Enemy
 {
     // ==== Rush ====
     [SerializeField] private bool rushing = false;
-    [SerializeField] private float stopRushDistance = 3f;
     [SerializeField] private float rushSpped = 10f;
     private float tmpSpeed;
     // ==== Rush ====
@@ -79,17 +78,11 @@ public class EnemyChicken : Enemy
                     break;
             }
         }
-
-        //var targetDirection = closestPlayer.position - transform.position;
-        //float singleStep = rotateSpeed * Time.deltaTime;
-        //var newDir = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0f);
-
-        //transform.rotation = Quaternion.LookRotation(newDir);
     }
 
     protected override void Idle()
     {
-        SetAllAnimationFalse(); // Idle aanimation
+        SetAllAnimationFalse(); // Idle animation
         if (UnityEngine.Random.Range(0, 1) > 0.7f) // TurnHead animation
             animator.SetBool("TurnHead", true);
     }
@@ -111,8 +104,9 @@ public class EnemyChicken : Enemy
         if (!walkPointSet) SearchWalkPoint();
         if (walkPointSet)
             GoToPoint(walkPoint);
+        walkPoint = new Vector3(walkPoint.x, transform.position.y, walkPoint.z);
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        if (distanceToWalkPoint.magnitude < 0.1f) walkPointSet = false;
+        if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
     }
 
     private void Rush() {
@@ -126,7 +120,7 @@ public class EnemyChicken : Enemy
         float distance = Vector3.Distance(p, w);
 
         SetAllAnimationFalse();
-        if (distance > stopRushDistance)
+        if (distance > AttackRange)
         {
             animator.SetBool("Run", true);
             tmpSpeed = speed;
@@ -137,6 +131,7 @@ public class EnemyChicken : Enemy
         {
             rushing = false;
             speed = tmpSpeed;
+            RandomAttackBehavior();
         }
     }
 
@@ -149,6 +144,7 @@ public class EnemyChicken : Enemy
 
     private void GoToPoint(Vector3 point)
     {
+        Debug.Log("mode point: " + point);
         float angle = Mathf.Atan2(point.x - transform.position.x, point.z - transform.position.z) * Mathf.Rad2Deg;
         Vector3 direction = new Vector3(0f, angle, 0f);
 
