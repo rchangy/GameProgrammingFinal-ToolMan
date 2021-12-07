@@ -36,6 +36,7 @@ namespace ToolMan.Combat.Equip
             base.Start();
             _lastingTimeToHatch = _hatchTime;
             _rb = gameObject.GetComponent<Rigidbody>();
+            gameObject.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
         }
 
         protected override void Update()

@@ -5,6 +5,7 @@ using ToolMan.Combat.Equip;
 
 namespace ToolMan.Combat.Skills.Normal
 {
+    [CreateAssetMenu(menuName = "ToolMan/Skill/Enemy/LayEgg")]
     public class BigChickenLayEgg : Skill
     {
         [SerializeField]
@@ -16,7 +17,7 @@ namespace ToolMan.Combat.Skills.Normal
         {
             yield return new WaitForSeconds(attackDelay);
             bigChicken = combat.gameObject.GetComponent<EnemyBigChicken>();
-
+            Debug.Log("new egg pos = " + combat.gameObject.transform.position + _layingPointOffset);
             GameObject newEgg = Instantiate(_eggPrefab, combat.gameObject.transform.position + _layingPointOffset, Quaternion.identity);
             newEgg.GetComponent<Egg>().setBigChicken(bigChicken);
         }

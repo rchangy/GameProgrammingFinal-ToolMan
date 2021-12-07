@@ -193,6 +193,7 @@ namespace ToolMan.Combat
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
+            Debug.Log("chicken ;) dmg = " + baseDmg);
             var dmg = base.TakeDamage(baseDmg, damager);
             // check strength
             if (dmg > Str)

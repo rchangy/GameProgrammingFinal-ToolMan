@@ -148,6 +148,8 @@ public class Enemy : MonoBehaviour
             if (combat.Attacking) Idle();
             else
             {
+                Debug.Log("playerInSightRange = " + PlayerInSightRange);
+                Debug.Log("playerAttackRange = " + PlayerInAttackRange);
                 if (!PlayerInSightRange && !PlayerInAttackRange) Patrol();
                 if (PlayerInSightRange && !PlayerInAttackRange) ChasePlayer();
                 if (PlayerInSightRange && PlayerInAttackRange) RandomBehavior();

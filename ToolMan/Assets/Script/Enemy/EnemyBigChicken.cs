@@ -53,6 +53,7 @@ public class EnemyBigChicken : Enemy
         if (!isAction)
         {
             act = GetRandType(weight);
+            Debug.Log("act = " + act + ", rushing = " + rushing);
             ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
             isAction = true;
         }
@@ -120,7 +121,7 @@ public class EnemyBigChicken : Enemy
         float distance = Vector3.Distance(p, w);
 
         SetAllAnimationFalse();
-        if (distance > AttackRange)
+        if (distance > AttackRange+1)
         {
             animator.SetBool("Run", true);
             tmpSpeed = speed;
@@ -144,7 +145,7 @@ public class EnemyBigChicken : Enemy
 
     private void GoToPoint(Vector3 point)
     {
-        Debug.Log("mode point: " + point);
+        //Debug.Log("mode point: " + point);
         float angle = Mathf.Atan2(point.x - transform.position.x, point.z - transform.position.z) * Mathf.Rad2Deg;
         Vector3 direction = new Vector3(0f, angle, 0f);
 
@@ -154,7 +155,7 @@ public class EnemyBigChicken : Enemy
 
     private void CrazyMode()
     {
-        combat.SetCurrentUsingSkill("BigChickenLayEgg");
+        combat.SetCurrentUsingSkill("Normal");
     }
 
     public void ChickKilled()
