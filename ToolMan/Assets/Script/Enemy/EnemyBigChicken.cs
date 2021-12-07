@@ -154,9 +154,7 @@ public class EnemyBigChicken : Enemy
 
     private void CrazyMode()
     {
-        // Attack
-        //combat.SetCurrentUsingSkill("??");
-        // buff??
+        combat.SetCurrentUsingSkill("BigChickenLayEgg");
     }
 
     public void ChickKilled()
