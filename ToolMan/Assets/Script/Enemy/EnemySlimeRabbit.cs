@@ -131,7 +131,7 @@ public class EnemySlimeRabbit : Enemy
                         RandomPatrol();
                         break;
                     case State.Attack:
-                        //RandomAttackBehavior();
+                        RandomAttackBehavior();
                         break;
                 }
             }
