@@ -228,7 +228,8 @@ namespace ToolMan.Combat
 
         protected override void Die()
         {
-            //
+            
         }
+
     }
 }
