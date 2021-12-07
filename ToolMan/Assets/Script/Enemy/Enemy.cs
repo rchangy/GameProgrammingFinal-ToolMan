@@ -119,6 +119,10 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (combat.Hp <= 0)
+        {
+            Die();
+        }
         GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
         int playerNum = PlayerGameObjects.Length;
 
@@ -258,6 +262,11 @@ public class Enemy : MonoBehaviour
 
         }
         return 0;
+    }
+
+    protected virtual void Die()
+    {
+        Destroy(gameObject);
     }
 
     protected void OnDrawGizmos()
