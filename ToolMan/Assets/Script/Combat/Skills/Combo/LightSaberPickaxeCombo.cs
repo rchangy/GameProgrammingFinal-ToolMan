@@ -13,7 +13,7 @@ namespace ToolMan.Combat.Skills.Combo
             _postTool = "Pickaxe";
             _cost = 0;
         }
-        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
             Debug.Log("performing lightSaber to Pickaxe combo skill");
             yield return new WaitForSeconds(attackDelay);

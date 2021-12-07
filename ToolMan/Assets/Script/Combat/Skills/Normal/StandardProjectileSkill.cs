@@ -17,7 +17,7 @@ namespace ToolMan.Combat.Skills.Normal
         [SerializeField]
         private float _atkMultiplier;
 
-        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
             rb = combat.gameObject.GetComponent<Rigidbody>();
             if (rb == null)
@@ -31,7 +31,6 @@ namespace ToolMan.Combat.Skills.Normal
                 manPlayer = toolCombat.TeamMateCombat.ThisPlayerController;
             }
 
-            player.AnimationAttack();
             yield return new WaitForSeconds(attackDelay);
             manPlayer.Release();
             var dir = manPlayer.gameObject.transform.forward;
@@ -43,7 +42,7 @@ namespace ToolMan.Combat.Skills.Normal
                 {
                     Debug.Log("Explosion");
                     // Check collisions
-                    Collider[] hitTargets = Physics.OverlapSphere(rb.gameObject.transform.position, _explosionRange, targetLayer);
+                    Collider[] hitTargets = Physics.OverlapSphere(rb.gameObject.transform.position, _explosionRange, combat.TargetLayers);
                     foreach (Collider target in hitTargets)
                     {
                         CombatUnit targetCombat = target.GetComponent<CombatUnit>();

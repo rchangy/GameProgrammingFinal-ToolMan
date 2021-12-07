@@ -60,6 +60,7 @@ namespace ToolMan.Combat
             if (dmg > Str)
             {
                 hitFeel.MakeHitFeel();
+                ThisPlayerController.Hurt();
                 ThisPlayerController.Release();
                 if (ThisPlayerController.inToolState()) ThisPlayerController.ToolableManTransform();
             }
@@ -118,7 +119,7 @@ namespace ToolMan.Combat
         private IEnumerator PerformComboSkill(ComboSkill skill)
         {
             _vulnerable.Disable();
-            yield return StartCoroutine(skill.Attack(_playerController, TargetLayers, this, _collisionEnable));
+            yield return StartCoroutine(skill.Attack(this, _collisionEnable));
             TeamMateCombat.ThisPlayerController.setChangeable(true);
             TeamMateCombat.ThisPlayerController.ToolManChange();
             _vulnerable.RemoveDisability();
@@ -130,6 +131,9 @@ namespace ToolMan.Combat
             base.Hit(target);
             //hitFeel.MakeHitFeel();
         }
-
+        protected override void Die()
+        {
+            ThisPlayerController.Die();
+        }
     }
 }

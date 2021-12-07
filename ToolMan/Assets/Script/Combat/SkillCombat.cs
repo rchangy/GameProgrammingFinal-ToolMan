@@ -11,9 +11,12 @@ namespace ToolMan.Combat
     public class SkillCombat : CombatUnit
     {
         // skills
-        public PlayerController player;
-        public LayerMask TargetLayers;
-
+        [SerializeField]
+        private LayerMask _targetLayers;
+        public LayerMask TargetLayers
+        {
+            get => _targetLayers;
+        }
         public SkillSet availableSkillSet;
         private List<string> CurrentUsingSkillSet;
         public List<string> InitUsingSkillSet;
@@ -121,7 +124,7 @@ namespace ToolMan.Combat
         private IEnumerator PerformSkill()
         {
             _hitRefractoryPeriod = currentUsingSkill.RefractoryPeriod;
-            yield return StartCoroutine(currentUsingSkill.Attack(player, TargetLayers, this, _collisionEnable));
+            yield return StartCoroutine(currentUsingSkill.Attack(this, _collisionEnable));
             SkillFinish();
         }
 
@@ -196,17 +199,9 @@ namespace ToolMan.Combat
             {
                 // skill interrupt
                 if (Attacking) InterruptAttack();
-                player.Hurt();
                 
             }
             return dmg;
-        }
-
-        protected override void Die()
-        {
-            Debug.Log(name + " dies");
-            Destroy(gameObject);
-            player.Die();
         }
 
         protected virtual void OnTriggerEnter(Collider other)

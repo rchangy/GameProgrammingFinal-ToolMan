@@ -10,10 +10,9 @@ namespace ToolMan.Combat.Skills.Normal
         public float shootingForce;
         private Transform attackPoint;
 
-        public override IEnumerator Attack(PlayerController player, LayerMask targetLayer, CombatUnit combat, BoolWrapper collisionEnable)
+        public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
-            player.AnimationAttack();
-
+            
             // wait for delay time
             yield return new WaitForSeconds(attackDelay);
             Shoot(combat.Atk, combat);
