@@ -29,6 +29,8 @@ namespace ToolMan.Combat.Equip
         [SerializeField]
         private LayerMask _targetLayers;
 
+        private EnemyBigChicken bigChicken;
+
         protected override void Start()
         {
             base.Start();
@@ -86,8 +88,14 @@ namespace ToolMan.Combat.Equip
 
         private void Chick()
         {
-            Instantiate(_chickPrefab, gameObject.transform.position + _chickHatchOffset, Quaternion.identity);
+            GameObject newChick = Instantiate(_chickPrefab, gameObject.transform.position + _chickHatchOffset, Quaternion.identity);
+            newChick.GetComponent<EnemyChick>().setMom(bigChicken);
             Destroy(gameObject);
+        }
+
+        public void setBigChicken(EnemyBigChicken bigChicken)
+        {
+            this.bigChicken = bigChicken;
         }
 
         protected override void Die()
