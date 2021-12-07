@@ -10,6 +10,8 @@ public class EnemyChick : Enemy
     private float tmpSpeed;
     // ==== Rush ====
 
+    private EnemyBigChicken Mom;
+
     protected override void Awake()
     {
         base.Awake();
@@ -149,5 +151,15 @@ public class EnemyChick : Enemy
 
         transform.eulerAngles = direction;
         transform.position += speed * Time.deltaTime * transform.forward;
+    }
+
+    public void setMom(EnemyBigChicken Mom)
+    {
+        this.Mom = Mom;
+    }
+
+    override protected void Die()
+    {
+        Mom.ChickKilled();
     }
 }

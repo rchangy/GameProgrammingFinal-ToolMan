@@ -225,5 +225,10 @@ namespace ToolMan.Combat
         {
             return CurrentUsingSkillSet;
         }
+
+        protected override void Die()
+        {
+            //
+        }
     }
 }
