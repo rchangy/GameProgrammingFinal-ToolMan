@@ -55,6 +55,7 @@ public class EnemyNormalChicken : Enemy
             act = GetRandType(weight);
             ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
             isAction = true;
+            rushing = false;
         }
 
         if (rushing)
@@ -144,7 +145,7 @@ public class EnemyNormalChicken : Enemy
 
     private void GoToPoint(Vector3 point)
     {
-        Debug.Log("mode point: " + point);
+        //Debug.Log("mode point: " + point);
         float angle = Mathf.Atan2(point.x - transform.position.x, point.z - transform.position.z) * Mathf.Rad2Deg;
         Vector3 direction = new Vector3(0f, angle, 0f);
 

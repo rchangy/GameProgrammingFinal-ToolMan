@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb65c6d2f08234fc4833943f6d024060, type: 3}
-  m_Name: Whale
+  m_Script: {fileID: 11500000, guid: 4d0a42f9b305c4935a2987dbbd53a540, type: 3}
+  m_Name: SardineMissle
   m_EditorClassIdentifier: 
-  skills:
-  - {fileID: 11400000, guid: a43c60a3afac6460290decf377a6bdd6, type: 2}
-  - {fileID: 11400000, guid: 671f4bd27999b4d0bbb9ec0aa6c61ac2, type: 2}
+  attackDelay: 0.5
+  RefractoryPeriod: 0
+  Cd: 5
+  _sardinePrefab: {fileID: 159700, guid: 4111a63ec6a85c744a305e1dfd0869f9, type: 3}
+  _launchPositionOffset: {x: 0, y: 0, z: 0}
