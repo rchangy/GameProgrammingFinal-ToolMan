@@ -16,6 +16,7 @@ namespace ToolMan.Combat.Equip
 
         [SerializeField]
         private int _bombWeight;
+        [SerializeField]
         private int _chichWeight;
 
         private Rigidbody _rb;
