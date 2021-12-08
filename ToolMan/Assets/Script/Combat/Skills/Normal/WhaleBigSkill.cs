@@ -9,19 +9,32 @@ namespace ToolMan.Combat.Skills.Normal
     {
         [SerializeField]
         private float _lastingTime;
+        [SerializeField]
+        private float _warningLastingTime;
+
 
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
-            // sound
-            yield return new WaitForSeconds(attackDelay);
+            EnemyWhale whale = combat.gameObject.GetComponent<EnemyWhale>();
+
+            // Warning
+            Effect warningEffect = whale.effectController.effectList.Find(e => e.name == "WhaleBigSkillWarning");
+            warningEffect.PlayEffect();
+            // play warning sound
+
+            yield return new WaitForSeconds(_warningLastingTime);
 
             // anim
-            EnemyWhale whale = combat.gameObject.GetComponent<EnemyWhale>();
+            yield return new WaitForSeconds(attackDelay);
             whale.GetAnimator().SetTrigger("Attack");
-
+            
             collisionEnable.Value = true;
-            yield return new WaitForSeconds(_lastingTime);
             // effect
+            Effect bigSkillEffect =  whale.effectController.effectList.Find(e => e.name == "WhaleBigSkillEffect");
+            bigSkillEffect.PlayEffect();
+            yield return new WaitForSeconds(_lastingTime);
+            bigSkillEffect.StopEffect();
+
             collisionEnable.Value = false;
         }
     }
