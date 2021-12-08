@@ -161,23 +161,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8145379251561204746, guid: 33b91fa302539478ea2c73f1f722a950, type: 3}
   m_PrefabInstance: {fileID: 1474548659}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &168680873 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 686000113, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
-  m_PrefabInstance: {fileID: 574051570}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &168680874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168680873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b834723dc58d4649a7f53b2e27fcc1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &177776985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1105,10 +1088,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigChicken
       objectReference: {fileID: 0}
+    - target: {fileID: 74622244883640366, guid: 7bed8de65a33b490e806902d6d0ffbb6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 75914775140835482, guid: 7bed8de65a33b490e806902d6d0ffbb6, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 168680874}
+      objectReference: {fileID: 0}
     - target: {fileID: 79961273085911644, guid: 7bed8de65a33b490e806902d6d0ffbb6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 3.0452347
