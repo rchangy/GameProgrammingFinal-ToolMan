@@ -349,9 +349,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80663cb3f0f9e44d88d379b9e986f57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpMaxValue: 10
-  HpInitValue: 10
-  AtkBaseValue: 1
+  HpMaxValue: 50
+  HpInitValue: 50
+  AtkBaseValue: 20
   DefBaseValue: 0
   StrBaseValue: 1
   AttackEnableBaseValue: 1
@@ -403,7 +403,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Name: 
-  AttackWeight: 1
+  AttackWeight: 5
   PatrolWeight: 1
   IdleWeight: 1
   skillWeight: 0100000000000000

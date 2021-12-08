@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80663cb3f0f9e44d88d379b9e986f57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpMaxValue: 1
+  HpMaxValue: 10
   HpInitValue: 1
   AtkBaseValue: 1
   DefBaseValue: 1
@@ -484,8 +484,7 @@ MonoBehaviour:
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
-  player: {fileID: 0}
-  TargetLayers:
+  _targetLayers:
     serializedVersion: 2
     m_Bits: 0
   availableSkillSet: {fileID: 0}
@@ -538,11 +537,13 @@ MonoBehaviour:
   speed: 4
   InitAttackRange: 3
   escapeRange: 8
+  _buffRange: 0
   followTarget: {fileID: 0}
   followOffset: {x: 5, y: 0, z: 5}
   targetInSightRange: 0
   targetInAttackRange: 0
   state: 0
+  _buffs: []
 --- !u!1 &1779164207820988
 GameObject:
   m_ObjectHideFlags: 0
