@@ -129,6 +129,41 @@ namespace ToolMan.Combat
             buff.AddBuff(_stats);
         }
 
+        public void AddStatMod(string name, StatModifier statMod)
+        {
+            if (_stats.HasStat(name))
+            {
+                Stat stat = _stats.GetStatByName(name);
+                stat.AddModifier(statMod);
+            }
+        }
+
+        public void RemoveStatMod(string name, StatModifier statMod)
+        {
+            if (_stats.HasStat(name))
+            {
+                Stat stat = _stats.GetStatByName(name);
+                stat.RemoveModifier(statMod);
+            }
+        }
+
+        public void Disable(string name)
+        {
+            if (_stats.HasAbility(name))
+            {
+                Ability ability = _stats.GetAbilityByName(name);
+                ability.Disable();
+            }
+        }
+
+        public void RemoveDisable(string name)
+        {
+            if (_stats.HasAbility(name))
+            {
+                Ability ability = _stats.GetAbilityByName(name);
+                ability.RemoveDisability();
+            }
+        }
 
 #nullable enable
         public float? GetStatValue(String name)
