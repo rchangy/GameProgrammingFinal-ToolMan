@@ -135,8 +135,7 @@ namespace ToolMan.Combat
                 InterruptAttack();
             if (skillNames == null || skillNames.Count == 0)
             {
-                CurrentUsingSkillSet = (List<string>) availableSkillSet.GetSkills();
-                return;
+                skillNames = availableSkillSet.GetSkills();
             }
             CurrentUsingSkillSet = new List<string>();
             foreach (string skillName in skillNames)

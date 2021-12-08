@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 namespace ToolMan.Combat.Skills
 {
     // save a set of skills
@@ -35,9 +37,9 @@ namespace ToolMan.Combat.Skills
             }
         }
 
-        public IReadOnlyCollection<string> GetSkills()
+        public List<string> GetSkills()
         {
-            return skillSet.Keys;
+            return skillSet.Keys.ToList();
         }
     }
 }
