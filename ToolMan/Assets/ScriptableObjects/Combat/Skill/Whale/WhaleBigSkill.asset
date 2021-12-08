@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb65c6d2f08234fc4833943f6d024060, type: 3}
-  m_Name: Whale
+  m_Script: {fileID: 11500000, guid: 8f918039e51be423cb199aa88e41a5ad, type: 3}
+  m_Name: WhaleBigSkill
   m_EditorClassIdentifier: 
-  skills:
-  - {fileID: 11400000, guid: 95d073043b9244df0bb09ba8b4c2a6f3, type: 2}
+  attackDelay: 0.5
+  RefractoryPeriod: 0.5
+  Cd: 10
+  _lastingTime: 5
+  _warningLastingTime: 5

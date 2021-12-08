@@ -6,19 +6,19 @@ public class EnemyWhale : Enemy
 {
     // ==== Rush ====
     [SerializeField] private float stopRushDistance = 3f;
-    [SerializeField] private float rushSpped = 10f;
+    [SerializeField] private float rushSpeed = 10f;
     private float tmpSpeed;
     // ==== Rush ====
 
     // ==== Patrol ====
-    [SerializeField] private bool onPatrolOrbit = false;
-    [SerializeField] private bool patrolStarted = false;
-    [SerializeField] private Transform patrolCenter;
-    [SerializeField] private float patrolRadius;
-    [SerializeField] private Vector3 patrolAxis;
-    private Vector3 patrolStartPoint;
-    private float patrolAngle = 0;
-    [SerializeField] private float patrolAngularVelocity = 30;
+    //[SerializeField] private bool onPatrolOrbit = false;
+    //[SerializeField] private bool patrolStarted = false;
+    //[SerializeField] private Transform patrolCenter;
+    //[SerializeField] private float patrolRadius;
+    //[SerializeField] private Vector3 patrolAxis;
+    //private Vector3 patrolStartPoint;
+    //private float patrolAngle = 0;
+    //[SerializeField] private float patrolAngularVelocity = 30;
     // ==== Patrol ====
 
     // ==== state ====
@@ -34,11 +34,15 @@ public class EnemyWhale : Enemy
     [SerializeField] int maxSardines;
     // ==== state ====
 
+    // ==== effect ====
+    public EffectController effectController;
+    // ==== effect ====
+
     protected override void Awake()
     {
         base.Awake();
-        patrolStartPoint = patrolCenter.position + Vector3.forward * patrolRadius;
-        transform.position = new Vector3(transform.position.x, patrolCenter.position.y, transform.position.z);
+        //patrolStartPoint = patrolCenter.position + Vector3.forward * patrolRadius;
+        //transform.position = new Vector3(transform.position.x, patrolCenter.position.y, transform.position.z);
         tmpSpeed = speed;
     }
 
@@ -74,6 +78,13 @@ public class EnemyWhale : Enemy
         transform.position = new Vector3(transform.position.x, highY, transform.position.z);
         hpBase = combat.HpMaxValue;
         lowTimeLeft = lowTimeSpan;
+
+        // effect
+        //Effect bigSkillWarning = effectController.effectList.Find(e => e.name == "WhaleBigSkillWarning");
+        //Effect bigSkillEffect = effectController.effectList.Find(e => e.name == "WhaleBigSkillEffect");
+        //bigSkillWarning.transform.position = transform.position + Vector3.down * 10;
+        //bigSkillEffect.transform.position = transform.position + Vector3.down * (highY + 2);
+
     }
 
     protected override void Update()
@@ -133,6 +144,7 @@ public class EnemyWhale : Enemy
         {
             hpBase -= combat.HpMaxValue / hpIntervals;
             height = Height.High;
+            transform.position = new Vector3(transform.position.x, highY, transform.position.z);
         }
 
         HeightTransition();
@@ -146,6 +158,7 @@ public class EnemyWhale : Enemy
                 {
                     height = Height.Middle;
                     isAction = false;
+                    transform.position = new Vector3(transform.position.x, middleY, transform.position.z);
                 }
                 break;
 
@@ -155,6 +168,7 @@ public class EnemyWhale : Enemy
                     height = Height.Low;
                     nowSardines = 0;
                     isAction = false;
+                    transform.position = new Vector3(transform.position.x, lowY, transform.position.z);
                 }
                 break;
 
@@ -165,6 +179,7 @@ public class EnemyWhale : Enemy
                     height = Height.Middle;
                     lowTimeLeft = lowTimeSpan;
                     isAction = false;
+                    transform.position = new Vector3(transform.position.x, middleY, transform.position.z);
                 }
                 break;
         }
@@ -237,7 +252,7 @@ public class EnemyWhale : Enemy
         {
             animator.SetTrigger("Swim2");
             tmpSpeed = speed;
-            speed = rushSpped;
+            speed = rushSpeed;
             GoToPoint(p);
         }
         else
@@ -283,7 +298,9 @@ public class EnemyWhale : Enemy
 
     public void BigSkill() {
         state = State.BigSkill;
-        // combat.attacking
+        combat.SetCurrentUsingSkill("WhaleBigSkill");
+        combat.Attack();
+        Debug.Log("combat aaaaa " + combat.currentUsingSkillName);
     }
 
     public void Sardine()
