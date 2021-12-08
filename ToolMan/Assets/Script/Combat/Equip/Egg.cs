@@ -104,6 +104,11 @@ namespace ToolMan.Combat.Equip
         {
             Destroy(gameObject);
         }
+        protected void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _explosionRange);
+        }
     }
 }
 

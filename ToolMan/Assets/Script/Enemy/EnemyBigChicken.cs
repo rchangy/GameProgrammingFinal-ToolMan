@@ -52,7 +52,7 @@ public class EnemyBigChicken : Enemy
         //Debug.Log("in Update");
         //Debug.Log("PlayerInSightRange: " + PlayerInSightRange);
         //Debug.Log("PlayerInAttackRange: " + PlayerInAttackRange);
-        Debug.Log("mode: isAction = " + isAction);
+        //Debug.Log("mode: isAction = " + isAction);
         ////Debug.Log("mode: Action Last time = " + ActionLastTime);
         base.Update();
     }
@@ -64,7 +64,7 @@ public class EnemyBigChicken : Enemy
         if (!isAction)
         {
             act = GetRandType(weight);
-            Debug.Log("mode act = " + act + ", rushing = " + rushing);
+            //Debug.Log("mode act = " + act + ", rushing = " + rushing);
             //Debug.Log("skillWeight = " + skillWeight[0] + ", " + skillWeight[1]);
             ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
             isAction = true;
@@ -119,12 +119,10 @@ public class EnemyBigChicken : Enemy
 
         if (!walkPointSet)
         {
-            Debug.Log("patrol searh");
             SearchWalkPoint();
         }
         if (walkPointSet)
         {
-            Debug.Log("patrol go to point");
             GoToPoint(walkPoint);
         }
         walkPoint = new Vector3(walkPoint.x, transform.position.y, walkPoint.z);
@@ -161,7 +159,6 @@ public class EnemyBigChicken : Enemy
     private void SetAllAnimationFalse() {
         animator.SetBool("Walk", false);
         animator.SetBool("Run", false);
-        animator.SetBool("Eat", false);
         animator.SetBool("TurnHead", false);
     }
 

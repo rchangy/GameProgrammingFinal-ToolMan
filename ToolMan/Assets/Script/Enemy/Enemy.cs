@@ -214,7 +214,7 @@ public class Enemy : MonoBehaviour
         if (combat.Attacking) return;
         if (skillWeight == null) return;
         int attackAct = GetRandType(skillWeight);
-        Debug.Log("mode " + _skillSet[attackAct]);
+        //Debug.Log("mode " + _skillSet[attackAct]);
         combat.SetCurrentUsingSkill(_skillSet[attackAct]);
         if (!combat.Attack())
         {
