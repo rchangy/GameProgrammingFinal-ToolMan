@@ -62,7 +62,7 @@ public class EnemyWhale : Enemy
             skillWeight = null;
         }
 
-        SetHeight(Height.Middle);
+        SetHeight(Height.High);
         hpBase = combat.HpMaxValue;
         lowTimeLeft = lowTimeSpan;
     }
