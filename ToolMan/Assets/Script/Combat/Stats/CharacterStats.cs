@@ -160,7 +160,10 @@ namespace ToolMan.Combat.Stats
                 _types.Remove(type);
             }
         }
-
+        public bool IsType(string type)
+        {
+            return _inherentTypes.Contains(type) || _types.Contains(type);
+        }
 
     }
 }
