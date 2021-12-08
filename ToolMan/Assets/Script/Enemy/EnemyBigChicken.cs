@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 public class EnemyBigChicken : Enemy
 {
@@ -46,6 +47,16 @@ public class EnemyBigChicken : Enemy
         }
     }
 
+    protected override void Update()
+    {
+        //Debug.Log("in Update");
+        //Debug.Log("PlayerInSightRange: " + PlayerInSightRange);
+        //Debug.Log("PlayerInAttackRange: " + PlayerInAttackRange);
+        Debug.Log("mode: isAction = " + isAction);
+        ////Debug.Log("mode: Action Last time = " + ActionLastTime);
+        base.Update();
+    }
+
     protected override void RandomBehavior()
     {
         // When player in attack range
@@ -53,9 +64,11 @@ public class EnemyBigChicken : Enemy
         if (!isAction)
         {
             act = GetRandType(weight);
-            Debug.Log("act = " + act + ", rushing = " + rushing);
+            Debug.Log("mode act = " + act + ", rushing = " + rushing);
+            //Debug.Log("skillWeight = " + skillWeight[0] + ", " + skillWeight[1]);
             ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
             isAction = true;
+            rushing = false;
         }
 
         if (rushing)
@@ -63,6 +76,7 @@ public class EnemyBigChicken : Enemy
 
         else
         {
+            Debug.Log("not rushing");
             switch (act)
             {
                 case 0: // attack
@@ -83,6 +97,7 @@ public class EnemyBigChicken : Enemy
 
     protected override void Idle()
     {
+        Debug.Log("Idle Mode");
         SetAllAnimationFalse(); // Idle animation
         if (UnityEngine.Random.Range(0, 1) > 0.7f) // TurnHead animation
             animator.SetBool("TurnHead", true);
@@ -102,9 +117,16 @@ public class EnemyBigChicken : Enemy
         SetAllAnimationFalse();
         animator.SetBool("Walk", true);
 
-        if (!walkPointSet) SearchWalkPoint();
+        if (!walkPointSet)
+        {
+            Debug.Log("patrol searh");
+            SearchWalkPoint();
+        }
         if (walkPointSet)
+        {
+            Debug.Log("patrol go to point");
             GoToPoint(walkPoint);
+        }
         walkPoint = new Vector3(walkPoint.x, transform.position.y, walkPoint.z);
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
@@ -121,7 +143,7 @@ public class EnemyBigChicken : Enemy
         float distance = Vector3.Distance(p, w);
 
         SetAllAnimationFalse();
-        if (distance > AttackRange+1)
+        if (distance > AttackRange)
         {
             animator.SetBool("Run", true);
             tmpSpeed = speed;
@@ -151,15 +173,43 @@ public class EnemyBigChicken : Enemy
 
         transform.eulerAngles = direction;
         transform.position += speed * Time.deltaTime * transform.forward;
+        //if ((speed * Time.deltaTime * transform.forward).magnitude > 0.1f)
+        //{
+        //    Debug.Log("magnitude = " + (speed * Time.deltaTime * transform.forward).magnitude + ", += " + speed * Time.deltaTime * transform.forward);
+        //    Debug.Log("+= " + speed * Time.deltaTime * transform.forward);
+        //    transform.position += speed * Time.deltaTime * transform.forward;
+        //}
+        //else
+        //{
+        //    Debug.Log("+= " + transform.forward / transform.forward.magnitude * 0.1f);
+        //    transform.position += transform.forward / transform.forward.magnitude * 0.1f;
+        //}
     }
 
-    private void CrazyMode()
+    private IEnumerator CrazyMode()
     {
-        combat.SetCurrentUsingSkill("Normal");
+        Debug.Log("Crazy Mode");
+        //{ AttackWeight, PatrolWeight, IdleWeight }
+        transform.Find("Toon Chicken").GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color32(255, 88, 66, 216));
+        int[] cacheWeight = new int[weight.Length];
+        Array.Copy(weight, cacheWeight, weight.Length);
+        skillWeight[0] = 0;
+        skillWeight[1] = 1;
+        weight = new int[] { 1, 0, 0 };
+        Debug.Log("skillWeight = " + skillWeight[0] + ", " + skillWeight[1]);
+        Debug.Log("weight = " + weight[0] + ", " + weight[1] + ", " + weight[2]);
+        yield return new WaitForSeconds(1000);
+        skillWeight[0] = 1;
+        skillWeight[1] = 0;
+        Array.Copy(cacheWeight, weight, weight.Length);
+        Debug.Log("skillWeight = " + skillWeight[0] + ", " + skillWeight[1]);
+        Debug.Log("weight = " + weight[0] + ", " + weight[1] + ", " + weight[2]);
+        transform.Find("Toon Chicken").GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", Color.white);
+        Debug.Log("End Crazy mode");
     }
 
     public void ChickKilled()
     {
-        CrazyMode();
+        StartCoroutine(CrazyMode());
     }
 }

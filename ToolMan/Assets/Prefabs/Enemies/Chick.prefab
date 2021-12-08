@@ -614,16 +614,15 @@ MonoBehaviour:
   HpMaxValue: 1
   HpInitValue: 1
   AtkBaseValue: 1
-  DefBaseValue: 1
+  DefBaseValue: 0
   StrBaseValue: 1
   AttackEnableBaseValue: 1
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
-  player: {fileID: 0}
-  TargetLayers:
+  _targetLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   availableSkillSet: {fileID: 0}
   InitUsingSkillSet: []
 --- !u!114 &-8304492803432560612

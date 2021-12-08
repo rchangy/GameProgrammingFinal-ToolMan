@@ -161,5 +161,6 @@ public class EnemyChick : Enemy
     override protected void Die()
     {
         Mom.ChickKilled();
+        Destroy(gameObject);
     }
 }
