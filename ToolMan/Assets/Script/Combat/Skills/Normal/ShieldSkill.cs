@@ -11,10 +11,11 @@ namespace ToolMan.Combat.Skills.Normal
 
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
+            _toolController.AnimationAttack();
+            yield return new WaitForSeconds(attackDelay);
             _toolCombat.AddBuff(Buff);
             _manCombat.AddBuff(Buff);
             // delay
-            yield return new WaitForSeconds(attackDelay);
         }
 
     }

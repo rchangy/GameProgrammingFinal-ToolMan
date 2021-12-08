@@ -133,9 +133,12 @@ namespace ToolMan.Combat
         {
             if(Attacking)
                 InterruptAttack();
+            if (skillNames == null || skillNames.Count == 0)
+            {
+                CurrentUsingSkillSet = (List<string>) availableSkillSet.GetSkills();
+                return;
+            }
             CurrentUsingSkillSet = new List<string>();
-            if (skillNames == null || skillNames.Count == 0) return;
-            Debug.Log("Setting skills");
             foreach (string skillName in skillNames)
             {
                 if (availableSkillSet.HasSkill(skillName))

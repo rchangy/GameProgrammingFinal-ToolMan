@@ -35,5 +35,9 @@ namespace ToolMan.Combat.Skills
             }
         }
 
+        public IReadOnlyCollection<string> GetSkills()
+        {
+            return skillSet.Keys;
+        }
     }
 }
