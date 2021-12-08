@@ -101,7 +101,7 @@ namespace ToolMan.Combat
 
         protected virtual void Update()
         {
-            Debug.Log(name + " Hp: " + Hp);
+            //Debug.Log(name + " Hp: " + Hp);
             if(Hp <= 0)
             {
                 Die();
@@ -116,6 +116,7 @@ namespace ToolMan.Combat
             if (!Vulnerable) return 0;
             float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
             float dmg = typeEffectedDmg - Def;
+            dmg = Mathf.Max(dmg, 0);
             _hp.ChangeValueBy(-(int)dmg);
             Debug.Log(name + " takes " + dmg + " damage, Hp: " + Hp);
 
@@ -165,6 +166,14 @@ namespace ToolMan.Combat
             }
         }
 
+        public void AddType(string type)
+        {
+            _stats.AddType(type);
+        }
+        public void RemoveType(string type)
+        {
+            _stats.RemoveType(type);
+        }
 #nullable enable
         public float? GetStatValue(String name)
         {
@@ -218,6 +227,10 @@ namespace ToolMan.Combat
         public IReadOnlyCollection<string> GetCurrentTypes()
         {
             return _stats.GetCurrentTypes();
+        }
+        public bool IsType(string type)
+        {
+            return _stats.IsType(type);
         }
     }
 }

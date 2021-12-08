@@ -32,6 +32,7 @@ namespace ToolMan.Combat
             get => _currentEnergy.Value;
         }
 
+        public bool tmp = false;
 
         [SerializeField]
         private HitFeel hitFeel;
@@ -55,6 +56,8 @@ namespace ToolMan.Combat
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
+            if(damager.gameObject.GetComponent<PlayerCombat>() != null) { return 0; }
+            if (tmp) return 0;
             int dmg = base.TakeDamage(baseDmg, damager);
             // check strength
             if (dmg > Str)
@@ -64,7 +67,13 @@ namespace ToolMan.Combat
                 ThisPlayerController.Release();
                 if (ThisPlayerController.inToolState()) ThisPlayerController.ToolableManTransform();
             }
+            
             return dmg;
+        }
+
+        public void AddHp(int hpAdd)
+        {
+            _hp.ChangeValueBy(hpAdd);
         }
 
         public int GetEnergyOfTool(string name)

@@ -107,16 +107,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622f6699f19d745a38788006b962e886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpMaxValue: 1
-  HpInitValue: 1
+  HpMaxValue: 20
+  HpInitValue: 20
   AtkBaseValue: 1
-  DefBaseValue: 1
+  DefBaseValue: 5
   StrBaseValue: 1
   AttackEnableBaseValue: 1
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
   _collisionTag: []
+  _buff: {fileID: 11400000, guid: dce6c975dc2e84f198dc9fb6df19f7af, type: 2}
 --- !u!114 &4818527044502034828
 MonoBehaviour:
   m_ObjectHideFlags: 0

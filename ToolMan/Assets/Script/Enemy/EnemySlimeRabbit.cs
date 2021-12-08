@@ -93,6 +93,10 @@ public class EnemySlimeRabbit : Enemy
 
     protected override void Update()
     {
+        if (combat.Hp <= 0)
+        {
+            Die();
+        }
         GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
         int playerNum = PlayerGameObjects.Length;
 
@@ -220,6 +224,7 @@ public class EnemySlimeRabbit : Enemy
 
     private void Escape()
     {
+        combat.Attack();
         state = State.Escape;
         //Debug.Log("Escape Mode");
         
@@ -303,6 +308,7 @@ public class EnemySlimeRabbit : Enemy
     {
         if (_buffs == null) return;
         if (_buffs.Count == 0) return;
+        Debug.Log("Add Buff Check");
         Collider[] hitTargets = Physics.OverlapSphere(gameObject.transform.position, _buffRange, gameObject.layer) ;
         foreach (Collider target in hitTargets)
         {
@@ -312,7 +318,9 @@ public class EnemySlimeRabbit : Enemy
                 // how to add buff
                 // random or all
                 targetCombat.AddBuff(_buffs[0]);
+                Debug.Log("add buff to " + target.name);
             }
         }
     }
+
 }

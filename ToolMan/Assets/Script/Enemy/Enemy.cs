@@ -224,7 +224,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void SearchWalkPoint()
+    protected virtual void SearchWalkPoint()
     {
         float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);

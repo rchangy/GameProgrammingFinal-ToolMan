@@ -10,19 +10,8 @@ public class EnemyWhale : Enemy
     private float tmpSpeed;
     // ==== Rush ====
 
-    // ==== Patrol ====
-    //[SerializeField] private bool onPatrolOrbit = false;
-    //[SerializeField] private bool patrolStarted = false;
-    //[SerializeField] private Transform patrolCenter;
-    //[SerializeField] private float patrolRadius;
-    //[SerializeField] private Vector3 patrolAxis;
-    //private Vector3 patrolStartPoint;
-    //private float patrolAngle = 0;
-    //[SerializeField] private float patrolAngularVelocity = 30;
-    // ==== Patrol ====
-
     // ==== state ====
-    [SerializeField] Height height = Height.High;
+    [SerializeField] Height height;
     [SerializeField] float highY, middleY, lowY;
     [SerializeField] State state = State.Idle;
     [SerializeField] int hpIntervals = 3;
@@ -41,8 +30,6 @@ public class EnemyWhale : Enemy
     protected override void Awake()
     {
         base.Awake();
-        //patrolStartPoint = patrolCenter.position + Vector3.forward * patrolRadius;
-        //transform.position = new Vector3(transform.position.x, patrolCenter.position.y, transform.position.z);
         tmpSpeed = speed;
     }
 
@@ -75,16 +62,9 @@ public class EnemyWhale : Enemy
             skillWeight = null;
         }
 
-        transform.position = new Vector3(transform.position.x, highY, transform.position.z);
+        SetHeight(Height.High);
         hpBase = combat.HpMaxValue;
         lowTimeLeft = lowTimeSpan;
-
-        // effect
-        //Effect bigSkillWarning = effectController.effectList.Find(e => e.name == "WhaleBigSkillWarning");
-        //Effect bigSkillEffect = effectController.effectList.Find(e => e.name == "WhaleBigSkillEffect");
-        //bigSkillWarning.transform.position = transform.position + Vector3.down * 10;
-        //bigSkillEffect.transform.position = transform.position + Vector3.down * (highY + 2);
-
     }
 
     protected override void Update()
@@ -97,10 +77,6 @@ public class EnemyWhale : Enemy
         {
             Players[i] = PlayerGameObjects[i].transform;
         }
-
-        //// check sight and attack range
-        //PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
-        //PlayerInAttackRange = Physics.CheckSphere(transform.position, AttackRange, PlayerMask);
 
         if (!combat.Attacking)
         {
@@ -143,8 +119,7 @@ public class EnemyWhale : Enemy
         if (combat.Hp <= hpBase - combat.HpMaxValue / hpIntervals)
         {
             hpBase -= combat.HpMaxValue / hpIntervals;
-            height = Height.High;
-            transform.position = new Vector3(transform.position.x, highY, transform.position.z);
+            SetHeight(Height.High);
         }
 
         HeightTransition();
@@ -156,19 +131,17 @@ public class EnemyWhale : Enemy
             case Height.High:
                 if (combat.Hp <= hpBase - hpDicreaseThres)
                 {
-                    height = Height.Middle;
+                    SetHeight(Height.Middle);
                     isAction = false;
-                    transform.position = new Vector3(transform.position.x, middleY, transform.position.z);
                 }
                 break;
 
             case Height.Middle:
                 if (nowSardines >= maxSardines)
                 {
-                    height = Height.Low;
+                    SetHeight(Height.Low);
                     nowSardines = 0;
                     isAction = false;
-                    transform.position = new Vector3(transform.position.x, lowY, transform.position.z);
                 }
                 break;
 
@@ -176,14 +149,14 @@ public class EnemyWhale : Enemy
                 lowTimeLeft -= Time.deltaTime;
                 if (lowTimeLeft <= 0)
                 {
-                    height = Height.Middle;
+                    SetHeight(Height.Middle);
                     lowTimeLeft = lowTimeSpan;
                     isAction = false;
-                    transform.position = new Vector3(transform.position.x, middleY, transform.position.z);
                 }
                 break;
         }
     }
+    public void TakeSardine() { nowSardines++; }
 
     protected override void RandomBehavior()
     {
@@ -211,20 +184,24 @@ public class EnemyWhale : Enemy
                 break;
 
             case Height.Middle:
-                act = GetRandType(weight);
-                switch (act)
+                PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
+                if (PlayerInSightRange && AttackWeight > 0)
+                    Sardine();
+                else
                 {
-                    case 0: // attack
-                        Sardine();
-                        break;
-                    case 1:
-                        ChasePlayer();
-                        break;
-                    case 2:
-                        Idle();
-                        break;
-                    default:
-                        break;
+                    int[] w = { PatrolWeight, IdleWeight };
+                    act = GetRandType(w);
+                    switch (act)
+                    {
+                        case 0: // attack
+                            ChasePlayer();
+                            break;
+                        case 1:
+                            Idle();
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 break;
 
@@ -243,6 +220,8 @@ public class EnemyWhale : Enemy
     protected override void ChasePlayer()
     {
         //Debug.Log("Chase Mode");
+        state = State.Chase;
+
         Vector3 p = GetClosestplayer().transform.position;
         p = new Vector3(p.x, 0, p.z); // No need to consider y
         Vector3 w = new Vector3(transform.position.x, 0, transform.position.z);
@@ -265,6 +244,7 @@ public class EnemyWhale : Enemy
     protected override void Patrol()
     {
         Debug.Log("Patrol Mode");
+        state = State.Patrol;
         animator.SetTrigger("Swim1");
 
         // Random patrol
@@ -273,39 +253,26 @@ public class EnemyWhale : Enemy
             GoToPoint(walkPoint);
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
-
-        //onPatrolOrbit = Vector3.Distance(transform.position, patrolCenter.position) <= 0.5f + patrolRadius;
-        //if (!onPatrolOrbit)
-        //    patrolStarted = false;
-
-
-        //if (!patrolStarted)
-        //{
-        //    patrolAngle = 0;
-        //    GoToPoint(patrolStartPoint);
-        //    patrolStarted = Vector3.Distance(transform.position, patrolStartPoint) <= 0.5f;
-        //    float dir = Mathf.Sign(-transform.forward.x * patrolCenter.position.y - transform.right.z * patrolCenter.position.x);
-        //    patrolAxis = Vector3.up;
-        //    if (dir > 0)
-        //        patrolAxis = Vector3.down;
-        //}
-        //else
-        //{
-        //    transform.RotateAround(patrolCenter.position, patrolAxis, patrolAngularVelocity * Time.deltaTime);
-
-        //}
+    }
+    protected override void SearchWalkPoint()
+    {
+        float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
+        float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        walkPointSet = true;
     }
 
     public void BigSkill() {
         state = State.BigSkill;
         combat.SetCurrentUsingSkill("WhaleBigSkill");
         combat.Attack();
-        Debug.Log("combat aaaaa " + combat.currentUsingSkillName);
     }
 
     public void Sardine()
     {
         state = State.Sardine;
+        combat.SetCurrentUsingSkill("SardineMissle");
+        combat.Attack();
     }
 
     public Animator GetAnimator() { return animator; }
@@ -317,6 +284,7 @@ public class EnemyWhale : Enemy
 
         transform.eulerAngles = direction;
         transform.position -= speed * Time.deltaTime * transform.forward;
+        //Debug.Log("go to " + point);
     }
 
     private enum Height
@@ -324,6 +292,27 @@ public class EnemyWhale : Enemy
         High,
         Middle,
         Low
+    }
+
+    private void SetHeight(Height h)
+    {
+        switch (h)
+        {
+            case Height.High:
+                height = Height.High;
+                transform.position = new Vector3(transform.position.x, highY, transform.position.z);
+                break;
+
+            case Height.Middle:
+                height = Height.Middle;
+                transform.position = new Vector3(transform.position.x, middleY, transform.position.z);
+                break;
+
+            case Height.Low:
+                height = Height.Low;
+                transform.position = new Vector3(transform.position.x, lowY, transform.position.z);
+                break;
+        }
     }
 
     private enum State {

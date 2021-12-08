@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using ToolMan.Combat.Stats.Buff;
+
 
 namespace ToolMan.Combat.Equip
 {
@@ -15,8 +17,12 @@ namespace ToolMan.Combat.Equip
         private float _defValue;
 
         private CombatUnit _target;
+        [SerializeField] private ScriptableBuff _buff;
+
 
         private object _source;
+
+        private bool _isSet = false;
 
 
         Dictionary<CombatUnit, ContactPoint[]> _contactPoints = new Dictionary<CombatUnit, ContactPoint[]>();
@@ -36,6 +42,8 @@ namespace ToolMan.Combat.Equip
                 _def.BaseValue = _defValue;
                 _init = false;
             }
+            if (_isSet)
+                _target.AddBuff(_buff);
         }
 
         public bool SetBy(object obj)
@@ -49,6 +57,7 @@ namespace ToolMan.Combat.Equip
             _target = target;
             GetComponent<Renderer>().sharedMaterial = mat;
             _source = src;
+            _isSet = true;
         }
 
         public void Init(int maxHp, float def)
@@ -59,8 +68,18 @@ namespace ToolMan.Combat.Equip
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
-            var dmg = base.TakeDamage(baseDmg, damager);
-
+            var dmg = 0;
+            //var dmg = base.TakeDamage(5, damager);
+            if (damager.IsType("LightSaber"))
+            {
+                _hp.ChangeValueBy(-10);
+                dmg = 10;
+            }
+            else
+            {
+                _hp.ChangeValueBy(0);
+                dmg = 0;
+            }
             if (_contactPoints.ContainsKey(damager))
             {
                 ContactPoint[] contacts = _contactPoints[damager];
@@ -71,6 +90,7 @@ namespace ToolMan.Combat.Equip
                     _mat.SetFloat("_HitTime", hitTime);
                 }
             }
+           
             return (int)dmg;
         }
 
@@ -98,7 +118,7 @@ namespace ToolMan.Combat.Equip
         protected override void Die()
         {
             Debug.Log("Shield Finish");
-            Destroy(this);
+            Destroy(gameObject);
         }
 
     }
