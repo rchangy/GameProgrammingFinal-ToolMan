@@ -67,6 +67,11 @@ namespace ToolMan.Combat
             return dmg;
         }
 
+        public void AddHp(int hpAdd)
+        {
+            _hp.ChangeValueBy(hpAdd);
+        }
+
         public int GetEnergyOfTool(string name)
         {
             if (_skillEnergy.ContainsKey(name))
