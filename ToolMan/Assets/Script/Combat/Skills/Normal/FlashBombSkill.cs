@@ -30,6 +30,7 @@ namespace ToolMan.Combat.Skills.Normal
             {
                 if (Input.GetButtonDown("JumpOrAttack1"))
                 {
+                    _toolController.AnimationAttack();
                     Debug.Log("Explosion");
                     // Check collisions
                     Collider[] hitTargets = Physics.OverlapSphere(rb.gameObject.transform.position, _explosionRange, combat.TargetLayers);

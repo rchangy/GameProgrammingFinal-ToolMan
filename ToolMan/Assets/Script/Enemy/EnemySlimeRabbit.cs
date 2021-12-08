@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using ToolMan.Combat.Stats.Buff;
+using ToolMan.Combat;
 
 public class EnemySlimeRabbit : Enemy
 {
@@ -10,6 +12,7 @@ public class EnemySlimeRabbit : Enemy
     // ==== Actions ====
 
     [SerializeField] private float escapeRange;
+    [SerializeField] private float _buffRange;
 
     // ==== Follow other enemies ====
     [SerializeField] private Enemy followTarget = null;
@@ -19,6 +22,8 @@ public class EnemySlimeRabbit : Enemy
     // ==== Follow other enemies ====
 
     [SerializeField] private State state = State.Idle;
+
+    [SerializeField] private List<ScriptableBuff> _buffs;
 
     protected override void Awake()
     {
@@ -156,6 +161,7 @@ public class EnemySlimeRabbit : Enemy
                 }
             }
         }
+        AddBuffToOthers();
     }
 
     private bool EnemyInRange(float range) {
@@ -291,5 +297,22 @@ public class EnemySlimeRabbit : Enemy
         Follow,
         RandomPatrol,
         Attack
+    }
+
+    private void AddBuffToOthers()
+    {
+        if (_buffs == null) return;
+        if (_buffs.Count == 0) return;
+        Collider[] hitTargets = Physics.OverlapSphere(gameObject.transform.position, _buffRange, gameObject.layer) ;
+        foreach (Collider target in hitTargets)
+        {
+            CombatUnit targetCombat = target.GetComponent<CombatUnit>();
+            if (targetCombat != null)
+            {
+                // how to add buff
+                // random or all
+                targetCombat.AddBuff(_buffs[0]);
+            }
+        }
     }
 }
