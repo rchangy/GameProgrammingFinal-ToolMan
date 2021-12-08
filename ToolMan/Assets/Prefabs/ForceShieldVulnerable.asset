@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d9cd3bd984db48edb2baab290013561, type: 3}
-  m_Name: FlashBomb
+  m_Script: {fileID: 11500000, guid: 56aa7e207e9e64696a43ecf946ee9dd8, type: 3}
+  m_Name: ForceShieldVulnerable
   m_EditorClassIdentifier: 
-  attackDelay: 0
-  RefractoryPeriod: 0
-  Cd: 0
-  _force: 500
-  _explosionRange: 5
-  _atkMultiplier: 1.5
+  Target: Vulnerable
+  Duration: 0.5
+  IsDurationStacked: 1
+  MaxDuration: 1

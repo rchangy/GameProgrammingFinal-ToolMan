@@ -94,7 +94,7 @@ namespace ToolMan.Combat.Equip
             if(playerCombat != null)
             {
                 if (_returning) return;
-                if (playerCombat.Vulnerable)
+                if (!playerCombat.Vulnerable)
                 {
                     _target = _whale;
                     _returning = true;

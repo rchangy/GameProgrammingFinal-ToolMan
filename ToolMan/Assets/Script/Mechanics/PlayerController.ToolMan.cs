@@ -43,6 +43,7 @@ public partial class PlayerController
             toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
             tools[toolIdx].toTool();
             combat.SetCurrentUsingSkill(tools[toolIdx].getName());
+            combat.AddType(tools[toolIdx].getName());
             cam.EnableFreeLook();
 
             //effect
@@ -57,6 +58,7 @@ public partial class PlayerController
             tools[toolIdx].toMan();
             toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
             toolListUI.Unchoose();
+            combat.RemoveType(tools[toolIdx].getName());
             cam.EnableMain();
 
             //effect

@@ -20,15 +20,15 @@ namespace ToolMan.Combat.Skills.Normal
         {
             rb = _tool.GetComponent<Rigidbody>();
 
-            _toolController.AnimationAttack();
             yield return new WaitForSeconds(attackDelay);
             _manController.Release();
             var dir = _man.transform.forward;
             dir.y = 1;
             rb.AddForce(dir * _force);
+            yield return new WaitForSeconds(0.3f);
             while (true)
             {
-                if (Input.GetButtonDown("JumpOrAttack1"))
+                if (Input.GetButtonDown("JumpOrAttack2"))
                 {
                     _toolController.AnimationAttack();
                     Debug.Log("Explosion");

@@ -138,7 +138,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1993,10 +1993,9 @@ MonoBehaviour:
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
-  player: {fileID: 8507911072495564285}
-  TargetLayers:
+  _targetLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   availableSkillSet: {fileID: 11400000, guid: 9e7f4c72521264d21af851c189decb46, type: 2}
   InitUsingSkillSet:
   - LightSaber
