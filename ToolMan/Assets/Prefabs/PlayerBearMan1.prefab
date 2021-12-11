@@ -400,7 +400,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2047
+    m_Bits: 6143
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1495,7 +1495,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   _targetLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   availableSkillSet: {fileID: 11400000, guid: d08758d99c5524a6fbdbe135bf5c56b0, type: 2}
   InitUsingSkillSet:
   - Pickaxe
@@ -3575,6 +3575,10 @@ PrefabInstance:
     - target: {fileID: 4248872616324170665, guid: 8192453c242d44af3be0538289155e08, type: 3}
       propertyPath: m_Name
       value: ToolTrail
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248872616324170676, guid: 8192453c242d44af3be0538289155e08, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.8994507
       objectReference: {fileID: 0}
     - target: {fileID: 4248872616324170678, guid: 8192453c242d44af3be0538289155e08, type: 3}
       propertyPath: m_RootOrder
