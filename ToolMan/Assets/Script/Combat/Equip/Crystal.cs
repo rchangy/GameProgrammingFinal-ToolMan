@@ -34,8 +34,6 @@ namespace ToolMan.Combat.Equip
             {
                 if (hitBy.inToolState() && hitBy.getTool().getName().Equals("Pickaxe"))
                     _hp.ChangeValueBy(-1);
-                hitBy.combat.AddHp(10);
-                hitBy = null;
             }
             
             return 1;
@@ -43,6 +41,11 @@ namespace ToolMan.Combat.Equip
 
         protected override void Die()
         {
+            if (hitBy != null)
+            {
+                hitBy.combat.AddHp(10);
+                hitBy.GetAnotherPlayer().combat.AddHp(10);
+            }
             Destroy(gameObject);
         }
         private void OnTriggerEnter(Collider other)
@@ -51,7 +54,6 @@ namespace ToolMan.Combat.Equip
             {
                 hitBy = other.gameObject.GetComponent<PlayerController>();
             }
-            
         }
     }
 }
