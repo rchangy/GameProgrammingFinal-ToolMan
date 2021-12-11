@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5674977809948141560}
   - component: {fileID: 7779033423952510761}
   - component: {fileID: -1959003523850715014}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Egg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,19 +99,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HpMaxValue: 1
   HpInitValue: 1
-  AtkBaseValue: 1
+  AtkBaseValue: 20
   DefBaseValue: 1
   StrBaseValue: 1
   AttackEnableBaseValue: 1
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
-  _hatchTime: 10
+  _hatchTime: 3
   _chickPrefab: {fileID: 1767663768970106, guid: ca9fda2f4d77c4d4f88d4ed8b939f69b, type: 3}
   _chickHatchOffset: {x: 0, y: 0, z: 0}
   _bombWeight: 1
   _chichWeight: 1
-  _explosionRange: 2
+  _explosionRange: 5
   _atkMultiplier: 1
   _targetLayers:
     serializedVersion: 2

@@ -77,8 +77,8 @@ namespace ToolMan.Combat.Equip
             }
             else
             {
-                _hp.ChangeValueBy(-3);
-                dmg = 3;
+                _hp.ChangeValueBy(0);
+                dmg = 0;
             }
             if (_contactPoints.ContainsKey(damager))
             {
