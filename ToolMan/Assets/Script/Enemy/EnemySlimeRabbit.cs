@@ -205,7 +205,7 @@ public class EnemySlimeRabbit : Enemy
         SetAllAnimationFalse();
         animator.SetBool("Move", true);
 
-        _dest = transform.position - (point - transform.position)
+        _dest = transform.position - (point - transform.position);
         //float angle = Mathf.Atan2(transform.position.x - point.x, transform.position.z - point.z) * Mathf.Rad2Deg;
         //Vector3 direction = new Vector3(0f, angle, 0f);
 

@@ -42,9 +42,20 @@ public class Enemy : MonoBehaviour
 
     public SkillCombat combat;
 
-    protected Transform closestPlayer
+    protected Vector3 closestPlayer
     {
-        get => GetClosestplayer();
+        get
+        {
+            Transform tmp;
+            if((tmp = GetClosestplayer()) == null)
+            {
+                return _dest;
+            }
+            else
+            {
+                return tmp.position;
+            }
+        }
     }
 
     protected Vector3 _dest;
@@ -59,7 +70,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float SightRange;
     protected bool PlayerInSightRange;
     [SerializeField] protected float speed;
-
+    protected float _currentSpeed;
 
     // attack
     protected List<string> _skillSet = new List<string>();
@@ -84,6 +95,7 @@ public class Enemy : MonoBehaviour
     {
         weight = new int[] { AttackWeight, PatrolWeight, IdleWeight };
         isAction = false;
+        _currentSpeed = speed;
     }
     protected virtual void Start()
     {
@@ -121,24 +133,21 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
-        GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
-        int playerNum = PlayerGameObjects.Length;
-
-        Players = new Transform[playerNum];
-        for (int i = 0; i < playerNum; i++)
-        {
-            Players[i] = PlayerGameObjects[i].transform;
-        }
         // check sight and attack range
         PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
         PlayerInAttackRange = Physics.CheckSphere(transform.position, AttackRange, PlayerMask);
+    }
+    protected virtual void FixedUpdate()
+    {
         ManageBehavior();
         ManageLookAt();
         ManageMovement();
+        _currentSpeed = speed;
     }
 
     protected virtual void ManageBehavior()
     {
+        if (combat.Attacking) return;
         if (isAction)
         {
             ActionLastTime -= Time.deltaTime;
@@ -147,18 +156,16 @@ public class Enemy : MonoBehaviour
                 isAction = false;
                 walkPointSet = false;
             }
-            RandomBehavior();
-        }
-        else
-        {
-            if (combat.Attacking) Idle();
             else
             {
-                if (!PlayerInSightRange && !PlayerInAttackRange) Patrol();
-                if (PlayerInSightRange && !PlayerInAttackRange) ChasePlayer();
-                if (PlayerInSightRange && PlayerInAttackRange) RandomBehavior();
+                RandomBehavior();
+                return;
             }
         }
+        if (!PlayerInSightRange && !PlayerInAttackRange) Patrol();
+        if (PlayerInSightRange && !PlayerInAttackRange) ChasePlayer();
+        if (PlayerInSightRange && PlayerInAttackRange) RandomBehavior();
+        
     }
 
     protected virtual void Patrol()
@@ -172,13 +179,14 @@ public class Enemy : MonoBehaviour
     protected virtual void Idle()
     {
         Debug.Log("Idle Mode");
-        _dest = transform.position;
+        SetDest(transform.position);
     }
 
     protected virtual void ChasePlayer()
     {
         Debug.Log("Chase Mode");
-        _dest = closestPlayer.position;
+        SetDest(closestPlayer);
+        _currentSpeed *= 2;
     }
 
     protected virtual void RandomBehavior()
@@ -187,12 +195,16 @@ public class Enemy : MonoBehaviour
         if (!isAction)
         {
             act = GetRandType(weight);
-            ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
-            isAction = true;
+            if(act > 0)
+            {
+                ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
+                isAction = true;
+            }
         }
 
         switch (act){
             case 0: // attack
+                Idle();
                 RandomAttackBehavior();
                 break;
             case 1:
@@ -228,9 +240,9 @@ public class Enemy : MonoBehaviour
         float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         var tmp = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(_dest, -transform.up, 2f, GroundMask))
+        if (Physics.Raycast(tmp, -transform.up, 10f, GroundMask))
         {
-            _dest = tmp;
+            SetDest(tmp);
             walkPointSet = true;
         }
     }
@@ -241,6 +253,7 @@ public class Enemy : MonoBehaviour
         float minDist = float.MaxValue;
         foreach(Transform player in Players)
         {
+            if (player == null) continue;
             float dist = Vector3.Distance(transform.position, player.position);
             if(dist < minDist)
             {
@@ -282,12 +295,13 @@ public class Enemy : MonoBehaviour
 
     protected void ManageMovement()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * speed);
+        transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * _currentSpeed);
     }
 
     protected virtual void ManageLookAt()
     {
-        if (PlayerInSightRange) _lookatDest = closestPlayer.position;
+        if (combat.Attacking) return;
+        if (PlayerInSightRange) _lookatDest = new Vector3(closestPlayer.x, transform.position.y, closestPlayer.z);
         else _lookatDest = _dest;
         var targetDirection = _lookatDest - transform.position;
         if(transform.position != _lookatDest)
@@ -295,5 +309,10 @@ public class Enemy : MonoBehaviour
             var newDir = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * rotateSpeed, 0f);
             transform.rotation = Quaternion.LookRotation(newDir);
         }
+    }
+
+    private void SetDest(Vector3 dest)
+    {
+        _dest = new Vector3(dest.x, transform.position.y, dest.z);
     }
 }
