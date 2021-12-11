@@ -28,5 +28,10 @@ namespace ToolMan.Combat.Skills
             skillSet.Clear();
             Load();
         }
+
+        public PlayerSkill GetPlayerSkillbyName(string name)
+        {
+            return (PlayerSkill) GetSkillbyName(name);
+        }
     }
 }

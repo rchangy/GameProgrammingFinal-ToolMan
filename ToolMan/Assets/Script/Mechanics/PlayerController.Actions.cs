@@ -24,9 +24,11 @@ public partial class PlayerController
         if (!grabPoint.IsGrabbing())
         {
             Grab();
+            AnimationGrab(anotherPlayer.getTool().getName());
         }
         else
         {
+            AnimationRelease(anotherPlayer.getTool().getName());
             Release();
         }
     }

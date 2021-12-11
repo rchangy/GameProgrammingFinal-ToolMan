@@ -26,7 +26,6 @@ namespace ToolMan.Combat
             get => _hp.Value;
         }
         
-
         protected Stat _atk;
         public float Atk
         {
@@ -113,6 +112,7 @@ namespace ToolMan.Combat
 
         public virtual int TakeDamage(float baseDmg, CombatUnit damager)
         {
+
             if (!Vulnerable) return 0;
             float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
             float dmg = typeEffectedDmg - Def;
@@ -128,6 +128,42 @@ namespace ToolMan.Combat
         public void AddBuff(ScriptableBuff buff)
         {
             buff.AddBuff(_stats);
+        }
+
+        public void AddStatMod(string name, StatModifier statMod)
+        {
+            if (_stats.HasStat(name))
+            {
+                Stat stat = _stats.GetStatByName(name);
+                stat.AddModifier(statMod);
+            }
+        }
+
+        public void RemoveStatMod(string name, StatModifier statMod)
+        {
+            if (_stats.HasStat(name))
+            {
+                Stat stat = _stats.GetStatByName(name);
+                stat.RemoveModifier(statMod);
+            }
+        }
+
+        public void Disable(string name)
+        {
+            if (_stats.HasAbility(name))
+            {
+                Ability ability = _stats.GetAbilityByName(name);
+                ability.Disable();
+            }
+        }
+
+        public void RemoveDisable(string name)
+        {
+            if (_stats.HasAbility(name))
+            {
+                Ability ability = _stats.GetAbilityByName(name);
+                ability.RemoveDisability();
+            }
         }
 
         public void AddType(string type)

@@ -15,6 +15,7 @@ namespace ToolMan.Combat.Skills.Normal{
             combat.gameObject.GetComponent<Animator>().SetTrigger("Attack");
             yield return new WaitForSeconds(_collisionTime);
             collisionEnable.Value = false;
+            yield return new WaitForSeconds(1.33f - _collisionTime);
         }
 
     }

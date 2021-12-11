@@ -16,7 +16,7 @@ public class EnemySlimeRabbit : Enemy
 
     // ==== Follow other enemies ====
     [SerializeField] private Enemy followTarget = null;
-    [SerializeField] Vector3 followOffset; 
+    //[SerializeField] Vector3 followOffset; 
     [SerializeField] private bool targetInSightRange = false;
     [SerializeField] private bool targetInAttackRange = false;
     // ==== Follow other enemies ====
@@ -25,44 +25,15 @@ public class EnemySlimeRabbit : Enemy
 
     [SerializeField] private List<ScriptableBuff> _buffs;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
 
     protected override void Start()
     {
-        // get players
-        GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
-        int playerNum = PlayerGameObjects.Length;
-
-        Players = new Transform[playerNum];
-        for (int i = 0; i < playerNum; i++)
-        {
-            Players[i] = PlayerGameObjects[i].transform;
-        }
-        AttackRange = InitAttackRange;
-
-        IReadOnlyCollection<string> skillSet = combat.GetCurrentUsingSkillSet();
-        _skillSet = (List<string>)skillSet;
-        if (skillSet != null && skillSet.Count > 0)
-        {
-            if (skillWeight.Length > skillSet.Count)
-            {
-                var tmp = skillWeight;
-                skillWeight = new int[skillSet.Count];
-                Array.Copy(tmp, skillWeight, skillSet.Count);
-            }
-        }
-        else
-        {
-            skillWeight = null;
-        }
+        base.Start();
 
         // Get enemy to follow
         SetFollowTarget();
-        if (followTarget != null)
-            transform.position = followTarget.transform.position + followOffset;
+        //if (followTarget != null)
+        //    transform.position = followTarget.transform.position + followOffset;
     }
 
     private void SetFollowTarget() {
@@ -93,57 +64,30 @@ public class EnemySlimeRabbit : Enemy
 
     protected override void Update()
     {
-        if (combat.Hp <= 0)
-        {
-            Die();
-        }
-        GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
-        int playerNum = PlayerGameObjects.Length;
-
-        Players = new Transform[playerNum];
-        for (int i = 0; i < playerNum; i++)
-        {
-            Players[i] = PlayerGameObjects[i].transform;
-        }
+        base.Update();
 
         // If no follow target, set a new one
         if (followTarget == null)
             SetFollowTarget();
 
         // check sight and attack range
-        PlayerInSightRange = Physics.CheckSphere(transform.position, escapeRange, PlayerMask);
         targetInSightRange = EnemyInRange(SightRange);
         targetInAttackRange = EnemyInRange(AttackRange);
         
+        AddBuffToOthers();
+    }
+
+    protected override void ManageBehavior()
+    {
         if (isAction)
         {
             ActionLastTime -= Time.deltaTime;
-            if (ActionLastTime < 0)
+            if (ActionLastTime <= 0)
             {
                 isAction = false;
                 walkPointSet = false;
             }
-            else
-            {
-                switch (state)
-                {
-                    case State.Idle:
-                        Idle();
-                        break;
-                    case State.Escape:
-                        Escape();
-                        break;
-                    case State.Follow:
-                        Follow();
-                        break;
-                    case State.RandomPatrol:
-                        RandomPatrol();
-                        break;
-                    case State.Attack:
-                        RandomAttackBehavior();
-                        break;
-                }
-            }
+            RandomBehavior();
         }
         else
         {
@@ -152,20 +96,19 @@ public class EnemySlimeRabbit : Enemy
 
             if (combat.Attacking) Idle();
             else
-            {                
+            {
                 if (PlayerInSightRange) Escape();
-                else if (targetInAttackRange) RandomAttackBehavior();
+                else if (targetInAttackRange) RandomBehavior();
                 else if (targetInSightRange) Follow();
                 else
                 {
                     if (followTarget == null)
-                        RandomPatrol();
+                        Patrol();
                     else
                         Follow();
                 }
             }
         }
-        AddBuffToOthers();
     }
 
     private bool EnemyInRange(float range) {
@@ -196,26 +139,25 @@ public class EnemySlimeRabbit : Enemy
 
         switch (act)
         {
-            case 0: // attack
-                RandomAttackBehavior();
-                Debug.Log("Attack Mode;)");
+            case 0:
+                Patrol();
                 break;
             case 1:
-                RandomPatrol();
+                Patrol();
                 break;
             case 2:
                 Idle();
                 break;
             default:
+                Follow();
                 break;
         }
     }
 
     protected override void Idle()
     {
-        state = State.Idle;
-        animator.SetBool("Move", false);
-        animator.SetBool("Death", false);
+        //state = State.Idle;
+        SetAllAnimationFalse();
         if (!combat.Attacking)
         {
             animator.SetBool("Idle", true);
@@ -238,61 +180,38 @@ public class EnemySlimeRabbit : Enemy
 
         if (followTarget != null)
         {
-            Vector3 tPos = new Vector3(followTarget.transform.position.x, transform.position.y, followTarget.transform.position.z);
-            float d = Vector3.Distance(tPos, transform.position);
-            if (d > followOffset.magnitude*1.2f)
-                GoToPoint(followTarget.transform.position + followOffset);
-            else
-            {
-                ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
-                Idle();
-            }
+            _dest = followTarget.transform.position;
         }
         else
-            RandomPatrol();
+            Patrol();
     }
 
-    private void RandomPatrol()
-    {
-        state = State.RandomPatrol;
-        //Debug.Log("Random Patrol Mode");
-        
-        if (!walkPointSet) SearchWalkPoint();
-        if (walkPointSet)
-            GoToPoint(walkPoint);
-        walkPoint = new Vector3(walkPoint.x, transform.position.y, walkPoint.z);
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
-    }
 
-    private void GoToPoint(Vector3 point)
-    {
-        animator.SetBool("Idle", false);
-        animator.SetBool("Damage", false);
-        animator.SetBool("Death", false);
-        animator.SetBool("Move", true);
+    //private void GoToPoint(Vector3 point)
+    //{
+    //    SetAllAnimationFalse();
+    //    animator.SetBool("Move", true);
 
-        float angle = Mathf.Atan2(point.x - transform.position.x, point.z - transform.position.z) * Mathf.Rad2Deg;
-        Vector3 direction = new Vector3(0f, angle, 0f);
+    //    float angle = Mathf.Atan2(point.x - transform.position.x, point.z - transform.position.z) * Mathf.Rad2Deg;
+    //    Vector3 direction = new Vector3(0f, angle, 0f);
 
-        transform.eulerAngles = direction;
-        transform.position += speed * Time.deltaTime * transform.forward;
-        //Debug.Log("mode go to " + point);
-    }
+    //    transform.eulerAngles = direction;
+    //    transform.position += speed * Time.deltaTime * transform.forward;
+    //    //Debug.Log("mode go to " + point);
+    //}
 
     private void EscapeFromPoint(Vector3 point)
     {
-        animator.SetBool("Idle", false);
-        animator.SetBool("Damage", false);
-        animator.SetBool("Death", false);
+        SetAllAnimationFalse();
         animator.SetBool("Move", true);
 
-        float angle = Mathf.Atan2(transform.position.x - point.x, transform.position.z - point.z) * Mathf.Rad2Deg;
-        Vector3 direction = new Vector3(0f, angle, 0f);
+        _dest = transform.position - (point - transform.position);
+        //float angle = Mathf.Atan2(transform.position.x - point.x, transform.position.z - point.z) * Mathf.Rad2Deg;
+        //Vector3 direction = new Vector3(0f, angle, 0f);
 
-        transform.eulerAngles = direction;
-        transform.position += speed * Time.deltaTime * transform.forward;
-        //Debug.Log("mode escape from " + point);
+        //transform.eulerAngles = direction;
+        //transform.position += speed * Time.deltaTime * transform.forward;
+        ////Debug.Log("mode escape from " + point);
     }
 
     private enum State
@@ -322,5 +241,20 @@ public class EnemySlimeRabbit : Enemy
             }
         }
     }
-
+    private void SetAllAnimationFalse()
+    {
+        animator.SetBool("Walk", false);
+        animator.SetBool("Run", false);
+        animator.SetBool("TurnHead", false);
+    }
+    protected override void ManageLookAt()
+    {
+        _lookatDest = _dest;
+        var targetDirection = _lookatDest - transform.position;
+        if (transform.position != _lookatDest)
+        {
+            var newDir = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * rotateSpeed, 0f);
+            transform.rotation = Quaternion.LookRotation(newDir);
+        }
+    }
 }

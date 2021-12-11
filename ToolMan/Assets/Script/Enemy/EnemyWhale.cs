@@ -250,15 +250,15 @@ public class EnemyWhale : Enemy
         // Random patrol
         if (!walkPointSet) SearchWalkPoint();
         if (walkPointSet)
-            GoToPoint(walkPoint);
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+            GoToPoint(_dest);
+        Vector3 distanceToWalkPoint = transform.position - _dest;
         if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
     }
     protected override void SearchWalkPoint()
     {
         float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        _dest = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
         walkPointSet = true;
     }
 

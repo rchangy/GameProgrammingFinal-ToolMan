@@ -28,6 +28,7 @@ public partial class PlayerController
     public void AnimationAttack()
     {
         animator.SetTrigger("Attack");
+        anotherPlayer.animator.SetTrigger("Attack");
     }
 
     public void AnimationHurt()
@@ -38,5 +39,14 @@ public partial class PlayerController
     public void AnimationDie()
     {
         animator.SetTrigger("isDead");
+    }
+
+    public void AnimationGrab(string toolName)
+    {
+        animator.SetBool("isGrabbing" + toolName, true);
+    }
+    public void AnimationRelease(string toolName)
+    {
+        animator.SetBool("isGrabbing" + toolName, false);
     }
 }

@@ -14,6 +14,7 @@ namespace ToolMan.Combat
 
         public float CalculateDmg(float baseDmg, IReadOnlyCollection<string> damagerTypes, IReadOnlyCollection<string> targetTypes)
         {
+            bool foundSpecific = false;
             if (typeEffectivenesses == null) return baseDmg;
             float totalMultiplier = 1f;
             foreach (string damagerType in damagerTypes)
@@ -25,7 +26,15 @@ namespace ToolMan.Combat
                     {
                         if (resistence.ContainsKey(targetType))
                         {
+                            foundSpecific = true;
                             totalMultiplier *= resistence[targetType];
+                        }
+                    }
+                    if (!foundSpecific)
+                    {
+                        if (resistence.ContainsKey("any"))
+                        {
+                            totalMultiplier *= resistence["any"];
                         }
                     }
                 }
