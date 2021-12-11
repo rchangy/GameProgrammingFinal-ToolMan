@@ -8,8 +8,6 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] protected Animator animator;
 
-    [SerializeField] protected NavMeshAgent EnemyAgent;
-
     [SerializeField] protected Transform[] Players;
 
     [SerializeField] protected LayerMask GroundMask, PlayerMask;
@@ -49,8 +47,10 @@ public class Enemy : MonoBehaviour
         get => GetClosestplayer();
     }
 
+    protected Vector3 _dest;
+    protected Vector3 _lookatDest;
+
     // Patrol
-    protected Vector3 walkPoint;
     protected bool walkPointSet;
     [SerializeField] protected float walkPointRange;
 
@@ -87,8 +87,6 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void Start()
     {
-        EnemyAgent = GetComponent<NavMeshAgent>();
-
         // get players
         GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
         int playerNum = PlayerGameObjects.Length;
@@ -134,14 +132,22 @@ public class Enemy : MonoBehaviour
         // check sight and attack range
         PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
         PlayerInAttackRange = Physics.CheckSphere(transform.position, AttackRange, PlayerMask);
+        ManageBehavior();
+        ManageLookAt();
+        ManageMovement();
+    }
+
+    protected virtual void ManageBehavior()
+    {
         if (isAction)
         {
             ActionLastTime -= Time.deltaTime;
-            if (ActionLastTime < 0)
+            if (ActionLastTime <= 0)
             {
                 isAction = false;
                 walkPointSet = false;
             }
+            RandomBehavior();
         }
         else
         {
@@ -158,24 +164,21 @@ public class Enemy : MonoBehaviour
     protected virtual void Patrol()
     {
         Debug.Log("Patrol Mode");
+        Vector3 distanceToDest = transform.position - _dest;
+        if (distanceToDest.magnitude < 1f) walkPointSet = false;
         if (!walkPointSet) SearchWalkPoint();
-        if (walkPointSet)
-            EnemyAgent.SetDestination(walkPoint);
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
     }
 
     protected virtual void Idle()
     {
         Debug.Log("Idle Mode");
-        EnemyAgent.SetDestination(transform.position);
+        _dest = transform.position;
     }
 
     protected virtual void ChasePlayer()
     {
         Debug.Log("Chase Mode");
-        // compare two players position and chase the closest
-        EnemyAgent.SetDestination(new Vector3(closestPlayer.position.x, transform.position.y, closestPlayer.position.z));
+        _dest = closestPlayer.position;
     }
 
     protected virtual void RandomBehavior()
@@ -199,14 +202,9 @@ public class Enemy : MonoBehaviour
                 Idle();
                 break;
             default:
+                ChasePlayer();
                 break;
         }
-
-        var targetDirection = closestPlayer.position - transform.position;
-        float singleStep = rotateSpeed * Time.deltaTime;
-        var newDir = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0f);
-
-        transform.rotation = Quaternion.LookRotation(newDir);
     }
 
     protected virtual void RandomAttackBehavior()
@@ -228,9 +226,13 @@ public class Enemy : MonoBehaviour
     {
         float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        var tmp = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, GroundMask)) walkPointSet = true;
+        if (Physics.Raycast(_dest, -transform.up, 2f, GroundMask))
+        {
+            _dest = tmp;
+            walkPointSet = true;
+        }
     }
 
     protected Transform GetClosestplayer()
@@ -270,11 +272,28 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected void OnDrawGizmos()
+    //protected void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, AttackRange);
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(transform.position, SightRange);
+    //}
+
+    protected void ManageMovement()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, AttackRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, SightRange);
+        transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * speed);
+    }
+
+    protected virtual void ManageLookAt()
+    {
+        if (PlayerInSightRange) _lookatDest = closestPlayer.position;
+        else _lookatDest = _dest;
+        var targetDirection = _lookatDest - transform.position;
+        if(transform.position != _lookatDest)
+        {
+            var newDir = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * rotateSpeed, 0f);
+            transform.rotation = Quaternion.LookRotation(newDir);
+        }
     }
 }

@@ -29,6 +29,11 @@ namespace ToolMan.Combat.Stats
             CheckCurrentValue();
         }
 
+        public void Reset()
+        {
+            _currentValue = InitValue;
+        }
+
         public string getName()
         {
             return _resourceName;

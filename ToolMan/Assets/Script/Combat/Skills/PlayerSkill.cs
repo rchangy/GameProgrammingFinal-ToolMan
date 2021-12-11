@@ -15,6 +15,9 @@ namespace ToolMan.Combat.Skills
         protected PlayerCombat _manCombat;
         protected PlayerCombat _toolCombat;
 
+        public bool UsingHitFeel;
+        public float HitFeelMul;
+
         public void SetPlayers(PlayerCombat manCombat, PlayerCombat toolCombat)
         {
             _manCombat = manCombat;

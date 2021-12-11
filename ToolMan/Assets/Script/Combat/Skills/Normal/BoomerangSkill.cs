@@ -12,7 +12,7 @@ namespace ToolMan.Combat.Skills.Normal
 
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
-            _toolCombat.tmp = true;
+            _toolCombat.Disable("Vulnerable");
             yield return new WaitForSeconds(attackDelay);
             _tool = combat.gameObject;
             if (typeof(PlayerCombat).IsInstanceOfType(combat))
@@ -26,7 +26,7 @@ namespace ToolMan.Combat.Skills.Normal
             }
             else
             {
-                _toolCombat.tmp = false;
+                _toolCombat.RemoveDisable("Vulnerable");
                 yield break;
             }
 
@@ -64,7 +64,7 @@ namespace ToolMan.Combat.Skills.Normal
                     if (_toolController.IsGrabbed())
                     {
                         collisionEnable.Value = false;
-                        _toolCombat.tmp = false;
+                        _toolCombat.RemoveDisable("Vulnerable");
                         yield break;
                     }
                 }

@@ -26,7 +26,6 @@ namespace ToolMan.Combat
             get => _hp.Value;
         }
         
-
         protected Stat _atk;
         public float Atk
         {
@@ -113,6 +112,7 @@ namespace ToolMan.Combat
 
         public virtual int TakeDamage(float baseDmg, CombatUnit damager)
         {
+
             if (!Vulnerable) return 0;
             float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
             float dmg = typeEffectedDmg - Def;

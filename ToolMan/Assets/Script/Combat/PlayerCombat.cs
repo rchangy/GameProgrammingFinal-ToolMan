@@ -32,10 +32,14 @@ namespace ToolMan.Combat
             get => _currentEnergy.Value;
         }
 
-        public bool tmp = false;
 
         [SerializeField]
         private HitFeel hitFeel;
+
+        public HitFeel HitFeel
+        {
+            get => hitFeel;
+        }
 
         private PlayerSkillSet _availablePlayerSkillSet;
 
@@ -57,12 +61,11 @@ namespace ToolMan.Combat
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
             if(damager.gameObject.GetComponent<PlayerCombat>() != null) { return 0; }
-            if (tmp) return 0;
             int dmg = base.TakeDamage(baseDmg, damager);
+            hitFeel.MakeHitFeel(dmg / _hp.MaxValue);
             // check strength
             if (dmg > Str)
             {
-                //hitFeel.MakeHitFeel();
                 ThisPlayerController.Hurt();
                 ThisPlayerController.Release();
                 if (ThisPlayerController.inToolState()) ThisPlayerController.ToolableManTransform();
@@ -92,10 +95,6 @@ namespace ToolMan.Combat
             {
                 if (!_skillEnergy.ContainsKey(skillName))
                 {
-                    if(_stats == null)
-                    {
-                        Debug.Log("null stat");
-                    }
                     Resource _newEnergy = _stats.AddResource(new Resource(skillName + "Energy", 100, 0));
                     _skillEnergy.Add(skillName, _newEnergy);
                 }
@@ -111,7 +110,6 @@ namespace ToolMan.Combat
 
         public void ComboSkillAttack()
         {
-            Debug.Log("try use combo skill");
             if (!AttackEnabled) return;
             if (!_hasSkillToUse) return;
             if (Attacking) return;
@@ -122,8 +120,6 @@ namespace ToolMan.Combat
                 _skillCoroutine = StartCoroutine(PerformComboSkill(checkedComboSkill));
             }
         }
-
-        
 
         private IEnumerator PerformComboSkill(ComboSkill skill)
         {
@@ -137,12 +133,18 @@ namespace ToolMan.Combat
 
         protected override void Hit(CombatUnit target)
         {
+            PlayerSkill skill = _availablePlayerSkillSet.GetPlayerSkillbyName(currentUsingSkillName);
+
+            if (skill.UsingHitFeel)
+            {
+                hitFeel.MakeHitFeel(skill.HitFeelMul);
+            }
             base.Hit(target);
-            //hitFeel.MakeHitFeel();
         }
         protected override void Die()
         {
             ThisPlayerController.Die();
         }
+
     }
 }

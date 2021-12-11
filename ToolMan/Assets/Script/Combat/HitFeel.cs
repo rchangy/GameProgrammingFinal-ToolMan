@@ -10,6 +10,8 @@ namespace ToolMan.Combat
         public float slowTimeScale = 0.01f;
         float originalTimeScale;
 
+        private float _mul;
+
         public Camera cam;
         public float shakeRange = 0.2f;
         public float shakeSpan = 0.05f;
@@ -22,13 +24,15 @@ namespace ToolMan.Combat
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.B))
-                MakeHitFeel();
+                MakeHitFeel(1);
         }
 
-        public void MakeHitFeel()
+        public void MakeHitFeel(float mul)
         {
+            
             if (!stopping)
             {
+                _mul = mul;
                 stopping = true;
                 StartCoroutine(TimeStop());
                 stopping = false;
@@ -39,11 +43,11 @@ namespace ToolMan.Combat
         {
             // Stop for a while
             Time.timeScale = 0;
-            yield return new WaitForSecondsRealtime(stopTimeSpan);
+            yield return new WaitForSecondsRealtime(stopTimeSpan * _mul);
 
             // Slow down for a while
             Time.timeScale = slowTimeScale;
-            yield return new WaitForSecondsRealtime(slowTimeSpan);
+            yield return new WaitForSecondsRealtime(slowTimeSpan * _mul);
 
             Time.timeScale = originalTimeScale;
 

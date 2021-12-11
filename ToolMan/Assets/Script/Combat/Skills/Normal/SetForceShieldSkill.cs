@@ -23,6 +23,7 @@ namespace ToolMan.Combat.Skills.Normal
                 if (s.SetBy(this))
                 {
                     isSet = true;
+                    s.Reset();
                     break;
                 }
             }
