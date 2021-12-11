@@ -238,5 +238,9 @@ public partial class PlayerController : ToolableMan
     {
         return grabPoint.IsGrabbing();
     }
+    public PlayerController GetAnotherPlayer()
+    {
+        return anotherPlayer;
+    }
     // ==== getters ====
 }
