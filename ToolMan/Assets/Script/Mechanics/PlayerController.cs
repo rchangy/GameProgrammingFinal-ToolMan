@@ -94,17 +94,11 @@ public partial class PlayerController : ToolableMan
 
     override protected void Update()
     {
-        //// ==== for testing (wave tool) ====
-        //if (beGrabbed && Input.GetKeyDown(KeyCode.Tab)) {
-        //    if (!toolWave)
-        //        SetToolWave(new Vector3(0, 90f, -120f), 1f, true);
-        //    else
-        //        ResetToolWave();
-        //}
-        //// ==== for testing (wave tool) ====
-
         if (winOrLose || isDead)
+        {
+            Debug.Log("Dead!");
             return;
+        }
         if (!isTool)
         {
             _comboSkillActivateByMan = anotherPlayer.ComboSkillCharged && keyboardInputController.JumpOrAttack(playerNum);
@@ -178,6 +172,10 @@ public partial class PlayerController : ToolableMan
 
     private void FixedUpdate()
     {
+        if (winOrLose || isDead)
+        {
+            return;
+        }
         transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
         transform.position += vertical * transform.forward * speed * Time.deltaTime;
         if (!isTool && confJ!= null)

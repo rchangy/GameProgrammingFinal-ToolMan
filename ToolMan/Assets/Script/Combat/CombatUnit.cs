@@ -70,6 +70,7 @@ namespace ToolMan.Combat
         // healthBar
         protected int _lastHpValue;
         public HealthBar healthBar;
+        protected bool isDead = false;
 
         protected virtual void Awake()
         {
@@ -100,10 +101,13 @@ namespace ToolMan.Combat
 
         protected virtual void Update()
         {
+            if (isDead)
+                return;
             //Debug.Log(name + " Hp: " + Hp);
             if(Hp <= 0)
             {
                 Die();
+                isDead = true;
             }
         }
 

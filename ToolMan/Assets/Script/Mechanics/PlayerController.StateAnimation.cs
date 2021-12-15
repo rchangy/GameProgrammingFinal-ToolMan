@@ -6,11 +6,7 @@ public partial class PlayerController
 {
     private void UpdateState()
     {
-        if (isDead)
-        {
-            animator.SetBool("isDead", true);
-        }
-        else if (!isGrounded)
+        if (!isGrounded)
         {
             animator.SetBool("inFlight", true);
             animator.SetBool("isGrounded", false);
