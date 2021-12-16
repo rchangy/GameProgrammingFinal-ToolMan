@@ -641,6 +641,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1670625246}
     m_Modifications:
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: _buffRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: rotateSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: AttackWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: walkPointRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: _buffs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115122344, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
+      propertyPath: _buffs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: d9ab55c80b5464381b42e932b7ff6e5f, type: 2}
     - target: {fileID: 1773656247975474, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
       propertyPath: m_Name
       value: SlimeRabbit
@@ -720,7 +748,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718717937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.850594, y: 6.0146513, z: -0.8156376}
+  m_LocalPosition: {x: -11.850594, y: 4, z: -0.8156376}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1670625246}
@@ -1470,9 +1498,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1670625246}
     m_Modifications:
+    - target: {fileID: 170206480, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
+      propertyPath: rotateSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: m_Name
       value: NormalChicken
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4303844821561524, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: m_RootOrder
@@ -1480,7 +1516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4303844821561524, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 6.29
       objectReference: {fileID: 0}
     - target: {fileID: 4303844821561524, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: m_LocalPosition.y

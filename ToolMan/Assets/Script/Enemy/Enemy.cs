@@ -170,28 +170,31 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Patrol()
     {
-        Debug.Log("Patrol Mode");
-        Vector3 distanceToDest = transform.position - _dest;
-        if (distanceToDest.magnitude < 1f) walkPointSet = false;
+        //Debug.Log("Patrol Mode");
+        if (walkPointSet)
+        {
+            Vector3 distanceToDest = transform.position - _dest;
+            if (distanceToDest.magnitude < 1f) walkPointSet = false;
+        }
         if (!walkPointSet) SearchWalkPoint();
     }
 
     protected virtual void Idle()
     {
-        Debug.Log("Idle Mode");
+        //Debug.Log("Idle Mode");
         SetDest(transform.position);
     }
 
     protected virtual void ChasePlayer()
     {
-        Debug.Log("Chase Mode");
+        //Debug.Log("Chase Mode");
         SetDest(closestPlayer);
         _currentSpeed *= 2;
     }
 
     protected virtual void RandomBehavior()
     {
-        Debug.Log("Attack Mode");
+        //Debug.Log("Attack Mode");
         if (!isAction)
         {
             act = GetRandType(weight);
@@ -239,12 +242,12 @@ public class Enemy : MonoBehaviour
         float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         var tmp = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if (Physics.Raycast(tmp, -transform.up, 10f, GroundMask))
-        {
-            SetDest(tmp);
-            walkPointSet = true;
-        }
+        SetDest(tmp);
+        //if (Physics.Raycast(tmp, -transform.up, 10f, GroundMask))
+        //{
+        //    SetDest(tmp);
+        //    walkPointSet = true;
+        //}
     }
 
     protected Transform GetClosestplayer()
@@ -295,6 +298,7 @@ public class Enemy : MonoBehaviour
 
     protected void ManageMovement()
     {
+        _dest.y = transform.position.y;
         transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * _currentSpeed);
     }
 
@@ -311,8 +315,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void SetDest(Vector3 dest)
+    protected void SetDest(Vector3 dest)
     {
-        _dest = new Vector3(dest.x, transform.position.y, dest.z);
+        //_dest = new Vector3(dest.x, transform.position.y, dest.z);
+        if (Physics.Raycast(dest, -transform.up, 10f, GroundMask))
+        {
+            walkPointSet = true;
+            _dest = dest;
+        }
+        if (!walkPointSet)
+        {
+            _dest = transform.position;
+        }
     }
 }

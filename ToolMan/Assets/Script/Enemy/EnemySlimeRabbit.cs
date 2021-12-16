@@ -11,20 +11,22 @@ public class EnemySlimeRabbit : Enemy
     // Escapes when player approaches
     // ==== Actions ====
 
-    [SerializeField] private float escapeRange;
+    //[SerializeField] private float _escapeRange;
     [SerializeField] private float _buffRange;
 
     // ==== Follow other enemies ====
     [SerializeField] private Enemy followTarget = null;
     //[SerializeField] Vector3 followOffset; 
-    [SerializeField] private bool targetInSightRange = false;
+    //[SerializeField] private bool targetInSightRange = false;
     [SerializeField] private bool targetInAttackRange = false;
     // ==== Follow other enemies ====
 
-    [SerializeField] private State state = State.Idle;
+    //[SerializeField] private State state = State.Idle;
 
     [SerializeField] private List<ScriptableBuff> _buffs;
 
+
+    private bool _escaping = false;
 
     protected override void Start()
     {
@@ -32,8 +34,6 @@ public class EnemySlimeRabbit : Enemy
 
         // Get enemy to follow
         SetFollowTarget();
-        //if (followTarget != null)
-        //    transform.position = followTarget.transform.position + followOffset;
     }
 
     private void SetFollowTarget() {
@@ -49,8 +49,7 @@ public class EnemySlimeRabbit : Enemy
             if (e.GetComponent<EnemySlimeRabbit>() != null)
                 continue;
 
-            Vector3 ePos = new Vector3(e.transform.position.x, transform.position.y, e.transform.position.z);
-            float d = Vector3.Distance(ePos, transform.position);
+            float d = Vector3.Distance(e.transform.position, transform.position);
             if (d <= distance)
             {
                 followTarget = e.GetComponent<Enemy>();
@@ -64,14 +63,15 @@ public class EnemySlimeRabbit : Enemy
 
     protected override void Update()
     {
-        base.Update();
-
         // If no follow target, set a new one
         if (followTarget == null)
             SetFollowTarget();
 
+        base.Update();
+
+
         // check sight and attack range
-        targetInSightRange = EnemyInRange(SightRange);
+        //targetInSightRange = EnemyInRange(SightRange);
         targetInAttackRange = EnemyInRange(AttackRange);
         
         AddBuffToOthers();
@@ -79,6 +79,22 @@ public class EnemySlimeRabbit : Enemy
 
     protected override void ManageBehavior()
     {
+        if (combat.Attacking) return;
+        if (PlayerInAttackRange && !_escaping)
+        {
+            isAction = false;
+            Escape();
+            return;
+        }
+        if (_escaping)
+        {
+            if (!PlayerInSightRange) _escaping = false;
+            else
+            {
+                Escape();
+                return;
+            }
+        }
         if (isAction)
         {
             ActionLastTime -= Time.deltaTime;
@@ -87,28 +103,16 @@ public class EnemySlimeRabbit : Enemy
                 isAction = false;
                 walkPointSet = false;
             }
-            RandomBehavior();
-        }
-        else
-        {
-            ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
-            isAction = true;
-
-            if (combat.Attacking) Idle();
             else
             {
-                if (PlayerInSightRange) Escape();
-                else if (targetInAttackRange) RandomBehavior();
-                else if (targetInSightRange) Follow();
-                else
-                {
-                    if (followTarget == null)
-                        Patrol();
-                    else
-                        Follow();
-                }
+                RandomBehavior();
+                return;
             }
         }
+
+        if (targetInAttackRange) RandomBehavior();
+        else Follow();
+        
     }
 
     private bool EnemyInRange(float range) {
@@ -119,8 +123,8 @@ public class EnemySlimeRabbit : Enemy
             if (e.GetComponent<EnemySlimeRabbit>() != null)
                 continue;
 
-            Vector3 ePos = new Vector3(e.transform.position.x, transform.position.y, e.transform.position.z);
-            if (Vector3.Distance(ePos, transform.position) <= range)
+            //Vector3 ePos = new Vector3(e.transform.position.x, transform.position.y, e.transform.position.z);
+            if (Vector3.Distance(e.transform.position, transform.position) <= range)
                 return true;
         }
         return false;
@@ -129,10 +133,13 @@ public class EnemySlimeRabbit : Enemy
     protected override void RandomBehavior()
     {
         // When player in attack range
-        //Debug.Log("Random Mode");
         if (!isAction)
         {
-            act = GetRandType(weight);
+            if (_escaping) act = 3;
+            else
+            {
+                act = GetRandType(weight);
+            }
             ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
             isAction = true;
         }
@@ -148,6 +155,9 @@ public class EnemySlimeRabbit : Enemy
             case 2:
                 Idle();
                 break;
+            case 3:
+                Escape();
+                break;
             default:
                 Follow();
                 break;
@@ -156,7 +166,7 @@ public class EnemySlimeRabbit : Enemy
 
     protected override void Idle()
     {
-        //state = State.Idle;
+        base.Idle();
         SetAllAnimationFalse();
         if (!combat.Attacking)
         {
@@ -167,51 +177,33 @@ public class EnemySlimeRabbit : Enemy
     private void Escape()
     {
         combat.Attack();
-        state = State.Escape;
-        //Debug.Log("Escape Mode");
-        
+        //state = State.Escape;
         Vector3 p = GetClosestplayer().position;
-        EscapeFromPoint(p);
+        SetAllAnimationFalse();
+        animator.SetBool("Move", true);
+        SetDest(transform.position - (p - transform.position));
+        //EscapeFromPoint(p);
+        _escaping = true;
     }
 
     private void Follow()
     {
-        state = State.Follow;
-
+        //state = State.Follow;
+        SetAllAnimationFalse();
+        animator.SetBool("Move", true);
         if (followTarget != null)
         {
-            _dest = followTarget.transform.position;
+            SetDest(followTarget.transform.position);
+            //_dest = new Vector3(followTarget.transform.position.x, transform.position.y, followTarget.transform.position.z);
         }
         else
             Patrol();
     }
-
-
-    //private void GoToPoint(Vector3 point)
-    //{
-    //    SetAllAnimationFalse();
-    //    animator.SetBool("Move", true);
-
-    //    float angle = Mathf.Atan2(point.x - transform.position.x, point.z - transform.position.z) * Mathf.Rad2Deg;
-    //    Vector3 direction = new Vector3(0f, angle, 0f);
-
-    //    transform.eulerAngles = direction;
-    //    transform.position += speed * Time.deltaTime * transform.forward;
-    //    //Debug.Log("mode go to " + point);
-    //}
-
-    private void EscapeFromPoint(Vector3 point)
+    protected override void Patrol()
     {
+        base.Patrol();
         SetAllAnimationFalse();
         animator.SetBool("Move", true);
-
-        _dest = transform.position - (point - transform.position);
-        //float angle = Mathf.Atan2(transform.position.x - point.x, transform.position.z - point.z) * Mathf.Rad2Deg;
-        //Vector3 direction = new Vector3(0f, angle, 0f);
-
-        //transform.eulerAngles = direction;
-        //transform.position += speed * Time.deltaTime * transform.forward;
-        ////Debug.Log("mode escape from " + point);
     }
 
     private enum State
@@ -227,25 +219,25 @@ public class EnemySlimeRabbit : Enemy
     {
         if (_buffs == null) return;
         if (_buffs.Count == 0) return;
-        Debug.Log("Add Buff Check");
-        Collider[] hitTargets = Physics.OverlapSphere(gameObject.transform.position, _buffRange, gameObject.layer) ;
+        Collider[] hitTargets = Physics.OverlapSphere(gameObject.transform.position, _buffRange, 1 << LayerMask.NameToLayer("Enemy"));
         foreach (Collider target in hitTargets)
         {
-            CombatUnit targetCombat = target.GetComponent<CombatUnit>();
+            
+            CombatUnit targetCombat = target.gameObject.GetComponent<CombatUnit>();
+                
             if (targetCombat != null)
             {
                 // how to add buff
                 // random or all
                 targetCombat.AddBuff(_buffs[0]);
-                Debug.Log("add buff to " + target.name);
             }
         }
     }
     private void SetAllAnimationFalse()
     {
-        animator.SetBool("Walk", false);
-        animator.SetBool("Run", false);
-        animator.SetBool("TurnHead", false);
+        animator.SetBool("Idle", false);
+        animator.SetBool("Move", false);
+
     }
     protected override void ManageLookAt()
     {

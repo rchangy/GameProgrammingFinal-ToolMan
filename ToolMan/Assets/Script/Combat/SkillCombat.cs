@@ -63,7 +63,7 @@ namespace ToolMan.Combat
                 SetSkills(InitUsingSkillSet);
                 if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
                 else SetCurrentUsingSkill(null);
-                Debug.Log(GetCurrentUsingSkillSet());
+                //Debug.Log(GetCurrentUsingSkillSet());
             }
             else
             {
@@ -142,7 +142,7 @@ namespace ToolMan.Combat
             {
                 if (availableSkillSet.HasSkill(skillName))
                 {
-                    Debug.Log(skillName);
+                    //Debug.Log(skillName);
                     _skillCd.Add(skillName, 0f);
                     CurrentUsingSkillSet.Add(skillName);
                 }
