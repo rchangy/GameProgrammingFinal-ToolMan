@@ -1464,6 +1464,7 @@ MonoBehaviour:
   playerCollider: {fileID: 3346628931965091970}
   grabPoint: {fileID: 1932339910922669504}
   rightHand: {fileID: 3346628931098774230}
+  Forearm: {fileID: 7737882345736013190}
   toolListUI: {fileID: 0}
   anotherPlayer: {fileID: 0}
   effectController: {fileID: 1976549261}
@@ -1484,10 +1485,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79ddaf4308f544a8b93b9f2e2e3f54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpMaxValue: 1
-  HpInitValue: 1
+  HpMaxValue: 20
+  HpInitValue: 20
   AtkBaseValue: 1
-  DefBaseValue: 1
+  DefBaseValue: 0
   StrBaseValue: 1
   AttackEnableBaseValue: 1
   MovableBaseValue: 1
@@ -1499,9 +1500,8 @@ MonoBehaviour:
   availableSkillSet: {fileID: 11400000, guid: d08758d99c5524a6fbdbe135bf5c56b0, type: 2}
   InitUsingSkillSet:
   - Pickaxe
-  - Boomarang
+  - Boomerang
   _teamMate: {fileID: 0}
-  tmp: 0
   hitFeel: {fileID: 0}
 --- !u!114 &323214610
 MonoBehaviour:
