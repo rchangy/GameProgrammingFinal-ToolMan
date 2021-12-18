@@ -17,13 +17,13 @@ namespace ToolMan.Combat.Skills
             collisionEnable.Value = true;
             if (!_toolController.ToolWave)
             {
-                _toolController.SetToolWave(new Vector3(0, 45f, 90f), 6f, true);
+                //_toolController.SetToolWave(new Vector3(0, 45f, 90f), 6f, true);
             }
             while (!_toolController.WaveEnd)
             {
                 yield return null;
             }
-            _toolController.ResetToolWave();
+            //_toolController.ResetToolWave();
             collisionEnable.Value = false;
         }
     }

@@ -9,7 +9,9 @@ public class Boomerang : Tool
     {
         setUp(player);
         name = "Boomerang";
-        theToolEulerAngle = new Vector3(0f, 90f, -26f);
+        //theToolEulerAngle = new Vector3(0f, 90f, -26f);
+        //theToolEulerAngle = new Vector3(0f, 0f, 0f);
+        theToolEulerAngle = new Vector3(-50f, -58f, -32.5f);
     }
 
     public override void toTool()

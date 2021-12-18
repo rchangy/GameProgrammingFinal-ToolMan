@@ -32,6 +32,7 @@ public partial class PlayerController : ToolableMan
     [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private GrabPoint grabPoint;
     [SerializeField] private GameObject rightHand;
+    [SerializeField] private GameObject Forearm;
     [SerializeField] private ObjectListUI toolListUI;
     [SerializeField] private PlayerController anotherPlayer;
     [SerializeField] private EffectController effectController;
@@ -96,7 +97,6 @@ public partial class PlayerController : ToolableMan
     {
         if (winOrLose || isDead)
         {
-            Debug.Log("Dead!");
             return;
         }
         if (!isTool)
@@ -224,6 +224,10 @@ public partial class PlayerController : ToolableMan
     {
         return rightHand;
     }
+    public GameObject GetForearm()
+    {
+        return Forearm;
+    }
     public LayerMask GetLayerMask()
     {
         return playerLayerMask;
@@ -239,6 +243,10 @@ public partial class PlayerController : ToolableMan
     public PlayerController GetAnotherPlayer()
     {
         return anotherPlayer;
+    }
+    public bool IsAnimationAttacking()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack");
     }
     // ==== getters ====
 }

@@ -19,6 +19,15 @@ public partial class PlayerController
             animator.SetBool("inFlight", false);
             animator.SetBool("isGrounded", true);
         }
+        //if (!isTool && (Mathf.Abs(vertical) >= 0.01f || !isGrounded) && !isMoving)
+        //{
+        //    animator.SetTrigger("Move");
+        //    isMoving = true;
+        //}
+        //else
+        //{
+        //    isMoving = false;
+        //}
     }
 
     public void AnimationAttack()
@@ -39,10 +48,12 @@ public partial class PlayerController
 
     public void AnimationGrab(string toolName)
     {
+        animator.SetBool("isGrabbing", true);
         animator.SetBool("isGrabbing" + toolName, true);
     }
     public void AnimationRelease(string toolName)
     {
+        animator.SetBool("isGrabbing", false);
         animator.SetBool("isGrabbing" + toolName, false);
     }
 }

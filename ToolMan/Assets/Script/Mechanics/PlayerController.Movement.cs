@@ -9,12 +9,16 @@ public partial class PlayerController
     /// </summary>
     /// 
 
+    // ==== status ====
     [SerializeField] private float speed = 20;
     public float moveAngleSensitivity = 750f;
     public float jumpForce = 300;
     public int maxJumpCount = 1; // It can actaully jump once more 
     public int currentJumpCount = 0;
+    private float distToGround;
+    private bool isGrounded;
 
+    // ==== wave ====
     private bool toolWave = false;
     public bool ToolWave
     {
@@ -32,9 +36,6 @@ public partial class PlayerController
     {
         get => waveEnd;
     }
-
-    private float distToGround;
-    private bool isGrounded;
 
     private void ManageMovement()
     {
@@ -68,15 +69,25 @@ public partial class PlayerController
 
     private void beGrabbedMovement()
     {
-        if (!toolWave)
+        //if (!toolWave)
+        //{
+        //    toolEulerAngle = tools[toolIdx].getTheToolEulerAngle();
+        //}
+        //else
+        //{
+        //    ManageWaving();
+        //}
+        //transform.eulerAngles = anotherPlayer.transform.eulerAngles + toolEulerAngle;
+        toolEulerAngle = tools[toolIdx].getTheToolEulerAngle();
+        if (tools[toolIdx].getName().Equals("Shield") || tools[toolIdx].getName().Equals("FlashBomb"))
         {
-            toolEulerAngle = tools[toolIdx].getTheToolEulerAngle();
+            transform.eulerAngles = anotherPlayer.transform.eulerAngles + toolEulerAngle;
         }
         else
         {
-            ManageWaving();
+            transform.eulerAngles = anotherPlayer.GetForearm().transform.eulerAngles + toolEulerAngle;
         }
-        transform.eulerAngles = anotherPlayer.transform.eulerAngles + toolEulerAngle;
+        waveEnd = !anotherPlayer.IsAnimationAttacking();
     }
 
     // ==== Wave Tool ====
@@ -119,24 +130,10 @@ public partial class PlayerController
         if (!IsCBetweenAB(originalToolEulerAngle, specialToolEulerAngle, newAngle))
         {
             toolEulerAngle = specialToolEulerAngle;
-            //if (waveDirChange == true)
-            //{
-            //    Debug.Log("out");
-            //    Debug.Log("new: " + newAngle);
-            //    Debug.Log("origin: " + originalToolEulerAngle);
-            //    Debug.Log("special: " + specialToolEulerAngle);
-            //}
         }
         else
         {
             toolEulerAngle = newAngle;
-            //if (waveDirChange == true)
-            //{
-            //    Debug.Log("in");
-            //    Debug.Log("new: " + newAngle);
-            //    Debug.Log("origin: " + originalToolEulerAngle);
-            //    Debug.Log("special: " + specialToolEulerAngle);
-            //}
         }
         if (toolEulerAngle == specialToolEulerAngle)
         {

@@ -56,7 +56,7 @@ namespace ToolMan.Combat.Skills.Normal
             while (flyingTimeLast > 0)
             {
                 _tool.transform.Rotate(0, 0, Time.deltaTime * 800);
-                _tool.transform.position = Vector3.MoveTowards(_tool.transform.position, _man.transform.position, Time.deltaTime * 40);
+                _tool.transform.position = Vector3.MoveTowards(_tool.transform.position, _manController.GetRightHand().transform.position, Time.deltaTime * 40);
                 flyingTimeLast -= Time.deltaTime;
                 if (Vector3.Distance(_man.transform.position, _tool.transform.position) < 1.5)
                 {

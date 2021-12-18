@@ -243,6 +243,14 @@ PrefabInstance:
       propertyPath: DefBaseValue
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 323214609, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: InitUsingSkillSet.Array.data[1]
+      value: Boomerang
+      objectReference: {fileID: 0}
+    - target: {fileID: 460149762, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: Forearm
+      value: 
+      objectReference: {fileID: 1203686988}
     - target: {fileID: 460149762, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
       propertyPath: toolListUI
       value: 
@@ -391,6 +399,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBearMan2
       objectReference: {fileID: 0}
+    - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: Forearm
+      value: 
+      objectReference: {fileID: 884151357}
     - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: toolListUI
       value: 
@@ -692,6 +704,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4987741909099236402, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
   m_PrefabInstance: {fileID: 466201447}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &884151357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3675442781225644286, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+  m_PrefabInstance: {fileID: 466201447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1030747287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -842,6 +859,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1203686988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7737882345736013190, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+  m_PrefabInstance: {fileID: 323214606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1229538627 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
