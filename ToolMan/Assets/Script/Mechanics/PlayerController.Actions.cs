@@ -24,11 +24,13 @@ public partial class PlayerController
         if (!grabPoint.IsGrabbing())
         {
             Grab();
-            AnimationGrab(anotherPlayer.getTool().getName());
+            if (this.confJ != null)
+                AnimationGrab(anotherPlayer.getTool().getName());
         }
         else
         {
-            AnimationRelease(anotherPlayer.getTool().getName());
+            if (this.confJ != null)
+                AnimationRelease(anotherPlayer.getTool().getName());
             Release();
         }
     }
@@ -36,6 +38,12 @@ public partial class PlayerController
     public void Grab()
     {
         this.confJ = grabPoint.Grab();
+    }
+
+    public void forceGrabbing()
+    {
+        grabPoint.setAnotherPlayerAndTarget(this);
+        Grab();
     }
 
     public void Release()
@@ -49,7 +57,16 @@ public partial class PlayerController
         isDead = true;
         if (isTool)
         {
+            if (anotherPlayer.IsGrabbing())
+            {
+                anotherPlayer.Release();
+            }
             ToolableManTransform();
+        }
+        else
+        {
+            if (IsGrabbing())
+                Release();
         }
         AnimationDie();
     }

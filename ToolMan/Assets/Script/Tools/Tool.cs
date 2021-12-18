@@ -37,7 +37,7 @@ public class Tool
         animator.SetBool("isTool", false);
         animator.SetBool("isShield", false);
         animator.SetBool("isFlashBomb", false);
-        animator.SetBool("isSword", false);
+        animator.SetBool("isLightSaber", false);
         animator.SetBool("isBoomerang", false);
         animator.SetBool("isPickaxe", false);
 

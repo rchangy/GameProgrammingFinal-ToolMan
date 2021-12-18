@@ -1953,6 +1953,7 @@ MonoBehaviour:
   playerCollider: {fileID: 8507911072495564282}
   grabPoint: {fileID: 4806112291604789432}
   rightHand: {fileID: 7602279447490618996}
+  Forearm: {fileID: 3675442781225644286}
   toolListUI: {fileID: 0}
   anotherPlayer: {fileID: 0}
   effectController: {fileID: 1888963215}
@@ -1986,10 +1987,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79ddaf4308f544a8b93b9f2e2e3f54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpMaxValue: 1
-  HpInitValue: 1
+  HpMaxValue: 20
+  HpInitValue: 20
   AtkBaseValue: 1
-  DefBaseValue: 1
+  DefBaseValue: 0
   StrBaseValue: 1
   AttackEnableBaseValue: 1
   MovableBaseValue: 1
@@ -2004,7 +2005,6 @@ MonoBehaviour:
   - FlashBomb
   - Shield
   _teamMate: {fileID: 0}
-  tmp: 0
   hitFeel: {fileID: 0}
 --- !u!1 &5681094873323192337
 GameObject:
