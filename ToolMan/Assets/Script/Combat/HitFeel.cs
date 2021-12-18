@@ -56,14 +56,14 @@ namespace ToolMan.Combat
 
         IEnumerator CamShake()
         {
-            Vector3 originalPosition = transform.position;
+            Vector3 originalPosition = transform.localPosition;
 
-            cam.transform.position += new Vector3(Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange));
+            cam.transform.localPosition += new Vector3(Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange));
             yield return new WaitForSeconds(shakeSpan);
-            cam.transform.position += new Vector3(Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange));
+            cam.transform.localPosition += new Vector3(Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange), Random.Range(-shakeRange, shakeRange));
             yield return new WaitForSeconds(shakeSpan);
 
-            cam.transform.position = originalPosition;
+            cam.transform.localPosition = originalPosition;
         }
     }
 }

@@ -60,18 +60,17 @@ namespace ToolMan.Combat
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
-            if(damager.gameObject.GetComponent<PlayerCombat>() != null) { return 0; }
             int dmg = base.TakeDamage(baseDmg, damager);
             hitFeel.MakeHitFeel(dmg / _hp.MaxValue);
-            // check strength
-            if (dmg > Str)
-            {
-                ThisPlayerController.Hurt();
-                ThisPlayerController.Release();
-                if (ThisPlayerController.inToolState()) ThisPlayerController.ToolableManTransform();
-            }
-            
             return dmg;
+        }
+
+        protected override void Interrupted(Transform damager)
+        {
+            base.Interrupted(damager);
+            ThisPlayerController.Hurt();
+            ThisPlayerController.Release();
+            if (ThisPlayerController.inToolState()) ThisPlayerController.ToolableManTransform();
         }
 
         public void AddHp(int hpAdd)
@@ -139,7 +138,15 @@ namespace ToolMan.Combat
             {
                 hitFeel.MakeHitFeel(skill.HitFeelMul);
             }
-            base.Hit(target);
+            if (ThisPlayerController.IsGrabbed())
+            {
+                Debug.Log(name + " hit " + target.name);
+                target.TakeDamage(Atk, TeamMateCombat);
+            }
+            else
+            {
+                base.Hit(target);
+            }
         }
         protected override void Die()
         {

@@ -72,6 +72,16 @@ namespace ToolMan.Combat
         public HealthBar healthBar;
         protected bool isDead = false;
 
+        // hit feel
+        protected Rigidbody _rb;
+        private float _stopVelTime = 0.5f;
+        private float _timeToStopRb = 0f;
+        private bool _isAddingForce
+        {
+            get => _timeToStopRb > 0f;
+        }
+
+
         protected virtual void Awake()
         {
             manager = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
@@ -87,6 +97,9 @@ namespace ToolMan.Combat
             _attackEnabled = _stats.AddAbility(new Ability("AttackEnabled", AttackEnableBaseValue));
             _movable = _stats.AddAbility(new Ability("Movable", MovableBaseValue));
             _vulnerable = _stats.AddAbility(new Ability("Vulnerable", VulnerableBaseValue));
+
+            _rb = gameObject.GetComponent<Rigidbody>();
+            _rb.angularDrag = 100;
         }
 
         protected virtual void Start()
@@ -109,6 +122,16 @@ namespace ToolMan.Combat
                 Die();
                 isDead = true;
             }
+            if (_isAddingForce)
+            {
+                _timeToStopRb -= Time.deltaTime;
+                if(_timeToStopRb <= 0)
+                {
+                    _rb.drag = 0;
+                    _movable.RemoveDisability();
+                    //_rb.velocity = Vector3.zero;
+                }
+            }
         }
 
 
@@ -123,8 +146,23 @@ namespace ToolMan.Combat
             dmg = Mathf.Max(dmg, 0);
             _hp.ChangeValueBy(-(int)dmg);
             Debug.Log(name + " takes " + dmg + " damage, Hp: " + Hp);
-
+            if (dmg > Str)
+            {
+                Interrupted(damager.transform);
+            }
             return (int)dmg;
+        }
+
+        protected virtual void Interrupted(Transform damager)
+        {
+            var dir = transform.position - damager.position;
+            dir.y = 0f;
+            dir = Vector3.Normalize(dir);
+            Debug.Log(dir);
+            _rb.AddForce(dir * 800);
+            _timeToStopRb = _stopVelTime;
+            _rb.drag = 15;
+            _movable.Disable();
         }
 
         protected abstract void Die();

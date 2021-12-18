@@ -394,7 +394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 25174408977107730}
-  EnemyAgent: {fileID: 0}
   Players: []
   GroundMask:
     serializedVersion: 2
@@ -404,8 +403,8 @@ MonoBehaviour:
     m_Bits: 64
   Name: 
   AttackWeight: 5
-  PatrolWeight: 1
-  IdleWeight: 1
+  PatrolWeight: 0
+  IdleWeight: 0
   skillWeight: 0100000000000000
   MaxActionTime: 3
   MinActionTime: 2
@@ -415,8 +414,8 @@ MonoBehaviour:
   SightRange: 20
   speed: 2
   InitAttackRange: 2
-  rushing: 0
-  rushSpped: 3
+  _crazyTime: 0
+  _speedUp: 0
 --- !u!65 &1841006655
 BoxCollider:
   m_ObjectHideFlags: 0

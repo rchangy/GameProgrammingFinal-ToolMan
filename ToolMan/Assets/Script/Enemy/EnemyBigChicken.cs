@@ -162,7 +162,7 @@ public class EnemyBigChicken : Enemy
     //    }
     //}
 
-    private void SetAllAnimationFalse() {
+    protected override void SetAllAnimationFalse() {
         animator.SetBool("Walk", false);
         animator.SetBool("Run", false);
         animator.SetBool("TurnHead", false);

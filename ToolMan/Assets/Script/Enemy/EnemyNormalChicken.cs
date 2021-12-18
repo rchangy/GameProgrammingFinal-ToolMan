@@ -33,7 +33,7 @@ public class EnemyNormalChicken : Enemy
         animator.SetBool("Walk", true);
     }
 
-    private void SetAllAnimationFalse() {
+    protected override void SetAllAnimationFalse() {
         animator.SetBool("Walk", false);
         animator.SetBool("Run", false);
         animator.SetBool("Eat", false);

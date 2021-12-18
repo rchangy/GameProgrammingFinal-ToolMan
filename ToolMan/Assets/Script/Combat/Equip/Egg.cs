@@ -19,13 +19,12 @@ namespace ToolMan.Combat.Equip
         [SerializeField]
         private int _chichWeight;
 
-        private Rigidbody _rb;
-
         // explode
         [SerializeField]
         private float _explosionRange;
         [SerializeField]
         private float _atkMultiplier;
+        [SerializeField] private GameObject _explosionVfx;
 
         [SerializeField]
         private LayerMask _targetLayers;
@@ -76,6 +75,15 @@ namespace ToolMan.Combat.Equip
 
         private void Bomb()
         {
+            if(_explosionVfx != null)
+            {
+                GameObject vfx = Instantiate(_explosionVfx, transform.position, Quaternion.identity);
+                Explosion explosion = vfx.GetComponent<Explosion>();
+                if(explosion != null)
+                {
+                    explosion.PlayEffect();
+                }
+            }
             Collider[] hitTargets = Physics.OverlapSphere(_rb.gameObject.transform.position, _explosionRange, _targetLayers);
             foreach (Collider target in hitTargets)
             {

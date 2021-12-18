@@ -510,7 +510,6 @@ GameObject:
   - component: {fileID: 7248259814197770267}
   - component: {fileID: -4707998662921425932}
   - component: {fileID: 573183920362926423}
-  - component: {fileID: -8304492803432560612}
   - component: {fileID: 389061563}
   m_Layer: 12
   m_Name: Chick
@@ -625,19 +624,6 @@ MonoBehaviour:
     m_Bits: 0
   availableSkillSet: {fileID: 0}
   InitUsingSkillSet: []
---- !u!114 &-8304492803432560612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1767663768970106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d42d4048d51594d52bc8a2be5a45853d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inherentTypes: []
 --- !u!114 &389061563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,7 +637,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95777776565643564}
-  EnemyAgent: {fileID: 0}
   Players: []
   GroundMask:
     serializedVersion: 2
@@ -666,14 +651,12 @@ MonoBehaviour:
   skillWeight: 
   MaxActionTime: 3
   MinActionTime: 2
-  rotateSpeed: 0
+  rotateSpeed: 3
   combat: {fileID: 573183920362926423}
   walkPointRange: 15
-  SightRange: 5
+  SightRange: 10
   speed: 1
-  InitAttackRange: 3
-  rushing: 0
-  rushSpped: 2
+  InitAttackRange: 1
 --- !u!1 &1878532393300130
 GameObject:
   m_ObjectHideFlags: 0

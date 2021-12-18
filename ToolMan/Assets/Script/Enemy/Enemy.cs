@@ -8,7 +8,8 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] protected Animator animator;
 
-    [SerializeField] protected Transform[] Players;
+    protected Transform[] Players;
+    protected PlayerController[] playerControllers;
 
     [SerializeField] protected LayerMask GroundMask, PlayerMask;
 
@@ -108,6 +109,13 @@ public class Enemy : MonoBehaviour
         {
             Players[i] = PlayerGameObjects[i].transform;
         }
+
+        playerControllers = new PlayerController[playerNum];
+        for (int i = 0; i < playerNum; i++)
+        {
+            playerControllers[i] = PlayerGameObjects[i].GetComponent<PlayerController>();
+        }
+
         AttackRange = InitAttackRange;
 
         IReadOnlyCollection<string> skillSet = combat.GetCurrentUsingSkillSet();
@@ -139,6 +147,12 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
+        if (!combat.Movable)
+        {
+            SetAllAnimationFalse();
+            _currentSpeed = speed;
+            return;
+        }
         ManageBehavior();
         ManageLookAt();
         ManageMovement();
@@ -227,7 +241,6 @@ public class Enemy : MonoBehaviour
         if (combat.Attacking) return;
         if (skillWeight == null) return;
         int attackAct = GetRandType(skillWeight);
-        //Debug.Log("mode " + _skillSet[attackAct]);
         combat.SetCurrentUsingSkill(_skillSet[attackAct]);
         if (!combat.Attack())
         {
@@ -243,24 +256,21 @@ public class Enemy : MonoBehaviour
         float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         var tmp = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
         SetDest(tmp);
-        //if (Physics.Raycast(tmp, -transform.up, 10f, GroundMask))
-        //{
-        //    SetDest(tmp);
-        //    walkPointSet = true;
-        //}
     }
 
     protected Transform GetClosestplayer()
     {
         Transform target = null;
         float minDist = float.MaxValue;
-        foreach(Transform player in Players)
+
+        for(int i = 0; i < Players.Length; i++)
         {
-            if (player == null) continue;
-            float dist = Vector3.Distance(transform.position, player.position);
-            if(dist < minDist)
+            if (Players[i] == null) continue;
+            if (playerControllers[i].IsGrabbed()) continue;
+            float dist = Vector3.Distance(transform.position, Players[i].position);
+            if (dist < minDist)
             {
-                target = player;
+                target = Players[i];
                 minDist = dist;
             }
         }
@@ -327,5 +337,10 @@ public class Enemy : MonoBehaviour
         {
             _dest = transform.position;
         }
+    }
+
+    protected virtual void SetAllAnimationFalse()
+    {
+
     }
 }

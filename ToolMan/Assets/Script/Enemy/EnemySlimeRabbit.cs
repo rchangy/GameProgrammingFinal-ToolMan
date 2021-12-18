@@ -233,7 +233,7 @@ public class EnemySlimeRabbit : Enemy
             }
         }
     }
-    private void SetAllAnimationFalse()
+    protected override void SetAllAnimationFalse()
     {
         animator.SetBool("Idle", false);
         animator.SetBool("Move", false);

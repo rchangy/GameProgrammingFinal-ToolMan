@@ -193,21 +193,15 @@ namespace ToolMan.Combat
             _skillCoroutine = null;
         }
 
-        public override int TakeDamage(float baseDmg, CombatUnit damager)
+        protected override void Interrupted(Transform damager)
         {
-            var dmg = base.TakeDamage(baseDmg, damager);
-            // check strength
-            if (dmg > Str)
-            {
-                // skill interrupt
-                if (Attacking) InterruptAttack();
-                
-            }
-            return dmg;
+            base.Interrupted(damager);
+            if (Attacking) InterruptAttack();
         }
 
         protected virtual void OnTriggerEnter(Collider other)
         {
+            if ((TargetLayers | (1 << other.gameObject.layer)) != TargetLayers) return;
             if (!CollisionEnable) return;
             CombatUnit target = other.gameObject.GetComponent<CombatUnit>();
             if (target == null) return;

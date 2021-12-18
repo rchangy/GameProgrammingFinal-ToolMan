@@ -6,11 +6,17 @@ public class CameraManager : MonoBehaviour
 {
     public GameObject FreeLookCam;
     public GameObject MainCam;
+    private Vector3 _camPosition = new Vector3(0, 3, -10);
 
     private void Awake()
     {
         EnableMain();
     }
+    //private void Update()
+    //{
+    //    MainCam.transform.localPosition = _camPosition;
+    //    MainCam.transform.localRotation = Quaternion.Euler(10, 0, 0);
+    //}
 
     public void EnableFreeLook() {
         FreeLookCam.SetActive(true);
@@ -20,7 +26,7 @@ public class CameraManager : MonoBehaviour
     public void EnableMain() {
         FreeLookCam.SetActive(false);
         MainCam.SetActive(true);
-        MainCam.transform.localPosition = new Vector3(0, 3, -10);
+        MainCam.transform.localPosition = _camPosition;
         MainCam.transform.localRotation = Quaternion.Euler(10, 0, 0);
     }
 }
