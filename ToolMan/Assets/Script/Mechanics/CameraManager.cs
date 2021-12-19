@@ -16,12 +16,6 @@ public class CameraManager : MonoBehaviour
     {
         EnableMain();
     }
-    //private void Update()
-    //{
-    //    MainCam.transform.localPosition = _camPosition;
-    //    MainCam.transform.localRotation = Quaternion.Euler(10, 0, 0);
-    //}
-
     public void EnableFreeLook() {
         FreeLookCam.SetActive(true);
         MainCam.SetActive(true);

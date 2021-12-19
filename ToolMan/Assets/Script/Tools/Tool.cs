@@ -29,6 +29,7 @@ public class Tool
     {
         animator.SetBool("isTool", true);
         playerRB.constraints = RigidbodyConstraints.None;
+        player.resetRigidBody();
     }
 
     public void toMan()

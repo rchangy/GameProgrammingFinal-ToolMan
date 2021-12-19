@@ -67,10 +67,10 @@ namespace ToolMan.Combat.Skills.Normal
                     Collider[] hitTargets = Physics.OverlapSphere(_rb.gameObject.transform.position, _explosionRange, combat.TargetLayers);
                     foreach (Collider target in hitTargets)
                     {
+                        Debug.Log("flash bomb hit " + target.name);
                         CombatUnit targetCombat = target.GetComponent<CombatUnit>();
                         if (targetCombat != null)
                         {
-                            //targetCombat.TakeDamage((combat.Atk * _atkMultiplier), combat);
                             targetCombat.AddBuff(_buff);
                         }
                     }

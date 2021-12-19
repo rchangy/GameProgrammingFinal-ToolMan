@@ -45,7 +45,8 @@ public partial class PlayerController
             combat.SetCurrentUsingSkill(tools[toolIdx].getName());
             combat.AddType(tools[toolIdx].getName());
             cam.EnableFreeLook();
-
+            vertical = 0;
+            horizontal = 0;
             //effect
             Effect toToolEffect = effectController.effectList.Find(e => e.name == "ToToolEffect");
             toToolEffect.PlayEffect();
