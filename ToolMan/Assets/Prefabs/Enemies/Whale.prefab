@@ -281,7 +281,6 @@ GameObject:
   - component: {fileID: 1807708414}
   - component: {fileID: 1807708416}
   - component: {fileID: 181256453}
-  - component: {fileID: 181256452}
   m_Layer: 12
   m_Name: Whale
   m_TagString: Enemy
@@ -350,10 +349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80663cb3f0f9e44d88d379b9e986f57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpMaxValue: 60
-  HpInitValue: 60
+  HpMaxValue: 20
+  HpInitValue: 20
   AtkBaseValue: 1
-  DefBaseValue: 1
+  DefBaseValue: 0
   StrBaseValue: 1
   SpdBaseValue: 1
   AttackEnableBaseValue: 1
@@ -398,15 +397,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Name: Whale
-  AttackWeight: 3
-  PatrolWeight: 1
-  IdleWeight: 1
+  AttackWeight: 1
+  PatrolWeight: 0
+  IdleWeight: 0
   skillWeight: 0100000001000000
   MaxActionTime: 5
   MinActionTime: 3
   rotateSpeed: 0.5
   combat: {fileID: 1807708413}
-  walkPointRange: 50
+  walkPointRange: 70
   SightRange: 50
   speed: 1.5
   InitAttackRange: 20
@@ -420,11 +419,12 @@ MonoBehaviour:
   hpIntervals: 3
   hpBase: 0
   hpDicreaseThres: 1
-  lowTimeSpan: 10
+  lowTimeSpan: 20
   lowTimeLeft: 0
   nowSardines: 0
   maxSardines: 3
   effectController: {fileID: 1312452252}
+  bigSkillPrefab: {fileID: 2718603048759978727, guid: bcd05cf342558417587da0b8e95a4958, type: 3}
 --- !u!54 &181256453
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -437,23 +437,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!135 &181256452
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3582877014822275613}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 70
-  m_Center: {x: 0, y: -6.5, z: 0}
 --- !u!1 &4138075529841327174
 GameObject:
   m_ObjectHideFlags: 0

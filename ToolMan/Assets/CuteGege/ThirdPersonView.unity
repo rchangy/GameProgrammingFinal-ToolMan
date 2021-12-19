@@ -130,13 +130,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1506372124}
     m_Modifications:
+    - target: {fileID: 1807708416, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
+      propertyPath: IdleWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807708416, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
+      propertyPath: lowTimeSpan
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807708416, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
+      propertyPath: AttackWeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807708416, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
+      propertyPath: PatrolWeight
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 568498576874944526, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 568498576874944526, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 70.4
+      value: 16.4
       objectReference: {fileID: 0}
     - target: {fileID: 568498576874944526, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1511,6 +1527,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 877237065}
     m_Modifications:
+    - target: {fileID: 1888963215, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: baseTrans
+      value: 
+      objectReference: {fileID: 2000138657}
     - target: {fileID: 319803372016367576, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: effect
       value: 
