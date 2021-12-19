@@ -64,6 +64,7 @@ namespace ToolMan.Combat.Stats.Buff
             StatModifier newMod = null;
             if ((_statBuff.IsEffectStacked && EffectStacks < _statBuff.MaxEffectStack) || newBuff)
             {
+                
                 if (Target.HasStat(_statBuff.Target))
                 {
                     newMod = new StatModifier(_statBuff.Value, _statBuff.ModType, this);
@@ -84,6 +85,7 @@ namespace ToolMan.Combat.Stats.Buff
         {
             if (Target.HasStat(_statBuff.Target))
             {
+                //Debug.Log("apply effect to " + _statBuff.Target);
                 var stat = Target.GetStatByName(_statBuff.Target);
                 stat.AddModifier(mod);
                 return true;

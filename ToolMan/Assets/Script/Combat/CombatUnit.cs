@@ -139,8 +139,8 @@ namespace ToolMan.Combat
                 if(_timeToStopRb <= 0)
                 {
                     _rb.drag = 0;
-                    _movable.RemoveDisability();
-                    //_rb.velocity = Vector3.zero;
+                    if(!Movable)
+                        _movable.RemoveDisability();
                 }
             }
         }
@@ -169,11 +169,11 @@ namespace ToolMan.Combat
             var dir = transform.position - damager.position;
             dir.y = 0f;
             dir = Vector3.Normalize(dir);
-            Debug.Log(dir);
-            _rb.AddForce(dir * 800);
+            _rb.AddForce(dir * 1400 * _rb.mass);
             _timeToStopRb = _stopVelTime;
             _rb.drag = 15;
-            _movable.Disable();
+            if (Movable) 
+                _movable.Disable();
         }
 
         protected abstract void Die();

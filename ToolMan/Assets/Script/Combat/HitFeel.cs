@@ -6,7 +6,7 @@ namespace ToolMan.Combat
     {
         private bool stopping = false;
         public float stopTimeSpan = 0.01f;
-        public float slowTimeSpan = 0.01f;
+        public float slowTimeSpan = 0.0001f;
         public float slowTimeScale = 0.01f;
         float originalTimeScale;
 
@@ -22,25 +22,6 @@ namespace ToolMan.Combat
         {
             originalTimeScale = Time.timeScale;
         }
-
-        //private void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.B))
-        //        MakeHitFeel(1);
-        //}
-
-        //public void MakeHitFeel(float mul)
-        //{
-            
-        //    if (!stopping)
-        //    {
-        //        _mul = mul;
-        //        stopping = true;
-        //        //StartCoroutine(TimeStop());
-        //        StartCoroutine(CamShake());
-        //        stopping = false;
-        //    }
-        //}
 
         public void MakeCamShake(float mul)
         {
