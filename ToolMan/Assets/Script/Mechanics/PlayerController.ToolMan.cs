@@ -36,7 +36,7 @@ public partial class PlayerController
 
     override public void ToolableManTransform()
     {
-        if (!isTool)
+        if (!isTool && !IsGrabbing())
         {
             // To Tool
             toolListUI.Choose();
@@ -53,7 +53,7 @@ public partial class PlayerController
             isTool = !isTool;
             animator.SetTrigger("changeToTool");
         }
-        else if (!beGrabbed)
+        else if (isTool && !beGrabbed)
         {
             // To Man
             tools[toolIdx].toMan();
