@@ -16,6 +16,9 @@ namespace ToolMan.Combat.Skills.Normal
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
             yield return new WaitForSeconds(attackDelay);
+            // anim
+            combat.gameObject.GetComponent<EnemyWhale>().GetAnimator().SetTrigger("Attack");
+
             Launch(combat);
         }
 

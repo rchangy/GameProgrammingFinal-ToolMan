@@ -86,12 +86,47 @@ namespace ToolMan.Combat.Equip
                 if (_returning)
                 {
                     // hit whale
+                    _whale.GetComponent<EnemyWhale>().TakeSardine();
                     Die();
                 }
                 return;
             }
             PlayerCombat playerCombat = collision.gameObject.GetComponent<PlayerCombat>();
             if(playerCombat != null)
+            {
+                if (_returning) return;
+                if (!playerCombat.Vulnerable)
+                {
+                    _target = _whale;
+                    _returning = true;
+                }
+                else
+                {
+                    playerCombat.TakeDamage(_whaleCombat.Atk * _atkMultiplier, _whaleCombat);
+                    // maybe add buff?
+                    Die();
+                }
+            }
+            else
+            {
+                Die();
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject == _whale)
+            {
+                if (_returning)
+                {
+                    // hit whale
+                    _whale.GetComponent<EnemyWhale>().TakeSardine();
+                    Die();
+                }
+                return;
+            }
+            PlayerCombat playerCombat = other.gameObject.GetComponent<PlayerCombat>();
+            if (playerCombat != null)
             {
                 if (_returning) return;
                 if (!playerCombat.Vulnerable)

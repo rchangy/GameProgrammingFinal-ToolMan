@@ -18,8 +18,8 @@ public class EnemyWhale : Enemy
     [SerializeField] float hpBase;
     [SerializeField] float hpDicreaseThres;
     [SerializeField] float lowTimeSpan;
-    private float lowTimeLeft;
-    private int nowSardines = 0;
+    [SerializeField] private float lowTimeLeft;
+    [SerializeField] private int nowSardines = 0;
     [SerializeField] int maxSardines;
     // ==== state ====
 
@@ -35,34 +35,35 @@ public class EnemyWhale : Enemy
 
     protected override void Start()
     {
-        // get players
-        GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
-        int playerNum = PlayerGameObjects.Length;
+        //// get players
+        //GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
+        //int playerNum = PlayerGameObjects.Length;
 
-        Players = new Transform[playerNum];
-        for (int i = 0; i < playerNum; i++)
-        {
-            Players[i] = PlayerGameObjects[i].transform;
-        }
-        AttackRange = InitAttackRange;
+        //Players = new Transform[playerNum];
+        //for (int i = 0; i < playerNum; i++)
+        //{
+        //    Players[i] = PlayerGameObjects[i].transform;
+        //}
+        //AttackRange = InitAttackRange;
 
-        IReadOnlyCollection<string> skillSet = combat.GetCurrentUsingSkillSet();
-        _skillSet = (List<string>)skillSet;
-        if (skillSet != null && skillSet.Count > 0)
-        {
-            if (skillWeight.Length > skillSet.Count)
-            {
-                var tmp = skillWeight;
-                skillWeight = new int[skillSet.Count];
-                Array.Copy(tmp, skillWeight, skillSet.Count);
-            }
-        }
-        else
-        {
-            skillWeight = null;
-        }
+        //IReadOnlyCollection<string> skillSet = combat.GetCurrentUsingSkillSet();
+        //_skillSet = (List<string>)skillSet;
+        //if (skillSet != null && skillSet.Count > 0)
+        //{
+        //    if (skillWeight.Length > skillSet.Count)
+        //    {
+        //        var tmp = skillWeight;
+        //        skillWeight = new int[skillSet.Count];
+        //        Array.Copy(tmp, skillWeight, skillSet.Count);
+        //    }
+        //}
+        //else
+        //{
+        //    skillWeight = null;
+        //}
+        base.Start();
 
-        SetHeight(Height.High);
+        SetHeight(Height.Middle);
         hpBase = combat.HpMaxValue;
         lowTimeLeft = lowTimeSpan;
     }
@@ -162,8 +163,11 @@ public class EnemyWhale : Enemy
                 }
                 break;
         }
+
+        // Move to correct height
+        if (Math.Abs(transform.position.y - getHeightValue()) > 0.3f)
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, getHeightValue(), transform.position.z), speed * Time.deltaTime);
     }
-    public void TakeSardine() { nowSardines++; }
 
     protected override void RandomBehavior()
     {
@@ -278,8 +282,10 @@ public class EnemyWhale : Enemy
     {
         state = State.Sardine;
         combat.SetCurrentUsingSkill("SardineMissle");
-        combat.Attack();
+        if (!combat.Attacking)
+            combat.Attack();
     }
+    public void TakeSardine() { nowSardines++; }
 
     public Animator GetAnimator() { return animator; }
 
@@ -287,7 +293,10 @@ public class EnemyWhale : Enemy
     {
         if (transform.position != point)
         {
-            var newDir = Vector3.RotateTowards(transform.forward, point, Time.deltaTime * rotateSpeed, 0f);
+            Vector3 towardDir = transform.position - point;
+            towardDir = new Vector3(towardDir.x, 0, towardDir.z); // Ignore y axis
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, towardDir, Time.deltaTime * rotateSpeed, 0f);
+            
             transform.rotation = Quaternion.LookRotation(newDir);
         }
         transform.position -= speed * Time.deltaTime * transform.forward;
@@ -299,24 +308,40 @@ public class EnemyWhale : Enemy
         Middle,
         Low
     }
+    private float getHeightValue()
+    {
+        switch (height)
+        {
+            case Height.High:
+                return highY;
+            case Height.Middle:
+                return middleY;
+            case Height.Low:
+                return lowY;
+            default:
+                return -1;
+        }
+    }
 
     private void SetHeight(Height h)
     {
+        Debug.Log("set height " + h);
         switch (h)
         {
             case Height.High:
                 height = Height.High;
-                transform.position = new Vector3(transform.position.x, highY, transform.position.z);
+                //transform.position = new Vector3(transform.position.x, highY, transform.position.z);
                 break;
 
             case Height.Middle:
                 height = Height.Middle;
-                transform.position = new Vector3(transform.position.x, middleY, transform.position.z);
+                nowSardines = 0;
+                //transform.position = new Vector3(transform.position.x, middleY, transform.position.z);
                 break;
 
             case Height.Low:
                 height = Height.Low;
-                transform.position = new Vector3(transform.position.x, lowY, transform.position.z);
+                //transform.position = new Vector3(transform.position.x, lowY, transform.position.z);
                 break;
         }
     }
