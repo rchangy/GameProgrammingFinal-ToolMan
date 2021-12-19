@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Collections.Generic;
 
 public class EnemyWhale : Enemy
 {
@@ -27,6 +26,10 @@ public class EnemyWhale : Enemy
     public EffectController effectController;
     // ==== effect ====
 
+    // ==== skill ====
+    public GameObject bigSkillPrefab;
+    // ==== skill ====
+
     protected override void Awake()
     {
         base.Awake();
@@ -35,32 +38,6 @@ public class EnemyWhale : Enemy
 
     protected override void Start()
     {
-        //// get players
-        //GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
-        //int playerNum = PlayerGameObjects.Length;
-
-        //Players = new Transform[playerNum];
-        //for (int i = 0; i < playerNum; i++)
-        //{
-        //    Players[i] = PlayerGameObjects[i].transform;
-        //}
-        //AttackRange = InitAttackRange;
-
-        //IReadOnlyCollection<string> skillSet = combat.GetCurrentUsingSkillSet();
-        //_skillSet = (List<string>)skillSet;
-        //if (skillSet != null && skillSet.Count > 0)
-        //{
-        //    if (skillWeight.Length > skillSet.Count)
-        //    {
-        //        var tmp = skillWeight;
-        //        skillWeight = new int[skillSet.Count];
-        //        Array.Copy(tmp, skillWeight, skillSet.Count);
-        //    }
-        //}
-        //else
-        //{
-        //    skillWeight = null;
-        //}
         base.Start();
 
         SetHeight(Height.Middle);
@@ -93,7 +70,6 @@ public class EnemyWhale : Enemy
                 if (ActionLastTime < 0)
                 {
                     isAction = false;
-                    walkPointSet = false;
                 }
                 switch (state)
                 {
@@ -198,6 +174,8 @@ public class EnemyWhale : Enemy
                 PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
                 if (PlayerInSightRange && AttackWeight > 0)
                     Sardine();
+                else if (PatrolWeight == 0 && IdleWeight == 0)
+                    Patrol();
                 else
                 {
                     int[] w = { PatrolWeight, IdleWeight };
@@ -300,6 +278,7 @@ public class EnemyWhale : Enemy
             transform.rotation = Quaternion.LookRotation(newDir);
         }
         transform.position -= speed * Time.deltaTime * transform.forward;
+        Debug.Log("go to " + point);
     }
 
     private enum Height
@@ -330,18 +309,15 @@ public class EnemyWhale : Enemy
         {
             case Height.High:
                 height = Height.High;
-                //transform.position = new Vector3(transform.position.x, highY, transform.position.z);
                 break;
 
             case Height.Middle:
                 height = Height.Middle;
                 nowSardines = 0;
-                //transform.position = new Vector3(transform.position.x, middleY, transform.position.z);
                 break;
 
             case Height.Low:
                 height = Height.Low;
-                //transform.position = new Vector3(transform.position.x, lowY, transform.position.z);
                 break;
         }
     }

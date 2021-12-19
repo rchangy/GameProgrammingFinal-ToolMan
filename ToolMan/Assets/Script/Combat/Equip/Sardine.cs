@@ -16,6 +16,14 @@ namespace ToolMan.Combat.Equip
         [SerializeField]
         private float _speed;
 
+        [SerializeField]
+        private EffectController effectController;
+
+        [SerializeField]
+        private GameObject _explosionPrefab;
+
+        private bool explodeOnDeath;
+        
         protected void Start()
         {
             // find target
@@ -29,6 +37,7 @@ namespace ToolMan.Combat.Equip
             {
                 Destroy(gameObject);
             }
+            explodeOnDeath = true;
         }
 
         private void FixedUpdate()
@@ -76,6 +85,13 @@ namespace ToolMan.Combat.Equip
 
         private void Die()
         {
+            // Explosion effect
+            if (explodeOnDeath)
+            {
+                Effect effect = Instantiate(_explosionPrefab, transform.position, Quaternion.identity).GetComponent<Effect>();
+                effect.PlayEffect();
+            }
+
             Destroy(gameObject);
         }
 
@@ -87,6 +103,7 @@ namespace ToolMan.Combat.Equip
                 {
                     // hit whale
                     _whale.GetComponent<EnemyWhale>().TakeSardine();
+                    explodeOnDeath = false;
                     Die();
                 }
                 return;
@@ -121,6 +138,7 @@ namespace ToolMan.Combat.Equip
                 {
                     // hit whale
                     _whale.GetComponent<EnemyWhale>().TakeSardine();
+                    explodeOnDeath = false;
                     Die();
                 }
                 return;

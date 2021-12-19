@@ -5,6 +5,7 @@ public class Explosion : Effect
     private bool _hasPlayed = false;
     public bool DestroyAfterPlaying;
     ParticleSystem[] _partList;
+
     public override void PlayEffect()
     {
         _partList = transform.GetComponentsInChildren<ParticleSystem>();
