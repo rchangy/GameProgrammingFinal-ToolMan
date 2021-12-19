@@ -24,13 +24,9 @@ public partial class PlayerController
         if (!grabPoint.IsGrabbing())
         {
             Grab();
-            if (this.confJ != null)
-                AnimationGrab(anotherPlayer.getTool().getName());
         }
         else
         {
-            if (this.confJ != null)
-                AnimationRelease(anotherPlayer.getTool().getName());
             Release();
         }
     }
@@ -38,6 +34,8 @@ public partial class PlayerController
     public void Grab()
     {
         this.confJ = grabPoint.Grab();
+        if (this.confJ != null)
+            AnimationGrab(anotherPlayer.getTool().getName());
     }
 
     public void forceGrabbing()
@@ -48,6 +46,8 @@ public partial class PlayerController
 
     public void Release()
     {
+        if (this.confJ != null)
+            AnimationRelease(anotherPlayer.getTool().getName());
         grabPoint.Release();
         this.confJ = null;
     }
