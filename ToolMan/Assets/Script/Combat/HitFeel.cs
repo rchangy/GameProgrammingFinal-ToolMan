@@ -6,7 +6,7 @@ namespace ToolMan.Combat
     {
         private bool stopping = false;
         public float stopTimeSpan = 0.01f;
-        public float slowTimeSpan = 0.05f;
+        public float slowTimeSpan = 0.01f;
         public float slowTimeScale = 0.01f;
         float originalTimeScale;
 
@@ -66,8 +66,8 @@ namespace ToolMan.Combat
         IEnumerator TimeStop()
         {
             // Stop for a while
-            Time.timeScale = 0;
-            yield return new WaitForSecondsRealtime(stopTimeSpan);
+            //Time.timeScale = 0;
+            //yield return new WaitForSecondsRealtime(stopTimeSpan);
 
             // Slow down for a while
             Time.timeScale = slowTimeScale;

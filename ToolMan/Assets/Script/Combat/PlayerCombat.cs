@@ -66,7 +66,7 @@ namespace ToolMan.Combat
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
             int dmg = base.TakeDamage(baseDmg, damager);
-            hitFeel.MakeTimeStop();
+            hitFeel.MakeCamShake(Mathf.Max(3, (float)dmg/(Str + 0.1f)));
             return dmg;
         }
 

@@ -71,7 +71,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float SightRange;
     protected bool PlayerInSightRange;
     [SerializeField] protected float speed;
-    protected float _currentSpeed;
+    private float _currentSpeedMul = 1f;
+    protected float _currentSpeed
+    {
+        get => speed * combat.Spd;
+    }
 
     // attack
     protected List<string> _skillSet = new List<string>();
@@ -96,7 +100,6 @@ public class Enemy : MonoBehaviour
     {
         weight = new int[] { AttackWeight, PatrolWeight, IdleWeight };
         isAction = false;
-        _currentSpeed = speed;
     }
     protected virtual void Start()
     {
@@ -150,13 +153,13 @@ public class Enemy : MonoBehaviour
         if (!combat.Movable)
         {
             SetAllAnimationFalse();
-            _currentSpeed = speed;
+            _currentSpeedMul = 1;
             return;
         }
         ManageBehavior();
         ManageLookAt();
         ManageMovement();
-        _currentSpeed = speed;
+        _currentSpeedMul = 1;
     }
 
     protected virtual void ManageBehavior()
@@ -203,7 +206,7 @@ public class Enemy : MonoBehaviour
     {
         //Debug.Log("Chase Mode");
         SetDest(closestPlayer);
-        _currentSpeed *= 2;
+        _currentSpeedMul = 2;
     }
 
     protected virtual void RandomBehavior()
