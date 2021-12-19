@@ -29,7 +29,7 @@ namespace ToolMan.Combat.Equip
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
-            //Debug.Log("crystal take damage");
+            Debug.Log("crystal take damage");
             if (hitBy != null)
             {
                 if (hitBy.inToolState() && hitBy.getTool().getName().Equals("Pickaxe"))
@@ -50,9 +50,11 @@ namespace ToolMan.Combat.Equip
         }
         private void OnTriggerEnter(Collider other)
         {
+            
             if (other.gameObject.layer == Converter.LayerBitMaskToLayerNumber(_targetLayers.value))
             {
                 hitBy = other.gameObject.GetComponent<PlayerController>();
+                Debug.Log("Hit Crystal!");
             }
         }
     }
