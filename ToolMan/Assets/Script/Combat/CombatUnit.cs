@@ -150,7 +150,7 @@ namespace ToolMan.Combat
 
         public virtual int TakeDamage(float baseDmg, CombatUnit damager)
         {
-
+            if (isDead) return 0;
             if (!Vulnerable) return 0;
             float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
             float dmg = typeEffectedDmg - Def;
