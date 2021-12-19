@@ -20,6 +20,7 @@ namespace ToolMan.Combat.Skills
 
         public void SetPlayers(PlayerCombat manCombat, PlayerCombat toolCombat)
         {
+            Debug.Log(manCombat.name);
             _manCombat = manCombat;
             _toolCombat = toolCombat;
 
@@ -29,5 +30,18 @@ namespace ToolMan.Combat.Skills
             _man = manCombat.gameObject;
             _tool = toolCombat.gameObject;
         }
+
+        public void SetColor(bool active)
+        {
+            if (active)
+            {
+                _tool.transform.Find("BearMan").GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", Color.red);
+            }
+            else
+            {
+                _tool.transform.Find("BearMan").GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", Color.white);
+            }
+        }
+        
     }
 }
