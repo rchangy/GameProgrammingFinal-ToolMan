@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ToolMan.Util;
+using ToolMan.Combat.Stats.Buff;
 
 namespace ToolMan.Combat.Skills.Normal
 {
@@ -23,8 +24,12 @@ namespace ToolMan.Combat.Skills.Normal
             get => _explosionRange;
         }
 
-        [SerializeField]
-        private float _atkMultiplier;
+        //[SerializeField]
+        //private float _atkMultiplier;
+
+        [SerializeField] private GameObject _explosionVfx;
+
+        [SerializeField] private ScriptableBuff _buff;
 
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
@@ -44,15 +49,29 @@ namespace ToolMan.Combat.Skills.Normal
                 if (Input.GetButtonDown("JumpOrAttack2"))
                 {
                     _toolController.AnimationAttack();
+                    // vfx
+                    if(_explosionVfx != null)
+                    {
+                        var explosion = Instantiate(_explosionVfx, _tool.transform.position, Quaternion.identity);
+                        Explosion vfx = explosion.GetComponent<Explosion>();
+                        if(vfx != null)
+                        {
+                            vfx.PlayEffect();
+                        }
+                    }
                     Debug.Log("Explosion");
                     // Check collisions
+                    _toolCombat.HitFeel.MakeCamShake(HitFeelMul);
+                    _manCombat.HitFeel.MakeCamShake(HitFeelMul);
+                    if (_buff == null) yield break;
                     Collider[] hitTargets = Physics.OverlapSphere(_rb.gameObject.transform.position, _explosionRange, combat.TargetLayers);
                     foreach (Collider target in hitTargets)
                     {
                         CombatUnit targetCombat = target.GetComponent<CombatUnit>();
                         if (targetCombat != null)
                         {
-                            targetCombat.TakeDamage((combat.Atk * _atkMultiplier), combat);
+                            //targetCombat.TakeDamage((combat.Atk * _atkMultiplier), combat);
+                            targetCombat.AddBuff(_buff);
                         }
                     }
                     break;

@@ -36,7 +36,6 @@ public class EnemyNormalChicken : Enemy
     protected override void SetAllAnimationFalse() {
         animator.SetBool("Walk", false);
         animator.SetBool("Run", false);
-        animator.SetBool("Eat", false);
         animator.SetBool("TurnHead", false);
     }
 }

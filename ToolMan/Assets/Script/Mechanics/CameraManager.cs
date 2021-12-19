@@ -6,7 +6,11 @@ public class CameraManager : MonoBehaviour
 {
     public GameObject FreeLookCam;
     public GameObject MainCam;
-    private Vector3 _camPosition = new Vector3(0, 3, -10);
+    private static Vector3 _camPosition = new Vector3(0, 3, -10);
+    public static Vector3 CamLocalPos
+    {
+        get => _camPosition;
+    }
 
     private void Awake()
     {

@@ -43,10 +43,15 @@ namespace ToolMan.Combat
 
         private PlayerSkillSet _availablePlayerSkillSet;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            _playerController = gameObject.GetComponent<PlayerController>();
+        }
+
 
         protected override void Start()
         {
-            _playerController = gameObject.GetComponent<PlayerController>();
 
             if (typeof(PlayerSkillSet).IsInstanceOfType(availableSkillSet))
             {
@@ -61,7 +66,7 @@ namespace ToolMan.Combat
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
             int dmg = base.TakeDamage(baseDmg, damager);
-            hitFeel.MakeHitFeel(dmg / _hp.MaxValue);
+            hitFeel.MakeTimeStop();
             return dmg;
         }
 
@@ -136,7 +141,7 @@ namespace ToolMan.Combat
 
             if (skill.UsingHitFeel)
             {
-                hitFeel.MakeHitFeel(skill.HitFeelMul);
+                hitFeel.MakeTimeStop();
             }
             if (ThisPlayerController.IsGrabbed())
             {

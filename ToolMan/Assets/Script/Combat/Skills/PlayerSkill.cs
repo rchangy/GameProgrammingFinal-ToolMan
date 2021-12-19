@@ -20,7 +20,6 @@ namespace ToolMan.Combat.Skills
 
         public void SetPlayers(PlayerCombat manCombat, PlayerCombat toolCombat)
         {
-            Debug.Log(manCombat.name);
             _manCombat = manCombat;
             _toolCombat = toolCombat;
 

@@ -212,6 +212,7 @@ namespace ToolMan.Combat
         protected virtual void Hit(CombatUnit target)
         {
             Debug.Log(name + " hit " + target.name);
+            StartCoroutine(currentUsingSkill.Hit(this, target));
             target.TakeDamage(Atk, this);
 
             _refractoryPeriod.Add(target, _hitRefractoryPeriod);

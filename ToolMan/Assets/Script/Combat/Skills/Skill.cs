@@ -17,6 +17,13 @@ namespace ToolMan.Combat.Skills
 
         public abstract IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable);
 
+        // for some effects when hit
+        // default is empty
+        public virtual IEnumerator Hit(SkillCombat combat, CombatUnit target)
+        {
+            yield break;
+        }
+
         public string getName()
         {
             return name;

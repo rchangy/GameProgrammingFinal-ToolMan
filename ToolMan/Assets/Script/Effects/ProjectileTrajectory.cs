@@ -17,6 +17,7 @@ public class ProjectileTrajectory : MonoBehaviour
 
     private float _rbMass = 1f;
 
+
     #region Singleton
     public static ProjectileTrajectory Instance;
     private void Awake()
@@ -63,7 +64,7 @@ public class ProjectileTrajectory : MonoBehaviour
                 vel.z * stepTimePassed
             );
 
-            _linePoints.Add(toolPos - moveVec);
+            _linePoints.Add(toolPos-moveVec);
         }
 
         _line.positionCount = _linePoints.Count;
