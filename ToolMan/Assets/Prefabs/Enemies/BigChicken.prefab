@@ -354,6 +354,7 @@ MonoBehaviour:
   AtkBaseValue: 20
   DefBaseValue: 0
   StrBaseValue: 1
+  SpdBaseValue: 1
   AttackEnableBaseValue: 1
   MovableBaseValue: 1
   VulnerableBaseValue: 1
@@ -394,7 +395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 25174408977107730}
-  Players: []
   GroundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -402,20 +402,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Name: 
-  AttackWeight: 5
+  AttackWeight: 1
   PatrolWeight: 0
   IdleWeight: 0
   skillWeight: 0100000000000000
   MaxActionTime: 3
   MinActionTime: 2
-  rotateSpeed: 0
+  rotateSpeed: 2
   combat: {fileID: 75914775140835482}
-  walkPointRange: 40
-  SightRange: 20
+  walkPointRange: 3
+  SightRange: 10
   speed: 2
   InitAttackRange: 2
-  _crazyTime: 0
-  _speedUp: 0
+  _crazyTime: 5
+  _speedUp: 2
 --- !u!65 &1841006655
 BoxCollider:
   m_ObjectHideFlags: 0
