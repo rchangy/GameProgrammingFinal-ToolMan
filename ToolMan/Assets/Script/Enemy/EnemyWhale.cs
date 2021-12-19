@@ -67,6 +67,10 @@ public class EnemyWhale : Enemy
         lowTimeLeft = lowTimeSpan;
     }
 
+    protected override void FixedUpdate()
+    {
+    }
+
     protected override void Update()
     {
         GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
@@ -80,8 +84,10 @@ public class EnemyWhale : Enemy
 
         if (!combat.Attacking)
         {
+            //Debug.Log("action time = " + ActionLastTime + " state = " + state + " isAction = " + isAction);
             if (isAction)
             {
+                //Debug.Log("isAction = true");
                 ActionLastTime -= Time.deltaTime;
                 if (ActionLastTime < 0)
                 {
@@ -109,6 +115,7 @@ public class EnemyWhale : Enemy
             }
             else
             {
+                //Debug.Log("isAction = false");
                 ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
                 isAction = true;
                 RandomBehavior();
@@ -219,7 +226,6 @@ public class EnemyWhale : Enemy
     
     protected override void ChasePlayer()
     {
-        //Debug.Log("Chase Mode");
         state = State.Chase;
 
         Vector3 p = GetClosestplayer().transform.position;
@@ -243,7 +249,6 @@ public class EnemyWhale : Enemy
 
     protected override void Patrol()
     {
-        Debug.Log("Patrol Mode");
         state = State.Patrol;
         animator.SetTrigger("Swim1");
 
@@ -265,7 +270,8 @@ public class EnemyWhale : Enemy
     public void BigSkill() {
         state = State.BigSkill;
         combat.SetCurrentUsingSkill("WhaleBigSkill");
-        combat.Attack();
+        if (!combat.Attacking)
+            combat.Attack();
     }
 
     public void Sardine()
@@ -279,12 +285,12 @@ public class EnemyWhale : Enemy
 
     private void GoToPoint(Vector3 point)
     {
-        float angle = Mathf.Atan2(point.x - transform.position.x, point.z - transform.position.z) * Mathf.Rad2Deg;
-        Vector3 direction = new Vector3(0f, angle + 180, 0f);
-
-        transform.eulerAngles = direction;
+        if (transform.position != point)
+        {
+            var newDir = Vector3.RotateTowards(transform.forward, point, Time.deltaTime * rotateSpeed, 0f);
+            transform.rotation = Quaternion.LookRotation(newDir);
+        }
         transform.position -= speed * Time.deltaTime * transform.forward;
-        //Debug.Log("go to " + point);
     }
 
     private enum Height

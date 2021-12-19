@@ -388,7 +388,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7595802015127999860}
-  EnemyAgent: {fileID: 0}
   Players: []
   GroundMask:
     serializedVersion: 2
@@ -398,12 +397,12 @@ MonoBehaviour:
     m_Bits: 64
   Name: Whale
   AttackWeight: 1
-  PatrolWeight: 1
-  IdleWeight: 1
+  PatrolWeight: 3
+  IdleWeight: 0
   skillWeight: 0100000001000000
   MaxActionTime: 5
   MinActionTime: 3
-  rotateSpeed: 3
+  rotateSpeed: 0.5
   combat: {fileID: 1807708413}
   walkPointRange: 50
   SightRange: 50
@@ -703,7 +702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 87881285884176148, guid: 91511b1d3ca45b6448a74bf2ab114aa0, type: 3}
       propertyPath: offset.y
-      value: -18
+      value: -15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91511b1d3ca45b6448a74bf2ab114aa0, type: 3}
