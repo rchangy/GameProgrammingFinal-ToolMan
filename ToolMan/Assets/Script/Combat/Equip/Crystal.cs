@@ -8,19 +8,8 @@ namespace ToolMan.Combat.Equip
     public class Crystal : CombatUnit
     {
         [SerializeField]
-        private LayerMask _targetLayers;
-
+        private LayerMask _crystalTargetLayers;
         private PlayerController hitBy = null;
-
-        protected override void Start()
-        {
-            base.Start();
-        }
-
-        protected override void Update()
-        {
-            base.Update();
-        }
 
         public override bool Attack()
         {
@@ -29,11 +18,12 @@ namespace ToolMan.Combat.Equip
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
-            Debug.Log("crystal take damage");
             if (hitBy != null)
             {
                 if (hitBy.inToolState() && hitBy.getTool().getName().Equals("Pickaxe"))
+                {
                     _hp.ChangeValueBy(-1);
+                }
             }
             
             return 1;
@@ -51,10 +41,9 @@ namespace ToolMan.Combat.Equip
         private void OnTriggerEnter(Collider other)
         {
             
-            if (other.gameObject.layer == Converter.LayerBitMaskToLayerNumber(_targetLayers.value))
+            if (other.gameObject.layer == Converter.LayerBitMaskToLayerNumber(_crystalTargetLayers.value))
             {
                 hitBy = other.gameObject.GetComponent<PlayerController>();
-                Debug.Log("Hit Crystal!");
             }
         }
     }

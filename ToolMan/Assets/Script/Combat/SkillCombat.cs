@@ -201,7 +201,8 @@ namespace ToolMan.Combat
 
         protected virtual void OnTriggerStay(Collider other)
         {
-            if ((TargetLayers | (1 << other.gameObject.layer)) != TargetLayers) return;
+            //if ((TargetLayers | (1 << other.gameObject.layer)) != TargetLayers) return;
+            if (other.gameObject.layer != Converter.LayerBitMaskToLayerNumber(TargetLayers)) return;
             if (!CollisionEnable) return;
             CombatUnit target = other.gameObject.GetComponent<CombatUnit>();
             if (target == null) return;

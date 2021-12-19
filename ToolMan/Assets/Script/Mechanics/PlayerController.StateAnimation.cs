@@ -43,6 +43,7 @@ public partial class PlayerController
 
     public void AnimationDie()
     {
+        animator.SetBool("isAlive", false);
         animator.SetTrigger("isDead");
     }
 
