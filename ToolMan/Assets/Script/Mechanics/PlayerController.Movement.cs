@@ -83,6 +83,11 @@ public partial class PlayerController
         {
             transform.eulerAngles = anotherPlayer.transform.eulerAngles + toolEulerAngle;
         }
+        else if (tools[toolIdx].getName().Equals("Pickaxe"))
+        {
+            transform.eulerAngles = anotherPlayer.GetForearm().transform.eulerAngles;
+            transform.Rotate(new Vector3(0f, -90f, 0f), Space.Self);
+        }
         else
         {
             transform.eulerAngles = anotherPlayer.GetForearm().transform.eulerAngles + toolEulerAngle;

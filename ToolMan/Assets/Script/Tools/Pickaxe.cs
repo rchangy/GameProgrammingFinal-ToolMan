@@ -9,9 +9,9 @@ public class Pickaxe : Tool
         setUp(player);
         name = "Pickaxe";
         //theToolEulerAngle = new Vector3(0f, 90f, -26f);
-        //theToolEulerAngle = new Vector3(-50f, -60f, -35f);
-        theToolEulerAngle = new Vector3(-48.5f, -58.5f, -32.5f);
-        //theToolEulerAngle = new Vector3(0f, 0f, 0f);
+        //theToolEulerAngle = new Vector3(-74.36f, -69.445f, -35.713f);
+        //theToolEulerAngle = new Vector3(-48.5f, -58.5f, -32.5f);
+        theToolEulerAngle = new Vector3(0f, 0f, 0f);
     }
 
     public override void toTool()
