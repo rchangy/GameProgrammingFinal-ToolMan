@@ -13,12 +13,17 @@ namespace ToolMan.Combat
     {
         public int HpMaxValue = 1;
         public int HpInitValue = 1;
+
         public float AtkBaseValue = 1f;
         public float DefBaseValue = 1f;
         public float StrBaseValue = 1f;
+        public float SpdBaseValue = 1f;
+
         public bool AttackEnableBaseValue = true;
         public bool MovableBaseValue = true;
         public bool VulnerableBaseValue = true;
+
+        
 
         protected Resource _hp;
         public int Hp
@@ -45,6 +50,11 @@ namespace ToolMan.Combat
         public float Str
         {
             get => _str.Value;
+        }
+        protected Stat _spd;
+        public float Spd
+        {
+            get => _spd.Value;
         }
 
         protected Ability _attackEnabled;
@@ -91,6 +101,7 @@ namespace ToolMan.Combat
             _aspd = _stats.AddStat(new Stat("ASPD", 1));
             _def = _stats.AddStat(new Stat("DEF", DefBaseValue));
             _str = _stats.AddStat(new Stat("STR", StrBaseValue));
+            _spd = _stats.AddStat(new Stat("SPD", SpdBaseValue));
 
             _hp = _stats.AddResource(new Resource("HP", HpMaxValue, HpInitValue));
 

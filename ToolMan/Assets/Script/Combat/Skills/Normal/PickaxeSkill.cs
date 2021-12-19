@@ -7,6 +7,7 @@ namespace ToolMan.Combat.Skills
     [CreateAssetMenu(menuName = "ToolMan/Skill/PlayerSkill/Pickaxe")]
     public class PickaxeSkill : PlayerSkill
     {
+        [SerializeField] private float _collidingTime;
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
             // Animation
@@ -15,16 +16,12 @@ namespace ToolMan.Combat.Skills
             // delay
             yield return new WaitForSeconds(attackDelay);
             collisionEnable.Value = true;
-            if (!_toolController.ToolWave)
-            {
-                //_toolController.SetToolWave(new Vector3(0, 90, 90f), 6f, true);
-            }
-            while (!_toolController.WaveEnd)
-            {
-                yield return null;
-            }
-            //_toolController.ResetToolWave();
+            SetColor(true);
+
+            yield return new WaitForSeconds(_collidingTime);
+
             collisionEnable.Value = false;
+            SetColor(false);
         }
     }
 }
