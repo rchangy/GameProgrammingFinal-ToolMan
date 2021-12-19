@@ -199,7 +199,7 @@ namespace ToolMan.Combat
             if (Attacking) InterruptAttack();
         }
 
-        protected virtual void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerStay(Collider other)
         {
             if ((TargetLayers | (1 << other.gameObject.layer)) != TargetLayers) return;
             if (!CollisionEnable) return;
