@@ -20,7 +20,7 @@ namespace ToolMan.Combat
         public SkillSet availableSkillSet;
         private List<string> CurrentUsingSkillSet;
         public List<string> InitUsingSkillSet;
-        private Skill currentUsingSkill;
+        protected Skill currentUsingSkill;
         public string currentUsingSkillName
         {
             get
@@ -63,7 +63,6 @@ namespace ToolMan.Combat
                 SetSkills(InitUsingSkillSet);
                 if (CurrentUsingSkillSet.Count > 0) SetCurrentUsingSkill(CurrentUsingSkillSet[0]);
                 else SetCurrentUsingSkill(null);
-                //Debug.Log(GetCurrentUsingSkillSet());
             }
             else
             {
@@ -142,7 +141,6 @@ namespace ToolMan.Combat
             {
                 if (availableSkillSet.HasSkill(skillName))
                 {
-                    //Debug.Log(skillName);
                     _skillCd.Add(skillName, 0f);
                     CurrentUsingSkillSet.Add(skillName);
                 }
@@ -193,7 +191,7 @@ namespace ToolMan.Combat
             _skillCoroutine = null;
         }
 
-        protected override void Interrupted(Transform damager)
+        protected override void Interrupted(CombatUnit damager)
         {
             base.Interrupted(damager);
             if (Attacking) InterruptAttack();
@@ -201,12 +199,13 @@ namespace ToolMan.Combat
 
         protected virtual void OnTriggerStay(Collider other)
         {
-            //if ((TargetLayers | (1 << other.gameObject.layer)) != TargetLayers) return;
             if (other.gameObject.layer != Converter.LayerBitMaskToLayerNumber(TargetLayers)) return;
             if (!CollisionEnable) return;
             CombatUnit target = other.gameObject.GetComponent<CombatUnit>();
             if (target == null) return;
             if (_refractoryPeriod.ContainsKey(target)) return;
+            _refractoryPeriod.Add(target, _hitRefractoryPeriod);
+            //_hitDir = transform.position - target.transform.position;
             Hit(target);
         }
 
@@ -215,8 +214,6 @@ namespace ToolMan.Combat
             Debug.Log(name + " hit " + target.name);
             StartCoroutine(currentUsingSkill.Hit(this, target));
             target.TakeDamage(Atk, this);
-
-            _refractoryPeriod.Add(target, _hitRefractoryPeriod);
         }
 
         public IReadOnlyCollection<String> GetCurrentUsingSkillSet()

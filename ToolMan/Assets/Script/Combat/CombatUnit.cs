@@ -159,17 +159,16 @@ namespace ToolMan.Combat
             Debug.Log(name + " takes " + dmg + " damage, Hp: " + Hp);
             if (dmg > Str)
             {
-                Interrupted(damager.transform);
+                Interrupted(damager);
             }
             return (int)dmg;
         }
 
-        protected virtual void Interrupted(Transform damager)
+        protected virtual void Interrupted(CombatUnit damager)
         {
-            var dir = transform.position - damager.position;
+            var dir = transform.position - damager.transform.position;
             dir.y = 0f;
-            dir = Vector3.Normalize(dir);
-            _rb.AddForce(dir * 1400 * _rb.mass);
+            _rb.AddForce(dir * 1000 * _rb.mass);
             _timeToStopRb = _stopVelTime;
             _rb.drag = 15;
             if (Movable) 

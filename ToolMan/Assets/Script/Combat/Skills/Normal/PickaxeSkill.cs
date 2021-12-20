@@ -29,22 +29,23 @@ namespace ToolMan.Combat.Skills
 
         public override IEnumerator Hit(SkillCombat combat, CombatUnit target)
         {
-            
             Transform targetTrans = target.gameObject.transform;
+            Debug.Log(targetTrans.name);
             Vector3 originalScale = targetTrans.localScale;
             float targetYScale = targetTrans.localScale.y * _deformedOnYAxis;
             if (_deformingTime == 0) _deformingTime = 1;
             Vector3 deform = new Vector3(0, (targetTrans.localScale.y - targetYScale) / _deformingTime, 0);
-
+            //Debug.Log(targetYScale + " " + deform);
             while(targetTrans.localScale.y >= targetYScale)
             {
-                targetTrans.localScale -= deform;
+                targetTrans.localScale -= deform * Time.deltaTime;
+                Debug.Log(targetTrans.localScale);
                 yield return null;
             }
 
             while (targetTrans.localScale.y <= originalScale.y)
             {
-                targetTrans.localScale += deform;
+                targetTrans.localScale += deform * Time.deltaTime;
                 yield return null;
             }
             targetTrans.localScale = originalScale;
