@@ -17,9 +17,11 @@ namespace ToolMan.Combat.Skills.Normal
             yield return new WaitForSeconds(attackDelay);
             _toolCombat.Disable("Vulnerable");
             _manCombat.Disable("Vulnerable");
+            _toolCombat.gameObject.transform.Find("Shield").gameObject.SetActive(true);
             yield return new WaitForSeconds(_invulnerableTime);
             _toolCombat.RemoveDisable("Vulnerable");
             _manCombat.RemoveDisable("Vulnerable");
+            _toolCombat.gameObject.transform.Find("Shield").gameObject.SetActive(false);
 
         }
 
