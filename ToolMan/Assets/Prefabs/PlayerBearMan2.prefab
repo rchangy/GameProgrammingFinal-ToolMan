@@ -32,9 +32,59 @@ Transform:
   - {fileID: 5341020879548721893}
   - {fileID: 1644180371161592924}
   - {fileID: 5401656022788395175}
+  - {fileID: 430677745}
   m_Father: {fileID: 4987741909099236402}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &430677743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 430677745}
+  - component: {fileID: 430677744}
+  m_Layer: 6
+  m_Name: ImpactEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &430677745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430677743}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 115225592}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &430677744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430677743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb88f8cee49441ca9af4e7cba3bc5fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
+  PickaxeContactPoint: {fileID: 0}
+  BoomerangContactPoint: {fileID: 0}
+  LightSaberContactPoint: {fileID: 1448650997301138983}
+  effectPrefab: {fileID: 6405743119090174104, guid: dfecfab708bda4d77a86ef31e79737ad, type: 3}
 --- !u!1 &999401813
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,6 +130,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FreeLookCam: {fileID: 1517318794}
   MainCam: {fileID: 1318089398}
+  layers:
+    serializedVersion: 2
+    m_Bits: 8
+  FollowTarget: {fileID: 4987741909099236402}
 --- !u!1 &1318089398
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,6 +456,7 @@ MonoBehaviour:
   - {fileID: 3438312311445285220}
   - {fileID: 6214692200700186037}
   - {fileID: 496578904575694476}
+  - {fileID: 430677744}
 --- !u!1 &15012738148726587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,6 +2064,8 @@ MonoBehaviour:
   - Shield
   _teamMate: {fileID: 0}
   hitFeel: {fileID: 2998619970559484916}
+  playingImpactEffect: 0
+  impactEffectCd: 3
 --- !u!65 &1719815286
 BoxCollider:
   m_ObjectHideFlags: 0

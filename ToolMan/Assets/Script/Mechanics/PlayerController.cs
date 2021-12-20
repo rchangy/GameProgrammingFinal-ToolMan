@@ -35,7 +35,7 @@ public partial class PlayerController : ToolableMan
     [SerializeField] private GameObject Forearm;
     [SerializeField] private ObjectListUI toolListUI;
     [SerializeField] private PlayerController anotherPlayer;
-    [SerializeField] private EffectController effectController;
+    public EffectController effectController;
     // ==== Components ====
 
     // ==== Combat ====

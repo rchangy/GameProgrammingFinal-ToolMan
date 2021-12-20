@@ -14,11 +14,4 @@ public class EffectController : MonoBehaviour
             e.setBaseTransform(baseTrans);
         }
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-            effectList[0].PlayEffect();
-            //effectList[0].GetComponent<ParticleSystem>().Play();
-    }
 }
