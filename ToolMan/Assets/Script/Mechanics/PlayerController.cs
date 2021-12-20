@@ -9,7 +9,7 @@ public partial class PlayerController : ToolableMan
     /// <summary>
     /// Handle inputs controlling a player.
     /// </summary>
-
+    GameManager gameManager;
     private KeyboardInputController keyboardInputController;
 
     // ==== Player Status ====
@@ -62,15 +62,17 @@ public partial class PlayerController : ToolableMan
     // ==== Camera ====
     [SerializeField] CameraManager cam;
     // ==== Camera ====
-
-    override protected void Start()
+    protected override void Awake()
     {
+        //gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        //playerCollider = GetComponent<CapsuleCollider>();
+        keyboardInputController = new KeyboardInputController();
+    }
+    override protected void Start()
+    {
         grabPoint.setPlayer(this);
         grabbedPoint.setPlayer(this);
-        keyboardInputController = new KeyboardInputController();
 
         if (playerNum == 1)
         {
