@@ -79,9 +79,9 @@ public partial class PlayerController : ToolableMan
         }
         else if (playerNum == 2)
         {
-            tools.Add(new Shield(this));
             tools.Add(new FlashBomb(this));
             tools.Add(new LightSaber(this));
+            tools.Add(new Shield(this));
         }
 
         distToGround = playerCollider.bounds.extents.y;
