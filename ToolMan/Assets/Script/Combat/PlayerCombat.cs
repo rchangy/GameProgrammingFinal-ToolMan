@@ -171,13 +171,15 @@ namespace ToolMan.Combat
 
         protected override void OnTriggerStay(Collider other)
         {
-            //if ((TargetLayers | (1 << other.gameObject.layer)) != TargetLayers) return;
             if (other.gameObject.layer != Converter.LayerBitMaskToLayerNumber(TargetLayers)) return;
             if (!CollisionEnable) return;
             CombatUnit target = other.gameObject.GetComponent<CombatUnit>();
             if (target == null) return;
             if (_refractoryPeriod.ContainsKey(target)) return;
+            _refractoryPeriod.Add(target, _hitRefractoryPeriod);
+            //_hitDir = transform.position - target.transform.position;
             Hit(target);
+
             if (!playingImpactEffect) {
                 Impact effect = _playerController.effectController.effectList.Find(e => e.name == "ImpactEffect").GetComponent<Impact>();
                 //effect.contactPoint = transform.position;
