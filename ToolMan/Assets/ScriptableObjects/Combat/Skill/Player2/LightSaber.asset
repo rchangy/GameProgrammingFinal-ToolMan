@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be51197d892e4449bb0d22a421f8fdf, type: 3}
   m_Name: LightSaber
   m_EditorClassIdentifier: 
-  attackDelay: 0
-  RefractoryPeriod: 0.5
+  attackDelay: 0.35
+  RefractoryPeriod: 1
   Cd: 0
+  UsingHitFeel: 1
+  HitFeelMul: 1
+  _collidingTime: 0.25
+  _deformedOnAxis: 0.4
+  _deformingTime: 0.05

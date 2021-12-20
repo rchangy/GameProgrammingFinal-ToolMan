@@ -35,6 +35,8 @@ namespace ToolMan.Combat.Skills.Normal
             // release
             _manController.GrabOrRelease();
             _tool.GetComponent<CapsuleCollider>().isTrigger = true;
+            _tool.GetComponent<Rigidbody>().useGravity = false;
+            
 
             // set target (closest enemy or something)
             Vector3 targetPos = _man.transform.position + _man.transform.forward * 10;
@@ -60,16 +62,18 @@ namespace ToolMan.Combat.Skills.Normal
                 flyingTimeLast -= Time.deltaTime;
                 if (Vector3.Distance(_man.transform.position, _tool.transform.position) < 1.5)
                 {
-                    _manController.GrabOrRelease();
+                    _manController.forceGrabbing();
                     if (_toolController.IsGrabbed())
                     {
                         collisionEnable.Value = false;
+                        _tool.GetComponent<Rigidbody>().useGravity = true;
                         _toolCombat.RemoveDisable("Vulnerable");
                         yield break;
                     }
                 }
                 yield return null;
             }
+            _tool.GetComponent<Rigidbody>().useGravity = true;
         }
     }
 }

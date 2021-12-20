@@ -40,7 +40,7 @@ public partial class PlayerController
 
     public void forceGrabbing()
     {
-        grabPoint.setAnotherPlayerAndTarget(this);
+        grabPoint.setAnotherPlayerAndTarget(anotherPlayer);
         Grab();
     }
 

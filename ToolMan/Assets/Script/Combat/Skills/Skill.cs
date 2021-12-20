@@ -21,6 +21,7 @@ namespace ToolMan.Combat.Skills
         // default is empty
         public virtual IEnumerator Hit(SkillCombat combat, CombatUnit target)
         {
+            Debug.Log("test");
             yield break;
         }
 

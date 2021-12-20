@@ -49,7 +49,7 @@ public class ObjectListUI : MonoBehaviour
         // unchoose every image and point to the first image
         chosenImages = new bool[MaxImageNum];
         ResetChoices();
-        SetSprites(new List<string>(Keys));
+        //SetSprites(new List<string>(Keys));
     }
 
     private void Update()

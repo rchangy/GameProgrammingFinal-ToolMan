@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a637e5ff11e3419e8d5cbe28a5ab778, type: 3}
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
-  attackDelay: 0
-  RefractoryPeriod: 0.5
+  attackDelay: 0.5
+  RefractoryPeriod: 1
   Cd: 0.3
-  UsingHitFeel: 0
-  HitFeelMul: 0
-  _collidingTime: 1
+  UsingHitFeel: 1
+  HitFeelMul: 1
+  _collidingTime: 0.3
+  _deformedOnYAxis: 0.2
+  _deformingTime: 0.08

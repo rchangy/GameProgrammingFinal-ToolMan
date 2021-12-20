@@ -51,8 +51,13 @@ namespace ToolMan.Combat
             //yield return new WaitForSecondsRealtime(stopTimeSpan);
 
             // Slow down for a while
-            Time.timeScale = slowTimeScale;
-            yield return new WaitForSecondsRealtime(slowTimeSpan);
+
+            Time.timeScale = 0;
+            for (int i = 0; i < 15; i++)
+            {
+                yield return null;
+            }
+            //yield return new WaitForSecondsRealtime(slowTimeSpan);
 
             Time.timeScale = originalTimeScale;
         }

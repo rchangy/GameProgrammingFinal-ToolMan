@@ -78,7 +78,7 @@ namespace ToolMan.Combat
             return dmg;
         }
 
-        protected override void Interrupted(Transform damager)
+        protected override void Interrupted(CombatUnit damager)
         {
             base.Interrupted(damager);
             ThisPlayerController.Hurt();
@@ -150,11 +150,14 @@ namespace ToolMan.Combat
             if (skill.UsingHitFeel)
             {
                 hitFeel.MakeTimeStop();
+                hitFeel.MakeCamShake(skill.HitFeelMul);
+                TeamMateCombat.hitFeel.MakeCamShake(skill.HitFeelMul);
             }
             if (ThisPlayerController.IsGrabbed())
             {
                 Debug.Log(name + " hit " + target.name);
                 target.TakeDamage(Atk, TeamMateCombat);
+                StartCoroutine(currentUsingSkill.Hit(this, target));
             }
             else
             {
