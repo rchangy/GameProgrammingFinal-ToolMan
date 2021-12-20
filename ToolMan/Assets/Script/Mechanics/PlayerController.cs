@@ -35,6 +35,7 @@ public partial class PlayerController : ToolableMan
     [SerializeField] private GameObject Forearm;
     [SerializeField] private ObjectListUI toolListUI;
     [SerializeField] private PlayerController anotherPlayer;
+    [SerializeField] private Material playerMaterial;
     public EffectController effectController;
     // ==== Components ====
 
@@ -233,6 +234,10 @@ public partial class PlayerController : ToolableMan
     public LayerMask GetLayerMask()
     {
         return playerLayerMask;
+    }
+    public Material GetMaterial()
+    {
+        return playerMaterial;
     }
     public bool IsDead()
     {
