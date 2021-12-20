@@ -75,7 +75,7 @@ MonoBehaviour:
     m_MaxSpeed: 2
     m_AccelTime: 0.2
     m_DecelTime: 0.1
-    m_InputAxisName: Mouse Y
+    m_InputAxisName: Vertical1
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: Mouse X
+    m_InputAxisName: Horizontal1
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: -180
@@ -362,8 +362,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690598928}
-  m_LocalRotation: {x: 0.003004659, y: 0.918562, z: 0.0069836457, w: -0.39520383}
-  m_LocalPosition: {x: 1.088264, y: 6.3273463, z: -6.400381}
+  m_LocalRotation: {x: -0.0053758593, y: 0.7070865, z: 0.0053758607, w: 0.70708627}
+  m_LocalPosition: {x: -2.430986, y: 16.592049, z: 0.0000026575278}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7002832303659562118}
@@ -394,7 +394,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -472,6 +472,7 @@ MonoBehaviour:
   cam: {fileID: 690598933}
   shakeRange: 0.2
   shakeSpan: 0.05
+  shakeFreq: 0.01
 --- !u!1 &1557875264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1504,7 @@ MonoBehaviour:
   - Pickaxe
   - Boomerang
   _teamMate: {fileID: 0}
-  hitFeel: {fileID: 0}
+  hitFeel: {fileID: 690598930}
 --- !u!114 &323214610
 MonoBehaviour:
   m_ObjectHideFlags: 0
