@@ -41,8 +41,11 @@ public partial class PlayerController
     {
         horizontal = 0;
         vertical = 0;
-        horizontal = keyboardInputController.MoveHorizontal(playerNum) * moveAngleSensitivity;
-        vertical = keyboardInputController.MoveVertical(playerNum);
+        if (!anotherPlayer.combat.Attacking)
+        {
+            horizontal = keyboardInputController.MoveHorizontal(playerNum) * moveAngleSensitivity;
+            vertical = keyboardInputController.MoveVertical(playerNum);
+        }
 
         
 
