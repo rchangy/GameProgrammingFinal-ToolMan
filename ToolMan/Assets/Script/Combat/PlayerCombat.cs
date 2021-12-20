@@ -43,10 +43,18 @@ namespace ToolMan.Combat
 
         private PlayerSkillSet _availablePlayerSkillSet;
 
+        [SerializeField]
+        private bool playingImpactEffect;
+        [SerializeField]
+        private float impactEffectCd;
+        private float impactEffectRemain;
+
         protected override void Awake()
         {
             base.Awake();
             _playerController = gameObject.GetComponent<PlayerController>();
+            playingImpactEffect = false;
+            impactEffectRemain = impactEffectCd;
         }
 
 
@@ -161,5 +169,34 @@ namespace ToolMan.Combat
             ThisPlayerController.Die();
         }
 
+        protected override void OnTriggerStay(Collider other)
+        {
+            //if ((TargetLayers | (1 << other.gameObject.layer)) != TargetLayers) return;
+            if (other.gameObject.layer != Converter.LayerBitMaskToLayerNumber(TargetLayers)) return;
+            if (!CollisionEnable) return;
+            CombatUnit target = other.gameObject.GetComponent<CombatUnit>();
+            if (target == null) return;
+            if (_refractoryPeriod.ContainsKey(target)) return;
+            Hit(target);
+            if (!playingImpactEffect) {
+                Impact effect = _playerController.effectController.effectList.Find(e => e.name == "ImpactEffect").GetComponent<Impact>();
+                //effect.contactPoint = transform.position;
+                string toolName = _playerController.getTool().getName();
+                effect.setToolName(toolName);
+                effect.PlayEffect();
+                playingImpactEffect = true;
+            }
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            if (playingImpactEffect)
+                impactEffectRemain -= Time.deltaTime;
+            if (impactEffectRemain <= 0){
+                impactEffectRemain = impactEffectCd;
+                playingImpactEffect = false;
+            }
+        }
     }
 }
