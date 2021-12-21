@@ -10,7 +10,7 @@ public class DialogController : Objective
 
     private bool _isCompleted = false;
 
-    void Start()
+    protected override void Init()
     {
         rpgTalk = gameObject.GetComponent<RPGTalk>();
     }

@@ -79,9 +79,7 @@ public partial class PlayerController
         resetRigidBody();
 
         grabbedPoint.gameObject.GetComponent<Collider>().isTrigger = true;
-        //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         playerCollider.isTrigger = true;
-        grabbedPoint.setAnotherPlayer(anotherPlayer);
 
         rb.mass = 0.000001f;
         beGrabbed = true;
@@ -93,9 +91,7 @@ public partial class PlayerController
         rb.constraints = RigidbodyConstraints.None;
         
         grabbedPoint.gameObject.GetComponent<Collider>().isTrigger = false;
-        //gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         playerCollider.isTrigger = false;
-        grabbedPoint.setAnotherPlayer(null);
         beGrabbed = false;
         ResetToolWave();
     }

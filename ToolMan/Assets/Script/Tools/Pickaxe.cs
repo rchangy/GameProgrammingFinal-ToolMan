@@ -18,7 +18,7 @@ public class Pickaxe : Tool
     {
         base.toTool();
         animator.SetBool("isPickaxe", true);
-        //grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.48f, 0.0f);
+        grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.48f, 0.0f);
         point = new Vector3(0.0f, -1.48f, 0.0f);
     }
 }

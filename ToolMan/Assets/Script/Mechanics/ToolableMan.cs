@@ -11,7 +11,7 @@ public abstract class ToolableMan : MonoBehaviour
     protected int toolIdx;
     protected bool beGrabbed = false;
 
-    [SerializeField] protected GrabbedPoint grabbedPoint;
+    [SerializeField] protected GameObject grabbedPoint;
 
     virtual protected void Awake() {}
 
@@ -36,7 +36,7 @@ public abstract class ToolableMan : MonoBehaviour
     {
         return isTool;
     }
-    public GrabbedPoint GetGrabbedPoint()
+    public GameObject GetGrabbedPoint()
     {
         return grabbedPoint;
     }
