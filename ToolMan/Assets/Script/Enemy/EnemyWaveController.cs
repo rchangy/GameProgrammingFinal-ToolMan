@@ -8,20 +8,23 @@ public class EnemyWaveController : MonoBehaviour
 
     private List<Enemy> _enemies;
 
-    private int total;
+    private int total = 0;
     private int currentAlive;
 
     private void Start()
     {
         _enemies = transform.GetComponentsInChildren<Enemy>().ToList();
-        foreach(Enemy enemy in _enemies)
+        if(_enemies != null)
         {
-            enemy.gameObject.SetActive(true);
-            enemy.SetWave(this);
-            enemy.gameObject.SetActive(false);
+            foreach(Enemy enemy in _enemies)
+            {
+                enemy.gameObject.SetActive(true);
+                enemy.SetWave(this);
+                enemy.gameObject.SetActive(false);
+            }
+            total = _enemies.Count;
+            currentAlive = total;
         }
-        total = _enemies.Count;
-        currentAlive = total;
     }
     private void Update()
     {
@@ -38,6 +41,7 @@ public class EnemyWaveController : MonoBehaviour
 
     public void StartWave()
     {
+        if (_enemies == null) return;
         foreach (Enemy enemy in _enemies)
         {
             enemy.gameObject.SetActive(true);

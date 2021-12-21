@@ -137,14 +137,16 @@ public class Enemy : MonoBehaviour
         {
             skillWeight = null;
         }
+
+        combat.DeadActions += Die;
     }
 
     protected virtual void Update()
     {
-        if (combat.Hp <= 0)
-        {
-            Die();
-        }
+        //if (combat.Hp <= 0)
+        //{
+        //    Die();
+        //}
         // check sight and attack range
         PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
         PlayerInAttackRange = Physics.CheckSphere(transform.position, AttackRange, PlayerMask);
@@ -303,7 +305,7 @@ public class Enemy : MonoBehaviour
         {
             _wave.EnemyDie();
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     //protected void OnDrawGizmos()

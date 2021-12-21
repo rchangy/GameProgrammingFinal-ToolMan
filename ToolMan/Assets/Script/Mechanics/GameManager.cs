@@ -28,10 +28,11 @@ public class GameManager : MonoBehaviour
         foreach(Objective obj in _objectives)
         {
             obj.StartObjective();
-            while (obj.isCompleted())
+            while (!obj.isCompleted())
             {
                 yield return null;
             }
+            Debug.Log("level1 complete");
         }
         // next scene
     }

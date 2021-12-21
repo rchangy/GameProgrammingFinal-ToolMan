@@ -7,20 +7,24 @@ public class EnemyWavesController : Objective
     private List<EnemyWaveController> _waves;
     private HashSet<EnemyWaveController> _activeWaves;
     private int _nextWave = 0;
-    private int _total;
+    private int _total = 0;
     private int _completed = 0;
 
-    private bool _isCompleted = false;
+    private bool _isCompleted;
 
     private void Start()
     {
         _waves = transform.GetComponentsInChildren<EnemyWaveController>().ToList();
-        foreach(EnemyWaveController wave in _waves)
+        if(_waves != null)
         {
-            wave.gameObject.SetActive(true);
-            wave.SetWaves(this);
+            foreach(EnemyWaveController wave in _waves)
+            {
+                wave.gameObject.SetActive(true);
+                wave.SetWaves(this);
+            }
+            _total = _waves.Count;
+            _activeWaves = new HashSet<EnemyWaveController>();
         }
-        _total = _waves.Count;
     }
 
     public override void StartObjective()
@@ -35,7 +39,9 @@ public class EnemyWavesController : Objective
 
     public void ReleaseNextWave()
     {
+        if(_waves == null) return;
         EnemyWaveController releasingWave = _waves[_nextWave];
+        releasingWave.StartWave();
         _activeWaves.Add(releasingWave);
         _nextWave++;
     }
