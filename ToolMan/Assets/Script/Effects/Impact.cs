@@ -35,6 +35,6 @@ public class Impact : Effect
 
     IEnumerator DestroyEffect(Effect e) {
         yield return new WaitForSeconds(2);
-        Destroy(e);
+        Destroy(e.gameObject);
     }
 }

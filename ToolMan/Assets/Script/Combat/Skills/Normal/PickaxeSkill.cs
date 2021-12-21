@@ -39,7 +39,6 @@ namespace ToolMan.Combat.Skills
             while(targetTrans.localScale.y >= targetYScale)
             {
                 targetTrans.localScale -= deform * Time.deltaTime;
-                Debug.Log(targetTrans.localScale);
                 yield return null;
             }
 

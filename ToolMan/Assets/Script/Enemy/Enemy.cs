@@ -6,6 +6,7 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
+    private EnemyWaveController _wave;
     [SerializeField] protected Animator animator;
 
     protected Transform[] Players;
@@ -136,14 +137,16 @@ public class Enemy : MonoBehaviour
         {
             skillWeight = null;
         }
+
+        combat.DeadActions += Die;
     }
 
     protected virtual void Update()
     {
-        if (combat.Hp <= 0)
-        {
-            Die();
-        }
+        //if (combat.Hp <= 0)
+        //{
+        //    Die();
+        //}
         // check sight and attack range
         PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
         PlayerInAttackRange = Physics.CheckSphere(transform.position, AttackRange, PlayerMask);
@@ -298,7 +301,11 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
-        Destroy(gameObject);
+        if(_wave != null)
+        {
+            _wave.EnemyDie();
+        }
+        gameObject.SetActive(false);
     }
 
     //protected void OnDrawGizmos()
@@ -345,5 +352,9 @@ public class Enemy : MonoBehaviour
     protected virtual void SetAllAnimationFalse()
     {
 
+    }
+    public void SetWave(EnemyWaveController wave)
+    {
+        _wave = wave;
     }
 }
