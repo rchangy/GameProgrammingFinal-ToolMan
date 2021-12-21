@@ -18,8 +18,6 @@ public class CameraManager : MonoBehaviour
         get => _camPosition;
     }
 
-    
-
     private void Awake()
     {
         EnableMain();
@@ -30,7 +28,7 @@ public class CameraManager : MonoBehaviour
         if (Physics.Linecast(FollowTarget.position, FollowTarget.position + FollowTarget.localRotation * _camPosition, out hit, layers))
         {
             float dist = Vector3.Distance(FollowTarget.position, hit.point);
-            MainCam.transform.localPosition = new Vector3(0, 3 * (dist / 10), -dist);
+            MainCam.transform.localPosition = new Vector3(0, 3 * (dist / 10), -(dist- 0.3f));
         }
         else
         {

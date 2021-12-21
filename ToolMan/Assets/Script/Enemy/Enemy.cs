@@ -6,6 +6,7 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
+    private EnemyWaveController _wave;
     [SerializeField] protected Animator animator;
 
     protected Transform[] Players;
@@ -298,6 +299,10 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
+        if(_wave != null)
+        {
+            _wave.EnemyDie();
+        }
         Destroy(gameObject);
     }
 
@@ -345,5 +350,9 @@ public class Enemy : MonoBehaviour
     protected virtual void SetAllAnimationFalse()
     {
 
+    }
+    public void SetWave(EnemyWaveController wave)
+    {
+        _wave = wave;
     }
 }
