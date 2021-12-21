@@ -69,11 +69,11 @@ public partial class PlayerController : ToolableMan
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         keyboardInputController = new KeyboardInputController();
+        GetMaterial().DisableKeyword("_EMISSION");
     }
     override protected void Start()
     {
         grabPoint.setPlayer(this);
-        grabbedPoint.setPlayer(this);
 
         if (playerNum == 1)
         {

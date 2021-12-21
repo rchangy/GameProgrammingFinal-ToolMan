@@ -20,7 +20,7 @@ public class Tool
     {
         this.player = player;
         this.animator = player.getAnimator();
-        this.grabbedPoint = player.GetGrabbedPoint().gameObject;
+        this.grabbedPoint = player.GetGrabbedPoint();
         this.playerRB = player.getRigidbody();
         //point = new Vector3(0.0f, -1.2f, 0.0f);
     }
@@ -44,7 +44,7 @@ public class Tool
 
         // reset grabbed point (need to fix this part if changing animation)
         grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.2f, 0.0f);
-        //point = new Vector3(0.0f, -1.2f, 0.0f);
+        point = new Vector3(0.0f, -1.2f, 0.0f);
 
         // ==== reset player ==== //
         playerRB.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
@@ -58,7 +58,8 @@ public class Tool
 
     public Vector3 getPoint()
     {
-        return point;
+        //return point;
+        return grabbedPoint.transform.localPosition;
     }
     public Vector3 getTheToolEulerAngle()
     {
