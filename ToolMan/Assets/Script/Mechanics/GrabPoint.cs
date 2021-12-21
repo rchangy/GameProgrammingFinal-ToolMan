@@ -41,7 +41,7 @@ namespace ToolMan.Mechanics
             Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange, grabbedPointLayer);
             foreach (Collider collider in colliders)
             {
-                if (collider.gameObject != gameObject)
+                if (collider.transform.root != transform.root)
                 {
                     anotherPlayer = collider.gameObject.GetComponent<GrabbedPoint>().GetPlayerController();
                     if (anotherPlayer != null && anotherPlayer.inToolState())
