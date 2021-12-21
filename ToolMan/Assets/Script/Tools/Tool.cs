@@ -20,7 +20,7 @@ public class Tool
     {
         this.player = player;
         this.animator = player.getAnimator();
-        this.grabbedPoint = player.GetGrabbedPoint().gameObject;
+        this.grabbedPoint = player.GetGrabbedPoint();
         this.playerRB = player.getRigidbody();
         //point = new Vector3(0.0f, -1.2f, 0.0f);
     }

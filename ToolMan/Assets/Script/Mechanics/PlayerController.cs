@@ -74,7 +74,6 @@ public partial class PlayerController : ToolableMan
     override protected void Start()
     {
         grabPoint.setPlayer(this);
-        grabbedPoint.setPlayer(this);
 
         if (playerNum == 1)
         {

@@ -43,7 +43,8 @@ namespace ToolMan.Mechanics
             {
                 if (collider.transform.root != transform.root)
                 {
-                    anotherPlayer = collider.gameObject.GetComponent<GrabbedPoint>().GetPlayerController();
+                    anotherPlayer = collider.transform.root.gameObject.GetComponent<PlayerController>();
+                    //anotherPlayer = collider.gameObject.GetComponent<GrabbedPoint>().GetPlayerController();
                     if (anotherPlayer != null && anotherPlayer.inToolState())
                     {
                         targetPoint = collider.gameObject;
@@ -107,7 +108,7 @@ namespace ToolMan.Mechanics
         public void setAnotherPlayerAndTarget(PlayerController anotherPlayer)
         {
             this.anotherPlayer = anotherPlayer;
-            this.targetPoint = anotherPlayer.GetGrabbedPoint().gameObject;
+            this.targetPoint = anotherPlayer.GetGrabbedPoint();
         }
 
         public bool IsGrabbing()

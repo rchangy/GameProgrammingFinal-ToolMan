@@ -2088,7 +2088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20557317c6f5148fcb4ad920dccaaab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabbedPoint: {fileID: 4349471767006141894}
+  grabbedPoint: {fileID: 5681094873323192337}
   speed: 10
   moveAngleSensitivity: 100
   jumpForce: 300
@@ -2188,7 +2188,6 @@ GameObject:
   - component: {fileID: 2436288046269121846}
   - component: {fileID: 3832618522116747320}
   - component: {fileID: 9038656772829788635}
-  - component: {fileID: 4349471767006141894}
   m_Layer: 9
   m_Name: GrabbedPoint
   m_TagString: Untagged
@@ -2272,20 +2271,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5681094873323192337}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &4349471767006141894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5681094873323192337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86f2c17171219453c806b19424f52b3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerGameObject: {fileID: 5653095584333043336}
-  anotherPlayer: {fileID: 0}
 --- !u!1 &5913743503393127174
 GameObject:
   m_ObjectHideFlags: 0
