@@ -11,6 +11,8 @@ public class EnemyWaveController : MonoBehaviour
     private int total = 0;
     private int currentAlive;
 
+    public int Order;
+
     private void Start()
     {
         _enemies = transform.GetComponentsInChildren<Enemy>().ToList();
