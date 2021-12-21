@@ -53,7 +53,7 @@ namespace ToolMan.Combat
             // Slow down for a while
 
             Time.timeScale = 0;
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 8; i++)
             {
                 yield return null;
             }

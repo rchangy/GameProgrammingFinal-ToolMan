@@ -92,6 +92,8 @@ namespace ToolMan.Combat
         }
 
 
+        public Action DeadActions;
+
         protected virtual void Awake()
         {
             manager = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
@@ -175,7 +177,10 @@ namespace ToolMan.Combat
                 _movable.Disable();
         }
 
-        protected abstract void Die();
+        protected virtual void Die()
+        {
+            DeadActions.Invoke();
+        }
 
         public void AddBuff(ScriptableBuff buff)
         {

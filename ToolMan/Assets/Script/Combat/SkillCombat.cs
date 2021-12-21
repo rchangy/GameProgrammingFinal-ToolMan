@@ -205,15 +205,14 @@ namespace ToolMan.Combat
             if (target == null) return;
             if (_refractoryPeriod.ContainsKey(target)) return;
             _refractoryPeriod.Add(target, _hitRefractoryPeriod);
-            //_hitDir = transform.position - target.transform.position;
             Hit(target);
         }
 
         protected virtual void Hit(CombatUnit target)
         {
             Debug.Log(name + " hit " + target.name);
-            StartCoroutine(currentUsingSkill.Hit(this, target));
             target.TakeDamage(Atk, this);
+            StartCoroutine(currentUsingSkill.Hit(this, target));
         }
 
         public IReadOnlyCollection<String> GetCurrentUsingSkillSet()
@@ -221,10 +220,6 @@ namespace ToolMan.Combat
             return CurrentUsingSkillSet;
         }
 
-        protected override void Die()
-        {
-            
-        }
 
     }
 }
