@@ -2,38 +2,39 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
     private string _currentScene;
-    [SerializeField] private List<Objective> _objectives;
+    [SerializeField] private GameObject Objectives;
+    private List<Objective> _objectives;
 
     void Start()
     {
-        _currentScene = SceneManager.GetActiveScene().name;
-
-        switch (_currentScene)
+        //_currentScene = SceneManager.GetActiveScene().name;
+        if(Objectives != null)
         {
-            case "Level1":
-                StartCoroutine(Level1());
-                break;
-            default:
-                break;
+            _objectives = Objectives.GetComponentsInChildren<Objective>().ToList();
         }
+        _objectives.Sort((x, y) => x.Order.CompareTo(y.Order));
+        StartCoroutine(CompleteSceneObjectives());
 
     }
 
-    private IEnumerator Level1()
+    private IEnumerator CompleteSceneObjectives()
     {
         foreach(Objective obj in _objectives)
         {
+            while (!obj.Startup) yield return null;
+            Debug.Log("obj start " + obj.gameObject.name + " , Order: " + obj.Order);
             obj.StartObjective();
             while (!obj.isCompleted())
             {
                 yield return null;
             }
-            Debug.Log("level1 complete");
         }
+        Debug.Log("level1 complete");
         // next scene
     }
 

@@ -12,7 +12,7 @@ public class EnemyWavesController : Objective
 
     private bool _isCompleted;
 
-    private void Start()
+    protected override void Init()
     {
         _waves = transform.GetComponentsInChildren<EnemyWaveController>().ToList();
         if(_waves != null)
@@ -22,6 +22,7 @@ public class EnemyWavesController : Objective
                 wave.gameObject.SetActive(true);
                 wave.SetWaves(this);
             }
+            _waves.Sort((x, y) => x.Order.CompareTo(y.Order));
             _total = _waves.Count;
             _activeWaves = new HashSet<EnemyWaveController>();
         }
