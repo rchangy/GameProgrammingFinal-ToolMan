@@ -109,8 +109,10 @@ namespace ToolMan.Combat
                 nextEnemyWave.SetActive(true);
                 currentWaveIdx = waveIdx;
                 enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                GameObject[] probs = GameObject.FindGameObjectsWithTag("DestroyableProb");
                 currentEnemyWave = nextEnemyWave;
-                SetEnemyCanvas();
+                SetHPCanvas(enemies);
+                SetHPCanvas(probs);
             }
             else
             {
@@ -118,12 +120,12 @@ namespace ToolMan.Combat
             }
         }
 
-        private void SetEnemyCanvas()
+        private void SetHPCanvas(GameObject[] objects)
         {
-            foreach(var enemy in enemies)
+            foreach(var obj in objects)
             {
-                Transform canvas1 = enemy.transform.Find("Canvas1");
-                Transform canvas2 = enemy.transform.Find("Canvas2");
+                Transform canvas1 = obj.transform.Find("Canvas1");
+                Transform canvas2 = obj.transform.Find("Canvas2");
                 EnemyHPCanvas EHPC1, EHPC2;
                 if (canvas1 != null)
                 {
