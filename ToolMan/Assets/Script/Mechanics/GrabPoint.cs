@@ -62,7 +62,7 @@ namespace ToolMan.Mechanics
         {
             if (targetPoint != null)
             {
-                int playerLayer = Converter.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
+                int playerLayer = LayerMaskUtil.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
                 Physics.IgnoreLayerCollision(playerLayer, playerLayer, true);
                 // change position first
                 Vector3 grabbedPointLocalPosition = anotherPlayer.GetGrabbedPoint().transform.localPosition;
@@ -100,7 +100,7 @@ namespace ToolMan.Mechanics
                 anotherPlayer.BeReleased();
                 //player.Release();
                 grabbing = false;
-                int playerLayer = Converter.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
+                int playerLayer = LayerMaskUtil.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
                 Physics.IgnoreLayerCollision(playerLayer, playerLayer, false);
             }
         }

@@ -31,6 +31,10 @@ public class HealthBar : MonoBehaviour
 
     public void Setup(Resource hp)
     {
+        if (_barSprite == null)
+        {
+            _barSprite = gameObject.GetComponent<Image>();
+        }
         _barSprite.enabled = true;
         _hp = hp;
         _lastHealth = _hp.Value;
