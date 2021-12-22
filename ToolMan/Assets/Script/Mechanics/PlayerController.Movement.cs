@@ -62,10 +62,10 @@ public partial class PlayerController
 
     private void Jump()
     {
-        if (currentJumpCount < maxJumpCount)
+        currentJumpCount++;
+        if (currentJumpCount < maxJumpCount || isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce);
-            currentJumpCount++;
         }
 
     }

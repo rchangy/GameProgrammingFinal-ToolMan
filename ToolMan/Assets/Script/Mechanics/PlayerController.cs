@@ -36,6 +36,8 @@ public partial class PlayerController : ToolableMan
     [SerializeField] private ObjectListUI toolListUI;
     [SerializeField] private PlayerController anotherPlayer;
     [SerializeField] private Material playerMaterial;
+    [SerializeField] private Material EmissionMaterial;
+    [SerializeField] private Renderer skinRenderer;
     public EffectController effectController;
     // ==== Components ====
 
@@ -254,6 +256,17 @@ public partial class PlayerController : ToolableMan
     public bool IsAnimationAttacking()
     {
         return animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack");
+    }
+    public void setEmission(bool emission)
+    {
+        if (emission && EmissionMaterial != null)
+        {
+            skinRenderer.material = EmissionMaterial;
+        }
+        else if (!emission)
+        {
+            skinRenderer.material = playerMaterial;
+        }
     }
     // ==== getters ====
 }
