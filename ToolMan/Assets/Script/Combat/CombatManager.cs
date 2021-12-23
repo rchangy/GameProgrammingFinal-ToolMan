@@ -13,6 +13,8 @@ namespace ToolMan.Combat
         {
             get => _model;
         }
+        [SerializeField] private Transform Player1Cam, Player2Cam;
+        [SerializeField] bool enableEnemyWaves;
 
         private List<PlayerController> players = new List<PlayerController>();
         private GameObject[] enemies;
@@ -26,36 +28,40 @@ namespace ToolMan.Combat
             Model.ComboSkills.Load();
         }
 
-        //private void Start()
-        //{
-        //    GameObject[] playerGameObjects;
-        //    playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
-        //    foreach (var playerGameObject in playerGameObjects)
-        //    {
-        //        players.Add(playerGameObject.GetComponent<PlayerController>());
-        //    }
+        private void Start()
+        {
+            if (!enableEnemyWaves)
+                return;
+            GameObject[] playerGameObjects;
+            playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var playerGameObject in playerGameObjects)
+            {
+                players.Add(playerGameObject.GetComponent<PlayerController>());
+            }
 
-        //    newEnemyWave(1);
-        //}
+            newEnemyWave(1);
+        }
 
-        //private void Update()
-        //{
-        //    if (winOrLose)
-        //        return;
-        //    if (CheckPlayersLose())
-        //    {
-        //        StartCoroutine(GameOver());
-        //    }
-        //    else if (CheckPlayersWin())
-        //    {
-        //        StartCoroutine(Win());
-        //    }
-        //    else if (currentEnemyWave != null)
-        //    {
-        //        if (EnemiesAllKilled())
-        //            newEnemyWave(currentWaveIdx + 1);
-        //    }
-        //}
+        private void Update()
+        {
+            if (!enableEnemyWaves)
+                return;
+            if (winOrLose)
+                return;
+            if (CheckPlayersLose())
+            {
+                StartCoroutine(GameOver());
+            }
+            else if (CheckPlayersWin())
+            {
+                StartCoroutine(Win());
+            }
+            else if (currentEnemyWave != null)
+            {
+                if (EnemiesAllKilled())
+                    newEnemyWave(currentWaveIdx + 1);
+            }
+        }
 
         private bool EnemiesAllKilled()
         {
@@ -63,7 +69,7 @@ namespace ToolMan.Combat
             foreach(var enemy in enemies) {
                 if (enemy != null)
                 {
-                    Debug.Log("!= null");
+                    Debug.Log("enemy num != null");
                     return false;
                 }
             }
@@ -103,11 +109,49 @@ namespace ToolMan.Combat
                 nextEnemyWave.SetActive(true);
                 currentWaveIdx = waveIdx;
                 enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                GameObject[] probs = GameObject.FindGameObjectsWithTag("DestroyableProb");
                 currentEnemyWave = nextEnemyWave;
+                SetHPCanvas(enemies);
+                SetHPCanvas(probs);
             }
             else
             {
                 currentEnemyWave = null;
+            }
+        }
+
+        private void SetHPCanvas(GameObject[] objects)
+        {
+            foreach(var obj in objects)
+            {
+                Transform canvas1 = obj.transform.Find("Canvas1");
+                Transform canvas2 = obj.transform.Find("Canvas2");
+                EnemyHPCanvas EHPC1, EHPC2;
+                if (canvas1 != null)
+                {
+                    EHPC1 = canvas1.GetComponent<EnemyHPCanvas>();
+                    if (EHPC1 != null)
+                    {
+                        EHPC1.setCamera(Player1Cam);
+                    }
+                    else
+                    {
+                        Debug.Log("Set EnemyHPCanvas for Canvas1 to keep Canvas1 looking at player1's camera.");
+                    }
+                }
+
+                if (canvas2 != null)
+                {
+                    EHPC2 = canvas2.GetComponent<EnemyHPCanvas>();
+                    if (EHPC2 != null)
+                    {
+                        EHPC2.setCamera(Player2Cam);
+                    }
+                    else
+                    {
+                        Debug.Log("Set EnemyHPCanvas for Canvas2 to keep Canvas2 looking at player2's camera.");
+                    }
+                }
             }
         }
 

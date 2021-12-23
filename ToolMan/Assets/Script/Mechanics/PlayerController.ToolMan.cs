@@ -50,8 +50,12 @@ public partial class PlayerController
             //effect
             Effect toToolEffect = effectController.effectList.Find(e => e.name == "ToToolEffect");
             toToolEffect.PlayEffect();
-            isTool = !isTool;
+            // animator
             animator.SetTrigger("changeToTool");
+            // grab hint
+            grabPoint.TeammateGrabHint(false);
+
+            isTool = !isTool;
         }
         else if (isTool && !beGrabbed)
         {

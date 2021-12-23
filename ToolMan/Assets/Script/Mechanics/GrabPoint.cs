@@ -38,6 +38,11 @@ namespace ToolMan.Mechanics
 
         private void DetectCollisionWithGrabbedPoint()
         {
+            bool canGrabSth = false;
+            if (grabbing || player.inToolState())
+            {
+                return;
+            }
             Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange, grabbedPointLayer);
             foreach (Collider collider in colliders)
             {
@@ -47,22 +52,30 @@ namespace ToolMan.Mechanics
                     //anotherPlayer = collider.gameObject.GetComponent<GrabbedPoint>().GetPlayerController();
                     if (anotherPlayer != null && anotherPlayer.inToolState())
                     {
+                        canGrabSth = true;
                         targetPoint = collider.gameObject;
+                        TeammateGrabHint(true);
                     }
                 }
 
             }
-            if (colliders.Length == 0 && !grabbing)
+            if (!canGrabSth)
             {
                 targetPoint = null;
+                TeammateGrabHint(false);
             }
+        }
+
+        public void TeammateGrabHint(bool InRange)
+        {
+            player.grabHint.SetActive(InRange);
         }
 
         public ConfigurableJoint Grab()
         {
             if (targetPoint != null)
             {
-                int playerLayer = Converter.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
+                int playerLayer = LayerMaskUtil.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
                 Physics.IgnoreLayerCollision(playerLayer, playerLayer, true);
                 // change position first
                 Vector3 grabbedPointLocalPosition = anotherPlayer.GetGrabbedPoint().transform.localPosition;
@@ -85,6 +98,7 @@ namespace ToolMan.Mechanics
 
                 //player.Grab(confJ);
                 grabbing = true;
+                TeammateGrabHint(false);
                 return confJ;
             }
             return null;
@@ -100,9 +114,10 @@ namespace ToolMan.Mechanics
                 anotherPlayer.BeReleased();
                 //player.Release();
                 grabbing = false;
-                int playerLayer = Converter.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
+                int playerLayer = LayerMaskUtil.LayerBitMaskToLayerNumber(player.GetLayerMask().value);
                 Physics.IgnoreLayerCollision(playerLayer, playerLayer, false);
             }
+            targetPoint = null;
         }
 
         public void setAnotherPlayerAndTarget(PlayerController anotherPlayer)
