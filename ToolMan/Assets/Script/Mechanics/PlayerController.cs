@@ -38,6 +38,7 @@ public partial class PlayerController : ToolableMan
     [SerializeField] private Material playerMaterial;
     [SerializeField] private Material EmissionMaterial;
     [SerializeField] private Renderer skinRenderer;
+    public GameObject grabHint;
     public EffectController effectController;
     // ==== Components ====
 

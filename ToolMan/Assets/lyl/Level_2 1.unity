@@ -154,6 +154,11 @@ Transform:
   m_Father: {fileID: 718717938}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &67873027 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6833222982587782655, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
+  m_PrefabInstance: {fileID: 574051570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &79440003 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4892504893775866, guid: 57d78de69bcaf8a4e969c0c3350b859b, type: 3}
@@ -552,6 +557,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 340924682}
     - target: {fileID: 460149762, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: grabHint
+      value: 
+      objectReference: {fileID: 938491924}
+    - target: {fileID: 460149762, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
       propertyPath: toolListUI
       value: 
       objectReference: {fileID: 574051571}
@@ -694,6 +703,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBearMan2
       objectReference: {fileID: 0}
+    - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: grabHint
+      value: 
+      objectReference: {fileID: 67873027}
     - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: toolListUI
       value: 
@@ -978,6 +991,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
+--- !u!1 &938491924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2856260320516639366, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
+  m_PrefabInstance: {fileID: 574051570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &968783891
 GameObject:
   m_ObjectHideFlags: 0
