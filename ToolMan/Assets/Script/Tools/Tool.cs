@@ -41,6 +41,7 @@ public class Tool
         animator.SetBool("isLightSaber", false);
         animator.SetBool("isBoomerang", false);
         animator.SetBool("isPickaxe", false);
+        animator.ResetTrigger("Attack");
 
         // reset grabbed point (need to fix this part if changing animation)
         grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.2f, 0.0f);
