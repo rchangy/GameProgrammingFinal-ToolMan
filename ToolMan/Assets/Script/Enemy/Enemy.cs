@@ -228,6 +228,7 @@ public class Enemy : MonoBehaviour
         switch (act){
             case 0: // attack
                 Idle();
+                SetAllAnimationFalse();
                 RandomAttackBehavior();
                 break;
             case 1:
