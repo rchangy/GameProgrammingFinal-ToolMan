@@ -80,6 +80,7 @@ namespace ToolMan.Combat
         // healthBar
         protected int _lastHpValue;
         public HealthBar healthBar;
+        public HealthBar healthBar2;
         protected bool isDead = false;
 
         // hit feel
@@ -120,6 +121,10 @@ namespace ToolMan.Combat
             if (healthBar != null)
             {
                 healthBar.Setup(_hp);
+            }
+            if (healthBar2 != null)
+            {
+                healthBar2.Setup(_hp);
             }
             _lastHpValue = _hp.Value;
         }

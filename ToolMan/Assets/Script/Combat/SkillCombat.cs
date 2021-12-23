@@ -199,7 +199,7 @@ namespace ToolMan.Combat
 
         protected virtual void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.layer != Converter.LayerBitMaskToLayerNumber(TargetLayers)) return;
+            if (!LayerMaskUtil.IsInLayerMask(TargetLayers, other.gameObject.layer)) return;
             if (!CollisionEnable) return;
             CombatUnit target = other.gameObject.GetComponent<CombatUnit>();
             if (target == null) return;

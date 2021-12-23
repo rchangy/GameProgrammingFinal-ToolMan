@@ -41,7 +41,7 @@ namespace ToolMan.Combat.Equip
         private void OnTriggerEnter(Collider other)
         {
             
-            if (other.gameObject.layer == Converter.LayerBitMaskToLayerNumber(_crystalTargetLayers.value))
+            if (other.gameObject.layer == LayerMaskUtil.LayerBitMaskToLayerNumber(_crystalTargetLayers.value))
             {
                 hitBy = other.gameObject.GetComponent<PlayerController>();
             }

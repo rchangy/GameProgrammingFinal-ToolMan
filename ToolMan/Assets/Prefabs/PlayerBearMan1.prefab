@@ -400,7 +400,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 6143
+    m_Bits: 47103
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1526,6 +1526,8 @@ MonoBehaviour:
   toolListUI: {fileID: 0}
   anotherPlayer: {fileID: 0}
   playerMaterial: {fileID: 2100000, guid: 49aa09efb21b88c48a6076ac4fe2ecc7, type: 2}
+  EmissionMaterial: {fileID: 0}
+  skinRenderer: {fileID: 4125194882034316856}
   effectController: {fileID: 1976549261}
   combat: {fileID: 323214609}
   _comboSkillChargeTime:
@@ -1554,6 +1556,7 @@ MonoBehaviour:
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
+  healthBar2: {fileID: 0}
   _targetLayers:
     serializedVersion: 2
     m_Bits: 4096

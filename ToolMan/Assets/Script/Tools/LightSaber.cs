@@ -19,6 +19,6 @@ public class LightSaber : Tool
         animator.SetBool("isLightSaber", true);
         grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.3f, 0f);
         point = new Vector3(0.0f, -1.3f, 0.0f);
-        player.GetMaterial().EnableKeyword("_EMISSION");
+        player.setEmission(true);
     }
 }

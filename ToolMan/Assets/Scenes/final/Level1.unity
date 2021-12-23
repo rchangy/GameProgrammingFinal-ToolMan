@@ -1424,6 +1424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce54e8f01cf694c9ab09cc9d1e7defa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Order: 1
   _startLine: 10
   _endLine: 13
 --- !u!114 &306595450
@@ -2885,9 +2886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11feb901109e84937a6fcdf16ff2de20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectives:
-  - {fileID: 1647842285}
-  - {fileID: 306595449}
+  Objectives: {fileID: 1423003205}
 --- !u!4 &664108127
 Transform:
   m_ObjectHideFlags: 0
@@ -5702,6 +5701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415987a55107b49daadfca54e3c19859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Order: 0
 --- !u!1001 &1177230692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8914,6 +8914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7ab8fce1b774972a955933b9dfbe0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Order: 0
 --- !u!1001 &1656993172
 PrefabInstance:
   m_ObjectHideFlags: 0
