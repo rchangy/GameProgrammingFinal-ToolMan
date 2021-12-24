@@ -1103,6 +1103,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1937883784}
     - target: {fileID: 460149762, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
+      propertyPath: grabHint
+      value: 
+      objectReference: {fileID: 1501691697}
+    - target: {fileID: 460149762, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
       propertyPath: toolListUI
       value: 
       objectReference: {fileID: 1937883782}
@@ -1221,6 +1225,16 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2115484099242539338, guid: dba0b8143ba24cc489aaf7bcbf183ef1, type: 3}
   m_PrefabInstance: {fileID: 978702643}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &992945750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6833222982587782655, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
+  m_PrefabInstance: {fileID: 1937883780}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &992945754 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7624817324320992221, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
+  m_PrefabInstance: {fileID: 1937883780}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1049681327
 GameObject:
@@ -1416,6 +1430,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300022, guid: c685db5bd3a0f9b4d8ddb667b78d772f, type: 3}
+--- !u!1 &1501691697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2856260320516639366, guid: 69c62e381c28e4c7fa0634d6184c3e79, type: 3}
+  m_PrefabInstance: {fileID: 1937883780}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1518833701 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100052, guid: c685db5bd3a0f9b4d8ddb667b78d772f, type: 3}
@@ -1939,9 +1958,17 @@ PrefabInstance:
       value: PlayerBearMan2
       objectReference: {fileID: 0}
     - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: grabHint
+      value: 
+      objectReference: {fileID: 992945750}
+    - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: toolListUI
       value: 
       objectReference: {fileID: 1937883783}
+    - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
+      propertyPath: skinRenderer
+      value: 
+      objectReference: {fileID: 992945754}
     - target: {fileID: 8507911072495564285, guid: a88a2ba088e14694ea23ffedc82150a6, type: 3}
       propertyPath: anotherPlayer
       value: 
