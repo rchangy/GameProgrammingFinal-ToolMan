@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TutorialController : Objective
+public abstract class TutorialController : Objective
 {
+    protected RPGTalk rpgTalk;
     private bool _isCompleted = false;
+
+    protected bool _isTalkEnd = true;
 
     public override void StartObjective()
     {
-        
+        StartCoroutine(StartTutorial());
     }
 
     public override bool isCompleted()
@@ -17,6 +20,18 @@ public class TutorialController : Objective
 
     protected override void Init()
     {
-        
+        rpgTalk = gameObject.GetComponent<RPGTalk>();
+    }
+
+    protected virtual IEnumerator StartTutorial()
+    {
+        yield return TutorialProcess();
+        _isCompleted = true;
+    }
+    protected abstract IEnumerator TutorialProcess();
+
+    public void TalkEnd()
+    {
+        _isTalkEnd = true;
     }
 }
