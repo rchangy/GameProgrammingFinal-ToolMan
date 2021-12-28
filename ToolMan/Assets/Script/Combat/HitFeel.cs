@@ -5,8 +5,8 @@ namespace ToolMan.Combat
     public class HitFeel : MonoBehaviour
     {
         private bool stopping = false;
-        public float stopTimeSpan = 0.01f;
-        public float slowTimeSpan = 0.0001f;
+        public float stopTimeSpan;
+        public float slowTimeSpan;
         public float slowTimeScale = 0.01f;
         float originalTimeScale;
 
@@ -47,18 +47,20 @@ namespace ToolMan.Combat
         IEnumerator TimeStop()
         {
             // Stop for a while
-            //Time.timeScale = 0;
-            //yield return new WaitForSecondsRealtime(stopTimeSpan);
+            Time.timeScale = 0;
+            Debug.Log("HitFeel stop");
+            yield return new WaitForSecondsRealtime(stopTimeSpan);
 
             // Slow down for a while
+            Debug.Log("HitFeel slow");
+            Time.timeScale = slowTimeScale;
+            //for (int i = 0; i < 0; i++)
+            //{
+            //    yield return null;
+            //}
+            yield return new WaitForSecondsRealtime(slowTimeSpan);
 
-            Time.timeScale = 0;
-            for (int i = 0; i < 8; i++)
-            {
-                yield return null;
-            }
-            //yield return new WaitForSecondsRealtime(slowTimeSpan);
-
+            Debug.Log("HitFeel resume");
             Time.timeScale = originalTimeScale;
         }
 

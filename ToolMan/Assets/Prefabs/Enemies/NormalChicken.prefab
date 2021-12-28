@@ -399,7 +399,7 @@ MonoBehaviour:
   healthBar2: {fileID: 5708097905938600915}
   _targetLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   availableSkillSet: {fileID: 0}
   InitUsingSkillSet: []
 --- !u!114 &170206480
@@ -428,7 +428,7 @@ MonoBehaviour:
   skillWeight: 
   MaxActionTime: 3
   MinActionTime: 2
-  rotateSpeed: 0
+  rotateSpeed: 10
   combat: {fileID: 170206478}
   walkPointRange: 20
   SightRange: 8
@@ -1125,7 +1125,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5f8d6c803befb44bc89c118436018629, type: 3}
-  m_Type: 1
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -1362,7 +1362,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5f8d6c803befb44bc89c118436018629, type: 3}
-  m_Type: 1
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0

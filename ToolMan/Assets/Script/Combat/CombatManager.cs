@@ -28,104 +28,104 @@ namespace ToolMan.Combat
             Model.ComboSkills.Load();
         }
 
-        private void Start()
-        {
-            if (!enableEnemyWaves)
-                return;
-            GameObject[] playerGameObjects;
-            playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
-            foreach (var playerGameObject in playerGameObjects)
-            {
-                players.Add(playerGameObject.GetComponent<PlayerController>());
-            }
+        //private void Start()
+        //{
+        //    if (!enableEnemyWaves)
+        //        return;
+        //    GameObject[] playerGameObjects;
+        //    playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
+        //    foreach (var playerGameObject in playerGameObjects)
+        //    {
+        //        players.Add(playerGameObject.GetComponent<PlayerController>());
+        //    }
 
-            newEnemyWave(1);
-        }
+        //    newEnemyWave(1);
+        //}
 
-        private void Update()
-        {
-            if (!enableEnemyWaves)
-                return;
-            if (winOrLose)
-                return;
-            if (CheckPlayersLose())
-            {
-                StartCoroutine(GameOver());
-            }
-            else if (CheckPlayersWin())
-            {
-                StartCoroutine(Win());
-            }
-            else if (currentEnemyWave != null)
-            {
-                if (EnemiesAllKilled())
-                    newEnemyWave(currentWaveIdx + 1);
-            }
-        }
+        //private void Update()
+        //{
+        //    if (!enableEnemyWaves)
+        //        return;
+        //    if (winOrLose)
+        //        return;
+        //    if (CheckPlayersLose())
+        //    {
+        //        StartCoroutine(GameOver());
+        //    }
+        //    else if (CheckPlayersWin())
+        //    {
+        //        StartCoroutine(Win());
+        //    }
+        //    else if (currentEnemyWave != null)
+        //    {
+        //        if (EnemiesAllKilled())
+        //            newEnemyWave(currentWaveIdx + 1);
+        //    }
+        //}
 
-        private bool EnemiesAllKilled()
-        {
-            Debug.Log("enemy num = " + enemies.Length);
-            foreach(var enemy in enemies) {
-                if (enemy != null)
-                {
-                    Debug.Log("enemy num != null");
-                    return false;
-                }
-            }
-            Debug.Log("All Killed:)");
-            return true;
-        }
+        //private bool EnemiesAllKilled()
+        //{
+        //    Debug.Log("enemy num = " + enemies.Length);
+        //    foreach(var enemy in enemies) {
+        //        if (enemy != null)
+        //        {
+        //            Debug.Log("enemy num != null");
+        //            return false;
+        //        }
+        //    }
+        //    Debug.Log("All Killed:)");
+        //    return true;
+        //}
 
-        private bool CheckPlayersLose()
-        {
-            foreach (var player in players)
-            {
-                if (player.IsDead())
-                    return true;
-            }
-            return false;
-        }
+        //private bool CheckPlayersLose()
+        //{
+        //    foreach (var player in players)
+        //    {
+        //        if (player.IsDead())
+        //            return true;
+        //    }
+        //    return false;
+        //}
 
-        private bool CheckPlayersWin()
-        {
-            if (currentEnemyWave == null && !CheckPlayersLose())
-                return true;
-            return false;
-        }
+        //private bool CheckPlayersWin()
+        //{
+        //    if (currentEnemyWave == null && !CheckPlayersLose())
+        //        return true;
+        //    return false;
+        //}
 
-        private void newEnemyWave(int waveIdx)
-        {
-            string enemyWaveName = string.Format("EnemyWave{0}", waveIdx);
-            if (currentEnemyWave != null)
-            {
-                currentEnemyWave.SetActive(false);
-            }
-            GameObject nextEnemyWave;
-            Transform nextEnemyWaveTrans = GameObject.Find("EnemyWaves").transform.Find(enemyWaveName);
-            if (nextEnemyWaveTrans != null)
-            {
-                nextEnemyWave = nextEnemyWaveTrans.gameObject;
-                nextEnemyWave.SetActive(true);
-                currentWaveIdx = waveIdx;
-                enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                GameObject[] probs = GameObject.FindGameObjectsWithTag("DestroyableProb");
-                currentEnemyWave = nextEnemyWave;
-                SetHPCanvas(enemies);
-                SetHPCanvas(probs);
-            }
-            else
-            {
-                currentEnemyWave = null;
-            }
-        }
+        //private void newEnemyWave(int waveIdx)
+        //{
+        //    string enemyWaveName = string.Format("EnemyWave{0}", waveIdx);
+        //    if (currentEnemyWave != null)
+        //    {
+        //        currentEnemyWave.SetActive(false);
+        //    }
+        //    GameObject nextEnemyWave;
+        //    Transform nextEnemyWaveTrans = GameObject.Find("EnemyWaves").transform.Find(enemyWaveName);
+        //    if (nextEnemyWaveTrans != null)
+        //    {
+        //        nextEnemyWave = nextEnemyWaveTrans.gameObject;
+        //        nextEnemyWave.SetActive(true);
+        //        currentWaveIdx = waveIdx;
+        //        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //        GameObject[] probs = GameObject.FindGameObjectsWithTag("DestroyableProb");
+        //        currentEnemyWave = nextEnemyWave;
+        //        SetHPCanvas(enemies);
+        //        SetHPCanvas(probs);
+        //    }
+        //    else
+        //    {
+        //        currentEnemyWave = null;
+        //    }
+        //}
 
-        private void SetHPCanvas(GameObject[] objects)
+        public void SetHPCanvas(List<Enemy> enemies)
         {
-            foreach(var obj in objects)
+            foreach(var enemy in enemies)
             {
-                Transform canvas1 = obj.transform.Find("Canvas1");
-                Transform canvas2 = obj.transform.Find("Canvas2");
+                Transform canvas1 = enemy.transform.Find("Canvas1");
+                Transform canvas2 = enemy.transform.Find("Canvas2");
                 EnemyHPCanvas EHPC1, EHPC2;
                 if (canvas1 != null)
                 {

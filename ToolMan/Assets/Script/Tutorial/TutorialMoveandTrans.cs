@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using ToolMan.Mechanics;
+using ToolMan.Player;
 
 public class TutorialMoveAndTrans : TutorialController
 {

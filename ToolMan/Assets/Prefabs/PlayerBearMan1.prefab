@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 314404874}
   - component: {fileID: 314404873}
+  - component: {fileID: 1650915471}
   m_Layer: 10
   m_Name: CM FreeLook1
   m_TagString: Untagged
@@ -135,6 +136,36 @@ MonoBehaviour:
   - {fileID: 686627582}
   - {fileID: 1755970114}
   - {fileID: 1656256405}
+--- !u!114 &1650915471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314404872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 8
+  m_IgnoreTag: 
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 1
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1 &651469335
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +378,6 @@ GameObject:
   - component: {fileID: 690598933}
   - component: {fileID: 690598932}
   - component: {fileID: 690598931}
-  - component: {fileID: 690598930}
   m_Layer: 0
   m_Name: MainCam1
   m_TagString: MainCamera
@@ -454,25 +484,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &690598930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 690598928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c2f2f7af27d84a71b3dfcf121296566, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopTimeSpan: 0.2
-  slowTimeSpan: 0.2
-  slowTimeScale: 0.01
-  cam: {fileID: 690598933}
-  shakeRange: 0.2
-  shakeSpan: 0.05
-  shakeFreq: 0.01
 --- !u!1 &1038217451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,6 +1539,7 @@ MonoBehaviour:
   playerMaterial: {fileID: 2100000, guid: 49aa09efb21b88c48a6076ac4fe2ecc7, type: 2}
   EmissionMaterial: {fileID: 0}
   skinRenderer: {fileID: 4125194882034316856}
+  grabHint: {fileID: 0}
   effectController: {fileID: 1976549261}
   combat: {fileID: 323214609}
   _comboSkillChargeTime:
@@ -1565,7 +1577,7 @@ MonoBehaviour:
   - Pickaxe
   - Boomerang
   _teamMate: {fileID: 0}
-  hitFeel: {fileID: 690598930}
+  hitFeel: {fileID: 0}
   playingImpactEffect: 0
   impactEffectCd: 1
 --- !u!114 &323214610
@@ -3743,6 +3755,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0f00cf61a6cd4da39a7e2e6e6b9519c, type: 3}
+--- !u!4 &375704037 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5341020880601247987, guid: e0f00cf61a6cd4da39a7e2e6e6b9519c, type: 3}
+  m_PrefabInstance: {fileID: 5341020880770873622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7325184945517398628 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3438312312540246898, guid: e0f00cf61a6cd4da39a7e2e6e6b9519c, type: 3}
@@ -3754,8 +3771,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334801ae0ef804c2b9140f5e3dce1005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &375704037 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5341020880601247987, guid: e0f00cf61a6cd4da39a7e2e6e6b9519c, type: 3}
-  m_PrefabInstance: {fileID: 5341020880770873622}
-  m_PrefabAsset: {fileID: 0}
