@@ -12,6 +12,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.4457825
       objectReference: {fileID: 0}
@@ -122,8 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83653acb995cd4410b1ae5e7ef8ae2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyAgent: {fileID: 1207400452}
-  Players: []
+  animator: {fileID: 0}
   GroundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -134,12 +145,14 @@ MonoBehaviour:
   AttackWeight: 1
   PatrolWeight: 0
   IdleWeight: 5
+  skillWeight: 
   MaxActionTime: 1
   MinActionTime: 0.5
   rotateSpeed: 3
   combat: {fileID: 5542827208670800066}
   walkPointRange: 3
   SightRange: 10
+  speed: 0
   InitAttackRange: 3
 --- !u!195 &1207400452
 NavMeshAgent:
@@ -175,9 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42d4048d51594d52bc8a2be5a45853d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbilityInfos: []
-  StatInfos: []
-  ResourceInfos: []
   _inherentTypes: []
 --- !u!114 &5542827208670800066
 MonoBehaviour:
@@ -196,15 +206,15 @@ MonoBehaviour:
   AtkBaseValue: 1
   DefBaseValue: 1
   StrBaseValue: 1
+  SpdBaseValue: 1
   AttackEnableBaseValue: 1
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
-  Anim: {fileID: 1207400454}
-  TargetLayers:
+  healthBar2: {fileID: 0}
+  _targetLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   availableSkillSet: {fileID: 11400000, guid: dfd89f1f2bc27426c9f38a48e8c9a180, type: 2}
   InitUsingSkillSet:
   - NormalCorgi
-  ColliderEnable: 0
