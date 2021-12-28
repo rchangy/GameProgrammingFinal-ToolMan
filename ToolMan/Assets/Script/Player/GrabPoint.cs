@@ -1,7 +1,7 @@
 using UnityEngine;
 using ToolMan.Util;
 
-namespace ToolMan.Mechanics
+namespace ToolMan.Player
 {
     public class GrabPoint : MonoBehaviour
     {

@@ -1,5 +1,5 @@
 using UnityEngine;
-using ToolMan.Mechanics;
+using ToolMan.Player;
 using ToolMan.Combat;
 using ToolMan.Util;
 
