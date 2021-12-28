@@ -8,11 +8,28 @@ public class Explosion : Effect
 
     public override void PlayEffect()
     {
-        _partList = transform.GetComponentsInChildren<ParticleSystem>();
+        if(_partList == null || _partList.Length == 0)
+        {
+            _partList = transform.GetComponentsInChildren<ParticleSystem>();
+        }
+        if (_partList == null) return;
         foreach (ParticleSystem child in _partList) {
             child.Play();
         }
         _hasPlayed = true;
+    }
+
+    public override void StopEffect()
+    {
+        if (_partList == null || _partList.Length == 0)
+        {
+            _partList = transform.GetComponentsInChildren<ParticleSystem>();
+        }
+        if (_partList == null) return;
+        foreach (ParticleSystem child in _partList)
+        {
+            child.Stop();
+        }
     }
 
     private void Update()
