@@ -269,5 +269,9 @@ public partial class PlayerController : ToolableMan
             skinRenderer.material = playerMaterial;
         }
     }
+    public void UnlockTool(int toolNum)
+    {
+        toolListUI.UnLockTool(toolNum);
+    }
     // ==== getters ====
 }
