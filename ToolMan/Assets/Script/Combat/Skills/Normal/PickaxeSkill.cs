@@ -19,12 +19,12 @@ namespace ToolMan.Combat.Skills
             // delay
             yield return new WaitForSeconds(attackDelay);
             collisionEnable.Value = true;
-            SetColor(true);
+            //SetColor(true);
 
             yield return new WaitForSeconds(_collidingTime);
 
             collisionEnable.Value = false;
-            SetColor(false);
+            //SetColor(false);
         }
 
         public override IEnumerator Hit(SkillCombat combat, CombatUnit target)
