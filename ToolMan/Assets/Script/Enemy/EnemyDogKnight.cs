@@ -4,6 +4,11 @@ using System;
 
 public class EnemyDogKnight : Enemy
 {
+    // skills
+    public Transform IaiAttackPoint;
+    public Explosion ChargingVfx;
+
+
     public int LongRangeAttackWeight;
     public int LongRangePatrolWeight;
     public int LongRangeChaseWeight;
@@ -33,7 +38,7 @@ public class EnemyDogKnight : Enemy
         if (weight.Length > _longRangeSkillStartIdx)
         {
             _longRangeSKillWeight = new int[weight.Length - _longRangeSkillStartIdx];
-            Array.Copy(skillWeight, _longRangeSkillStartIdx, _longRangeSKillWeight, 0, weight.Length - _longRangeSkillStartIdx);
+            Array.Copy(skillWeight, _longRangeSkillStartIdx, _longRangeSKillWeight, 0, skillWeight.Length - _longRangeSkillStartIdx);
         }
         else
         {
@@ -51,6 +56,7 @@ public class EnemyDogKnight : Enemy
             if (ActionLastTime <= 0)
             {
                 isAction = false;
+                isLongRangeAction = false;
                 walkPointSet = false;
             }
             else
@@ -71,20 +77,45 @@ public class EnemyDogKnight : Enemy
 
     protected override void ChasePlayer()
     {
+        Debug.Log("chase");
         base.ChasePlayer();
-        //animator.SetBool("Walking", true);
+        SetAllAnimationFalse();
+        animator.SetBool("Run", true);
+    }
+
+    protected override void Idle()
+    {
+        Debug.Log("idle");
+        base.Idle();
+        SetAllAnimationFalse();
+    }
+
+    protected override void SetAllAnimationFalse()
+    {
+        animator.SetBool("Run", false);
+        animator.SetBool("Walk", false);
+        animator.SetBool("Defend", false);
+    }
+
+    protected override void Patrol()
+    {
+        Debug.Log("patrol");
+        base.Patrol();
+        SetAllAnimationFalse();
+        animator.SetBool("Walk", true);
     }
 
     private void LongRangeRandomBehavior()
     {
+        Debug.Log("long range");
         if (!isAction && !isLongRangeAction)
         {
             act = GetRandType(longRangeWeight);
             if (act > 0)
             {
                 ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
-                isLongRangeAction = true;
             }
+            isLongRangeAction = true;
         }
         if (isLongRangeAction)
         {
@@ -111,15 +142,15 @@ public class EnemyDogKnight : Enemy
 
     protected override void RandomBehavior()
     {
-        //Debug.Log("Attack Mode");
+        Debug.Log("close range");
         if (!isAction && !isLongRangeAction)
         {
             act = GetRandType(weight);
             if (act > 0)
             {
                 ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
-                isAction = true;
             }
+            isAction = true;
         }
         if (isAction)
         {
@@ -146,7 +177,7 @@ public class EnemyDogKnight : Enemy
     protected override void RandomAttackBehavior()
     {
         if (combat.Attacking) return;
-        if (skillWeight == null) return;
+        if (skillWeight == null || skillWeight.Length == 0) return;
         int attackAct = -1;
         if (isAction)
         {
@@ -159,6 +190,7 @@ public class EnemyDogKnight : Enemy
         if(attackAct != -1)
         {
             combat.SetCurrentUsingSkill(_skillSet[attackAct]);
+            combat.Attack();
             if (!combat.Attack())
             {
                 if (isAction)

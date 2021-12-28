@@ -82,8 +82,17 @@ namespace ToolMan.Combat
         {
             base.Interrupted(damager);
             ThisPlayerController.Hurt();
-            ThisPlayerController.Release();
-            if (ThisPlayerController.inToolState()) ThisPlayerController.ToolableManTransform();
+            if(ThisPlayerController.IsGrabbing())
+                ThisPlayerController.Release();
+            var dir = transform.position - damager.transform.position;
+            dir.y = 0f;
+            dir = Vector3.Normalize(dir);
+            dir.y = 2;
+            _rb.drag = 4;
+            _rb.AddForce(dir * 300 * _rb.mass);
+            _timeToStopRb = _stopVelTime;
+            if (Movable)
+                _movable.Disable();
         }
 
         public void AddHp(int hpAdd)

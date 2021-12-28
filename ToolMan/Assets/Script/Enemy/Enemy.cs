@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     public SkillCombat combat;
 
-    protected Vector3 closestPlayer
+    public Vector3 closestPlayer
     {
         get
         {
@@ -265,7 +265,7 @@ public class Enemy : MonoBehaviour
         SetDest(tmp);
     }
 
-    protected Transform GetClosestplayer()
+    public Transform GetClosestplayer()
     {
         Transform target = null;
         float minDist = float.MaxValue;

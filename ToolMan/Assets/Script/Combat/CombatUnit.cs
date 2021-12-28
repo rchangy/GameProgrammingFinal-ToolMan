@@ -85,8 +85,8 @@ namespace ToolMan.Combat
 
         // hit feel
         protected Rigidbody _rb;
-        private float _stopVelTime = 0.5f;
-        private float _timeToStopRb = 0f;
+        protected float _stopVelTime = 0.5f;
+        protected float _timeToStopRb = 0f;
         private bool _isAddingForce
         {
             get => _timeToStopRb > 0f;
@@ -175,6 +175,7 @@ namespace ToolMan.Combat
         {
             var dir = transform.position - damager.transform.position;
             dir.y = 0f;
+            dir = Vector3.Normalize(dir);
             _rb.AddForce(dir * 1000 * _rb.mass);
             _timeToStopRb = _stopVelTime;
             _rb.drag = 15;
