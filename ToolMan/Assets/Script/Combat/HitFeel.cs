@@ -12,6 +12,8 @@ namespace ToolMan.Combat
 
         private float _mul;
 
+        public Camera cam1;
+        public Camera cam2;
         public Camera cam;
         private bool shaking = false;
         public float shakeRange = 0.2f;
@@ -20,6 +22,7 @@ namespace ToolMan.Combat
 
         private void Awake()
         {
+            cam = cam2;
             originalTimeScale = Time.timeScale;
         }
 

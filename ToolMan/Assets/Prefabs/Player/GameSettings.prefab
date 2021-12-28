@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &231099603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 231099604}
+  - component: {fileID: 231099605}
+  m_Layer: 0
+  m_Name: HitFeel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &231099604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231099603}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2423348877079538174}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &231099605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231099603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2f2f7af27d84a71b3dfcf121296566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopTimeSpan: 0.05
+  slowTimeSpan: 0.05
+  slowTimeScale: 0.02
+  cam1: {fileID: 2423348877150704494}
+  cam2: {fileID: 2423348875866744197}
+  cam: {fileID: 0}
+  shakeRange: 0.2
+  shakeSpan: 0.05
+  shakeFreq: 0.01
 --- !u!1 &28650903339071637
 GameObject:
   m_ObjectHideFlags: 3
@@ -3418,7 +3470,6 @@ GameObject:
   - component: {fileID: 2423348875866744197}
   - component: {fileID: 2423348875866744202}
   - component: {fileID: 2423348875866744199}
-  - component: {fileID: 593430679457789129}
   m_Layer: 0
   m_Name: MainCam2
   m_TagString: MainCamera
@@ -3525,25 +3576,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &593430679457789129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2423348875866744203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c2f2f7af27d84a71b3dfcf121296566, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopTimeSpan: 0.2
-  slowTimeSpan: 0.2
-  slowTimeScale: 0.01
-  cam: {fileID: 2423348875866744197}
-  shakeRange: 0.2
-  shakeSpan: 0.05
-  shakeFreq: 0.01
 --- !u!1 &2423348875895794254
 GameObject:
   m_ObjectHideFlags: 0
@@ -23795,11 +23827,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2423348877079538175}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -121.5, y: -6.64, z: 135.73}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7248950564732607247}
   - {fileID: 4394039214326930993}
+  - {fileID: 231099604}
   m_Father: {fileID: 2423348876475688487}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23889,7 +23922,6 @@ GameObject:
   - component: {fileID: 2423348877150704494}
   - component: {fileID: 2423348877150704495}
   - component: {fileID: 2423348877150704488}
-  - component: {fileID: 2423348877150704489}
   m_Layer: 0
   m_Name: MainCam1
   m_TagString: MainCamera
@@ -23996,25 +24028,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2423348877150704489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2423348877150704491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c2f2f7af27d84a71b3dfcf121296566, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopTimeSpan: 0.2
-  slowTimeSpan: 0.2
-  slowTimeScale: 0.01
-  cam: {fileID: 2423348877150704494}
-  shakeRange: 0.2
-  shakeSpan: 0.05
-  shakeFreq: 0.01
 --- !u!1 &2423348877229828970
 GameObject:
   m_ObjectHideFlags: 0
@@ -97474,7 +97487,7 @@ MonoBehaviour:
   - Pickaxe
   - Boomerang
   _teamMate: {fileID: 189264050945683044}
-  hitFeel: {fileID: 2423348877150704489}
+  hitFeel: {fileID: 231099605}
   playingImpactEffect: 0
   impactEffectCd: 1
 --- !u!114 &2423348877311785577
@@ -124264,7 +124277,7 @@ MonoBehaviour:
   - FlashBomb
   - Shield
   _teamMate: {fileID: 2423348877311785578}
-  hitFeel: {fileID: 593430679457789129}
+  hitFeel: {fileID: 231099605}
   playingImpactEffect: 0
   impactEffectCd: 1
 --- !u!65 &2423348876539009867
