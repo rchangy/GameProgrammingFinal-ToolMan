@@ -61,8 +61,8 @@ namespace ToolMan.Combat.Skills.Normal
                     }
                     Debug.Log("Explosion");
                     // Check collisions
-                    _toolCombat.HitFeel.MakeCamShake(HitFeelMul);
-                    _manCombat.HitFeel.MakeCamShake(HitFeelMul);
+                    _toolCombat.HitFeel.MakeCamShake(HitFeelMul, _toolController);
+                    _manCombat.HitFeel.MakeCamShake(HitFeelMul, _manController);
                     if (_buff == null) yield break;
                     Collider[] hitTargets = Physics.OverlapSphere(_rb.gameObject.transform.position, _explosionRange, combat.TargetLayers);
                     foreach (Collider target in hitTargets)

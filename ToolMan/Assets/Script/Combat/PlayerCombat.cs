@@ -31,7 +31,7 @@ namespace ToolMan.Combat
         {
             get => _currentEnergy.Value;
         }
-
+        
 
         [SerializeField]
         private HitFeel hitFeel;
@@ -74,7 +74,7 @@ namespace ToolMan.Combat
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
             int dmg = base.TakeDamage(baseDmg, damager);
-            hitFeel.MakeCamShake(Mathf.Min(3, (float)dmg/(Str + 0.1f)));
+            hitFeel.MakeCamShake(Mathf.Min(3, (float)dmg/(Str + 0.1f)), _playerController);
             return dmg;
         }
 
@@ -159,8 +159,8 @@ namespace ToolMan.Combat
             if (skill.UsingHitFeel)
             {
                 hitFeel.MakeTimeStop();
-                hitFeel.MakeCamShake(skill.HitFeelMul);
-                TeamMateCombat.hitFeel.MakeCamShake(skill.HitFeelMul);
+                hitFeel.MakeCamShake(skill.HitFeelMul, _playerController);
+                TeamMateCombat.hitFeel.MakeCamShake(skill.HitFeelMul, _teamMate._playerController);
             }
             if (ThisPlayerController.IsGrabbed())
             {

@@ -14,7 +14,6 @@ namespace ToolMan.Combat
 
         public Camera cam1;
         public Camera cam2;
-        public Camera cam;
         private bool shaking = false;
         public float shakeRange = 0.2f;
         public float shakeSpan = 0.05f;
@@ -22,17 +21,17 @@ namespace ToolMan.Combat
 
         private void Awake()
         {
-            cam = cam2;
             originalTimeScale = Time.timeScale;
         }
 
-        public void MakeCamShake(float mul)
+        public void MakeCamShake(float mul, PlayerController p)
         {
             if (!shaking)
             {
+                Camera cam = (p.playerNum == 1)? cam1 : cam2;
                 _mul = mul;
                 shaking = true;
-                StartCoroutine(CamShake());
+                StartCoroutine(CamShake(cam));
                 shaking = false;
             }
         }
@@ -67,7 +66,7 @@ namespace ToolMan.Combat
             Time.timeScale = originalTimeScale;
         }
 
-        IEnumerator CamShake()
+        IEnumerator CamShake(Camera cam)
         {
             float shakeTime = 0f;
             float curShakeSpan = shakeSpan * _mul;
