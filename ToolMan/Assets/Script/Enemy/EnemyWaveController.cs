@@ -15,14 +15,13 @@ public class EnemyWaveController : MonoBehaviour
 
     private void Start()
     {
+        
         _enemies = transform.GetComponentsInChildren<Enemy>().ToList();
         if(_enemies != null)
         {
-            foreach(Enemy enemy in _enemies)
+            foreach (Enemy enemy in _enemies)
             {
-                enemy.gameObject.SetActive(true);
                 enemy.SetWave(this);
-                enemy.gameObject.SetActive(false);
             }
             total = _enemies.Count;
             currentAlive = total;
@@ -44,10 +43,8 @@ public class EnemyWaveController : MonoBehaviour
     public void StartWave()
     {
         if (_enemies == null) return;
-        foreach (Enemy enemy in _enemies)
-        {
-            enemy.gameObject.SetActive(true);
-        }
+        gameObject.SetActive(true);
+        _waves.combatManager.SetHPCanvas(_enemies);
     }
 
     public void EnemyDie()

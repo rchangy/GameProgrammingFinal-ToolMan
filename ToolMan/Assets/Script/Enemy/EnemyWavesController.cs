@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using ToolMan.Combat;
 
 public class EnemyWavesController : Objective
 {
@@ -11,10 +12,20 @@ public class EnemyWavesController : Objective
     private int _completed = 0;
 
     private bool _isCompleted;
+    public CombatManager combatManager;
 
     protected override void Init()
     {
-        _waves = transform.GetComponentsInChildren<EnemyWaveController>().ToList();
+        GameObject cmObject = GameObject.Find("CombatManager");
+        if (cmObject != null)
+        {
+            combatManager = cmObject.GetComponent<CombatManager>();
+        }
+        else
+        {
+            Debug.Log("combatManager is null");
+        }
+        _waves = transform.GetComponentsInChildren<EnemyWaveController>(true).ToList();
         if(_waves != null)
         {
             foreach(EnemyWaveController wave in _waves)
@@ -40,7 +51,7 @@ public class EnemyWavesController : Objective
 
     public void ReleaseNextWave()
     {
-        if(_waves == null) return;
+        if(_waves == null || _waves.Count <= 0) return;
         EnemyWaveController releasingWave = _waves[_nextWave];
         releasingWave.StartWave();
         _activeWaves.Add(releasingWave);
