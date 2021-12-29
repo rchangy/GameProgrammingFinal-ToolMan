@@ -2,7 +2,6 @@
 using System.Collections;
 using ToolMan.Util;
 using ToolMan.Combat.Stats.Buff;
-using System.Collections.Generic;
 
 namespace ToolMan.Combat.Skills.Normal
 {
@@ -10,20 +9,32 @@ namespace ToolMan.Combat.Skills.Normal
     public class TurtleAddBuff : Skill
     {
         [SerializeField] private ScriptableBuff _buff;
+        [SerializeField] private float _lastingTime;
       
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
+            yield return new WaitForSeconds(attackDelay);
+
+            Debug.Log("start buff");
+
+            // Anim
+            combat.gameObject.GetComponent<EnemyTurtle>().GetAnimator().SetTrigger("Eat");
+
+            // Effect
+
+            collisionEnable.Value = true;
+            yield return new WaitForSeconds(_lastingTime);
+
+            collisionEnable.Value = false;
+            // Stop Effect
+
+
             yield return null;
         }
 
 
         public override IEnumerator Hit(SkillCombat combat, CombatUnit target)
-        {
-            yield return new WaitForSeconds(attackDelay);
-
-            // Anim
-            combat.gameObject.GetComponent<EnemyTurtle>().GetAnimator().SetTrigger("Eat");
-
+        {    
             // Add buff
             target.AddBuff(_buff);
             Debug.Log("Add Buff!!");

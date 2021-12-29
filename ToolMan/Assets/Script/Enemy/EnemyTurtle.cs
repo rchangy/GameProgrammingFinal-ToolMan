@@ -1,8 +1,4 @@
 using UnityEngine;
-using System;
-using System.Collections.Generic;
-using ToolMan.Combat.Stats.Buff;
-using ToolMan.Combat;
 
 public class EnemyTurtle : Enemy
 {
@@ -11,24 +7,16 @@ public class EnemyTurtle : Enemy
     // Escapes when player approaches
     // ==== Actions ====
 
-    //[SerializeField] private float _escapeRange;
-    //[SerializeField] private float _buffRange;
-
     // ==== Follow other enemies ====
     [SerializeField] private Enemy followTarget = null;
     //[SerializeField] Vector3 followOffset; 
-    //[SerializeField] private bool targetInSightRange = false;
-    [SerializeField] private bool targetInAttackRange = false;
+    [SerializeField] private bool targetInSightRange = false;
+    //[SerializeField] private bool targetInAttackRange = false;
     // ==== Follow other enemies ====
-
-    //[SerializeField] private State state = State.Idle;
-
-    //[SerializeField] private List<ScriptableBuff> _buffs;
-
 
     [SerializeField] private bool _escaping = false;
 
-    [SerializeField] private State state;
+    [SerializeField] private State state; // For debugging
 
     protected override void Start()
     {
@@ -40,7 +28,7 @@ public class EnemyTurtle : Enemy
     }
 
     private void SetFollowTarget() {
-        if (followTarget != null)
+        if (followTarget != null && followTarget.gameObject.activeSelf)
             return;
 
         // set closest one
@@ -49,7 +37,7 @@ public class EnemyTurtle : Enemy
 
         foreach (var e in enemies)
         {
-            if (e.GetComponent<EnemySlimeRabbit>() != null)
+            if (e.GetComponent<EnemyTurtle>() != null || !e.activeSelf)
                 continue;
 
             float d = Vector3.Distance(e.transform.position, transform.position);
@@ -67,15 +55,18 @@ public class EnemyTurtle : Enemy
     protected override void Update()
     {
         // If no follow target, set a new one
-        if (followTarget == null)
+        if (followTarget == null || !followTarget.gameObject.activeSelf)
+        {
             SetFollowTarget();
+            //Debug.Log("chicken died");
+        }
 
         base.Update();
 
 
         // check sight and attack range
         //targetInSightRange = EnemyInRange(SightRange);
-        targetInAttackRange = EnemyInRange(AttackRange);
+        targetInSightRange = EnemyInRange(SightRange);
         
         //AddBuffToOthers();
     }
@@ -91,7 +82,7 @@ public class EnemyTurtle : Enemy
         }
         if (_escaping)
         {
-            if (!PlayerInSightRange) _escaping = false;
+            if (!PlayerInAttackRange) _escaping = false;
             else
             {
                 Escape();
@@ -105,7 +96,6 @@ public class EnemyTurtle : Enemy
             {
                 isAction = false;
                 walkPointSet = false;
-                return;
             }
             else
             {
@@ -113,10 +103,13 @@ public class EnemyTurtle : Enemy
                 return;
             }
         }
-        
-        if (targetInAttackRange) RandomBehavior();
-        else Follow();
-        
+
+        if (!targetInSightRange && followTarget != null) {
+            isAction = true;
+            ActionLastTime = Random.Range(MinActionTime, MaxActionTime);
+            Follow();
+        }
+        else RandomBehavior();     
     }
 
     private bool EnemyInRange(float range) {
@@ -144,7 +137,7 @@ public class EnemyTurtle : Enemy
             {
                 act = GetRandType(weight);
             }
-            ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
+            ActionLastTime = Random.Range(MinActionTime, MaxActionTime);
             isAction = true;
         }
 
@@ -170,6 +163,8 @@ public class EnemyTurtle : Enemy
 
     private void Attack() {
         state = State.Attack;
+        SetAllAnimationFalse();
+        SetDest(transform.position);
         combat.Attack();
     }
 
@@ -191,9 +186,9 @@ public class EnemyTurtle : Enemy
         Vector3 p = GetClosestplayer().position;
         SetAllAnimationFalse();
         animator.SetBool("Walk", true);
-        Debug.Log("desired dest = " + (-p + transform.position));
+        //Debug.Log("desired dest = " + (-p + transform.position));
         SetDest(transform.position - (p - transform.position));
-        Debug.Log("now dest = " + (_dest-transform.position));
+        //Debug.Log("now dest = " + (_dest-transform.position));
         //EscapeFromPoint(p);
         _escaping = true;
     }
@@ -274,11 +269,11 @@ public class EnemyTurtle : Enemy
 
     protected override void SetDest(Vector3 dest)
     {
-        Debug.Log("set dest = " + (dest-transform.position));
+        //Debug.Log("set dest = " + (dest-transform.position));
         //_dest = new Vector3(dest.x, transform.position.y, dest.z);
         if (true)
         {
-            Debug.Log("set dest success = " + (dest-transform.position));
+            //Debug.Log("set dest success = " + (dest-transform.position));
 
             walkPointSet = true;
             _dest = dest;
@@ -287,6 +282,11 @@ public class EnemyTurtle : Enemy
         {
             _dest = transform.position;
         }
+    }
+
+    protected void LateUpdate()
+    {
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
     }
 
     //protected void OnDrawGizmos()

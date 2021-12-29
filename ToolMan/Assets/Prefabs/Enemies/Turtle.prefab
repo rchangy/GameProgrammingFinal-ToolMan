@@ -239,7 +239,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694585447699996}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.9, y: 0, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -283,17 +283,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Name: turtle
-  AttackWeight: 0
+  AttackWeight: 3
   PatrolWeight: 1
   IdleWeight: 0
   skillWeight: 
   MaxActionTime: 5
   MinActionTime: 2
-  rotateSpeed: 10
+  rotateSpeed: 3
   combat: {fileID: 5913986894603866099}
   walkPointRange: 20
   SightRange: 20
-  speed: 3
+  speed: 1.5
   InitAttackRange: 10
   followTarget: {fileID: 0}
   targetInAttackRange: 0
