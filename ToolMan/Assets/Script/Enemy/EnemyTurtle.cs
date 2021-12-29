@@ -105,6 +105,7 @@ public class EnemyTurtle : Enemy
             {
                 isAction = false;
                 walkPointSet = false;
+                return;
             }
             else
             {
@@ -112,7 +113,7 @@ public class EnemyTurtle : Enemy
                 return;
             }
         }
-
+        
         if (targetInAttackRange) RandomBehavior();
         else Follow();
         

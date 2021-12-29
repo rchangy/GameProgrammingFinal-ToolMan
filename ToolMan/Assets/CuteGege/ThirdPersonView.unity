@@ -379,7 +379,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 9e43dc53825814a86b51de786f84253e, type: 2}
     - target: {fileID: 6762914956985902783, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
       propertyPath: speed
-      value: 3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6762914956985902783, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
       propertyPath: m_Enabled
@@ -387,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6762914956985902783, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
       propertyPath: IdleWeight
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6762914956985902783, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
       propertyPath: rotateSpeed
@@ -399,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6762914956985902783, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
       propertyPath: PatrolWeight
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6762914956985902783, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
       propertyPath: followTarget
@@ -1811,6 +1811,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2423348875760685292, guid: d9b1f045573050749aab36f91caa872c, type: 3}
+      propertyPath: reset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2423348876475688484, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_Name
       value: GameSettings
@@ -2815,15 +2819,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 496576, guid: c711992513e4e354d9d85d02d0d5b710, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 496576, guid: c711992513e4e354d9d85d02d0d5b710, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 496576, guid: c711992513e4e354d9d85d02d0d5b710, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 496576, guid: c711992513e4e354d9d85d02d0d5b710, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2831,7 +2835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 496576, guid: c711992513e4e354d9d85d02d0d5b710, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -7.66
       objectReference: {fileID: 0}
     - target: {fileID: 496576, guid: c711992513e4e354d9d85d02d0d5b710, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4266,11 +4270,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 170206478, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: HpMaxValue
-      value: 1500
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 170206478, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: HpInitValue
-      value: 1500
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 170206478, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: availableSkillSet
