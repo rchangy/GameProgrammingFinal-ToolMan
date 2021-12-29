@@ -36,18 +36,19 @@ namespace ToolMan.Combat.Skills
             if (_deformingTime == 0) _deformingTime = 1;
             Vector3 deform = new Vector3(0, (targetTrans.localScale.y - targetYScale) / _deformingTime, 0);
             //Debug.Log(targetYScale + " " + deform);
-            while(targetTrans.localScale.y >= targetYScale)
+            while(targetTrans != null && targetTrans.localScale.y >= targetYScale)
             {
                 targetTrans.localScale -= deform * Time.deltaTime;
                 yield return null;
             }
 
-            while (targetTrans.localScale.y <= originalScale.y)
+            while (targetTrans != null && targetTrans.localScale.y <= originalScale.y)
             {
                 targetTrans.localScale += deform * Time.deltaTime;
                 yield return null;
             }
-            targetTrans.localScale = originalScale;
+            if (targetTrans != null)
+                targetTrans.localScale = originalScale;
         }
     }
 }

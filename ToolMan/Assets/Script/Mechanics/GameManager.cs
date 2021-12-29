@@ -9,11 +9,19 @@ public class GameManager : MonoBehaviour
     private string _currentScene;
     [SerializeField] private GameObject Objectives;
     private List<Objective> _objectives;
+    public bool reset = true;
+    private void Awake()
+    {
+        if (reset)
+        {
+            CheckpointManager.resetLevel();
+        }
+    }
 
     void Start()
     {
         //_currentScene = SceneManager.GetActiveScene().name;
-        if(Objectives != null)
+        if (Objectives != null)
         {
             _objectives = Objectives.GetComponentsInChildren<Objective>().ToList();
         }

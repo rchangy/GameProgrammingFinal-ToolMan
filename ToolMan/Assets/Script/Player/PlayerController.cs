@@ -13,9 +13,9 @@ public partial class PlayerController : ToolableMan
     private KeyboardInputController keyboardInputController;
 
     // ==== Player Status ====
+    public bool controlEnable;
     public int playerNum = 1; // player 1 or player 2
     [SerializeField] private bool isDead = false;
-    private bool winOrLose = false;
 
     [SerializeField] private bool changeable = false;
     [SerializeField] private LayerMask playerLayerMask;
@@ -101,7 +101,7 @@ public partial class PlayerController : ToolableMan
 
     override protected void Update()
     {
-        if (winOrLose || isDead)
+        if (!controlEnable)
         {
             return;
         }
@@ -178,7 +178,7 @@ public partial class PlayerController : ToolableMan
 
     private void FixedUpdate()
     {
-        if (winOrLose || isDead)
+        if (!controlEnable)
         {
             return;
         }
@@ -268,6 +268,10 @@ public partial class PlayerController : ToolableMan
         {
             skinRenderer.material = playerMaterial;
         }
+    }
+    public void UnlockTool(int toolNum)
+    {
+        toolListUI.UnLockTool(toolNum);
     }
     // ==== getters ====
 }

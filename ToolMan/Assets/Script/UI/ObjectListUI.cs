@@ -6,6 +6,7 @@ public class ObjectListUI : MonoBehaviour
 {
     // image will be shown, and the sprites in images can be changed
     private int MaxImageNum;
+    private int UnlockImageNum;
     public int CurrentActiveImageNum;
     public Image[] Images;
     public string[] Keys;
@@ -13,9 +14,6 @@ public class ObjectListUI : MonoBehaviour
 
     public int currentIdx;
     private bool[] chosenImages;
-    //public string NextButton = "Next1";
-    //public string PreviousButton = "Prev1";
-    //public string ChooseButton = "Choose1";
 
     public int unchoose = -1;
 
@@ -49,25 +47,12 @@ public class ObjectListUI : MonoBehaviour
         // unchoose every image and point to the first image
         chosenImages = new bool[MaxImageNum];
         ResetChoices();
-        SetSprites(new List<string>(Keys));
+        //SetSprites(new List<string>(Keys));
+        SetSprites(true);
     }
 
     private void Update()
     {
-        //if (Input.GetButtonDown(NextButton))
-        //{
-        //    Next();
-        //}
-        //else if (Input.GetButtonDown(PreviousButton))
-        //{
-        //    Previous();
-        //}
-        //else if (Input.GetButtonDown(ChooseButton))
-        //{
-            
-        //    if (chosenImages[currentIdx]) Unchoose();
-        //    else Choose();
-        //}
         if(unchoose != -1)
         {
             UnchooseByIdx(unchoose);
@@ -75,13 +60,20 @@ public class ObjectListUI : MonoBehaviour
         }
     }
 
-
-    public void SetSprites(List<string> keys)
+    public void UnLockTool(int toolNum)
     {
+        UnlockImageNum = toolNum;
+        SetSprites(false);
+    }
+
+
+    public void SetSprites(bool reset)
+    {
+        List<string> keys = new List<string>(Keys);
         if (keys.Count > MaxImageNum) Debug.Log("Too much sprites, only " + MaxImageNum + "will be shown.");
-        CurrentActiveImageNum = Mathf.Min(keys.Count, MaxImageNum);
+        CurrentActiveImageNum = Mathf.Min(keys.Count, UnlockImageNum);
         int i = 0, j = 0;
-        for(i = 0, j = 0; i < MaxImageNum && j < keys.Count; i++, j++)
+        for(i = 0, j = 0; i < UnlockImageNum && j < keys.Count; i++, j++)
         {
             if (spriteMap.ContainsKey(keys[j]))
             {
@@ -99,7 +91,8 @@ public class ObjectListUI : MonoBehaviour
         {
             Images[i].enabled = false;
         }
-        ResetChoices();
+        if (reset)
+            ResetChoices();
     }
 
     // unchoose every image and point to the first image
