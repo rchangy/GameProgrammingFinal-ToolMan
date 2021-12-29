@@ -55,6 +55,7 @@ public partial class PlayerController
     public void Die()
     {
         isDead = true;
+        controlEnable = false;
         if (isTool)
         {
             if (anotherPlayer.IsGrabbing())
@@ -82,10 +83,10 @@ public partial class PlayerController
             ToolableManTransform();
         animator.SetTrigger("startSpinning");
         animator.SetBool("isSpinning", true);
-        winOrLose = true;
+        controlEnable = false;
     }
     public void Lose()
     {
-        winOrLose = true;
+        controlEnable = false;
     }
 }

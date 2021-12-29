@@ -14,7 +14,6 @@ namespace ToolMan.Combat
             get => _model;
         }
         [SerializeField] private Transform Player1Cam, Player2Cam;
-        [SerializeField] bool enableEnemyWaves;
 
         private List<PlayerController> players = new List<PlayerController>();
         private GameObject[] enemies;
@@ -28,19 +27,22 @@ namespace ToolMan.Combat
             Model.ComboSkills.Load();
         }
 
-        //private void Start()
-        //{
-        //    if (!enableEnemyWaves)
-        //        return;
-        //    GameObject[] playerGameObjects;
-        //    playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
-        //    foreach (var playerGameObject in playerGameObjects)
-        //    {
-        //        players.Add(playerGameObject.GetComponent<PlayerController>());
-        //    }
+        private void Start()
+        {
+            GameObject[] playerGameObjects;
+            playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var playerGameObject in playerGameObjects)
+            {
+                players.Add(playerGameObject.GetComponent<PlayerController>());
+            }
+            UnLockTool();
+        }
 
-        //    newEnemyWave(1);
-        //}
+        public void UnLockTool()
+        {
+            players[0].UnlockTool(CheckpointManager.LoadCheckpoint().player1ToolNum);
+            players[1].UnlockTool(CheckpointManager.LoadCheckpoint().player2ToolNum);
+        }
 
         //private void Update()
         //{
@@ -166,7 +168,7 @@ namespace ToolMan.Combat
             // wait for 10 seconds
             yield return new WaitForSeconds(10);
             // Reload this Scene
-            SceneManager.LoadScene("Level_" + System.Convert.ToString(GameStatus.level));
+            //SceneManager.LoadScene("Level_" + System.Convert.ToString(GameStatus.level));
         }
         private IEnumerator Win()
         {
@@ -178,9 +180,9 @@ namespace ToolMan.Combat
             // Animation?
             // wait for 10 seconds
             yield return new WaitForSeconds(10);
-            GameStatus.level += 1;
+            //GameStatus.level += 1;
             // Load Next Scene
-            SceneManager.LoadScene("Level_" + System.Convert.ToString(GameStatus.level));
+            //SceneManager.LoadScene("Level_" + System.Convert.ToString(GameStatus.level));
         }
     }
 }
