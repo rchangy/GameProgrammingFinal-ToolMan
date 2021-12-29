@@ -336,7 +336,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void SetDest(Vector3 dest)
+    protected virtual void SetDest(Vector3 dest)
     {
         //_dest = new Vector3(dest.x, transform.position.y, dest.z);
         if (Physics.Raycast(dest, -transform.up, 10f, GroundMask))

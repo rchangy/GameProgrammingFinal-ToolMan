@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1444638899229730, guid: 18ed84bba105fb0419e3b2b89496b375, type: 3}
       propertyPath: m_Name
-      value: ShieldWithoutMat
+      value: TurtleShield
       objectReference: {fileID: 0}
     - target: {fileID: 4233494580616524, guid: 18ed84bba105fb0419e3b2b89496b375, type: 3}
       propertyPath: m_RootOrder
@@ -17,15 +17,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233494580616524, guid: 18ed84bba105fb0419e3b2b89496b375, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4233494580616524, guid: 18ed84bba105fb0419e3b2b89496b375, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4233494580616524, guid: 18ed84bba105fb0419e3b2b89496b375, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4233494580616524, guid: 18ed84bba105fb0419e3b2b89496b375, type: 3}
       propertyPath: m_LocalPosition.x
@@ -69,12 +69,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 23268880034199270, guid: 18ed84bba105fb0419e3b2b89496b375, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 23268880034199270, guid: 18ed84bba105fb0419e3b2b89496b375, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e9ded56fd9bca47e799a8ac7f264c0e4, type: 2}
+      objectReference: {fileID: 2100000, guid: 0a336c9df0f284791b0756b20c2ed259, type: 2}
     - target: {fileID: 135900357308531450, guid: 18ed84bba105fb0419e3b2b89496b375, type: 3}
       propertyPath: m_Radius
       value: 0.5
@@ -112,12 +112,13 @@ MonoBehaviour:
   AtkBaseValue: 1
   DefBaseValue: 5
   StrBaseValue: 1
+  SpdBaseValue: 1
   AttackEnableBaseValue: 1
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
+  healthBar2: {fileID: 0}
   _collisionTag: []
-  _buff: {fileID: 11400000, guid: dce6c975dc2e84f198dc9fb6df19f7af, type: 2}
 --- !u!114 &4818527044502034828
 MonoBehaviour:
   m_ObjectHideFlags: 0

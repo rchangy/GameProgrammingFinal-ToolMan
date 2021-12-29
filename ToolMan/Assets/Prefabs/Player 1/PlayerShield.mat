@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SlimeRabbitShield
+  m_Name: PlayerShield
   m_Shader: {fileID: 4800000, guid: ba8e2ab68bbc368409f4ce9567679df7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -74,7 +74,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity: 0.5
+    - _Opacity: 0.15
     - _Parallax: 0.02
     - _ShieldPatternPower: 5
     - _ShieldRimPower: 7
@@ -88,5 +88,5 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HitColor: {r: 1, g: 1, b: 1, a: 1}
     - _HitPosition: {r: 0, g: 0, b: 0, a: 0}
-    - _ShieldPatternColor: {r: 0.764151, g: 0.75866395, b: 0.47218764, a: 1}
+    - _ShieldPatternColor: {r: 1, g: 0.35294116, b: 0.7664111, a: 1}
   m_BuildTextureStacks: []
