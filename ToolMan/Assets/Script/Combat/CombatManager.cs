@@ -16,10 +16,10 @@ namespace ToolMan.Combat
         [SerializeField] private Transform Player1Cam, Player2Cam;
 
         private List<PlayerController> players = new List<PlayerController>();
-        private GameObject[] enemies;
-        private int currentWaveIdx = 1;
-        private GameObject currentEnemyWave = null;
-        private bool winOrLose = false;
+        //private GameObject[] enemies;
+        //private int currentWaveIdx = 1;
+        //private GameObject currentEnemyWave = null;
+        //private bool winOrLose = false;
 
         private void Awake()
         {
@@ -35,13 +35,21 @@ namespace ToolMan.Combat
             {
                 players.Add(playerGameObject.GetComponent<PlayerController>());
             }
-            UnLockTool();
+            LoadTool();
+        }
+
+        public void LoadTool()
+        {
+            CheckpointManager.LoadCheckpoint();
+            players[0].LoadTool(CheckpointManager.GetCheckpointInfo().player1ToolNum);
+            players[1].LoadTool(CheckpointManager.GetCheckpointInfo().player2ToolNum);
         }
 
         public void UnLockTool()
         {
-            players[0].UnlockTool(CheckpointManager.LoadCheckpoint().player1ToolNum);
-            players[1].UnlockTool(CheckpointManager.LoadCheckpoint().player2ToolNum);
+            // set camera to look at bearMan's face
+            players[0].UnlockTool(CheckpointManager.GetCheckpointInfo().level, CheckpointManager.GetCheckpointInfo().player1ToolNum);
+            players[1].UnlockTool(CheckpointManager.GetCheckpointInfo().level, CheckpointManager.GetCheckpointInfo().player2ToolNum);
         }
 
         //private void Update()
@@ -160,7 +168,7 @@ namespace ToolMan.Combat
         private IEnumerator GameOver()
         {
             Debug.Log("GameOver :(((");
-            winOrLose = true;
+            //winOrLose = true;
             players[0].Lose();
             players[1].Lose();
 
@@ -173,7 +181,7 @@ namespace ToolMan.Combat
         private IEnumerator Win()
         {
             Debug.Log("Win :)))");
-            winOrLose = true;
+            //winOrLose = true;
             players[0].Win();
             players[1].Win();
 

@@ -10,13 +10,12 @@ public static class CheckpointManager
     static string ckptPath = "Assets/Script/Mechanics/checkpoint.json";
     static int[] player1ToolNums = { 1, 1, 2, 2, 2 };
     static int[] player2ToolNums = { 1, 2, 2, 3, 3 };
-    public static CheckpointInfo LoadCheckpoint()
+    public static void LoadCheckpoint()
     {
         StreamReader r = new StreamReader(ckptPath);
         string jsonString = r.ReadToEnd();
         ckpt = JsonUtility.FromJson<Checkpoint>(jsonString);
         ckptInfo = new CheckpointInfo(ckpt);
-        return ckptInfo;
     }
 
     public static void NextLevel()
@@ -43,9 +42,9 @@ public static class CheckpointManager
     {
         File.WriteAllText(ckptPath, JsonUtility.ToJson(ckpt));
     }
-    public static Checkpoint GetCheckpoint()
+    public static CheckpointInfo GetCheckpointInfo()
     {
-        return ckpt;
+        return ckptInfo;
     }
 
     public class CheckpointInfo
