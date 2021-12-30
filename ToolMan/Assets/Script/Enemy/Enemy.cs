@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     protected int act;
     public float rotateSpeed;
 
-
+    
     public SkillCombat combat;
 
     public Vector3 closestPlayer
@@ -317,8 +317,10 @@ public class Enemy : MonoBehaviour
     //    Gizmos.DrawWireSphere(transform.position, SightRange);
     //}
 
-    protected void ManageMovement()
+    protected virtual void ManageMovement()
     {
+        if (_dest == Vector3.negativeInfinity)
+            return;
         _dest.y = transform.position.y;
         transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * _currentSpeed);
     }

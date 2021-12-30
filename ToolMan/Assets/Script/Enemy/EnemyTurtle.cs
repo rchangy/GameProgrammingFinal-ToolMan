@@ -18,6 +18,8 @@ public class EnemyTurtle : Enemy
 
     [SerializeField] private State state; // For debugging
 
+    private bool _destAvailable = false;
+
     protected override void Start()
     {
         base.Start();
@@ -25,6 +27,7 @@ public class EnemyTurtle : Enemy
         // Get enemy to follow
         SetFollowTarget();
         state = State.Idle;
+        //SetDest(Vector3.negativeInfinity);
     }
 
     private void SetFollowTarget() {
@@ -54,6 +57,7 @@ public class EnemyTurtle : Enemy
 
     protected override void Update()
     {
+        _destAvailable = false;
         // If no follow target, set a new one
         if (followTarget == null || !followTarget.gameObject.activeSelf)
         {
@@ -164,7 +168,7 @@ public class EnemyTurtle : Enemy
     private void Attack() {
         state = State.Attack;
         SetAllAnimationFalse();
-        SetDest(transform.position);
+        _destAvailable = false;
         combat.Attack();
     }
 
@@ -177,7 +181,7 @@ public class EnemyTurtle : Enemy
         {
             //animator.SetBool("Idle", true);
         }
-        SetDest(transform.position);
+        _destAvailable = false;
     }
 
     private void Escape()
@@ -256,13 +260,15 @@ public class EnemyTurtle : Enemy
 
     protected override void ManageLookAt()
     {
+        if (!_destAvailable)
+            return;
+
         _lookatDest = _dest;
         var targetDirection = _lookatDest - transform.position;
-        if (transform.position != _lookatDest)
-        {
-            var newDir = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * rotateSpeed, 0f);
-            transform.rotation = Quaternion.LookRotation(newDir);
-        }
+        
+        var newDir = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * rotateSpeed, 0f);
+        transform.rotation = Quaternion.LookRotation(newDir);
+        Debug.Log("pos = " + transform.position + "dest = " + _dest); 
     }
 
     public Animator GetAnimator() { return animator; }
@@ -271,6 +277,7 @@ public class EnemyTurtle : Enemy
     {
         //Debug.Log("set dest = " + (dest-transform.position));
         //_dest = new Vector3(dest.x, transform.position.y, dest.z);
+        _destAvailable = true;
         if (true)
         {
             //Debug.Log("set dest success = " + (dest-transform.position));
@@ -284,10 +291,21 @@ public class EnemyTurtle : Enemy
         }
     }
 
-    protected void LateUpdate()
+    protected override void ManageMovement()
     {
-        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
+        if (!_destAvailable)
+            return;
+        _dest.y = transform.position.y;
+        transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * _currentSpeed);
     }
+    //protected void LateUpdate()
+    //{
+    //    transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
+    //}
+
+    //protected override void FixedUpdate()
+    //{
+    //}
 
     //protected void OnDrawGizmos()
     //{

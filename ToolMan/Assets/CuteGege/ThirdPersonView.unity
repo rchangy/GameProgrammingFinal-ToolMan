@@ -418,6 +418,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6762914956985902783, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762914956985902783, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
       propertyPath: AttackWeight
       value: 0
       objectReference: {fileID: 0}
@@ -429,6 +433,10 @@ PrefabInstance:
       propertyPath: followTarget
       value: 
       objectReference: {fileID: 1289508206}
+    - target: {fileID: 6762914956985902783, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
+      propertyPath: MaxActionTime
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 136772003800426118, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d85450112cddae34ea7d5aa1c2a252d2, type: 3}
