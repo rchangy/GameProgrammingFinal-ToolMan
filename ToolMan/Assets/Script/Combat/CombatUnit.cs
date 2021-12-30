@@ -87,7 +87,7 @@ namespace ToolMan.Combat
         protected Rigidbody _rb;
         protected float _stopVelTime = 0.5f;
         protected float _timeToStopRb = 0f;
-        private bool _isAddingForce
+        protected bool _isAddingForce
         {
             get => _timeToStopRb > 0f;
         }
@@ -134,7 +134,7 @@ namespace ToolMan.Combat
         {
             if (isDead)
                 return;
-            //Debug.Log(name + " Hp: " + Hp);
+            Debug.Log(name + " Hp: " + Hp);
             if(Hp <= 0)
             {
                 Die();

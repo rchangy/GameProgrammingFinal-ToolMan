@@ -9,6 +9,8 @@ public abstract class Objective : MonoBehaviour
 
     protected bool _startup = false;
 
+    private bool _inputEnable; // player control & UI
+    
     public bool Startup
     {
         get => _startup;
@@ -17,7 +19,7 @@ public abstract class Objective : MonoBehaviour
     private void Awake()
     {
         _manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-
+        _inputEnable = false;
     }
 
     protected void Start()

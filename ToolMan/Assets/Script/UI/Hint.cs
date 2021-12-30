@@ -1,28 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 namespace ToolMan.UI
 {
-    [CreateAssetMenu(menuName = "ToolMan/UI/Hint")]
     public class Hint : MonoBehaviour
     {
-        public TextMeshProUGUI _title;
+        public string _title;
         public Image _image;
-        public TextMeshProUGUI _content;
-
-        // Start is called before the first frame update
-        void Start()
+        public string _content;
+        public bool locked
         {
-
+            get => _locked;
+        }
+        public int order {
+            get => _order;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
+        [SerializeField]
+        private bool _locked;
+        [SerializeField]
+        private int _order;
 
-        }
+        public void Unlock() { _locked = false; }
     }
 }
