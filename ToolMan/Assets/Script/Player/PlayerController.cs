@@ -184,7 +184,11 @@ public partial class PlayerController : ToolableMan
             return;
         }
         transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
-        transform.position += vertical * transform.forward * speed * Time.deltaTime;
+
+        RaycastHit m_Hit;
+        float moveDis = vertical * speed * Time.deltaTime;
+        if (!Physics.BoxCast(playerCollider.bounds.center, transform.localScale/2, transform.forward, out m_Hit, transform.rotation, moveDis))
+            transform.position += moveDis * transform.forward;
         if (!isTool && confJ!= null)
         {
             confJ.anchor = rightHand.transform.localPosition;
