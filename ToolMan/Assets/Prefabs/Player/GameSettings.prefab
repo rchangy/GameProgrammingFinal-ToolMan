@@ -48,7 +48,6 @@ MonoBehaviour:
   slowTimeScale: 0.02
   cam1: {fileID: 2423348877150704494}
   cam2: {fileID: 2423348875866744197}
-  cam: {fileID: 0}
   shakeRange: 0.2
   shakeSpan: 0.05
   shakeFreq: 0.01
@@ -3458,6 +3457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Objectives: {fileID: 0}
+  reset: 0
 --- !u!1 &2423348875866744203
 GameObject:
   m_ObjectHideFlags: 0
@@ -97353,7 +97353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4013010518878422155}
   m_LocalRotation: {x: -0, y: -0.6427876, z: -0, w: 0.7660445}
-  m_LocalPosition: {x: -0.16, y: 1.8790002, z: -6.24}
+  m_LocalPosition: {x: -4.8, y: 2.63, z: -17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6914996547388897378}
@@ -97431,6 +97431,7 @@ MonoBehaviour:
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
+  controlEnable: 1
   playerNum: 1
   isDead: 0
   changeable: 0
@@ -99237,7 +99238,6 @@ MonoBehaviour:
     _comboSkillSet: {fileID: 11400000, guid: f8aee079b24854b35b46c4d9b1f5852d, type: 2}
   Player1Cam: {fileID: 2423348877150704493}
   Player2Cam: {fileID: 2423348875866744196}
-  enableEnemyWaves: 0
 --- !u!1 &6533346770882946799
 GameObject:
   m_ObjectHideFlags: 0
@@ -124128,7 +124128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8057681411268755893}
   m_LocalRotation: {x: -0, y: -0.6427876, z: -0, w: 0.7660445}
-  m_LocalPosition: {x: 2.16, y: 1.98, z: -2.67}
+  m_LocalPosition: {x: 3.16, y: 1.98, z: -11.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 546257149374512476}
@@ -124207,6 +124207,7 @@ MonoBehaviour:
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
+  controlEnable: 1
   playerNum: 2
   isDead: 0
   changeable: 0
