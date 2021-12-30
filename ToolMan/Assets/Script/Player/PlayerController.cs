@@ -21,7 +21,8 @@ public partial class PlayerController : ToolableMan
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private LayerMask groundLayerMask;
 
-    float horizontal, vertical;
+    private float horizontal, vertical;
+    private int unlockedToolNum;
     // ==== Player Status ====
 
     // ==== Components ====
@@ -178,7 +179,7 @@ public partial class PlayerController : ToolableMan
 
     private void FixedUpdate()
     {
-        if (!controlEnable)
+        if (isDead)
         {
             return;
         }
@@ -269,9 +270,30 @@ public partial class PlayerController : ToolableMan
             skinRenderer.material = playerMaterial;
         }
     }
-    public void UnlockTool(int toolNum)
+    public void LoadTool(int toolNum)
     {
-        toolListUI.UnLockTool(toolNum);
+        unlockedToolNum = toolNum;
+        toolListUI.LoadTool(toolNum);
+    }
+    public void UnlockTool(int level, int toolNum)
+    {
+        if (toolNum > unlockedToolNum)
+        {
+            unlockedToolNum = toolNum;
+            AnimationUnlock(level);
+        }
+    }
+    public void ResetToIdle()
+    {
+        controlEnable = false;
+        if (isTool && IsGrabbed())
+        {
+            anotherPlayer.Release();
+        }
+        if (isTool)
+        {
+            ToolableManTransform();
+        }
     }
     // ==== getters ====
 }

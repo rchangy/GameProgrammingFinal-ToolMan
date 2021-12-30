@@ -57,4 +57,9 @@ public partial class PlayerController
         animator.SetBool("isGrabbing", false);
         animator.SetBool("isGrabbing" + toolName, false);
     }
+    public void AnimationUnlock(int level)
+    {
+        animator.SetTrigger("unlock");
+        animator.SetInteger("unlockIdx", level);
+    }
 }

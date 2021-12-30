@@ -1521,6 +1521,7 @@ MonoBehaviour:
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
+  controlEnable: 0
   playerNum: 1
   isDead: 0
   changeable: 0
@@ -3755,11 +3756,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0f00cf61a6cd4da39a7e2e6e6b9519c, type: 3}
---- !u!4 &375704037 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5341020880601247987, guid: e0f00cf61a6cd4da39a7e2e6e6b9519c, type: 3}
-  m_PrefabInstance: {fileID: 5341020880770873622}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7325184945517398628 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3438312312540246898, guid: e0f00cf61a6cd4da39a7e2e6e6b9519c, type: 3}
@@ -3771,3 +3767,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334801ae0ef804c2b9140f5e3dce1005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &375704037 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5341020880601247987, guid: e0f00cf61a6cd4da39a7e2e6e6b9519c, type: 3}
+  m_PrefabInstance: {fileID: 5341020880770873622}
+  m_PrefabAsset: {fileID: 0}

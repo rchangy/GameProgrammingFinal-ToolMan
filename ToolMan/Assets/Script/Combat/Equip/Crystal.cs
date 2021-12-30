@@ -11,6 +11,12 @@ namespace ToolMan.Combat.Equip
         [SerializeField] private int crystalType = 0;
         private PlayerController hitBy = null;
         private int hitCount = 0;
+        private RetrieveMemory RM;
+
+        public void setObjective(RetrieveMemory RM)
+        {
+            this.RM = RM;
+        }
 
         public override bool Attack()
         {
@@ -19,11 +25,14 @@ namespace ToolMan.Combat.Equip
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
+            if (this.gameObject == null)
+                return 0;
             if (hitBy != null)
             {
                 if (hitBy.inToolState() && hitBy.getTool().getName().Equals("Pickaxe"))
                 {
                     hitCount += 1;
+                    gameObject.GetComponent<Animator>().SetTrigger("hit");
                 }
             }
             if (hitCount >= 2)
@@ -43,14 +52,10 @@ namespace ToolMan.Combat.Equip
             }
             if (hitBy != null && crystalType == 1)
             {
-                CheckpointManager.NextLevel();
-                GameObject cmObject = GameObject.Find("CombatManager");
-                if (cmObject != null)
-                {
-                    cmObject.GetComponent<CombatManager>().UnLockTool();
-                }
+                RM.CrystalDie();
             }
             Destroy(gameObject);
+            
         }
         private void OnTriggerEnter(Collider other)
         {
