@@ -34,6 +34,7 @@ public class RetrieveMemory : Objective
         {
             players.Add(playerGameObject.GetComponent<PlayerController>());
         }
+        players.Sort((x, y) => { return x.playerNum.CompareTo(y.playerNum); });
 
     }
     public override bool isCompleted()

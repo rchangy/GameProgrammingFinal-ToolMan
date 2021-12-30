@@ -35,6 +35,7 @@ namespace ToolMan.Combat
             {
                 players.Add(playerGameObject.GetComponent<PlayerController>());
             }
+            players.Sort((x, y) => { return x.playerNum.CompareTo(y.playerNum); });
             LoadTool();
         }
 
