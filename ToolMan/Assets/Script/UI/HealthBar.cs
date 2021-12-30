@@ -21,7 +21,7 @@ public class HealthBar : MonoBehaviour
     {
         if (isSet)
         {
-            if(_hp.Value != _lastHealth)
+            if (_hp.Value != _lastHealth)
             {
                 _barSprite.fillAmount = (float)_hp.Value / (float)_hp.MaxValue;
                 _lastHealth = _hp.Value;
@@ -37,7 +37,7 @@ public class HealthBar : MonoBehaviour
         }
         _barSprite.enabled = true;
         _hp = hp;
-        _lastHealth = _hp.Value;
+        _lastHealth = _hp.MaxValue;
         isSet = true;
     }
 }

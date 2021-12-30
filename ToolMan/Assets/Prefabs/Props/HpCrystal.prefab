@@ -430,6 +430,7 @@ GameObject:
   - component: {fileID: 144467908468823537}
   - component: {fileID: 144467908468823538}
   - component: {fileID: 353102814}
+  - component: {fileID: 286708971370950353}
   m_Layer: 12
   m_Name: HpCrystal
   m_TagString: DestroyableProb
@@ -529,6 +530,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!95 &286708971370950353
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145761822874367211}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f245920688f93d4faef6319537d7641, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &145782707133774111
 GameObject:
   m_ObjectHideFlags: 0
