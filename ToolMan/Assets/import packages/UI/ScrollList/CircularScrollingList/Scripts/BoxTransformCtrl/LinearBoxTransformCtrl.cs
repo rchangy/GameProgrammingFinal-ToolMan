@@ -120,6 +120,7 @@ namespace AirFishLab.ScrollingList.BoxTransformCtrl
                 _getLocalPosition(majorPosition, passivePosition, localPosition.z);
             boxTransform.localScale =
                 new Vector3(scaleValue, scaleValue, localScale.z);
+            Debug.Log("box = " + boxTransform.gameObject.name + " localPos = " + boxTransform.localPosition);
         }
 
         public void SetLocalTransform(

@@ -74,6 +74,7 @@ namespace AirFishLab.ScrollingList
             InitializeBoxDependency();
             InitializeContent();
             AddClickEvent();
+            //Debug.Log("box = " + gameObject.name + " id = " + listBoxID);
         }
 
         /// <summary>
