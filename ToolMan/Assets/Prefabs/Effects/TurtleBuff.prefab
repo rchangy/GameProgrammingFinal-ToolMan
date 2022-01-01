@@ -14026,6 +14026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400006}
   - component: {fileID: 114000011771506654}
+  - component: {fileID: 7771481232871642017}
   m_Layer: 0
   m_Name: TurtleBuff
   m_TagString: Untagged
@@ -14062,3 +14063,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db08735561a38424182823d8d175333b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7771481232871642017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16ffad4fcede4ff4a42eeb32d57f6c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 100006}
+  offset: {x: 0, y: 0, z: 0}

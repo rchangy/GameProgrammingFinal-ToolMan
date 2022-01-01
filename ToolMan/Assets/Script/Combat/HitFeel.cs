@@ -26,14 +26,30 @@ namespace ToolMan.Combat
 
         public void MakeCamShake(float mul, PlayerController p)
         {
-            if (!shaking)
+            Camera cam = (p.playerNum == 1)? cam1 : cam2;
+            if (shaking)
             {
-                Camera cam = (p.playerNum == 1)? cam1 : cam2;
-                _mul = mul;
-                shaking = true;
-                StartCoroutine(CamShake(cam));
-                shaking = false;
+                ResetCam(cam);
             }
+            _mul = mul;
+            shaking = true;
+            StartCoroutine(CamShake(cam));
+            shaking = false;
+        }
+
+        public void MakeCamShake(float mul)
+        {
+            if (shaking)
+            {
+                ResetCam(cam1);
+                ResetCam(cam2);
+            }
+            
+            _mul = mul;
+            shaking = true;
+            StartCoroutine(CamShake(cam1));
+            StartCoroutine(CamShake(cam2));
+            shaking = false;
         }
 
         public void MakeTimeStop()
@@ -91,6 +107,12 @@ namespace ToolMan.Combat
 
             if(shaked)
                 cam.transform.localPosition = CameraManager.CamLocalPos;
+        }
+
+        private void ResetCam(Camera cam)
+        {
+            cam.transform.localPosition = CameraManager.CamLocalPos;
+            
         }
     }
 }

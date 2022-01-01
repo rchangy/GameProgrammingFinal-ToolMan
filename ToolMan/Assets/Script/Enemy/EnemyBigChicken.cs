@@ -168,6 +168,11 @@ public class EnemyBigChicken : Enemy
         animator.SetBool("TurnHead", false);
     }
 
+    protected override void Hurt()
+    {
+        animator.SetTrigger("Hurt");
+    }
+
     //private void GoToPoint(Vector3 point)
     //{
     //    //Debug.Log("mode point: " + point);

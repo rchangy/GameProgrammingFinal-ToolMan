@@ -20,24 +20,6 @@ namespace ToolMan.Combat.Equip
 
         Dictionary<CombatUnit, ContactPoint[]> _contactPoints = new Dictionary<CombatUnit, ContactPoint[]>();
 
-        //protected override void Awake()
-        //{
-        //    manager = GameObject.FindGameObjectWithTag("CombatManager").GetComponent<CombatManager>();
-        //    damageCalculator = manager.Model.DmgCalculator;
-        //    _stats = GetComponent<CharacterStats>();
-        //    _atk = _stats.AddStat(new Stat("ATK", AtkBaseValue));
-        //    _aspd = _stats.AddStat(new Stat("ASPD", 1));
-        //    _def = _stats.AddStat(new Stat("DEF", DefBaseValue));
-        //    _str = _stats.AddStat(new Stat("STR", StrBaseValue));
-        //    _spd = _stats.AddStat(new Stat("SPD", SpdBaseValue));
-
-        //    _hp = _stats.AddResource(new Resource("HP", HpMaxValue, HpInitValue));
-
-        //    _attackEnabled = _stats.AddAbility(new Ability("AttackEnabled", AttackEnableBaseValue));
-        //    _movable = _stats.AddAbility(new Ability("Movable", MovableBaseValue));
-        //    _vulnerable = _stats.AddAbility(new Ability("Vulnerable", VulnerableBaseValue));
-        //}
-
         protected override void Start()
         {
             base.Start();
@@ -107,7 +89,6 @@ namespace ToolMan.Combat.Equip
             _target.RemoveDisable("Vulnerable");
             Destroy(gameObject);
         }
-
     }
 }
 

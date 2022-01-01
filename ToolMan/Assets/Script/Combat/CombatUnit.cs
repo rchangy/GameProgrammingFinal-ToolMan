@@ -11,6 +11,8 @@ namespace ToolMan.Combat
     [RequireComponent(typeof(CharacterStats))]
     public abstract class CombatUnit : MonoBehaviour
     {
+        public Explosion SlowedDownEffect;
+
         public int HpMaxValue = 1;
         public int HpInitValue = 1;
 
@@ -76,6 +78,10 @@ namespace ToolMan.Combat
 
         protected DamageCalculator damageCalculator;
         protected CombatManager manager;
+        public CombatManager Manager
+        {
+            get => manager;
+        }
 
         // healthBar
         protected int _lastHpValue;
@@ -87,13 +93,15 @@ namespace ToolMan.Combat
         protected Rigidbody _rb;
         protected float _stopVelTime = 0.5f;
         protected float _timeToStopRb = 0f;
-        private bool _isAddingForce
+        protected bool _isAddingForce
         {
             get => _timeToStopRb > 0f;
         }
 
 
         public Action DeadActions;
+        public Action HurtActions;
+
 
         protected virtual void Awake()
         {
@@ -113,7 +121,8 @@ namespace ToolMan.Combat
             _vulnerable = _stats.AddAbility(new Ability("Vulnerable", VulnerableBaseValue));
 
             _rb = gameObject.GetComponent<Rigidbody>();
-            _rb.angularDrag = 100;
+            if(_rb != null)
+                _rb.angularDrag = 100;
         }
 
         protected virtual void Start()
@@ -134,7 +143,7 @@ namespace ToolMan.Combat
         {
             if (isDead)
                 return;
-            //Debug.Log(name + " Hp: " + Hp);
+            Debug.Log(name + " Hp: " + Hp);
             if(Hp <= 0)
             {
                 Die();
@@ -148,6 +157,20 @@ namespace ToolMan.Combat
                     _rb.drag = 0;
                     if(!Movable)
                         _movable.RemoveDisability();
+                }
+            }
+            if(SlowedDownEffect != null)
+            {
+                
+                if(Spd < GetStatBaseValue("SPD"))
+                {
+                    if(!SlowedDownEffect.isPlaying)
+                        SlowedDownEffect.PlayEffect();
+                }
+                else
+                {
+                    if(SlowedDownEffect.isPlaying)
+                        SlowedDownEffect.StopEffect();
                 }
             }
         }
@@ -173,6 +196,7 @@ namespace ToolMan.Combat
 
         protected virtual void Interrupted(CombatUnit damager)
         {
+            HurtActions.Invoke();
             var dir = transform.position - damager.transform.position;
             dir.y = 0f;
             dir = Vector3.Normalize(dir);
@@ -187,6 +211,8 @@ namespace ToolMan.Combat
         {
             DeadActions.Invoke();
         }
+
+        
 
         public void AddBuff(ScriptableBuff buff)
         {

@@ -15,10 +15,9 @@ public class EnemyTurtle : Enemy
     // ==== Follow other enemies ====
 
     [SerializeField] private bool _escaping = false;
-
     [SerializeField] private State state; // For debugging
-
     private bool _destAvailable = false;
+    [SerializeReference] private EffectController effectController;
 
     protected override void Start()
     {
@@ -27,7 +26,6 @@ public class EnemyTurtle : Enemy
         // Get enemy to follow
         SetFollowTarget();
         state = State.Idle;
-        //SetDest(Vector3.negativeInfinity);
     }
 
     private void SetFollowTarget() {
@@ -298,18 +296,6 @@ public class EnemyTurtle : Enemy
         _dest.y = transform.position.y;
         transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * _currentSpeed);
     }
-    //protected void LateUpdate()
-    //{
-    //    transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
-    //}
 
-    //protected override void FixedUpdate()
-    //{
-    //}
-
-    //protected void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawLine(_dest, _dest-10*Vector3.up);
-    //}
+    public EffectController GetEffectController() { return effectController; }
 }

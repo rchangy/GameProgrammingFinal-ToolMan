@@ -21,13 +21,15 @@ namespace ToolMan.Combat.Skills.Normal
             combat.gameObject.GetComponent<EnemyTurtle>().GetAnimator().SetTrigger("Eat");
 
             // Effect
+            Effect e = combat.gameObject.GetComponent<EnemyTurtle>().GetEffectController().effectList.Find(e => e.name == "TurtleBuff");
+            e.PlayEffect();
 
             collisionEnable.Value = true;
             yield return new WaitForSeconds(_lastingTime);
 
             collisionEnable.Value = false;
             // Stop Effect
-
+            e.StopEffect();
 
             yield return null;
         }

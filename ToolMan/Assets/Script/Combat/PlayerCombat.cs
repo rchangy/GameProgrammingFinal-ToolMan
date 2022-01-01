@@ -41,6 +41,14 @@ namespace ToolMan.Combat
             get => hitFeel;
         }
 
+        [SerializeField] private float _hitFeelCd;
+        private float _hitFeelCoolingTime;
+        private bool _hitFeelCooling
+        {
+            get => _hitFeelCoolingTime > 0;
+        }
+
+
         private PlayerSkillSet _availablePlayerSkillSet;
 
         [SerializeField]
@@ -70,6 +78,8 @@ namespace ToolMan.Combat
 
             comboSkillSet = manager.Model.ComboSkills;
         }
+
+        
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
@@ -158,7 +168,11 @@ namespace ToolMan.Combat
 
             if (skill.UsingHitFeel)
             {
-                hitFeel.MakeTimeStop();
+                if (!_hitFeelCooling)
+                {
+                    //hitFeel.MakeTimeStop();
+                    _hitFeelCoolingTime = _hitFeelCd;
+                }
                 hitFeel.MakeCamShake(skill.HitFeelMul, _playerController);
                 TeamMateCombat.hitFeel.MakeCamShake(skill.HitFeelMul, _teamMate._playerController);
             }
@@ -207,6 +221,10 @@ namespace ToolMan.Combat
             if (impactEffectRemain <= 0){
                 impactEffectRemain = impactEffectCd;
                 playingImpactEffect = false;
+            }
+            if (_hitFeelCooling)
+            {
+                _hitFeelCoolingTime -= Time.deltaTime;
             }
         }
     }

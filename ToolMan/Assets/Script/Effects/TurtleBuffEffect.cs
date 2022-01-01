@@ -2,13 +2,31 @@ using UnityEngine;
 
 public class TurtleBuffEffect : Effect
 {
-    public override void PlayEffect() {
-        effect.GetComponent<ParticleSystem>().Play();
+    ParticleSystem[] _partList;
+
+    public override void PlayEffect()
+    {
+        if (_partList == null || _partList.Length == 0)
+        {
+            _partList = transform.GetComponentsInChildren<ParticleSystem>();
+        }
+        if (_partList == null) return;
+        foreach (ParticleSystem child in _partList)
+        {
+            child.Play();
+        }
     }
 
     public override void StopEffect()
     {
-        effect.GetComponent<ParticleSystem>().Stop();
+        if (_partList == null || _partList.Length == 0)
+        {
+            _partList = transform.GetComponentsInChildren<ParticleSystem>();
+        }
+        if (_partList == null) return;
+        foreach (ParticleSystem child in _partList)
+        {
+            child.Stop();
+        }
     }
-
 }

@@ -8,6 +8,9 @@ namespace ToolMan.Combat.Skills.Normal
     {
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
+            // add str
+            // animation
+            
             yield return null;
         }
     }

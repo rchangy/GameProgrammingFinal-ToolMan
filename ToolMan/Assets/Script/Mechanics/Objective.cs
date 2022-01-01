@@ -9,15 +9,25 @@ public abstract class Objective : MonoBehaviour
 
     protected bool _startup = false;
 
+    private bool _inputEnable; // player control & UI
+
+    protected UIController _uIController;
+
     public bool Startup
     {
         get => _startup;
     }
 
+    public UIController uIController
+    {
+        get => _uIController;
+        set { _uIController = value; }
+    }
+
     private void Awake()
     {
         _manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-
+        _inputEnable = false;
     }
 
     protected void Start()

@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 714ea524dc3fe4ae7afeb94f35062c73, type: 3}
-  m_Name: DogKnightIai
+  m_Script: {fileID: 11500000, guid: 83674a1030cfa4d93ac35a9ad4ebb587, type: 3}
+  m_Name: ShockWave
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
+  attackDelay: 0.25
   RefractoryPeriod: 0
   Cd: 5
-  ChargingTime: 2
-  _rushSpeed: 200
-  _attackRange: 0.8
+  _shockWavePrefab: {fileID: 2020226042885281433, guid: b9ca7101314f042caa2d41af0338aa7c, type: 3}
+  _instantiateOffset: {x: 0, y: -2.5, z: 0}

@@ -6,8 +6,13 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
+
     private EnemyWaveController _wave;
     [SerializeField] protected Animator animator;
+    public Animator Anim
+    {
+        get => animator;
+    }
 
     protected Transform[] Players;
     protected PlayerController[] playerControllers;
@@ -43,6 +48,7 @@ public class Enemy : MonoBehaviour
 
     
     public SkillCombat combat;
+    public Rigidbody Rb;
 
     public Vector3 closestPlayer
     {
@@ -95,10 +101,9 @@ public class Enemy : MonoBehaviour
 
     protected bool PlayerInAttackRange;
 
-    // state & attributes (suppressed by what)
-    // health bar https://www.youtube.com/watch?v=37hEX3Lrc0A
     protected virtual void Awake()
     {
+        Rb = gameObject.GetComponent<Rigidbody>();
         weight = new int[] { AttackWeight, PatrolWeight, IdleWeight };
         isAction = false;
     }
@@ -139,6 +144,7 @@ public class Enemy : MonoBehaviour
         }
 
         combat.DeadActions += Die;
+        combat.HurtActions += Hurt;
     }
 
     protected virtual void Update()
@@ -153,9 +159,8 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
-        if (!combat.Movable)
+        if (!combat.Movable || combat.Attacking)
         {
-            SetAllAnimationFalse();
             _currentSpeedMul = 1;
             return;
         }
@@ -284,6 +289,24 @@ public class Enemy : MonoBehaviour
         return target;
     }
 
+    public Transform GetRealClosestplayer()
+    {
+        Transform target = null;
+        float minDist = float.MaxValue;
+
+        for (int i = 0; i < Players.Length; i++)
+        {
+            if (Players[i] == null) continue;
+            float dist = Vector3.Distance(transform.position, Players[i].position);
+            if (dist < minDist)
+            {
+                target = Players[i];
+                minDist = dist;
+            }
+        }
+        return target;
+    }
+
 
     protected int GetRandType(int[] weight)
     {
@@ -309,6 +332,10 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    protected virtual void Hurt()
+    {
+        
+    }
     //protected void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.red;

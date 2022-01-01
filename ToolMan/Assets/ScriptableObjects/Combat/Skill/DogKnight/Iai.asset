@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eefccdc53b1943d1aac965aa03fd023, type: 3}
-  m_Name: DogKnightNormalAttack
+  m_Script: {fileID: 11500000, guid: 714ea524dc3fe4ae7afeb94f35062c73, type: 3}
+  m_Name: Iai
   m_EditorClassIdentifier: 
-  attackDelay: 0
+  attackDelay: 0.35
   RefractoryPeriod: 0
-  Cd: 0
-  AttackPointOffset: {x: 0, y: 0, z: 0}
-  AttackRange: 0
-  AtkMul: 0
+  Cd: 5
+  ChargingTime: 2
+  _rushSpeed: 200
+  DizzyTime: 5
+  NotifyTime: 0.5
+  _attackRange: 3

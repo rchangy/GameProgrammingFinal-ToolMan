@@ -18,6 +18,7 @@ namespace ToolMan.Combat.Stats
         {
             MaxValue = maxValue;
             _currentValue = initValue;
+            InitValue = initValue;
             _resourceName = name;
             CheckCurrentValue();
         }
@@ -31,6 +32,7 @@ namespace ToolMan.Combat.Stats
 
         public void Reset()
         {
+            Debug.Log("shield init = " + InitValue);
             _currentValue = InitValue;
         }
 

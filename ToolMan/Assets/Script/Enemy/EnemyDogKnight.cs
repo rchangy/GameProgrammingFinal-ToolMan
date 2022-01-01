@@ -7,7 +7,9 @@ public class EnemyDogKnight : Enemy
     // skills
     public Transform IaiAttackPoint;
     public Explosion ChargingVfx;
-
+    public Explosion SwordTrailVfx;
+    public Explosion IaiSparkVfx;
+    public Explosion NotifyVfx;
 
     public int LongRangeAttackWeight;
     public int LongRangePatrolWeight;
@@ -201,5 +203,10 @@ public class EnemyDogKnight : Enemy
                 }
             }
         }
+    }
+    protected override void Die()
+    {
+        animator.SetTrigger("Die");
+        base.Die();
     }
 }

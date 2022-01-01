@@ -1,0 +1,239 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2020226042885281433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2020226042885281434}
+  - component: {fileID: 2020226042885281435}
+  - component: {fileID: 2020226042885281432}
+  - component: {fileID: 3233335136791372886}
+  m_Layer: 0
+  m_Name: Shock Wave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2020226042885281434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020226042885281433}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2378659921696010899}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2020226042885281435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020226042885281433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42d4048d51594d52bc8a2be5a45853d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inherentTypes: []
+--- !u!114 &2020226042885281432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020226042885281433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca30110c34dc48e09c6ce2ee0711529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlowedDownEffect: {fileID: 0}
+  HpMaxValue: 100000
+  HpInitValue: 100000
+  AtkBaseValue: 1
+  DefBaseValue: 1
+  StrBaseValue: 1
+  SpdBaseValue: 20
+  AttackEnableBaseValue: 0
+  MovableBaseValue: 1
+  VulnerableBaseValue: 0
+  healthBar: {fileID: 0}
+  healthBar2: {fileID: 0}
+  _vfx: {fileID: 1492498727250982398}
+  _effectPlayingTime: 0.03
+  _effectStoppingTime: 0.1
+--- !u!136 &3233335136791372886
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020226042885281433}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.8033395
+  m_Height: 5.709259
+  m_Direction: 1
+  m_Center: {x: -0.1340537, y: 2.8869715, z: -0.16928577}
+--- !u!1001 &2378659921695614999
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2020226042885281434}
+    m_Modifications:
+    - target: {fileID: 100004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_Name
+      value: Shock Wave Flame
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10800000, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: ShapeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: SizeModule.y.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: SizeModule.z.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: ShapeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.15
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+--- !u!4 &2378659921696010899 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400004, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+  m_PrefabInstance: {fileID: 2378659921695614999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1492498727250982398 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3869956813481074153, guid: 7acba5f31bf25425696bc6cb85630c41, type: 3}
+  m_PrefabInstance: {fileID: 2378659921695614999}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97a75f1fb10f74564ad34fc107f630ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
