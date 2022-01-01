@@ -105,7 +105,7 @@ namespace ToolMan.Combat
                 _movable.Disable();
         }
 
-        public void AddHp(int hpAdd)
+        public void AddHP(int hpAdd)
         {
             _hp.ChangeValueBy(hpAdd);
         }

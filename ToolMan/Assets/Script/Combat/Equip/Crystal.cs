@@ -45,17 +45,22 @@ namespace ToolMan.Combat.Equip
 
         protected override void Die()
         {
+            StartCoroutine(WaitDie(0.3f));
+        }
+
+        private IEnumerator WaitDie(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
             if (hitBy != null && crystalType == 0)
             {
-                hitBy.combat.AddHp(10);
-                hitBy.GetAnotherPlayer().combat.AddHp(10);
+                hitBy.AddHP(10);
+                hitBy.GetAnotherPlayer().AddHP(10);
             }
             if (hitBy != null && crystalType == 1)
             {
                 RM.CrystalDie();
             }
             Destroy(gameObject);
-            
         }
         private void OnTriggerEnter(Collider other)
         {

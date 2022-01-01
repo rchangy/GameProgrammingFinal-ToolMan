@@ -52,6 +52,14 @@ public partial class PlayerController
         this.confJ = null;
     }
 
+    public void AddHP(int hpAdd)
+    {
+        Effect addHPEffect = effectController.effectList.Find(e => e.name == "AddHPEffect");
+        if (addHPEffect != null)
+            addHPEffect.PlayEffect();
+        combat.AddHP(hpAdd);
+    }
+
     public void Die()
     {
         isDead = true;
