@@ -195,7 +195,7 @@ public partial class PlayerController : ToolableMan
         float moveDis = vertical * speed * Time.deltaTime;
         m_MaxDistance = moveDis;
         m_HitDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
-        if (!m_HitDetect || m_Hit.collider.gameObject.tag == "Player")
+        if (!m_HitDetect || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
             transform.position += moveDis * transform.forward;
         else
         {
