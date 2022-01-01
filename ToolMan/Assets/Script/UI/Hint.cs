@@ -6,7 +6,7 @@ namespace ToolMan.UI
     public class Hint : MonoBehaviour
     {
         public string _title;
-        public Image _image;
+        public Sprite _sprite;
         public string _content;
         public bool locked
         {

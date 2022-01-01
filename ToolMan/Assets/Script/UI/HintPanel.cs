@@ -54,7 +54,7 @@ namespace ToolMan.UI
                 Button b = bs[i];
                 b.onClick.AddListener(delegate { LoadHint(h._title); });
 
-                Debug.Log("h = " + h._title + " b = " + b.name);
+                //Debug.Log("h = " + h._title + " b = " + b.name);
             }
         }
 
@@ -63,13 +63,13 @@ namespace ToolMan.UI
 
             if (hint.locked) {
                 _title.text = lockedHint._title;
-                _image = lockedHint._image;
+                _image.sprite = lockedHint._sprite;
                 _content.text = lockedHint._content;
             }
             else
             {
                 _title.text = hint._title;
-                _image = hint._image;
+                _image.sprite = hint._sprite;
                 _content.text = hint._content;
             }   
         }
