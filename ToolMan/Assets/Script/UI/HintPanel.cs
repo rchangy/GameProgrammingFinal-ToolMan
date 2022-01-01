@@ -26,11 +26,16 @@ namespace ToolMan.UI
         [SerializeField]
         private Hint lockedHint;
 
+        private void Awake()
+        {
+            Init();
+        }
+
         void Start()
         {
             // Default hint
             LoadHint("提示");
-            Init();
+            //Init();
         }
 
         private void Init() {
