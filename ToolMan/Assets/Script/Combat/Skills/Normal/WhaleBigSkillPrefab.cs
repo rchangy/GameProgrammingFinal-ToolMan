@@ -20,7 +20,11 @@ namespace ToolMan.Combat.Skills.Normal
             //GetComponent<SphereCollider>().enabled = false;
             _collisionEnable.Value = false;
             //Warning
+
             Effect warningEffect = whale.effectController.effectList.Find(e => e.name == "WhaleBigSkillWarning");
+            RaycastHit hit;
+            Physics.Raycast(whale.transform.position, -Vector3.up, out hit, 100, whale.GroundLayerMask);
+            warningEffect.transform.position = new Vector3(warningEffect.transform.position.x, hit.point.y, warningEffect.transform.position.z);
             warningEffect.PlayEffect();
             // play warning sound
 
@@ -65,35 +69,11 @@ namespace ToolMan.Combat.Skills.Normal
                 }
             }
         }
-        //[SerializeField]
-        //private float _lastingTime;
-        //[SerializeField]
-        //private float _warningLastingTime;
 
-
-        //public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
-        //{
-        //    EnemyWhale whale = combat.gameObject.GetComponent<EnemyWhale>();
-
-        //    // Warning
-        //    Effect warningEffect = whale.effectController.effectList.Find(e => e.name == "WhaleBigSkillWarning");
-        //    warningEffect.PlayEffect();
-        //    // play warning sound
-
-        //    yield return new WaitForSeconds(_warningLastingTime);
-
-        //    // anim
-        //    yield return new WaitForSeconds(attackDelay);
-        //    whale.GetAnimator().SetTrigger("Attack");
-
-        //    collisionEnable.Value = true;
-        //    // effect
-        //    Effect bigSkillEffect =  whale.effectController.effectList.Find(e => e.name == "WhaleBigSkillEffect");
-        //    bigSkillEffect.PlayEffect();
-        //    yield return new WaitForSeconds(_lastingTime);
-        //    bigSkillEffect.StopEffect();
-
-        //    collisionEnable.Value = false;
-        //}
+        protected override void Hit(CombatUnit target)
+        {
+            Debug.Log(name + " hit " + target.name);
+            target.TakeDamage(Atk, this);
+        }
     }
 }

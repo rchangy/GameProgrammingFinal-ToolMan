@@ -18,7 +18,7 @@ namespace ToolMan.Combat.Skills.Normal
             EnemyWhale whale = combat.gameObject.GetComponent<EnemyWhale>();
             GameObject bigSkillObj = Instantiate(whale.bigSkillPrefab, whale.transform.position, Quaternion.identity);
             bigSkillObj.GetComponent<WhaleBigSkillPrefab>()._Play(whale, _warningLastingTime, attackDelay, _lastingTime);
-            yield return new WaitForSeconds(0);
+            yield return new WaitForSeconds(_warningLastingTime + _lastingTime);
 
             //// Warning
             //Effect warningEffect = whale.effectController.effectList.Find(e => e.name == "WhaleBigSkillWarning");
