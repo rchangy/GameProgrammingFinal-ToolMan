@@ -9,7 +9,7 @@ public abstract class Objective : MonoBehaviour
 
     protected bool _startup = false;
 
-    private bool _inputEnable; // player control & UI
+    protected bool _inputEnable; // player control & UI
 
     protected UIController _uIController;
 
