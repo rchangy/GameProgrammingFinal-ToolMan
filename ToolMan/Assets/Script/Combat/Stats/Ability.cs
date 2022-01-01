@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
 namespace ToolMan.Combat.Stats
 {
     [Serializable]
@@ -9,6 +10,8 @@ namespace ToolMan.Combat.Stats
         [SerializeField]
         private string _statName;
         public bool BaseValue = true;
+
+        private Dictionary<object, int> _disabilities = new Dictionary<object, int>();
 
         private int _disability;
 
@@ -54,16 +57,45 @@ namespace ToolMan.Combat.Stats
             isDirty = true;
         }
 
+        public void Disable(object source)
+        {
+            if (!_disabilities.ContainsKey(source))
+            {
+                _disabilities.Add(source, 0);
+            }
+            _disabilities[source]++;
+        }
+
+        public void RemoveAllDisabilities(object source)
+        {
+            if (_disabilities.ContainsKey(source))
+            {
+                _disabilities[source] = 0;
+            }
+        }
+
         public void RemoveDisability()
         {
             _disability -= 1;
             isDirty = true;
         }
 
+        public void RemoveDisability(object source)
+        {
+            if (_disabilities.ContainsKey(source))
+            {
+                _disabilities[source]--;
+            }
+        }
+
         private bool CalculateFinalValue()
         {
             if (_disability > 0) return !BaseValue;
-            else return BaseValue;
+            foreach(int disable in _disabilities.Values.ToList())
+            {
+                if(disable > 0) return !BaseValue;
+            }
+            return BaseValue;
         }
 
     }

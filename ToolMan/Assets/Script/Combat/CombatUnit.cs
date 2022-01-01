@@ -219,6 +219,11 @@ namespace ToolMan.Combat
             buff.AddBuff(_stats);
         }
 
+        public void RemoveBuff(ScriptableBuff buff)
+        {
+            buff.RemoveBuff(_stats);
+        }
+
         public void AddStatMod(string name, StatModifier statMod)
         {
             if (_stats.HasStat(name))

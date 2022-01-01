@@ -8,10 +8,19 @@ namespace ToolMan.Combat.Skills.Normal
     {
         public Vector3 AttackPointOffset;
         public float AttackRange;
+        public float AfterAttackDelay;
         public float AtkMul;
+        private EnemyDogKnight _dogKnight;
+        
 
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
+            if(_dogKnight == null)
+            {
+                _dogKnight = combat.gameObject.GetComponent<EnemyDogKnight>();
+                if (_dogKnight == null) yield break;
+            }
+            _dogKnight.Anim.SetTrigger("Attack1");
             yield return new WaitForSeconds(attackDelay);
             Collider[] hitTargets = Physics.OverlapSphere(combat.gameObject.transform.position + AttackPointOffset, AttackRange, combat.TargetLayers);
             foreach (Collider target in hitTargets)
@@ -22,6 +31,7 @@ namespace ToolMan.Combat.Skills.Normal
                     targetCombat.TakeDamage(combat.Atk * AtkMul, combat);
                 }
             }
+            yield return new WaitForSeconds(AfterAttackDelay);
         }
     }
 }

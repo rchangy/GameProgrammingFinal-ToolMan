@@ -14,5 +14,13 @@ namespace ToolMan.Combat.Stats.Buff
             if (target.HasBuff(this)) target.AddBuff(this, null);
             else target.AddBuff(this, new TimedDisability(this, target));
         }
+        public override void RemoveBuff(CharacterStats stats)
+        {
+            if (stats.HasAbility(Target))
+            {
+                Ability targetAbility = stats.GetAbilityByName(Target);
+                targetAbility.RemoveAllDisabilities(this);
+            }
+        }
     }
 }
