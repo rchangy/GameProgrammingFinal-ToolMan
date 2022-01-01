@@ -9,8 +9,14 @@ public class GameManager : MonoBehaviour
     private string _currentScene;
     [SerializeField] private GameObject Objectives;
     private List<Objective> _objectives;
+
     [SerializeField]
     private UIController _uIController;
+    [SerializeField]
+    private PlayerController _p1;
+    [SerializeField]
+    private PlayerController _p2;
+
     public bool reset = true;
     private void Awake()
     {
@@ -27,7 +33,10 @@ public class GameManager : MonoBehaviour
         {
             _objectives = Objectives.GetComponentsInChildren<Objective>().ToList();
         }
-        foreach (Objective o in _objectives) { o.uIController = _uIController; }
+        foreach (Objective o in _objectives) {
+            o.uIController = _uIController;
+            o.SetPlayers(_p1, _p2);
+        }
         _objectives.Sort((x, y) => x.Order.CompareTo(y.Order));
 
         StartCoroutine(CompleteSceneObjectives());

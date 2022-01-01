@@ -20,10 +20,12 @@ namespace ToolMan.UI
 
         public override void StartObjective()
         {
+            _p1.controlEnable = false;
+            _p2.controlEnable = false;
+            _uIController.SetControlEnable(true);
+
             // Unlock some hints
-            Debug.Log("hi:)))");
             foreach (Hint h in hintsToUnlock) { uIController.hintPanel.UnlockHint(h._title); }
-            Debug.Log("hi:)))");
             uIController.hintPanel.LoadHint(hintToShow._title);
             uIController.SetTutorialUI(true);
             //StartCoroutine(WaitForEsc());

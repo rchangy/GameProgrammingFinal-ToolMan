@@ -18,11 +18,13 @@ public class UIController : MonoBehaviour
     private PlayerController p1;
     [SerializeField]
     private PlayerController p2;
+    private bool _controlEnable;
 
     private void Start()
     {
         SetBattleUI(false);
         SetTutorialUI(false);
+        _controlEnable = false;
     }
 
     public void SetBattleUI(bool val) {
@@ -40,9 +42,11 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Hint"))
+        if (_controlEnable && Input.GetButtonDown("Hint"))
         {
             SetTutorialUI(!showingTutorialUI);
         }
     }
+
+    public void SetControlEnable(bool val) { _controlEnable = val; }
 }

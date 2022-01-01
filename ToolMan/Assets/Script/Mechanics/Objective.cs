@@ -9,7 +9,8 @@ public abstract class Objective : MonoBehaviour
 
     protected bool _startup = false;
 
-    protected bool _inputEnable; // player control & UI
+    protected PlayerController _p1;
+    protected PlayerController _p2;
 
     protected UIController _uIController;
 
@@ -24,10 +25,11 @@ public abstract class Objective : MonoBehaviour
         set { _uIController = value; }
     }
 
+    public void SetPlayers(PlayerController p1, PlayerController p2) { _p1 = p1; _p2 = p2; }
+
     private void Awake()
     {
         _manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        _inputEnable = false;
     }
 
     protected void Start()

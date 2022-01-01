@@ -16,6 +16,10 @@ public class Cutscene : Objective
 
     public override void StartObjective()
     {
+        _p1.controlEnable = false;
+        _p2.controlEnable = false;
+        _uIController.SetControlEnable(false);
+
         playableDirector.Play();
     }
 
