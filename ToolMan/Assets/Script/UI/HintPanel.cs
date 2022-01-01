@@ -53,7 +53,7 @@ namespace ToolMan.UI
 
         public void LoadHint(string hintTitle) {
             Hint hint = _hints.Find(h => h._title == hintTitle);
-            Debug.Log("load hint = " + hint._title);
+            //Debug.Log("load hint = " + hint._title);
             if (hint.locked) {
                 _title.text = lockedHint._title;
                 _image.sprite = lockedHint._sprite;

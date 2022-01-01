@@ -28,7 +28,7 @@ namespace ToolMan.UI
             foreach (Hint h in hintsToUnlock) { uIController.hintPanel.UnlockHint(h._title); }
             uIController.hintPanel.LoadHint(hintToShow._title);
             uIController.SetTutorialUI(true);
-            //StartCoroutine(WaitForEsc());
+            StartCoroutine(WaitForEsc());
         }
 
         public override bool isCompleted()
@@ -37,7 +37,7 @@ namespace ToolMan.UI
         }
 
         IEnumerator WaitForEsc() {
-            while (uIController.showingTutorialUI) { }
+            while (uIController.showingTutorialUI) { yield return null; }
             _isCompleted = true;
             yield return null;
         }
