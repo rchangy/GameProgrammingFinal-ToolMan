@@ -70,9 +70,9 @@ public class ObjectListUI : MonoBehaviour
     {
         List<string> keys = new List<string>(Keys);
         if (keys.Count > MaxImageNum) Debug.Log("Too much sprites, only " + MaxImageNum + "will be shown.");
-        CurrentActiveImageNum = Mathf.Min(keys.Count, MaxImageNum);
+        CurrentActiveImageNum = Mathf.Min(keys.Count, UnlockImageNum);
         int i = 0, j = 0;
-        for(i = 0, j = 0; i < MaxImageNum && j < keys.Count; i++, j++)
+        for(i = 0, j = 0; i < UnlockImageNum && j < keys.Count; i++, j++)
         {
             if (spriteMap.ContainsKey(keys[j]))
             {
