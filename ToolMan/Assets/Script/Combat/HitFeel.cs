@@ -12,7 +12,8 @@ namespace ToolMan.Combat
 
         private float _mul;
 
-        public Camera cam;
+        public Camera cam1;
+        public Camera cam2;
         private bool shaking = false;
         public float shakeRange = 0.2f;
         public float shakeSpan = 0.05f;
@@ -23,15 +24,32 @@ namespace ToolMan.Combat
             originalTimeScale = Time.timeScale;
         }
 
+        public void MakeCamShake(float mul, PlayerController p)
+        {
+            Camera cam = (p.playerNum == 1)? cam1 : cam2;
+            if (shaking)
+            {
+                ResetCam(cam);
+            }
+            _mul = mul;
+            shaking = true;
+            StartCoroutine(CamShake(cam));
+            shaking = false;
+        }
+
         public void MakeCamShake(float mul)
         {
-            if (!shaking)
+            if (shaking)
             {
-                _mul = mul;
-                shaking = true;
-                StartCoroutine(CamShake());
-                shaking = false;
+                ResetCam(cam1);
+                ResetCam(cam2);
             }
+            
+            _mul = mul;
+            shaking = true;
+            StartCoroutine(CamShake(cam1));
+            StartCoroutine(CamShake(cam2));
+            shaking = false;
         }
 
         public void MakeTimeStop()
@@ -64,7 +82,7 @@ namespace ToolMan.Combat
             Time.timeScale = originalTimeScale;
         }
 
-        IEnumerator CamShake()
+        IEnumerator CamShake(Camera cam)
         {
             float shakeTime = 0f;
             float curShakeSpan = shakeSpan * _mul;
@@ -89,6 +107,12 @@ namespace ToolMan.Combat
 
             if(shaked)
                 cam.transform.localPosition = CameraManager.CamLocalPos;
+        }
+
+        private void ResetCam(Camera cam)
+        {
+            cam.transform.localPosition = CameraManager.CamLocalPos;
+            
         }
     }
 }

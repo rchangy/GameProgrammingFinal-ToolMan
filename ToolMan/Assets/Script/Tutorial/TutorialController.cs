@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using ToolMan.UI;
 
 public abstract class TutorialController : Objective
 {
+    public Notification notification;
     protected RPGTalk rpgTalk;
     private bool _isCompleted = false;
 
@@ -21,6 +23,7 @@ public abstract class TutorialController : Objective
     protected override void Init()
     {
         rpgTalk = gameObject.GetComponent<RPGTalk>();
+        notification.canvasGroup.alpha = 0;
     }
 
     protected virtual IEnumerator StartTutorial()

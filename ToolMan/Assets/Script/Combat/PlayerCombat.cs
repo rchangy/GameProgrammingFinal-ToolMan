@@ -31,7 +31,7 @@ namespace ToolMan.Combat
         {
             get => _currentEnergy.Value;
         }
-
+        
 
         [SerializeField]
         private HitFeel hitFeel;
@@ -40,6 +40,14 @@ namespace ToolMan.Combat
         {
             get => hitFeel;
         }
+
+        [SerializeField] private float _hitFeelCd;
+        private float _hitFeelCoolingTime;
+        private bool _hitFeelCooling
+        {
+            get => _hitFeelCoolingTime > 0;
+        }
+
 
         private PlayerSkillSet _availablePlayerSkillSet;
 
@@ -71,10 +79,12 @@ namespace ToolMan.Combat
             comboSkillSet = manager.Model.ComboSkills;
         }
 
+        
+
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
             int dmg = base.TakeDamage(baseDmg, damager);
-            hitFeel.MakeCamShake(Mathf.Min(3, (float)dmg/(Str + 0.1f)));
+            hitFeel.MakeCamShake(Mathf.Min(3, (float)dmg/(Str + 0.1f)), _playerController);
             return dmg;
         }
 
@@ -158,9 +168,13 @@ namespace ToolMan.Combat
 
             if (skill.UsingHitFeel)
             {
-                hitFeel.MakeTimeStop();
-                hitFeel.MakeCamShake(skill.HitFeelMul);
-                TeamMateCombat.hitFeel.MakeCamShake(skill.HitFeelMul);
+                if (!_hitFeelCooling)
+                {
+                    //hitFeel.MakeTimeStop();
+                    _hitFeelCoolingTime = _hitFeelCd;
+                }
+                hitFeel.MakeCamShake(skill.HitFeelMul, _playerController);
+                TeamMateCombat.hitFeel.MakeCamShake(skill.HitFeelMul, _teamMate._playerController);
             }
             if (ThisPlayerController.IsGrabbed())
             {
@@ -207,6 +221,10 @@ namespace ToolMan.Combat
             if (impactEffectRemain <= 0){
                 impactEffectRemain = impactEffectCd;
                 playingImpactEffect = false;
+            }
+            if (_hitFeelCooling)
+            {
+                _hitFeelCoolingTime -= Time.deltaTime;
             }
         }
     }

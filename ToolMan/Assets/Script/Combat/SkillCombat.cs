@@ -212,7 +212,8 @@ namespace ToolMan.Combat
         {
             Debug.Log(name + " hit " + target.name);
             target.TakeDamage(Atk, this);
-            StartCoroutine(currentUsingSkill.Hit(this, target));
+            if(target.Hp > 0)
+                StartCoroutine(currentUsingSkill.Hit(this, target));
         }
 
         public IReadOnlyCollection<String> GetCurrentUsingSkillSet()

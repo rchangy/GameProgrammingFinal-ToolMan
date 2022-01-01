@@ -47,4 +47,11 @@ public class CameraManager : MonoBehaviour
         MainCam.transform.localPosition = _camPosition;
         MainCam.transform.localRotation = Quaternion.Euler(10, 0, 0);
     }
+    public void LookAtFace()
+    {
+        EnableMain();
+        Debug.Log("main cam: " + MainCam.gameObject.name);
+        MainCam.transform.eulerAngles = new Vector3(MainCam.transform.eulerAngles.x, MainCam.transform.eulerAngles.y + 180f, MainCam.transform.eulerAngles.z);
+        _camPosition = new Vector3(0, 3, 10);
+    }
 }

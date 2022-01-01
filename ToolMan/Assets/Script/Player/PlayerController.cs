@@ -13,15 +13,16 @@ public partial class PlayerController : ToolableMan
     private KeyboardInputController keyboardInputController;
 
     // ==== Player Status ====
+    public bool controlEnable;
     public int playerNum = 1; // player 1 or player 2
     [SerializeField] private bool isDead = false;
-    private bool winOrLose = false;
 
     [SerializeField] private bool changeable = false;
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private LayerMask groundLayerMask;
 
-    float horizontal, vertical;
+    private float horizontal, vertical;
+    private int unlockedToolNum;
     // ==== Player Status ====
 
     // ==== Components ====
@@ -66,6 +67,12 @@ public partial class PlayerController : ToolableMan
     // ==== Camera ====
     [SerializeField] CameraManager cam;
     // ==== Camera ====
+
+    // ==== Debug ====
+    RaycastHit m_Hit;
+    float m_MaxDistance;
+    bool m_HitDetect;
+    // ==== Debug ====
     protected override void Awake()
     {
         //gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -101,7 +108,7 @@ public partial class PlayerController : ToolableMan
 
     override protected void Update()
     {
-        if (winOrLose || isDead)
+        if (!controlEnable)
         {
             return;
         }
@@ -178,12 +185,22 @@ public partial class PlayerController : ToolableMan
 
     private void FixedUpdate()
     {
-        if (winOrLose || isDead)
+        if (isDead)
         {
             return;
         }
         transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
-        transform.position += vertical * transform.forward * speed * Time.deltaTime;
+
+       
+        float moveDis = vertical * speed * Time.deltaTime;
+        m_MaxDistance = moveDis;
+        m_HitDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
+        if (!m_HitDetect || m_Hit.collider.gameObject.tag == "Player")
+            transform.position += moveDis * transform.forward;
+        else
+        {
+            Debug.Log("Hit : " + m_Hit.collider.name);
+        }
         if (!isTool && confJ!= null)
         {
             confJ.anchor = rightHand.transform.localPosition;
@@ -269,5 +286,52 @@ public partial class PlayerController : ToolableMan
             skinRenderer.material = playerMaterial;
         }
     }
+    public void LoadTool(int toolNum)
+    {
+        unlockedToolNum = toolNum;
+        toolListUI.LoadTool(toolNum);
+    }
+    public void UnlockTool(int level, int toolNum)
+    {
+        if (toolNum > unlockedToolNum)
+        {
+            unlockedToolNum = toolNum;
+            AnimationUnlock(level);
+        }
+    }
+    public void ResetToIdle()
+    {
+        controlEnable = false;
+        if (isTool && IsGrabbed())
+        {
+            anotherPlayer.Release();
+        }
+        if (isTool)
+        {
+            ToolableManTransform();
+        }
+    }
     // ==== getters ====
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        //Check if there has been a hit yet
+        if (m_HitDetect)
+        {
+            //Draw a Ray forward from GameObject toward the hit
+            Gizmos.DrawRay(transform.position, transform.forward * m_Hit.distance);
+            //Draw a cube that extends to where the hit exists
+            Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit.distance, transform.localScale);
+        }
+        //If there hasn't been a hit yet, draw the ray at the maximum distance
+        else
+        {
+            //Draw a Ray forward from GameObject toward the maximum distance
+            Gizmos.DrawRay(transform.position, transform.forward * m_MaxDistance);
+            //Draw a cube at the maximum distance
+            Gizmos.DrawWireCube(transform.position + transform.forward * m_MaxDistance, transform.localScale);
+        }
+    }
 }

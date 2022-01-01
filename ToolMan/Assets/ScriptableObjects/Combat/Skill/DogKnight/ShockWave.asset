@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83674a1030cfa4d93ac35a9ad4ebb587, type: 3}
+  m_Name: ShockWave
+  m_EditorClassIdentifier: 
+  attackDelay: 0.25
+  RefractoryPeriod: 0
+  Cd: 5
+  _shockWavePrefab: {fileID: 2020226042885281433, guid: b9ca7101314f042caa2d41af0338aa7c, type: 3}
+  _instantiateOffset: {x: 0, y: -2.5, z: 0}

@@ -20,6 +20,11 @@ namespace ToolMan.Combat
         {
             get => _comboSkillSet;
         }
-
+        [SerializeField]
+        private HitFeel _hitFeel;
+        public HitFeel hitFeel
+        {
+            get => _hitFeel;
+        }
     }
 }

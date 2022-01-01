@@ -14,13 +14,12 @@ namespace ToolMan.Combat
             get => _model;
         }
         [SerializeField] private Transform Player1Cam, Player2Cam;
-        [SerializeField] bool enableEnemyWaves;
 
         private List<PlayerController> players = new List<PlayerController>();
-        private GameObject[] enemies;
-        private int currentWaveIdx = 1;
-        private GameObject currentEnemyWave = null;
-        private bool winOrLose = false;
+        //private GameObject[] enemies;
+        //private int currentWaveIdx = 1;
+        //private GameObject currentEnemyWave = null;
+        //private bool winOrLose = false;
 
         private void Awake()
         {
@@ -28,19 +27,31 @@ namespace ToolMan.Combat
             Model.ComboSkills.Load();
         }
 
-        //private void Start()
-        //{
-        //    if (!enableEnemyWaves)
-        //        return;
-        //    GameObject[] playerGameObjects;
-        //    playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
-        //    foreach (var playerGameObject in playerGameObjects)
-        //    {
-        //        players.Add(playerGameObject.GetComponent<PlayerController>());
-        //    }
+        private void Start()
+        {
+            GameObject[] playerGameObjects;
+            playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var playerGameObject in playerGameObjects)
+            {
+                players.Add(playerGameObject.GetComponent<PlayerController>());
+            }
+            players.Sort((x, y) => { return x.playerNum.CompareTo(y.playerNum); });
+            LoadTool();
+        }
 
-        //    newEnemyWave(1);
-        //}
+        public void LoadTool()
+        {
+            CheckpointManager.LoadCheckpoint();
+            players[0].LoadTool(CheckpointManager.GetCheckpointInfo().player1ToolNum);
+            players[1].LoadTool(CheckpointManager.GetCheckpointInfo().player2ToolNum);
+        }
+
+        public void UnLockTool()
+        {
+            // set camera to look at bearMan's face
+            players[0].UnlockTool(CheckpointManager.GetCheckpointInfo().level, CheckpointManager.GetCheckpointInfo().player1ToolNum);
+            players[1].UnlockTool(CheckpointManager.GetCheckpointInfo().level, CheckpointManager.GetCheckpointInfo().player2ToolNum);
+        }
 
         //private void Update()
         //{
@@ -158,7 +169,7 @@ namespace ToolMan.Combat
         private IEnumerator GameOver()
         {
             Debug.Log("GameOver :(((");
-            winOrLose = true;
+            //winOrLose = true;
             players[0].Lose();
             players[1].Lose();
 
@@ -166,21 +177,21 @@ namespace ToolMan.Combat
             // wait for 10 seconds
             yield return new WaitForSeconds(10);
             // Reload this Scene
-            SceneManager.LoadScene("Level_" + System.Convert.ToString(GameStatus.level));
+            //SceneManager.LoadScene("Level_" + System.Convert.ToString(GameStatus.level));
         }
         private IEnumerator Win()
         {
             Debug.Log("Win :)))");
-            winOrLose = true;
+            //winOrLose = true;
             players[0].Win();
             players[1].Win();
 
             // Animation?
             // wait for 10 seconds
             yield return new WaitForSeconds(10);
-            GameStatus.level += 1;
+            //GameStatus.level += 1;
             // Load Next Scene
-            SceneManager.LoadScene("Level_" + System.Convert.ToString(GameStatus.level));
+            //SceneManager.LoadScene("Level_" + System.Convert.ToString(GameStatus.level));
         }
     }
 }

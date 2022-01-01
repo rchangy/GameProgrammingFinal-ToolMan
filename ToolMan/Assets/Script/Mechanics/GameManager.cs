@@ -9,15 +9,27 @@ public class GameManager : MonoBehaviour
     private string _currentScene;
     [SerializeField] private GameObject Objectives;
     private List<Objective> _objectives;
+    [SerializeField]
+    private UIController _uIController;
+    public bool reset = true;
+    private void Awake()
+    {
+        if (reset)
+        {
+            CheckpointManager.resetLevel();
+        }
+    }
 
     void Start()
     {
         //_currentScene = SceneManager.GetActiveScene().name;
-        if(Objectives != null)
+        if (Objectives != null)
         {
             _objectives = Objectives.GetComponentsInChildren<Objective>().ToList();
         }
+        foreach (Objective o in _objectives) { o.uIController = _uIController; }
         _objectives.Sort((x, y) => x.Order.CompareTo(y.Order));
+
         StartCoroutine(CompleteSceneObjectives());
 
     }

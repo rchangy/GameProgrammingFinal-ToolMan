@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76c9478bc22f40d89a9e12597286e77, type: 3}
+  m_Name: TurtleShield
+  m_EditorClassIdentifier: 
+  attackDelay: 0
+  RefractoryPeriod: 0
+  Cd: 10
+  shieldPrefab: {fileID: 8759886588682070743, guid: fdf2f2d97bf984cabaeab790efcd947c, type: 3}
+  mat: {fileID: 2100000, guid: 0a336c9df0f284791b0756b20c2ed259, type: 2}

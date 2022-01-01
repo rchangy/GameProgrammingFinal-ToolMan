@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using ToolMan.Combat.Stats.Buff;
-
+using ToolMan.Combat.Stats;
 
 namespace ToolMan.Combat.Equip
 {
@@ -90,7 +89,6 @@ namespace ToolMan.Combat.Equip
             _target.RemoveDisable("Vulnerable");
             Destroy(gameObject);
         }
-
     }
 }
 
