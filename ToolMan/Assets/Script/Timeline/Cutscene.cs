@@ -19,7 +19,7 @@ public class Cutscene : Objective
         _p1.controlEnable = false;
         _p2.controlEnable = false;
         _uIController.SetControlEnable(false);
-
+        Debug.Log("hi");
         playableDirector.Play();
     }
 
