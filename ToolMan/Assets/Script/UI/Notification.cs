@@ -43,12 +43,15 @@ namespace ToolMan.UI
 
             }
 
+            Debug.Log("state = " + state);
+
             if (countingDown)
                 countDownTime -= Time.deltaTime;
         }
 
         private void FadeIn()
         {
+            Debug.Log(name + " obj st fading in " + canvasGroup.alpha);
             canvasGroup.alpha = 1 - countDownTime / fadingTime;
 
             if (countDownTime <= 0)

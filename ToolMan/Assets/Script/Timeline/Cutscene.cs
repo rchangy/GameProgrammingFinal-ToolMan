@@ -20,8 +20,7 @@ public class Cutscene : Objective
 
         uIController.SetBattleUI(false);
         uIController.SetHintUI(false);
-        uIController.SetNotificationUI(false);
-
+        
         playableDirector.Play();
     }
 

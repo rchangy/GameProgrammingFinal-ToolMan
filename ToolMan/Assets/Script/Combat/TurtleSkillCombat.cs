@@ -10,14 +10,22 @@ namespace ToolMan.Combat
         //private LayerMask _targetLayers;
 
         [SerializeField] private EnemyTurtle _turtle;
+        SphereCollider sphereCollider;
         //private List<ScriptableBuff> _buffs;
         //private float _buffRange;
 
         protected override void Awake()
         {
             base.Awake();
+            sphereCollider = GetComponent<SphereCollider>();
             //_buffs = _turtle._buffs;
             //_buffRange = _turtle._buffRange;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            //sphereCollider.enabled = _collisionEnable.Value;
         }
 
         public override bool Attack()
