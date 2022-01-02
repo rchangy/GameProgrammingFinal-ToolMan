@@ -108,8 +108,12 @@ public partial class PlayerController : ToolableMan
 
     override protected void Update()
     {
+        if (isDead)
+            return;
         if (!controlEnable)
         {
+            ManageMovement();
+            UpdateState();
             return;
         }
         if (!isTool)
@@ -189,9 +193,9 @@ public partial class PlayerController : ToolableMan
         {
             return;
         }
-        transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
 
-       
+        // Movement
+        transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
         float moveDis = vertical * speed * Time.deltaTime;
         m_MaxDistance = moveDis;
         m_HitDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
@@ -201,6 +205,7 @@ public partial class PlayerController : ToolableMan
         {
             Debug.Log("Hit : " + m_Hit.collider.name);
         }
+
         if (!isTool && confJ!= null)
         {
             confJ.anchor = rightHand.transform.localPosition;

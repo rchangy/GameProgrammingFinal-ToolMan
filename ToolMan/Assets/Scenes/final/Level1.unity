@@ -553,7 +553,7 @@ MonoBehaviour:
   showWithDialog:
   - {fileID: 78732474}
   textUIObj: {fileID: 345262798}
-  dialoger: 0
+  dialoger: 1
   dialogerObj: {fileID: 2015001924}
   shouldFollow: 0
   following: {fileID: 0}
@@ -607,7 +607,7 @@ MonoBehaviour:
   textAudio: {fileID: 8300000, guid: 49c855462770641229c932e59dd505e5, type: 3}
   passAudio: {fileID: 8300000, guid: a8b5ae316e8c14602bc3114d2d5e8302, type: 3}
   passWithMouse: 1
-  passWithInputButton: 
+  passWithInputButton: Grab1
   passWithKey: 0
   enablePass: 1
   autoPass: 0
@@ -5382,7 +5382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &315777745
 Transform:
   m_ObjectHideFlags: 0
@@ -5881,8 +5881,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 35c92968e66844cc28e2e827393c8c73, type: 2}
-  m_sharedMaterial: {fileID: -5983185541706229637, guid: 35c92968e66844cc28e2e827393c8c73, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3fdd72ba0b17a438c9b83511b059f669, type: 2}
+  m_sharedMaterial: {fileID: -8319559825670784228, guid: 3fdd72ba0b17a438c9b83511b059f669, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14071,7 +14071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4394039214326930993, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -195.18
+      value: -193.49
       objectReference: {fileID: 0}
     - target: {fileID: 4394039214326930993, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14091,7 +14091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7248950564732607247, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -194.73
+      value: -193.4
       objectReference: {fileID: 0}
     - target: {fileID: 7248950564732607247, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21511,8 +21511,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 35c92968e66844cc28e2e827393c8c73, type: 2}
-  m_sharedMaterial: {fileID: -5983185541706229637, guid: 35c92968e66844cc28e2e827393c8c73, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3fdd72ba0b17a438c9b83511b059f669, type: 2}
+  m_sharedMaterial: {fileID: -8319559825670784228, guid: 3fdd72ba0b17a438c9b83511b059f669, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -34019,7 +34019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7ab8fce1b774972a955933b9dfbe0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Order: 8
+  Order: -1
   combatManager: {fileID: 0}
 --- !u!114 &1533919863 stripped
 MonoBehaviour:
@@ -39634,7 +39634,7 @@ MonoBehaviour:
   showWithDialog:
   - {fileID: 57935903}
   textUIObj: {fileID: 1734836964}
-  dialoger: 0
+  dialoger: 1
   dialogerObj: {fileID: 1057906197}
   shouldFollow: 0
   following: {fileID: 0}
@@ -39688,7 +39688,7 @@ MonoBehaviour:
   textAudio: {fileID: 8300000, guid: 49c855462770641229c932e59dd505e5, type: 3}
   passAudio: {fileID: 8300000, guid: a8b5ae316e8c14602bc3114d2d5e8302, type: 3}
   passWithMouse: 1
-  passWithInputButton: 
+  passWithInputButton: Grab1
   passWithKey: 0
   enablePass: 1
   autoPass: 0
@@ -41045,8 +41045,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 35c92968e66844cc28e2e827393c8c73, type: 2}
-  m_sharedMaterial: {fileID: -5983185541706229637, guid: 35c92968e66844cc28e2e827393c8c73, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3fdd72ba0b17a438c9b83511b059f669, type: 2}
+  m_sharedMaterial: {fileID: -8319559825670784228, guid: 3fdd72ba0b17a438c9b83511b059f669, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -49920,7 +49920,7 @@ MonoBehaviour:
   showWithDialog:
   - {fileID: 135922544}
   textUIObj: {fileID: 886605621}
-  dialoger: 0
+  dialoger: 1
   dialogerObj: {fileID: 1662995217}
   shouldFollow: 0
   following: {fileID: 0}
@@ -49974,7 +49974,7 @@ MonoBehaviour:
   textAudio: {fileID: 8300000, guid: 49c855462770641229c932e59dd505e5, type: 3}
   passAudio: {fileID: 8300000, guid: a8b5ae316e8c14602bc3114d2d5e8302, type: 3}
   passWithMouse: 1
-  passWithInputButton: 
+  passWithInputButton: Grab1
   passWithKey: 0
   enablePass: 1
   autoPass: 0
@@ -50699,8 +50699,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 35c92968e66844cc28e2e827393c8c73, type: 2}
-  m_sharedMaterial: {fileID: -5983185541706229637, guid: 35c92968e66844cc28e2e827393c8c73, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3fdd72ba0b17a438c9b83511b059f669, type: 2}
+  m_sharedMaterial: {fileID: -8319559825670784228, guid: 3fdd72ba0b17a438c9b83511b059f669, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
