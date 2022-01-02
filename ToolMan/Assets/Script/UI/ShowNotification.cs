@@ -20,6 +20,7 @@ namespace ToolMan.UI
 
         public override void StartObjective()
         {
+            uIController.SetNotificationUI(true);
             _p1.controlEnable = true;
             _p2.controlEnable = true;
             _uIController.SetControlEnable(true);

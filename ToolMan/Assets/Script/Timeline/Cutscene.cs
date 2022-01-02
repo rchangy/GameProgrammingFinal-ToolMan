@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -19,7 +17,11 @@ public class Cutscene : Objective
         _p1.controlEnable = false;
         _p2.controlEnable = false;
         _uIController.SetControlEnable(false);
-        //Debug.Log("hi");
+
+        uIController.SetBattleUI(false);
+        uIController.SetHintUI(false);
+        uIController.SetNotificationUI(false);
+
         playableDirector.Play();
     }
 

@@ -27,6 +27,7 @@ public class UIController : MonoBehaviour
     {
         SetBattleUI(false);
         SetHintUI(false);
+        SetNotificationUI(true);
         _controlEnable = false;
     }
 
