@@ -36,7 +36,7 @@ public class EnemyWaveController : MonoBehaviour
             {
                 _waves.WaveEnd(this);
             }
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 
