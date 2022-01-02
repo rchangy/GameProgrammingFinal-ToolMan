@@ -39,7 +39,7 @@ public class EnemyDogKnight : Enemy
 
         if (weight.Length > _longRangeSkillStartIdx)
         {
-            _longRangeSKillWeight = new int[weight.Length - _longRangeSkillStartIdx];
+            _longRangeSKillWeight = new int[skillWeight.Length - _longRangeSkillStartIdx];
             Array.Copy(skillWeight, _longRangeSkillStartIdx, _longRangeSKillWeight, 0, skillWeight.Length - _longRangeSkillStartIdx);
         }
         else

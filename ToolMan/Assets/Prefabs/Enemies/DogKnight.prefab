@@ -1293,10 +1293,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Name: DogKnight
-  AttackWeight: 1
-  PatrolWeight: 0
+  AttackWeight: 5
+  PatrolWeight: 2
   IdleWeight: 0
-  skillWeight: 010000000000000001000000
+  skillWeight: 01000000010000000100000001000000
   MaxActionTime: 2
   MinActionTime: 3
   rotateSpeed: 3
@@ -1305,17 +1305,17 @@ MonoBehaviour:
   walkPointRange: 10
   SightRange: 100
   speed: 3
-  InitAttackRange: 5
+  InitAttackRange: 3
   IaiAttackPoint: {fileID: 4559413203452229578}
   ChargingVfx: {fileID: 2288956798234743795}
   SwordTrailVfx: {fileID: 2030150880}
   IaiSparkVfx: {fileID: 807775980579752209}
   NotifyVfx: {fileID: 8690952255197579200}
   LongRangeAttackWeight: 1
-  LongRangePatrolWeight: 0
-  LongRangeChaseWeight: 0
-  LongRangeIdleWeight: 0
-  _longRangeSkillStartIdx: 1
+  LongRangePatrolWeight: 1
+  LongRangeChaseWeight: 2
+  LongRangeIdleWeight: 1
+  _longRangeSkillStartIdx: 2
 --- !u!114 &5698416647293100067
 MonoBehaviour:
   m_ObjectHideFlags: 0

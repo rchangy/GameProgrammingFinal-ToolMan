@@ -25,5 +25,8 @@ namespace ToolMan.Combat.Stats.Buff
             MaxDuration = maxDuration;
         }
         public abstract void AddBuff(CharacterStats target);
+
+        public abstract void RemoveBuff(CharacterStats stats);
+
     }
 }

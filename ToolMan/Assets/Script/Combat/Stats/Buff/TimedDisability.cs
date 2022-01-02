@@ -35,7 +35,7 @@ namespace ToolMan.Combat.Stats.Buff
                     var ability = Target.GetAbilityByName(Buff.Target);
                     if (ability != null)
                     {
-                        ability.Disable();
+                        ability.Disable(Buff);
                     }
                 }
             }
@@ -55,7 +55,7 @@ namespace ToolMan.Combat.Stats.Buff
                 var ability = Target.GetAbilityByName(Buff.Target);
                 if (ability != null)
                 {
-                    ability.RemoveDisability();
+                    ability.RemoveDisability(Buff);
                 }
             }
         }

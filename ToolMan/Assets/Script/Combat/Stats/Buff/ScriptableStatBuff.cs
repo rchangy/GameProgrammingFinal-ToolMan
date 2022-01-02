@@ -27,5 +27,13 @@ namespace ToolMan.Combat.Stats.Buff
             else target.AddBuff(this, new TimedStatBuff(this, target));
         }
 
+        public override void RemoveBuff(CharacterStats stats)
+        {
+            if (stats.HasStat(Target))
+            {
+                Stat stat = stats.GetStatByName(Target);
+                stat.RemoveAllModifiersFromSource(this);
+            }
+        }
     }
 }

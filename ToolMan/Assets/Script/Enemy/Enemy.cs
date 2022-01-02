@@ -18,6 +18,10 @@ public class Enemy : MonoBehaviour
     protected PlayerController[] playerControllers;
 
     [SerializeField] protected LayerMask GroundMask, PlayerMask;
+    public LayerMask GroundLayerMask
+    {
+        get => GroundMask;
+    }
 
     [SerializeField] protected string Name;
 
@@ -222,6 +226,7 @@ public class Enemy : MonoBehaviour
         //Debug.Log("Attack Mode");
         if (!isAction)
         {
+            SetAllAnimationFalse();
             act = GetRandType(weight);
             if(act > 0)
             {
@@ -232,8 +237,6 @@ public class Enemy : MonoBehaviour
 
         switch (act){
             case 0: // attack
-                Idle();
-                SetAllAnimationFalse();
                 RandomAttackBehavior();
                 break;
             case 1:
@@ -367,7 +370,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void SetDest(Vector3 dest)
     {
-        //_dest = new Vector3(dest.x, transform.position.y, dest.z);
+        dest = new Vector3(dest.x, transform.position.y, dest.z);
         if (Physics.Raycast(dest, -transform.up, 10f, GroundMask))
         {
             walkPointSet = true;

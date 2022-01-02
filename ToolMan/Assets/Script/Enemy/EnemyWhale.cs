@@ -9,7 +9,15 @@ public class EnemyWhale : Enemy
     private float tmpSpeed;
     // ==== Rush ====
 
+    // === CirclePath ===
+    [SerializeField] private Transform[] pathNodes;
+    private int _currentNodeIdx;
+    // === CirclePath ===
+
+
     // ==== state ====
+    private float _initY;
+
     [SerializeField] Height height;
     [SerializeField] float highY, middleY, lowY;
     [SerializeField] State state = State.Idle;
@@ -39,15 +47,13 @@ public class EnemyWhale : Enemy
     protected override void Start()
     {
         base.Start();
-
-        SetHeight(Height.Middle);
+        _initY = transform.position.y;
+        SetHeight(Height.High);
         hpBase = combat.HpMaxValue;
         lowTimeLeft = lowTimeSpan;
+        SetDest(pathNodes[_currentNodeIdx].position);
     }
 
-    protected override void FixedUpdate()
-    {
-    }
 
     protected override void Update()
     {
@@ -97,6 +103,7 @@ public class EnemyWhale : Enemy
                 isAction = true;
                 RandomBehavior();
             }
+            HeightTransition();
         }
 
         // Hp
@@ -106,7 +113,6 @@ public class EnemyWhale : Enemy
             SetHeight(Height.High);
         }
 
-        HeightTransition();
     }
 
     private void HeightTransition() {
@@ -150,6 +156,19 @@ public class EnemyWhale : Enemy
         // High states: Idle, BigSkill, Patrol
         // Middle states: Idle, Sardine, Chase
         // Low states: Idle
+
+
+
+        //if (!isAction)
+        //{
+        //    act = GetRandType(weight);
+        //    if (act > 0)
+        //    {
+        //        ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
+        //        isAction = true;
+        //    }
+        //}
+
         switch (height)
         {
             case Height.High:
@@ -159,13 +178,8 @@ public class EnemyWhale : Enemy
                     case 0: // attack
                         BigSkill();
                         break;
-                    case 1:
-                        Patrol();
-                        break;
-                    case 2:
-                        Idle();
-                        break;
                     default:
+                        Patrol();
                         break;
                 }
                 break;
@@ -203,7 +217,6 @@ public class EnemyWhale : Enemy
     protected override void Idle()
     {
         state = State.Idle;
-        animator.SetTrigger("Swim1");
     }
     
     protected override void ChasePlayer()
@@ -217,7 +230,7 @@ public class EnemyWhale : Enemy
         float distance = Vector3.Distance(p, w);
         if (distance > stopRushDistance)
         {
-            animator.SetTrigger("Swim2");
+            animator.SetBool("Swim2", true);
             tmpSpeed = speed;
             speed = rushSpeed;
             GoToPoint(p);
@@ -231,15 +244,16 @@ public class EnemyWhale : Enemy
 
     protected override void Patrol()
     {
+        Debug.Log("whale patrol");
         state = State.Patrol;
-        animator.SetTrigger("Swim1");
-
-        // Random patrol
-        if (!walkPointSet) SearchWalkPoint();
-        if (walkPointSet)
-            GoToPoint(_dest);
+        // follow circular path
+        SetDest(pathNodes[_currentNodeIdx].position);
         Vector3 distanceToWalkPoint = transform.position - _dest;
-        if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
+        if (distanceToWalkPoint.magnitude < 1f)
+        {
+            _currentNodeIdx++;
+            if (_currentNodeIdx == pathNodes.Length) _currentNodeIdx = 0;
+        }
     }
     protected override void SearchWalkPoint()
     {
@@ -292,11 +306,11 @@ public class EnemyWhale : Enemy
         switch (height)
         {
             case Height.High:
-                return highY;
+                return highY + _initY;
             case Height.Middle:
-                return middleY;
+                return middleY + _initY;
             case Height.Low:
-                return lowY;
+                return lowY + _initY;
             default:
                 return -1;
         }
@@ -328,5 +342,30 @@ public class EnemyWhale : Enemy
         Patrol,
         Sardine,
         Chase
+    }
+
+    protected override void SetDest(Vector3 dest)
+    {
+        _dest = new Vector3(dest.x, transform.position.y, dest.z);
+    }
+
+    protected override void ManageLookAt()
+    {
+        _lookatDest = _dest;
+        if (transform.position != _lookatDest)
+        {
+            var targetDirection = _lookatDest - transform.position;
+            targetDirection.x = -targetDirection.x;
+            targetDirection.z = -targetDirection.z;
+
+            var newDir = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * rotateSpeed, 0f);
+
+            transform.rotation = Quaternion.LookRotation(newDir);
+        }
+    }
+
+    protected override void SetAllAnimationFalse()
+    {
+        Anim.SetBool("Swim2", false);
     }
 }

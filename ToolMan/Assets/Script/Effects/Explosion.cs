@@ -32,9 +32,7 @@ public class Explosion : Effect
             _lightList = transform.GetComponentsInChildren<Light>();
         }
         if (_partList == null) return;
-        //Debug.Log(_partList.Length);
         foreach (ParticleSystem child in _partList) {
-            Debug.Log(child.name);
             child.Play();
         }
         if(_lightList != null)

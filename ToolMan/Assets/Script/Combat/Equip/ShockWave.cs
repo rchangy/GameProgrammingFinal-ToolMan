@@ -20,7 +20,6 @@ namespace ToolMan.Combat.Equip
         {
             base.Start();
             _vfx.PlayEffect();
-            //StartCoroutine(ManageVfx());
         }
 
 

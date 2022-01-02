@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eefccdc53b1943d1aac965aa03fd023, type: 3}
   m_Name: NormalAttack
   m_EditorClassIdentifier: 
-  attackDelay: 0
+  attackDelay: 0.25
   RefractoryPeriod: 0
   Cd: 0
   AttackPointOffset: {x: 0, y: 0, z: 0}
-  AttackRange: 0
-  AtkMul: 0
+  AttackRange: 2
+  AfterAttackDelay: 0.8
+  AtkMul: 1
