@@ -20,11 +20,17 @@ public class TutorialGrabAttack : TutorialController
     
     protected override IEnumerator TutorialProcess()
     {
+        uIController.SetBattleUI(true);
         HPCrystal.SetActive(true);
-        while(!crystalDie)
+        _player1.controlEnable = true;
+        _player2.controlEnable = true;
+        while (!crystalDie)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
+        _player1.controlEnable = false;
+        _player2.controlEnable = false;
+        uIController.SetBattleUI(false);
     }
 }

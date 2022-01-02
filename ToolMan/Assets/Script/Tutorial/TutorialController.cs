@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ToolMan.UI;
+using UnityEngine.Playables;
 
 public abstract class TutorialController : Objective
 {
-    public Notification notification;
-    protected RPGTalk rpgTalk;
-    private bool _isCompleted = false;
+    public ToolMan.UI.Notification notification;
+    public PlayableDirector timelineDirector;
 
+    protected RPGTalk rpgTalk;
     protected bool _isTalkEnd = true;
+    private bool _isCompleted = false;
 
     public override void StartObjective()
     {
+        if (timelineDirector != null)
+        {
+            timelineDirector.Pause();
+        }
         StartCoroutine(StartTutorial());
     }
 
@@ -30,6 +36,10 @@ public abstract class TutorialController : Objective
     {
         yield return TutorialProcess();
         _isCompleted = true;
+        if (timelineDirector != null)
+        {
+            timelineDirector.Resume();
+        }
     }
     protected abstract IEnumerator TutorialProcess();
 

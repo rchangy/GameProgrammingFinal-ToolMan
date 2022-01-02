@@ -147,6 +147,9 @@ public class TutorialMoveAndTrans : TutorialController
         //rpgTalk.NewTalk("32", "34");
         //while(!_isTalkEnd)
         //    yield return null;
+        uIController.SetBattleUI(true);
+        _player1.controlEnable = true;
+        _player2.controlEnable = true;
         _isDetectingPlayerMove = taskMove;
         _isDetectingPlayerJump = taskJump;
         _isDetectingTrans1 = taskTransform;
@@ -156,7 +159,11 @@ public class TutorialMoveAndTrans : TutorialController
         {
             yield return null;
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        _player1.controlEnable = false;
+        _player2.controlEnable = false;
+        uIController.SetBattleUI(false);
+        //battleCanvas.gameObject.SetActive(false);
         //_isTalkEnd = false;
         //rpgTalk.NewTalk("37", "39");
         //while (!_isTalkEnd)

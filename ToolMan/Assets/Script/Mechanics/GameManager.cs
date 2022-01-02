@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     private string _currentScene;
     [SerializeField] private GameObject Objectives;
+    [SerializeField] private int objectivesDepth = -1;
     private List<Objective> _objectives;
 
     [SerializeField]
@@ -33,10 +34,19 @@ public class GameManager : MonoBehaviour
         {
             _objectives = Objectives.GetComponentsInChildren<Objective>().ToList();
         }
+        List<Objective> tmpObjectives = new List<Objective>(_objectives);
         foreach (Objective o in _objectives) {
+            if (objectivesDepth == 1)
+            {
+                if (!o.transform.parent.name.Equals("Objectives"))
+                {
+                    tmpObjectives.Remove(o);
+                }
+            }
             o.uIController = _uIController;
             o.SetPlayers(_p1, _p2);
         }
+        _objectives = tmpObjectives;
         _objectives.Sort((x, y) => x.Order.CompareTo(y.Order));
 
         StartCoroutine(CompleteSceneObjectives());
