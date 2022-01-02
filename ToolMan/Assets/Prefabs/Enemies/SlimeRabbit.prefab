@@ -791,6 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80663cb3f0f9e44d88d379b9e986f57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlowedDownEffect: {fileID: 0}
   HpMaxValue: 10
   HpInitValue: 1
   AtkBaseValue: 1
@@ -833,6 +834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95131097399638280}
+  collider: {fileID: 5888432295736771252}
   GroundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -848,6 +850,7 @@ MonoBehaviour:
   MinActionTime: 2
   rotateSpeed: 0
   combat: {fileID: 1115122342}
+  Rb: {fileID: 0}
   walkPointRange: 0
   SightRange: 10
   speed: 4
