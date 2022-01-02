@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4227763940166935905}
   - component: {fileID: 4227763940166935904}
   m_Layer: 0
-  m_Name: CutScene1
+  m_Name: CutScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Order: 1
+  Order: 11
   playableDirector: {fileID: 4227763940226226631}
 --- !u!114 &4227763940166935904
 MonoBehaviour:
@@ -301,6 +301,10 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[17].key
       value: 
       objectReference: {fileID: -9057987498293413553, guid: bf50694df5a234c2a8b745bdf6a38493, type: 2}
+    - target: {fileID: 7615106305790778300, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
+      propertyPath: characters.Array.data[1].character
+      value: 
+      objectReference: {fileID: 11400000, guid: afb8ff50d749d478f9d6ec6b1978b805, type: 2}
     - target: {fileID: 7615106305790778302, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
       propertyPath: timelineDirector
       value: 

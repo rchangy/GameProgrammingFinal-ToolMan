@@ -22,6 +22,7 @@ namespace ToolMan.UI
             countingDown = false;
             countDownTime = fadingTime;
             checkMark.SetActive(false);
+            canvasGroup.alpha = 0;
         }
 
         // Update is called once per frame

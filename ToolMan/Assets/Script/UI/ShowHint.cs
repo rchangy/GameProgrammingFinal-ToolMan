@@ -34,7 +34,7 @@ namespace ToolMan.UI
             Debug.Log("hint length = " + hintsToUnlock.Count);
             foreach (Hint h in hintsToUnlock) { uIController.hintPanel.UnlockHint(h._title); }
             uIController.hintPanel.LoadHint(hintToShow._title);
-            uIController.SetTutorialUI(true);
+            uIController.SetHintUI(true);
             StartCoroutine(WaitForEsc());
         }
 
