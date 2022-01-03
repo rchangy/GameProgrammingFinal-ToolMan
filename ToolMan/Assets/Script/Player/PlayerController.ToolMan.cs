@@ -77,6 +77,7 @@ public partial class PlayerController
 
     override public void BeGrabbed(PlayerController anotherPlayer)
     {
+        animator.ResetTrigger("Attack");
         // reset
         transform.rotation = Quaternion.Euler(0f, 0f, 26f);
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
