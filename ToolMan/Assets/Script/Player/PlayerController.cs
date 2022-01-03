@@ -115,6 +115,7 @@ public partial class PlayerController : ToolableMan
 
     override protected void Update()
     {
+        Debug.Log("update: collider enable = " + playerCollider.enabled);
         if (isDead)
             return;
         if (!controlEnable)

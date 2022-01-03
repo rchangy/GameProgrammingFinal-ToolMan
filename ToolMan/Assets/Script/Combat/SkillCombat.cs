@@ -211,7 +211,7 @@ namespace ToolMan.Combat
         protected virtual void Hit(CombatUnit target)
         {
             Debug.Log(name + " hit " + target.name);
-            target.TakeDamage(Atk, this);
+            target.TakeDamage(Atk * currentUsingSkill.Multiplier, this);
             if(target.Hp > 0)
                 StartCoroutine(currentUsingSkill.Hit(this, target));
         }

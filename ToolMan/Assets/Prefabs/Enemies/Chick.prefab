@@ -825,6 +825,7 @@ GameObject:
   - component: {fileID: -4707998662921425932}
   - component: {fileID: 573183920362926423}
   - component: {fileID: 389061563}
+  - component: {fileID: 1641935250066009757}
   m_Layer: 12
   m_Name: Chick
   m_TagString: Enemy
@@ -897,7 +898,7 @@ SphereCollider:
   m_GameObject: {fileID: 1767663768970106}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.12
   m_Center: {x: 0, y: 0.12, z: 0}
@@ -975,8 +976,23 @@ MonoBehaviour:
   Rb: {fileID: 0}
   walkPointRange: 15
   SightRange: 10
-  speed: 1
+  speed: 2
   InitAttackRange: 1
+  Mom: {fileID: 0}
+--- !u!136 &1641935250066009757
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767663768970106}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.11
+  m_Height: 0.31
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.12, z: 0}
 --- !u!1 &1878532393300130
 GameObject:
   m_ObjectHideFlags: 0

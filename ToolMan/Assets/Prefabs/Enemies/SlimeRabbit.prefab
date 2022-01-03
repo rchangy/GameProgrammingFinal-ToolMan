@@ -704,7 +704,7 @@ GameObject:
   - component: {fileID: 5888432295736771252}
   - component: {fileID: 1115122342}
   - component: {fileID: 1115122343}
-  - component: {fileID: 1115122344}
+  - component: {fileID: 2052034876969533712}
   m_Layer: 12
   m_Name: SlimeRabbit
   m_TagString: Enemy
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inherentTypes: []
---- !u!114 &1115122344
+--- !u!114 &2052034876969533712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -830,7 +830,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1773656247975474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14781d8f4b29e4f48aa2a7b3d2742e73, type: 3}
+  m_Script: {fileID: 11500000, guid: 1471da96001524602aa9a2141a5baa31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95131097399638280}
@@ -842,23 +842,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Name: SlimeRabbit
-  AttackWeight: 0
-  PatrolWeight: 1
-  IdleWeight: 1
+  AttackWeight: 5
+  PatrolWeight: 5
+  IdleWeight: 0
   skillWeight: 
-  MaxActionTime: 3
-  MinActionTime: 2
-  rotateSpeed: 0
+  MaxActionTime: 1
+  MinActionTime: 0.5
+  rotateSpeed: 4
   combat: {fileID: 1115122342}
-  Rb: {fileID: 0}
-  walkPointRange: 0
+  Rb: {fileID: 1115122339}
+  walkPointRange: 5
   SightRange: 10
-  speed: 4
-  InitAttackRange: 3
-  _buffRange: 0
-  followTarget: {fileID: 0}
-  targetInAttackRange: 0
-  _buffs: []
+  speed: 8
+  InitAttackRange: 2
 --- !u!1 &1779164207820988
 GameObject:
   m_ObjectHideFlags: 0

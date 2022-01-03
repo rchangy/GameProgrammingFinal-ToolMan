@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TurtleAddBuff
   m_EditorClassIdentifier: 
   attackDelay: 0.2
-  RefractoryPeriod: 1
-  Cd: 15
+  RefractoryPeriod: 0.5
+  Cd: 20
+  Multiplier: 0
   _buff: {fileID: 11400000, guid: fa50efa11602a4ea4bee3c97d472d487, type: 2}
-  _lastingTime: 4
+  _lastingTime: 2

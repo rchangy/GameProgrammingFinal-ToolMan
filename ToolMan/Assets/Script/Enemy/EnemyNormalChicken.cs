@@ -20,10 +20,9 @@ public class EnemyNormalChicken : Enemy
         animator.SetBool("Run", true);
     }
 
-    public void Hurt()
+    protected override void Hurt()
     {
-        SetAllAnimationFalse();
-        // animation
+        animator.SetTrigger("Hurt");
     }
 
     protected override void Patrol()

@@ -47,17 +47,27 @@ namespace ToolMan.Combat.Equip
 
         public override int TakeDamage(float baseDmg, CombatUnit damager)
         {
-            var dmg = base.TakeDamage(baseDmg, damager);
-            if (_contactPoints.ContainsKey(damager))
+            int dmg = 0;
+            if (damager.gameObject.CompareTag("Player"))
             {
-                ContactPoint[] contacts = _contactPoints[damager];
-                for (int i2 = 0; i2 < contacts.Length; i2++)
+
+                PlayerController player = damager.gameObject.GetComponent<PlayerController>();
+                if(player.GetAnotherPlayer().inToolState() && player.GetAnotherPlayer().getTool().getName() == "LightSaber")
                 {
-                    _mat.SetVector("_HitPosition", transform.InverseTransformPoint(contacts[i2].point));
-                    hitTime = 500;
-                    _mat.SetFloat("_HitTime", hitTime);
+                    dmg = base.TakeDamage(baseDmg, damager);
                 }
             }
+
+            //if (_contactPoints.ContainsKey(damager))
+            //{
+            //    ContactPoint[] contacts = _contactPoints[damager];
+            //    for (int i2 = 0; i2 < contacts.Length; i2++)
+            //    {
+            //        _mat.SetVector("_HitPosition", transform.InverseTransformPoint(contacts[i2].point));
+            //        hitTime = 500;
+            //        _mat.SetFloat("_HitTime", hitTime);
+            //    }
+            //}
 
             return dmg;
         }
