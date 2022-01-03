@@ -39,8 +39,8 @@ public class UIController : MonoBehaviour
     public void SetHintUI(bool val)
     {
         hintUI.SetActive(val);
-        p1.controlEnable = !val;
-        p2.controlEnable = !val;
+        //p1.controlEnable = !val;
+        //p2.controlEnable = !val;
         showingTutorialUI = val;
     }
 

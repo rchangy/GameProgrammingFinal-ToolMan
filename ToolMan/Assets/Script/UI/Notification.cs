@@ -51,7 +51,7 @@ namespace ToolMan.UI
 
         private void FadeIn()
         {
-            Debug.Log(name + " obj st fading in " + canvasGroup.alpha);
+            //Debug.Log(name + " obj st fading in " + canvasGroup.alpha);
             canvasGroup.alpha = 1 - countDownTime / fadingTime;
 
             if (countDownTime <= 0)

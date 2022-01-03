@@ -24,7 +24,7 @@ public class Cutscene : Objective
         playableDirector.Play();
     }
 
-    public void Complete() { _isCompleted = true; Debug.Log("cutScene:)))"); }
+    public void Complete() { _isCompleted = true; Debug.Log("cutScene:))), p1_controlenable = " + _p1.controlEnable); }
 
     public override bool isCompleted()
     {

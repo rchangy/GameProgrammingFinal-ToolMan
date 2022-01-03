@@ -162,6 +162,7 @@ public class TutorialMoveAndTrans : TutorialController
         yield return new WaitForSeconds(1f);
         _player1.controlEnable = false;
         _player2.controlEnable = false;
+        Debug.Log("control enable -> false");
         uIController.SetBattleUI(false);
         //battleCanvas.gameObject.SetActive(false);
         //_isTalkEnd = false;
