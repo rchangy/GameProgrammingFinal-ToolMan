@@ -39,7 +39,7 @@ namespace ToolMan.Combat.Skills.Normal
         {    
             // Add buff
             target.AddBuff(_buff);
-            Debug.Log("Add Buff!!");
+            Debug.Log("Add Buff to " + target.gameObject.name);
             yield break;
         }
     }

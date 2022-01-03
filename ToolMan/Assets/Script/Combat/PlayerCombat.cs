@@ -179,7 +179,7 @@ namespace ToolMan.Combat
             if (ThisPlayerController.IsGrabbed())
             {
                 Debug.Log(name + " hit " + target.name);
-                target.TakeDamage(Atk, TeamMateCombat);
+                target.TakeDamage(Atk * currentUsingSkill.Multiplier, TeamMateCombat);
                 StartCoroutine(currentUsingSkill.Hit(this, target));
             }
             else

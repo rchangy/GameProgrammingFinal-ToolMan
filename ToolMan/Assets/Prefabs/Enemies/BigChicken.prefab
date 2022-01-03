@@ -580,6 +580,7 @@ GameObject:
   - component: {fileID: 3446378994680574240}
   - component: {fileID: 2028721547694754480}
   - component: {fileID: 1841006655}
+  - component: {fileID: 5705157939653602017}
   m_Layer: 12
   m_Name: BigChicken
   m_TagString: Enemy
@@ -636,7 +637,7 @@ SphereCollider:
   m_GameObject: {fileID: 74622244883640366}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.22
   m_Center: {x: 0, y: 0.22, z: 0}
@@ -668,7 +669,7 @@ MonoBehaviour:
   SlowedDownEffect: {fileID: 0}
   HpMaxValue: 2500
   HpInitValue: 2500
-  AtkBaseValue: 50
+  AtkBaseValue: 80
   DefBaseValue: 0
   StrBaseValue: 1
   SpdBaseValue: 1
@@ -721,20 +722,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Name: 
-  AttackWeight: 1
-  PatrolWeight: 0
+  AttackWeight: 5
+  PatrolWeight: 1
   IdleWeight: 0
   skillWeight: 0100000000000000
-  MaxActionTime: 3
-  MinActionTime: 2
+  MaxActionTime: 1
+  MinActionTime: 0.5
   rotateSpeed: 2
   combat: {fileID: 75914775140835482}
   Rb: {fileID: 0}
   walkPointRange: 3
-  SightRange: 10
-  speed: 2
-  InitAttackRange: 2
-  _crazyTime: 5
+  SightRange: 5
+  speed: 4
+  InitAttackRange: 1
+  _crazyTime: 10
   _speedUp: 2
 --- !u!65 &1841006655
 BoxCollider:
@@ -749,6 +750,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &5705157939653602017
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74622244883640366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.18
+  m_Height: 0.48
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.22, z: 0}
 --- !u!1 &74671087135205744
 GameObject:
   m_ObjectHideFlags: 0

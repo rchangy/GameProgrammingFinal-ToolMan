@@ -25813,8 +25813,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2423348877150704491}
-  m_LocalRotation: {x: -0.0053758593, y: 0.7070865, z: 0.0053758607, w: 0.70708627}
-  m_LocalPosition: {x: -2.430986, y: 16.592049, z: 0.0000026575278}
+  m_LocalRotation: {x: -0.0064019, y: 0.5710211, z: 0.0044531943, w: 0.8208984}
+  m_LocalPosition: {x: 4.9349174, y: -2.6355329, z: 2.3868666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4651787502565413885}
@@ -99489,7 +99489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabbedPoint: {fileID: 3969230403153121810}
   speed: 10
-  moveAngleSensitivity: 100
+  moveAngleSensitivity: 200
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0
@@ -99581,8 +99581,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 3.0732732, y: 0.63311434, z: 0.78126717}
-  m_Center: {x: -0.05914092, y: 0.7397287, z: 0.019379616}
+  m_Size: {x: 0.17867218, y: 0.14999998, z: 0.11999999}
+  m_Center: {x: 1.3881481, y: 0.7397287, z: 0.019377347}
 --- !u!135 &2423348877496031023
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -127245,7 +127245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabbedPoint: {fileID: 8031672161016583980}
   speed: 10
-  moveAngleSensitivity: 100
+  moveAngleSensitivity: 200
   jumpForce: 300
   maxJumpCount: 1
   currentJumpCount: 0

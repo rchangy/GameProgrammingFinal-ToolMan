@@ -29,6 +29,7 @@ public class EnemyWaveController : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log("alive = " + currentAlive);
         if(currentAlive == 0)
         {
             // report to enemy waves manager

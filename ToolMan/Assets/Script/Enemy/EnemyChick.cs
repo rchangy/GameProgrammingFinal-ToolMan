@@ -10,6 +10,7 @@ public class EnemyChick : EnemyNormalChicken
     //private float tmpSpeed;
     //// ==== Rush ====
 
+    [SerializeField]
     private EnemyBigChicken Mom;
 
     //protected override void Awake()
@@ -160,7 +161,8 @@ public class EnemyChick : EnemyNormalChicken
 
     override protected void Die()
     {
+        base.Die();
         Mom.ChickKilled();
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

@@ -25,7 +25,7 @@ namespace ToolMan.Combat
         protected override void Update()
         {
             base.Update();
-            //sphereCollider.enabled = _collisionEnable.Value;
+            sphereCollider.enabled = _collisionEnable.Value;
         }
 
         public override bool Attack()

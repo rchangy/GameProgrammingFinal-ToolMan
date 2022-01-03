@@ -23,7 +23,6 @@ public class EnemyNormalChicken : Enemy
     protected override void Hurt()
     {
         animator.SetTrigger("Hurt");
-        // animation
     }
 
     protected override void Patrol()

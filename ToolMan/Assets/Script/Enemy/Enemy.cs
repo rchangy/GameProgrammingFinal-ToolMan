@@ -217,8 +217,9 @@ public class Enemy : MonoBehaviour
 
     protected virtual void ChasePlayer()
     {
-        //Debug.Log("Chase Mode");
+        Debug.Log("Big Chase Mode");
         SetDest(closestPlayer);
+        Debug.Log("Big dest = " + _dest);
         _currentSpeedMul = 2;
     }
 
@@ -365,13 +366,13 @@ public class Enemy : MonoBehaviour
         Vector3 nextStep = Vector3.MoveTowards(transform.position, _dest, speed * combat.Spd * Time.deltaTime);
         Vector3 nextStepDir = Vector3.Normalize(nextStep - transform.position);
         RaycastHit m_Hit;
-        //float m_MaxDistance;
+        float m_MaxDistance;
         bool m_HitDetect;
         //transform.rotation = Quaternion.LookRotation(newDirection);
         float moveDis = Vector3.Distance(nextStep, transform.position);
-        //m_MaxDistance = moveDis;
-        //m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
-        //if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
+        m_MaxDistance = moveDis;
+        m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
+        if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
             transform.position = nextStep;
         //else
         //    Debug.Log(m_Hit.collider.gameObject.name);

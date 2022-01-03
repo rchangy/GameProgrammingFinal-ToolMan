@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 170206480}
   - component: {fileID: 3377219759611425972}
   - component: {fileID: 5245498188588633036}
+  - component: {fileID: 8000998570584598408}
   m_Layer: 12
   m_Name: NormalChicken
   m_TagString: Enemy
@@ -359,7 +360,7 @@ SphereCollider:
   m_GameObject: {fileID: 1311290861401530}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.19
   m_Center: {x: 0, y: 0.22, z: 0}
@@ -427,8 +428,8 @@ MonoBehaviour:
     m_Bits: 64
   Name: Chicken
   AttackWeight: 10
-  PatrolWeight: 1
-  IdleWeight: 1
+  PatrolWeight: 5
+  IdleWeight: 0
   skillWeight: 01000000
   MaxActionTime: 1
   MinActionTime: 0.5
@@ -437,7 +438,7 @@ MonoBehaviour:
   Rb: {fileID: 0}
   walkPointRange: 3
   SightRange: 20
-  speed: 5
+  speed: 7.5
   InitAttackRange: 0.8
 --- !u!54 &3377219759611425972
 Rigidbody:
@@ -468,6 +469,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &8000998570584598408
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311290861401530}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.18
+  m_Height: 0.43
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.21, z: 0}
 --- !u!1 &1325880688823160
 GameObject:
   m_ObjectHideFlags: 0

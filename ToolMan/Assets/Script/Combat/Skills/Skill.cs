@@ -14,6 +14,7 @@ namespace ToolMan.Combat.Skills
         public float attackDelay;
         public float RefractoryPeriod;
         public float Cd;
+        public float Multiplier = 1;
 
         public abstract IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable);
 
