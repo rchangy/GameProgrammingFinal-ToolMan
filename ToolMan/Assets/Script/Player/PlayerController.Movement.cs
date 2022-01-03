@@ -15,8 +15,7 @@ public partial class PlayerController
     public float jumpForce = 300;
     public int maxJumpCount = 1; // It can actaully jump once more 
     public int currentJumpCount = 0;
-    private float distToGround;
-    private bool isGrounded;
+    
 
     // ==== wave ====
     private bool toolWave = false;

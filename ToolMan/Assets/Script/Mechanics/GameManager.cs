@@ -36,9 +36,9 @@ public class GameManager : MonoBehaviour
         }
         List<Objective> tmpObjectives = new List<Objective>(_objectives);
         foreach (Objective o in _objectives) {
-            if (objectivesDepth == 1)
+            if (objectivesDepth != -1)
             {
-                if (!o.transform.parent.name.Equals("Objectives"))
+                if (FindDepth(Objectives.transform, o.transform) > objectivesDepth)
                 {
                     tmpObjectives.Remove(o);
                 }
@@ -68,6 +68,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("level1 complete");
         // next scene
     }
-
-    
+    int FindDepth(Transform root, Transform objective)
+    {
+        if (objective.parent == root)
+            return 1;
+        else
+            return 1 + FindDepth(root, objective.parent);
+    }
 }

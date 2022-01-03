@@ -51,7 +51,12 @@ public class Tool
         playerRB.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         player.gameObject.transform.rotation = Quaternion.identity;
         // when a tool transform to a man, it may stuck into ground and fall down, this may need to be adjusted (position.y)
-        player.gameObject.transform.position = new Vector3(player.gameObject.transform.position.x, player.GetAnotherPlayer().transform.position.y, player.gameObject.transform.position.z);
+        float newY;
+        if (!player.IsGrabbed())
+            newY = player.transform.position.y - player.GetCollider().bounds.extents.y + player.distToGround;
+        else
+            newY = player.GetAnotherPlayer().transform.position.y;
+        player.gameObject.transform.position = new Vector3(player.gameObject.transform.position.x, newY, player.gameObject.transform.position.z);
         player.resetRigidBody();
         // ==== reset player ====
         player.setEmission(false);

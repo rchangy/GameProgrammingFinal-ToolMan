@@ -16,6 +16,8 @@ public partial class PlayerController : ToolableMan
     public bool controlEnable;
     public int playerNum = 1; // player 1 or player 2
     [SerializeField] private bool isDead = false;
+    public float distToGround;
+    private bool isGrounded;
 
     [SerializeField] private bool changeable = false;
     [SerializeField] private LayerMask playerLayerMask;
@@ -242,6 +244,11 @@ public partial class PlayerController : ToolableMan
     public Animator getAnimator()
     {
         return animator;
+    }
+
+    public Collider GetCollider()
+    {
+        return playerCollider;
     }
 
     public GrabPoint GetGrabPoint()
