@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private PlayerController _p1;
     [SerializeField]
     private PlayerController _p2;
+    [SerializeField]
+    private GameObject PostFX_Dead;
 
     public bool reset = true;
     private void Awake()
@@ -68,11 +70,16 @@ public class GameManager : MonoBehaviour
         Debug.Log("level1 complete");
         // next scene
     }
-    int FindDepth(Transform root, Transform objective)
+    private int FindDepth(Transform root, Transform objective)
     {
         if (objective.parent == root)
             return 1;
         else
             return 1 + FindDepth(root, objective.parent);
+    }
+
+    private void PlayerLose()
+    {
+        PostFX_Dead.gameObject.SetActive(true);
     }
 }

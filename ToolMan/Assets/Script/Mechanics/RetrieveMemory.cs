@@ -55,6 +55,7 @@ public class RetrieveMemory : Objective
         // Release & toMan
         players[0].ResetToIdle();
         players[1].ResetToIdle();
+        movePlayer1();
 
         // set camera
         CameraManager[] cams;
@@ -76,5 +77,41 @@ public class RetrieveMemory : Objective
     public void CrystalDie()
     {
         crystalBroken = true;
+    }
+
+    private void movePlayer1()
+    {
+        RaycastHit m_Hit;
+        float m_MaxDistance;
+        bool m_HitDetect;
+
+        float moveDis = 5f;
+        float accumulateRotates = 0f;
+        bool moved = false;
+        m_MaxDistance = moveDis;
+
+        int count = 0;
+        _p1.transform.forward = _p2.transform.forward;
+        _p1.transform.position = _p2.transform.position;
+        while (!moved)
+        {
+            accumulateRotates += 90f;
+            count++;
+            _p1.transform.eulerAngles += new Vector3(0f, 90f, 0f);
+            m_HitDetect = Physics.BoxCast(_p1.GetCollider().bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
+            if (!m_HitDetect || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
+            {
+                _p1.transform.position += moveDis * transform.forward;
+                moved = true;
+            }
+            else
+            {
+                //Debug.Log("Hit : " + m_Hit.collider.name);
+            }
+            if (count >= 4)
+                break;
+        }
+        if (moved)
+            _p1.transform.eulerAngles -= new Vector3(0f, accumulateRotates, 0f);
     }
 }
