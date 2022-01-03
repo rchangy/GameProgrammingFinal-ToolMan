@@ -10,6 +10,7 @@ public static class CheckpointManager
     static string ckptPath = "Assets/Script/Mechanics/checkpoint.json";
     static int[] player1ToolNums = { 1, 1, 2, 2, 2 };
     static int[] player2ToolNums = { 1, 2, 2, 3, 3 };
+    static int[] lastUnlockedHIntList = { 1, 15, 17, 20, 21 };
     public static void LoadCheckpoint()
     {
         StreamReader r = new StreamReader(ckptPath);
@@ -52,6 +53,7 @@ public static class CheckpointManager
         public int level;
         public int player1ToolNum;
         public int player2ToolNum;
+        public int lastUnlockedHint;
         public CheckpointInfo(Checkpoint newCkpt)
         {
             setByLevel(int.Parse(newCkpt.level));
@@ -69,6 +71,7 @@ public static class CheckpointManager
             this.level = level;
             this.player1ToolNum = player1ToolNums[level - 1];
             this.player2ToolNum = player2ToolNums[level - 1];
+            this.lastUnlockedHint = lastUnlockedHIntList[level - 1]; 
         }
         public Checkpoint ToCheckpoint()
         {
