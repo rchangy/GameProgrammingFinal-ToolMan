@@ -12,8 +12,6 @@ namespace ToolMan.UI
         [SerializeField]
         private List<Hint> hintsToUnlock;
 
-        public PlayableDirector timelineDirector;
-
         private bool _isCompleted;
 
         protected override void Init()
@@ -24,8 +22,6 @@ namespace ToolMan.UI
         public override void StartObjective()
         {
             Debug.Log("Start objective: " + gameObject.name);
-            if (timelineDirector != null)
-                timelineDirector.Pause();
             _p1.controlEnable = false;
             _p2.controlEnable = false;
             _uIController.SetControlEnable(true);
@@ -46,8 +42,6 @@ namespace ToolMan.UI
         IEnumerator WaitForEsc() {
             while (uIController.showingTutorialUI) { yield return null; }
             _isCompleted = true;
-            if (timelineDirector != null)
-                timelineDirector.Resume();
             yield return null;
         }
     }
