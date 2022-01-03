@@ -24,12 +24,12 @@ namespace ToolMan.Combat.Skills.Normal
             Effect warningEffect = whale.effectController.effectList.Find(e => e.name == "WhaleBigSkillWarning");
             RaycastHit hit;
             Physics.Raycast(whale.transform.position, -Vector3.up, out hit, 100, whale.GroundLayerMask);
-            warningEffect.transform.position = new Vector3(warningEffect.transform.position.x, hit.point.y, warningEffect.transform.position.z);
+            warningEffect.transform.position = new Vector3(warningEffect.transform.position.x, hit.point.y + 0.5f, warningEffect.transform.position.z);
             warningEffect.PlayEffect();
             // play warning sound
 
             yield return new WaitForSeconds(_warningLastingTime);
-
+            warningEffect.StopEffect();
             // anim
             yield return new WaitForSeconds(attackDelay);
             whale.GetAnimator().SetTrigger("Attack");

@@ -64,6 +64,11 @@ public partial class PlayerController : ToolableMan
     private ProgressBar _comboChargeProgress;
     // ==== Combat ====
 
+    /// === WaterMat === 
+    [SerializeField] private BearManWaterMatSwitcher _waterMatSwitcher;
+    /// === WaterMat === 
+
+
     // ==== Camera ====
     [SerializeField] CameraManager cam;
     // ==== Camera ====
@@ -192,7 +197,7 @@ public partial class PlayerController : ToolableMan
         transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
 
        
-        float moveDis = vertical * speed * Time.deltaTime;
+        float moveDis = vertical * speed * Time.deltaTime * combat.Spd;
         m_MaxDistance = moveDis;
         m_HitDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
         if (!m_HitDetect || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
@@ -283,7 +288,10 @@ public partial class PlayerController : ToolableMan
         }
         else if (!emission)
         {
-            skinRenderer.material = playerMaterial;
+            if (_waterMatSwitcher != null && _waterMatSwitcher.InWater)
+                _waterMatSwitcher.SetWaterMat();
+            else
+                skinRenderer.material = playerMaterial;
         }
     }
     public void LoadTool(int toolNum)

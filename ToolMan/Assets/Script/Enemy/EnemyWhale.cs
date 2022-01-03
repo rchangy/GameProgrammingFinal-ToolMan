@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-
+using ToolMan.Combat.Equip;
 public class EnemyWhale : Enemy
 {
     // ==== Rush ====
@@ -25,9 +25,10 @@ public class EnemyWhale : Enemy
     [SerializeField] float hpBase;
     [SerializeField] float hpDicreaseThres;
     [SerializeField] float lowTimeSpan;
-    [SerializeField] private float lowTimeLeft;
+    private float lowTimeLeft;
     [SerializeField] private int nowSardines = 0;
     [SerializeField] int maxSardines;
+
     // ==== state ====
 
     // ==== effect ====
@@ -36,6 +37,16 @@ public class EnemyWhale : Enemy
 
     // ==== skill ====
     public GameObject bigSkillPrefab;
+    public Flood flood;
+
+    public Transform[] SharkPos;
+    [SerializeField] private int[] SharkNumEachWave;
+    private int _currentSharkWave;
+
+    private float _timerForSkills;
+    [SerializeField] private float _timeToStartSharkWave;
+    private bool _sharkReleased;
+
     // ==== skill ====
 
     protected override void Awake()
@@ -49,14 +60,10 @@ public class EnemyWhale : Enemy
         base.Start();
         _initY = transform.position.y;
         SetHeight(Height.High);
+
         hpBase = combat.HpMaxValue;
         lowTimeLeft = lowTimeSpan;
         SetDest(pathNodes[_currentNodeIdx].position);
-    }
-
-
-    protected override void Update()
-    {
         GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
         int playerNum = PlayerGameObjects.Length;
 
@@ -65,13 +72,17 @@ public class EnemyWhale : Enemy
         {
             Players[i] = PlayerGameObjects[i].transform;
         }
+    }
 
+
+    protected override void Update()
+    {
+        if (_timerForSkills > 0)
+            _timerForSkills -= Time.deltaTime;
         if (!combat.Attacking)
         {
-            //Debug.Log("action time = " + ActionLastTime + " state = " + state + " isAction = " + isAction);
             if (isAction)
             {
-                //Debug.Log("isAction = true");
                 ActionLastTime -= Time.deltaTime;
                 if (ActionLastTime < 0)
                 {
@@ -82,14 +93,8 @@ public class EnemyWhale : Enemy
                     case State.Idle:
                         Idle();
                         break;
-                    case State.BigSkill:
-                        BigSkill();
-                        break;
                     case State.Patrol:
                         Patrol();
-                        break;
-                    case State.Sardine:
-                        Sardine();
                         break;
                     case State.Chase:
                         ChasePlayer();
@@ -98,7 +103,6 @@ public class EnemyWhale : Enemy
             }
             else
             {
-                //Debug.Log("isAction = false");
                 ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
                 isAction = true;
                 RandomBehavior();
@@ -119,7 +123,7 @@ public class EnemyWhale : Enemy
         switch (height)
         {
             case Height.High:
-                if (combat.Hp <= hpBase - hpDicreaseThres)
+                if (_sharkReleased && !combat.Attacking)
                 {
                     SetHeight(Height.Middle);
                     isAction = false;
@@ -139,7 +143,7 @@ public class EnemyWhale : Enemy
                 lowTimeLeft -= Time.deltaTime;
                 if (lowTimeLeft <= 0)
                 {
-                    SetHeight(Height.Middle);
+                    SetHeight(Height.High);
                     lowTimeLeft = lowTimeSpan;
                     isAction = false;
                 }
@@ -153,26 +157,14 @@ public class EnemyWhale : Enemy
 
     protected override void RandomBehavior()
     {
-        // High states: Idle, BigSkill, Patrol
-        // Middle states: Idle, Sardine, Chase
-        // Low states: Idle
-
-
-
-        //if (!isAction)
-        //{
-        //    act = GetRandType(weight);
-        //    if (act > 0)
-        //    {
-        //        ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
-        //        isAction = true;
-        //    }
-        //}
-
         switch (height)
         {
             case Height.High:
                 act = GetRandType(weight);
+                if(!combat.Attacking && _timerForSkills <= 0)
+                {
+                    ReleaseSharks();
+                }
                 switch (act)
                 {
                     case 0: // attack
@@ -233,7 +225,7 @@ public class EnemyWhale : Enemy
             animator.SetBool("Swim2", true);
             tmpSpeed = speed;
             speed = rushSpeed;
-            GoToPoint(p);
+            SetDest(p);
         }
         else
         {
@@ -244,9 +236,7 @@ public class EnemyWhale : Enemy
 
     protected override void Patrol()
     {
-        Debug.Log("whale patrol");
         state = State.Patrol;
-        // follow circular path
         SetDest(pathNodes[_currentNodeIdx].position);
         Vector3 distanceToWalkPoint = transform.position - _dest;
         if (distanceToWalkPoint.magnitude < 1f)
@@ -270,6 +260,22 @@ public class EnemyWhale : Enemy
             combat.Attack();
     }
 
+    private void ReleaseSharks()
+    {
+        flood.StartFlooding();
+        combat.SetCurrentUsingSkill("Shark Missle");
+        combat.Attack();
+        _sharkReleased = true;
+    }
+
+    public int GetCurrentSharkWave()
+    {
+        int ret = SharkNumEachWave[_currentSharkWave];
+        _currentSharkWave++;
+        if (_currentSharkWave == SharkNumEachWave.Length) _currentSharkWave = 0;
+        return ret;
+    }
+
     public void Sardine()
     {
         state = State.Sardine;
@@ -281,19 +287,6 @@ public class EnemyWhale : Enemy
 
     public Animator GetAnimator() { return animator; }
 
-    private void GoToPoint(Vector3 point)
-    {
-        if (transform.position != point)
-        {
-            Vector3 towardDir = transform.position - point;
-            towardDir = new Vector3(towardDir.x, 0, towardDir.z); // Ignore y axis
-            Vector3 newDir = Vector3.RotateTowards(transform.forward, towardDir, Time.deltaTime * rotateSpeed, 0f);
-            
-            transform.rotation = Quaternion.LookRotation(newDir);
-        }
-        transform.position -= speed * Time.deltaTime * transform.forward;
-        Debug.Log("go to " + point);
-    }
 
     private enum Height
     {
@@ -323,10 +316,13 @@ public class EnemyWhale : Enemy
         {
             case Height.High:
                 height = Height.High;
+                _timerForSkills = _timeToStartSharkWave;
+                _sharkReleased = false;
                 break;
 
             case Height.Middle:
                 height = Height.Middle;
+                flood.StopFlooding();
                 nowSardines = 0;
                 break;
 
@@ -368,4 +364,5 @@ public class EnemyWhale : Enemy
     {
         Anim.SetBool("Swim2", false);
     }
+
 }

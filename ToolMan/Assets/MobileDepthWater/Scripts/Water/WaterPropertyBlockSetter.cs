@@ -24,6 +24,14 @@ namespace Assets.Scripts.Water
 
         [Space]
         [SerializeField] private float waterHeight;
+        public float WaterHeight
+        {
+            get => waterHeight;
+            set
+            {
+                waterHeight = value;
+            }
+        }
         [SerializeField] private float waterDeep;
         [Range(0, 0.1f)][SerializeField] private float waterDepthParam;
         [Range(0, 1)][SerializeField] private float waterMinAlpha;

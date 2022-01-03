@@ -10,11 +10,11 @@ namespace Assets.Scripts.Water
     /// </summary>
     public class WaterMaterialSwitcher : MonoBehaviour
     {
-        [SerializeField] private Renderer renderer;
-        [SerializeField] private Material waterMaterial;
-        [SerializeField] private Material diffuseMaterial;
+        [SerializeField] protected Renderer renderer;
+        [SerializeField] protected Material waterMaterial;
+        [SerializeField] protected Material diffuseMaterial;
 
-        private MaterialPropertyBlock defaulPropertyBlock;
+        protected MaterialPropertyBlock defaulPropertyBlock;
 
         public void Awake()
         {
@@ -22,7 +22,7 @@ namespace Assets.Scripts.Water
             renderer.GetPropertyBlock(defaulPropertyBlock);
         }
 
-        public void OnTriggerEnter(Collider collider)
+        public virtual void OnTriggerEnter(Collider collider)
         {
             if (collider.tag == "Water")
             {
@@ -33,7 +33,7 @@ namespace Assets.Scripts.Water
             }
         }
 
-        public void OnTriggerExit(Collider collider)
+        public virtual void OnTriggerExit(Collider collider)
         {
             if (collider.tag == "Water")
             {

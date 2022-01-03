@@ -1067,6 +1067,7 @@ MonoBehaviour:
   maxSardines: 3
   effectController: {fileID: 1312452252}
   bigSkillPrefab: {fileID: 2718603048759978727, guid: bcd05cf342558417587da0b8e95a4958, type: 3}
+  flood: {fileID: 0}
 --- !u!54 &181256453
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1324,15 +1325,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427342, guid: 91511b1d3ca45b6448a74bf2ab114aa0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.910801
       objectReference: {fileID: 0}
     - target: {fileID: 427342, guid: 91511b1d3ca45b6448a74bf2ab114aa0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.6
+      value: 156.3
       objectReference: {fileID: 0}
     - target: {fileID: 427342, guid: 91511b1d3ca45b6448a74bf2ab114aa0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -18.43065
       objectReference: {fileID: 0}
     - target: {fileID: 427342, guid: 91511b1d3ca45b6448a74bf2ab114aa0, type: 3}
       propertyPath: m_LocalRotation.w
