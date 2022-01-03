@@ -182,45 +182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d025571132434551a7f4282a61ac4f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &75080195 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5737167549631152015, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-  m_PrefabInstance: {fileID: 992009670}
-  m_PrefabAsset: {fileID: 0}
 --- !u!137 &75080196 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4683010608365147261, guid: d9b1f045573050749aab36f91caa872c, type: 3}
   m_PrefabInstance: {fileID: 992009670}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &75080198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75080195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb037ac5c89fe48a39fdc602fb744c24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderer: {fileID: 75080196}
-  waterMaterial: {fileID: 2100000, guid: e4b20711db0e644bdbdc7b9016c72258, type: 2}
-  diffuseMaterial: {fileID: 2100000, guid: daf7ba677d64dad459938aca394c6db7, type: 2}
---- !u!136 &75080199
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75080195}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.93203807
-  m_Height: 2.8360846
-  m_Direction: 1
-  m_Center: {x: -0.0000009536743, y: -0.057250977, z: -0.056322098}
 --- !u!1 &172550453
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,45 +313,11 @@ Transform:
   m_Father: {fileID: 380627932}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &303700144 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1728593074302450353, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-  m_PrefabInstance: {fileID: 992009670}
-  m_PrefabAsset: {fileID: 0}
 --- !u!137 &303700145 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1774088491511796035, guid: d9b1f045573050749aab36f91caa872c, type: 3}
   m_PrefabInstance: {fileID: 992009670}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &303700147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 303700144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43f35e80d9e9de94b9032fbd4aa2b5f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderer: {fileID: 303700145}
-  waterMaterial: {fileID: 2100000, guid: 3497a19cf53a043e089a4398a30f1475, type: 2}
-  diffuseMaterial: {fileID: 2100000, guid: 49aa09efb21b88c48a6076ac4fe2ecc7, type: 2}
---- !u!136 &303700148
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 303700144}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.017275762
-  m_Height: 0.05256816
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.0010609627, z: -0.001043953}
 --- !u!1 &336141710 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8145033416783112295, guid: 8ff9b8dd3ee6143a9a138739dd613b88, type: 3}
@@ -1435,10 +1367,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 189264050945683044, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: VulnerableBaseValue
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1881676203093876934, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1491,10 +1419,6 @@ PrefabInstance:
       propertyPath: Objectives
       value: 
       objectReference: {fileID: 1331041956}
-    - target: {fileID: 2423348875866744197, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 121855
-      objectReference: {fileID: 0}
     - target: {fileID: 2423348876475688484, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_Name
       value: GameSettings
@@ -1509,11 +1433,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2423348876475688487, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2423348876475688487, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.93
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2423348876475688487, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1545,24 +1469,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2423348877079538174, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 107
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423348877150704494, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 112639
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423348877311785578, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: VulnerableBaseValue
-      value: 1
+      value: 113.4
       objectReference: {fileID: 0}
     - target: {fileID: 4394039214326930993, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 45.95
       objectReference: {fileID: 0}
-    - target: {fileID: 4683010608365147261, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: daf7ba677d64dad459938aca394c6db7, type: 2}
     - target: {fileID: 5678871092492134002, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1587,10 +1499,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6319494748944245440, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: _waterMatSwitcher
-      value: 
-      objectReference: {fileID: 75080198}
     - target: {fileID: 6771355376928982780, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_IsActive
       value: 0
