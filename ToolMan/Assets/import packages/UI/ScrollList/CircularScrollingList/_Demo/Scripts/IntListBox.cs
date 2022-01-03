@@ -12,8 +12,6 @@ namespace AirFishLab.ScrollingList.Demo
         private Hint[] _hints;
         private Hint _lockedHint;
         public string boxName;
-        private string[] _names = {"提示", "移動、跳躍", "變身", "十字鎬", "閃光彈", "轉視角", "水晶", "治療水晶", "抓取", "攻擊",
-        "記憶水晶", "光劍", "工具選擇", "鍵位——人型", "鍵位——工具", "龜龜", "迴力鏢", "大雞、小雞", "史萊姆兔", "護盾", "狗勾將軍", "族邸鯨魔閻",};
         [SerializeField]
         private Text _contentText;
 
