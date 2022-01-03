@@ -196,7 +196,8 @@ namespace ToolMan.Combat
 
         protected virtual void Interrupted(CombatUnit damager)
         {
-            HurtActions.Invoke();
+            if(HurtActions != null)
+                HurtActions.Invoke();
             var dir = transform.position - damager.transform.position;
             dir.y = 0f;
             dir = Vector3.Normalize(dir);

@@ -19,6 +19,8 @@ public class EnemyTurtle : Enemy
     private bool _destAvailable = false;
     [SerializeReference] private EffectController effectController;
 
+    private bool _isUsingShield = false;
+
     protected override void Start()
     {
         base.Start();
@@ -76,21 +78,21 @@ public class EnemyTurtle : Enemy
     protected override void ManageBehavior()
     {
         if (combat.Attacking) return;
-        if (PlayerInAttackRange && !_escaping)
-        {
-            isAction = false;
-            Escape();
-            return;
-        }
-        if (_escaping)
-        {
-            if (!PlayerInAttackRange) _escaping = false;
-            else
-            {
-                Escape();
-                return;
-            }
-        }
+        //if (PlayerInAttackRange && !_escaping)
+        //{
+        //    isAction = false;
+        //    Escape();
+        //    return;
+        //}
+        //if (_escaping)
+        //{
+        //    if (!PlayerInAttackRange) _escaping = false;
+        //    else
+        //    {
+        //        Escape();
+        //        return;
+        //    }
+        //}
         if (isAction)
         {
             ActionLastTime -= Time.deltaTime;
@@ -106,7 +108,7 @@ public class EnemyTurtle : Enemy
             }
         }
 
-        if (!targetInSightRange && followTarget != null) {
+        if (targetInSightRange && followTarget != null) {
             isAction = true;
             ActionLastTime = Random.Range(MinActionTime, MaxActionTime);
             Follow();
@@ -167,6 +169,12 @@ public class EnemyTurtle : Enemy
         state = State.Attack;
         SetAllAnimationFalse();
         _destAvailable = false;
+        if (PlayerInSightRange)
+        {
+            combat.SetCurrentUsingSkill("TurtleShield");
+            combat.Attack();
+        }
+        combat.SetCurrentUsingSkill("TurtleAddBuff");
         combat.Attack();
     }
 
@@ -289,30 +297,30 @@ public class EnemyTurtle : Enemy
         }
     }
 
-    protected override void ManageMovement()
-    {
-        if (!_destAvailable)
-            return;
-        _dest.y = transform.position.y;
-        //transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * _currentSpeed);
+    //protected override void ManageMovement()
+    //{
+    //    if (!_destAvailable)
+    //        return;
+    //    _dest.y = transform.position.y;
+    //    //transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * _currentSpeed);
 
-        // Determine which direction to rotate towards
-        Vector3 targetDirection = _dest - transform.position;
-        // The step size is equal to speed times frame time.
-        float singleStep = speed * Time.deltaTime;
-        // Rotate the forward vector towards the target direction by one step
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+    //    // Determine which direction to rotate towards
+    //    Vector3 targetDirection = _dest - transform.position;
+    //    // The step size is equal to speed times frame time.
+    //    float singleStep = speed * Time.deltaTime;
+    //    // Rotate the forward vector towards the target direction by one step
+    //    Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
 
-        RaycastHit m_Hit;
-        float m_MaxDistance;
-        bool m_HitDetect;
-        transform.rotation = Quaternion.LookRotation(newDirection);
-        float moveDis = speed * Time.deltaTime;
-        m_MaxDistance = moveDis;
-        m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
-        if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.isTrigger)
-            transform.position += moveDis * transform.forward;
-    }
+    //    RaycastHit m_Hit;
+    //    float m_MaxDistance;
+    //    bool m_HitDetect;
+    //    transform.rotation = Quaternion.LookRotation(newDirection);
+    //    float moveDis = speed * Time.deltaTime;
+    //    m_MaxDistance = moveDis;
+    //    m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
+    //    if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.isTrigger)
+    //        transform.position += moveDis * transform.forward;
+    //}
 
     public EffectController GetEffectController() { return effectController; }
 }

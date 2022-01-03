@@ -93,9 +93,9 @@ public class Enemy : MonoBehaviour
     protected List<string> _skillSet = new List<string>();
 
 
-    [SerializeField] protected int InitAttackRange;
-    protected int _attackRange;
-    public int AttackRange
+    [SerializeField] protected float InitAttackRange;
+    protected float _attackRange;
+    public float AttackRange
     {
         get => _attackRange;
         set
@@ -370,9 +370,11 @@ public class Enemy : MonoBehaviour
         //transform.rotation = Quaternion.LookRotation(newDirection);
         float moveDis = Vector3.Distance(nextStep, transform.position);
         //m_MaxDistance = moveDis;
-        m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
-        if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.isTrigger)
+        //m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
+        //if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
             transform.position = nextStep;
+        //else
+        //    Debug.Log(m_Hit.collider.gameObject.name);
     }
 
     protected virtual void ManageLookAt()

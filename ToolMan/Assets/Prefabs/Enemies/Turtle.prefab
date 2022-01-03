@@ -276,14 +276,14 @@ MonoBehaviour:
   Name: turtle
   AttackWeight: 5
   PatrolWeight: 1
-  IdleWeight: 1
+  IdleWeight: 0
   skillWeight: 
-  MaxActionTime: 4
-  MinActionTime: 2
+  MaxActionTime: 1
+  MinActionTime: 0.5
   rotateSpeed: 3
   combat: {fileID: 5913986894603866099}
   Rb: {fileID: 0}
-  walkPointRange: 20
+  walkPointRange: 3
   SightRange: 20
   speed: 2.5
   InitAttackRange: 10
@@ -1075,52 +1075,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3897210457047182147}
     m_Modifications:
-    - target: {fileID: 100000, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
       propertyPath: m_Name
       value: TurtleBuff
       objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
       propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
@@ -1161,14 +1121,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19800000, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19800000, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
-      propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
