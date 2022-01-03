@@ -93,30 +93,24 @@ public class RetrieveMemory : Objective
         int count = 0;
         _p1.transform.forward = _p2.transform.forward;
         _p1.transform.position = _p2.transform.position;
-        Debug.Log("original p1 position = " + _p1.transform.position);
         while (!moved)
         {
             accumulateRotates += 90f;
             count++;
             _p1.transform.eulerAngles += new Vector3(0f, 90f, 0f);
-            Debug.Log("transform.forward = " + _p1.transform.forward);
             m_HitDetect = Physics.BoxCast(_p1.GetCollider().bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
             if (!m_HitDetect || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
             {
-                Debug.Log("move:   " + moveDis * transform.forward);
                 _p1.transform.position += moveDis * transform.forward;
-                Debug.Log("moved p1 position = " + _p1.transform.position);
                 moved = true;
             }
             else
             {
-                Debug.Log("Hit : " + m_Hit.collider.name);
+                //Debug.Log("Hit : " + m_Hit.collider.name);
             }
             if (count >= 4)
                 break;
         }
-        Debug.Log("moved = " + moved);
-        Debug.Log("accumulateRotates = " + accumulateRotates);
         if (moved)
             _p1.transform.eulerAngles -= new Vector3(0f, accumulateRotates, 0f);
     }
