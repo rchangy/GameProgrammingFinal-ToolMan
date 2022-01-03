@@ -17,7 +17,7 @@ public class RetrieveMemory : Objective
         if (crystal != null)
         {
             memoryCrystal = crystal.GetComponent<Crystal>();
-            memoryCrystal.gameObject.SetActive(true);
+            memoryCrystal.gameObject.SetActive(false);
             memoryCrystal.setObjective(this);
             crystalBroken = false;
         }
@@ -44,6 +44,7 @@ public class RetrieveMemory : Objective
 
     public override void StartObjective()
     {
+        memoryCrystal.gameObject.SetActive(true);
         StartCoroutine(CheckCrystal());
     }
     private IEnumerator CheckCrystal()
@@ -62,7 +63,7 @@ public class RetrieveMemory : Objective
         {
             cam.LookAtFace();
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         // unlock
         CheckpointManager.NextLevel();
         players[0].UnlockTool(CheckpointManager.GetCheckpointInfo().level, CheckpointManager.GetCheckpointInfo().player1ToolNum);

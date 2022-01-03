@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6219238310914833741
+--- !u!114 &-1175343883786079752
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16,48 +16,7 @@ MonoBehaviour:
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: c4ef7adbd9391ba4ca440c66931da244, type: 2}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
-  m_Name: level1_Battle2
-  m_EditorClassIdentifier: 
-  m_Version: 0
-  m_Tracks:
-  - {fileID: 4916714544327839859}
-  m_FixedDuration: 0
-  m_EditorSettings:
-    m_Framerate: 60
-    m_ScenePreview: 1
-  m_DurationMode: 0
-  m_MarkerTrack: {fileID: 3352292132946957175}
---- !u!114 &47314826233384390
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 479ec74219d674ef8b34abb60a3e4c46, type: 3}
-  m_Name: RPGTalkCinematicClip
-  m_EditorClassIdentifier: 
-  template:
-    txtToParse: {fileID: 4900000, guid: 43f5a712140d542799e5cb665ad5ad4c, type: 3}
-    lineToStart: 66
-    lineToBreak: 70
-    textSpeed: 50
-    pauseUntilTalkEnd: 1
-    autoPass: 0
-    secondsAutoPass: 0
---- !u!114 &3352292132946957175
+--- !u!114 &-930078078191823834
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,7 +39,48 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects: []
---- !u!114 &4916714544327839859
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
+  m_Name: level1_View
+  m_EditorClassIdentifier: 
+  m_Version: 0
+  m_Tracks:
+  - {fileID: 5472357569374641427}
+  m_FixedDuration: 0
+  m_EditorSettings:
+    m_Framerate: 60
+    m_ScenePreview: 1
+  m_DurationMode: 0
+  m_MarkerTrack: {fileID: -930078078191823834}
+--- !u!114 &310630650141761728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479ec74219d674ef8b34abb60a3e4c46, type: 3}
+  m_Name: RPGTalkCinematicClip
+  m_EditorClassIdentifier: 
+  template:
+    txtToParse: {fileID: 4900000, guid: 43f5a712140d542799e5cb665ad5ad4c, type: 3}
+    lineToStart: 39
+    lineToBreak: 40
+    textSpeed: 50
+    pauseUntilTalkEnd: 1
+    autoPass: 0
+    secondsAutoPass: 0
+--- !u!114 &5472357569374641427
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,10 +104,10 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 1
     m_ClipIn: 0
-    m_Asset: {fileID: 47314826233384390}
+    m_Asset: {fileID: 310630650141761728}
     m_Duration: 0.08333333333333326
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 4916714544327839859}
+    m_ParentTrack: {fileID: 5472357569374641427}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -172,4 +172,4 @@ MonoBehaviour:
     m_DisplayName: RPGTalkCinematicClip
   m_Markers:
     m_Objects:
-    - {fileID: -6219238310914833741}
+    - {fileID: -1175343883786079752}
