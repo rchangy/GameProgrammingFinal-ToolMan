@@ -150,6 +150,10 @@ namespace ToolMan.Combat
                         Debug.Log("Set EnemyHPCanvas for Canvas1 to keep Canvas1 looking at player1's camera.");
                     }
                 }
+                else
+                {
+                    Debug.Log("Cannot find canvas 1");
+                }
 
                 if (canvas2 != null)
                 {
@@ -162,6 +166,10 @@ namespace ToolMan.Combat
                     {
                         Debug.Log("Set EnemyHPCanvas for Canvas2 to keep Canvas2 looking at player2's camera.");
                     }
+                }
+                else
+                {
+                    Debug.Log("Cannot find canvas 2");
                 }
             }
         }

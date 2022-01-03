@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4247655823776350}
   - component: {fileID: 95621980816538592}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Turtle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,8 +61,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4929774701729338}
-  - component: {fileID: 136772003800426118}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,20 +83,6 @@ Transform:
   m_Father: {fileID: 4060794305477308}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &136772003800426118
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244711570167174}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.74
-  m_Height: 2.6
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.44, z: 0.15}
 --- !u!1 &1349271281342476
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4836817436400552}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4189741750912830}
   - component: {fileID: 137630882824824840}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Turtle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,9 +210,10 @@ GameObject:
   - component: {fileID: 3511378925171788107}
   - component: {fileID: 5913986894603866099}
   - component: {fileID: 3597979667483980526}
-  m_Layer: 0
+  - component: {fileID: 1545133638}
+  m_Layer: 12
   m_Name: Turtle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95621980816538592}
+  collider: {fileID: 1545133638}
   GroundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -292,6 +279,7 @@ MonoBehaviour:
   MinActionTime: 2
   rotateSpeed: 3
   combat: {fileID: 5913986894603866099}
+  Rb: {fileID: 0}
   walkPointRange: 20
   SightRange: 20
   speed: 2.5
@@ -326,8 +314,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ffa7daa7e504a77b01da9af2f40356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpMaxValue: 1
-  HpInitValue: 1
+  SlowedDownEffect: {fileID: 0}
+  HpMaxValue: 20
+  HpInitValue: 20
   AtkBaseValue: 1
   DefBaseValue: 1
   StrBaseValue: 1
@@ -352,10 +341,24 @@ SphereCollider:
   m_GameObject: {fileID: 1694585447699996}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &1545133638
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694585447699996}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.74
+  m_Height: 2.6
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.44, z: 0.15}
 --- !u!1 &2340132398816865212
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3897210457047182147}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ====Effect====
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,7 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7092014944306592170}
   - component: {fileID: 2085327376262484762}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EffectController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,9 +444,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3897210457047182147}
     m_Modifications:
+    - target: {fileID: 100000, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
       propertyPath: m_Name
       value: TurtleBuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 68849d937b3285f4083f33a1dc4cd5ed, type: 3}
       propertyPath: m_LocalScale.x

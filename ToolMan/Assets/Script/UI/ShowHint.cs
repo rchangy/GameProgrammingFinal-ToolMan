@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Playables;
 
 namespace ToolMan.UI
 {
@@ -11,6 +12,8 @@ namespace ToolMan.UI
         [SerializeField]
         private List<Hint> hintsToUnlock;
 
+        public PlayableDirector timelineDirector;
+
         private bool _isCompleted;
 
         protected override void Init()
@@ -20,14 +23,18 @@ namespace ToolMan.UI
 
         public override void StartObjective()
         {
+            Debug.Log("Start objective: " + gameObject.name);
+            if (timelineDirector != null)
+                timelineDirector.Pause();
             _p1.controlEnable = false;
             _p2.controlEnable = false;
             _uIController.SetControlEnable(true);
 
             // Unlock some hints
+            Debug.Log("hint length = " + hintsToUnlock.Count);
             foreach (Hint h in hintsToUnlock) { uIController.hintPanel.UnlockHint(h._title); }
             uIController.hintPanel.LoadHint(hintToShow._title);
-            uIController.SetTutorialUI(true);
+            uIController.SetHintUI(true);
             StartCoroutine(WaitForEsc());
         }
 
@@ -39,6 +46,8 @@ namespace ToolMan.UI
         IEnumerator WaitForEsc() {
             while (uIController.showingTutorialUI) { yield return null; }
             _isCompleted = true;
+            if (timelineDirector != null)
+                timelineDirector.Resume();
             yield return null;
         }
     }

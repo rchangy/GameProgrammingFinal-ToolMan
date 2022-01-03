@@ -30,7 +30,7 @@ public class EnemyWavesController : Objective
         {
             foreach(EnemyWaveController wave in _waves)
             {
-                wave.gameObject.SetActive(true);
+                wave.gameObject.SetActive(false);
                 wave.SetWaves(this);
             }
             _waves.Sort((x, y) => x.Order.CompareTo(y.Order));
@@ -41,6 +41,9 @@ public class EnemyWavesController : Objective
 
     public override void StartObjective()
     {
+        uIController.SetBattleUI(true);
+        _p1.controlEnable = true;
+        _p2.controlEnable = true;
         ReleaseNextWave();
     }
 
@@ -53,6 +56,7 @@ public class EnemyWavesController : Objective
     {
         if(_waves == null || _waves.Count <= 0) return;
         EnemyWaveController releasingWave = _waves[_nextWave];
+        releasingWave.gameObject.SetActive(true);
         releasingWave.StartWave();
         _activeWaves.Add(releasingWave);
         _nextWave++;

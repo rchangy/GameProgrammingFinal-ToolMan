@@ -13,7 +13,7 @@ public class EnemyWaveController : MonoBehaviour
 
     public int Order;
 
-    private void Start()
+    private void Init()
     {
         
         _enemies = transform.GetComponentsInChildren<Enemy>().ToList();
@@ -36,12 +36,13 @@ public class EnemyWaveController : MonoBehaviour
             {
                 _waves.WaveEnd(this);
             }
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 
     public void StartWave()
     {
+        Init();
         if (_enemies == null) return;
         gameObject.SetActive(true);
         _waves.combatManager.SetHPCanvas(_enemies);

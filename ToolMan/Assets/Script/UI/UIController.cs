@@ -5,14 +5,17 @@ public class UIController : MonoBehaviour
 {
     public bool showingBattleUI;
     public bool showingTutorialUI;
+    public bool showingNotificationUI;
 
     [SerializeField]
     private GameObject battleUI;
     [SerializeField]
-    private GameObject tutorialUI;
+    private GameObject hintUI;
     [SerializeField]
     private HintPanel _hintPanel;
     public HintPanel hintPanel { get => _hintPanel; }
+    [SerializeField]
+    private GameObject notificationUI;
 
     [SerializeField]
     private PlayerController p1;
@@ -22,8 +25,9 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        SetBattleUI(false);
-        SetTutorialUI(false);
+        SetBattleUI(true);
+        SetHintUI(false);
+        SetNotificationUI(true);
         _controlEnable = false;
     }
 
@@ -32,19 +36,25 @@ public class UIController : MonoBehaviour
         showingBattleUI = val;
     }
 
-    public void SetTutorialUI(bool val)
+    public void SetHintUI(bool val)
     {
-        tutorialUI.SetActive(val);
-        p1.controlEnable = !val;
-        p2.controlEnable = !val;
+        hintUI.SetActive(val);
+        //p1.controlEnable = !val;
+        //p2.controlEnable = !val;
         showingTutorialUI = val;
+    }
+
+    public void SetNotificationUI(bool val)
+    {
+        notificationUI.SetActive(val);
+        showingNotificationUI = val;
     }
 
     private void Update()
     {
         if (_controlEnable && Input.GetButtonDown("Hint"))
         {
-            SetTutorialUI(!showingTutorialUI);
+            SetHintUI(!showingTutorialUI);
         }
     }
 

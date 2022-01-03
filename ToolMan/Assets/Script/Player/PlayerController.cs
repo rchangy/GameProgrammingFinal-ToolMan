@@ -16,6 +16,8 @@ public partial class PlayerController : ToolableMan
     public bool controlEnable;
     public int playerNum = 1; // player 1 or player 2
     [SerializeField] private bool isDead = false;
+    public float distToGround;
+    private bool isGrounded;
 
     [SerializeField] private bool changeable = false;
     [SerializeField] private LayerMask playerLayerMask;
@@ -113,8 +115,12 @@ public partial class PlayerController : ToolableMan
 
     override protected void Update()
     {
+        if (isDead)
+            return;
         if (!controlEnable)
         {
+            ManageMovement();
+            UpdateState();
             return;
         }
         if (!isTool)
@@ -194,9 +200,10 @@ public partial class PlayerController : ToolableMan
         {
             return;
         }
-        transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
 
        
+        // Movement
+        transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
         float moveDis = vertical * speed * Time.deltaTime * combat.Spd;
         m_MaxDistance = moveDis;
         m_HitDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
@@ -206,6 +213,7 @@ public partial class PlayerController : ToolableMan
         {
             Debug.Log("Hit : " + m_Hit.collider.name);
         }
+
         if (!isTool && confJ!= null)
         {
             confJ.anchor = rightHand.transform.localPosition;
@@ -242,6 +250,11 @@ public partial class PlayerController : ToolableMan
     public Animator getAnimator()
     {
         return animator;
+    }
+
+    public Collider GetCollider()
+    {
+        return playerCollider;
     }
 
     public GrabPoint GetGrabPoint()

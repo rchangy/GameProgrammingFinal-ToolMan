@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -19,11 +17,14 @@ public class Cutscene : Objective
         _p1.controlEnable = false;
         _p2.controlEnable = false;
         _uIController.SetControlEnable(false);
-        //Debug.Log("hi");
+
+        uIController.SetBattleUI(false);
+        uIController.SetHintUI(false);
+        
         playableDirector.Play();
     }
 
-    public void Complete() { _isCompleted = true; Debug.Log("cutScene:)))"); }
+    public void Complete() { _isCompleted = true; Debug.Log("cutScene:))), p1_controlenable = " + _p1.controlEnable); }
 
     public override bool isCompleted()
     {

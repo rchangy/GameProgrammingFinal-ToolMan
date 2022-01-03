@@ -15,8 +15,7 @@ public partial class PlayerController
     public float jumpForce = 300;
     public int maxJumpCount = 1; // It can actaully jump once more 
     public int currentJumpCount = 0;
-    private float distToGround;
-    private bool isGrounded;
+    
 
     // ==== wave ====
     private bool toolWave = false;
@@ -41,18 +40,17 @@ public partial class PlayerController
     {
         horizontal = 0;
         vertical = 0;
-        if (!anotherPlayer.combat.Attacking)
+        if (controlEnable)
         {
-            horizontal = keyboardInputController.MoveHorizontal(playerNum) * moveAngleSensitivity;
-            vertical = keyboardInputController.MoveVertical(playerNum);
+            if (!anotherPlayer.combat.Attacking)
+            {
+                horizontal = keyboardInputController.MoveHorizontal(playerNum) * moveAngleSensitivity;
+                vertical = keyboardInputController.MoveVertical(playerNum);
+            }
+            // Jump
+            if (keyboardInputController.JumpOrAttack(playerNum))
+                Jump();
         }
-
-        
-
-        // Jump
-        if (keyboardInputController.JumpOrAttack(playerNum))
-            Jump();
-        //Debug.Log("++= " + transform.position + playerCollider.center);
         isGrounded = Physics.Raycast(transform.position + playerCollider.center, -Vector3.up, distToGround + 0.1f, groundLayerMask.value);
         if (isGrounded)
         {
