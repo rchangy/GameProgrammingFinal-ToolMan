@@ -3425,6 +3425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c4d4b534d96264cb54e07b2d99d8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hintObj: {fileID: 4178826831097509350}
+  _boxes: []
 --- !u!114 &7735857956947987448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130221,6 +130223,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4573319423886367905, guid: 57888038a43e53e41bdc2668a35586d0, type: 3}
+      propertyPath: hintObj
+      value: 
+      objectReference: {fileID: 4178826831097509350}
+    - target: {fileID: 4573319423886367905, guid: 57888038a43e53e41bdc2668a35586d0, type: 3}
+      propertyPath: lockedHint
+      value: 
+      objectReference: {fileID: 3921632913966124649}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57888038a43e53e41bdc2668a35586d0, type: 3}
 --- !u!114 &8711337481956781618 stripped
