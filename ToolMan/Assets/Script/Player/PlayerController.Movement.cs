@@ -42,11 +42,8 @@ public partial class PlayerController
         vertical = 0;
         if (controlEnable)
         {
-            if (!anotherPlayer.combat.Attacking)
-            {
-                horizontal = keyboardInputController.MoveHorizontal(playerNum) * moveAngleSensitivity;
-                vertical = keyboardInputController.MoveVertical(playerNum);
-            }
+            horizontal = keyboardInputController.MoveHorizontal(playerNum) * moveAngleSensitivity;
+            vertical = keyboardInputController.MoveVertical(playerNum);
             // Jump
             if (keyboardInputController.JumpOrAttack(playerNum))
                 Jump();

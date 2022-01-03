@@ -1108,9 +1108,8 @@ GameObject:
   - component: {fileID: 5436492}
   - component: {fileID: 8204896}
   - component: {fileID: 8233152}
-  - component: {fileID: 11450568}
-  - component: {fileID: 11423888}
   - component: {fileID: 2241256466056029797}
+  - component: {fileID: 2514947215839314380}
   m_Layer: 12
   m_Name: Sardine
   m_TagString: Enemy
@@ -1177,7 +1176,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159700}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9915dbb891b82452ea71e6c13d865f5e, type: 3}
@@ -1273,7 +1272,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159700}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 46a60c95802e14ce0998f2f4da6f4f8d, type: 3}
@@ -1362,34 +1361,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &11450568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffc3b54cf39514124bd91eec65921b38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mizuwoeta: 0
---- !u!114 &11423888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159700}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 211d635d35c4947bca463a7ed27f121b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1.5
-  rotateSpeed: 0.3
-  target: {fileID: 0}
 --- !u!114 &2241256466056029797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,7 +1377,21 @@ MonoBehaviour:
   _speed: 10
   effectController: {fileID: 1962144632817642460}
   _explosionPrefab: {fileID: 319803370290364408, guid: a7724e5f07b7a43818dc4dc2105698d4, type: 3}
-  _explosionOffset: {x: 0, y: 0, z: 0}
+  DieAfterSeconds: 5
+--- !u!136 &2514947215839314380
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159700}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.04069797
+  m_Height: 0.46590567
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.06313311, z: -0.0031836987}
 --- !u!1 &160698
 GameObject:
   m_ObjectHideFlags: 0

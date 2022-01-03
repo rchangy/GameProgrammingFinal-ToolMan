@@ -5,7 +5,7 @@ namespace ToolMan.Combat.Equip
 {
     public class Sardine : MonoBehaviour
     {
-        private GameObject _target;
+        private Transform _target;
         private GameObject _whale;
         private CombatUnit _whaleCombat;
 
@@ -23,7 +23,9 @@ namespace ToolMan.Combat.Equip
         private GameObject _explosionPrefab;
 
         private bool explodeOnDeath;
-        
+
+        [SerializeField] private float DieAfterSeconds = 5f;
+
         protected void Start()
         {
             // find target
@@ -43,6 +45,8 @@ namespace ToolMan.Combat.Equip
         private void FixedUpdate()
         {
             MoveTowardTarget();
+            DieAfterSeconds -= Time.deltaTime;
+            if (DieAfterSeconds <= 0) Die();
         }
 
         public void SetWhale(CombatUnit whaleCombat)
@@ -59,25 +63,23 @@ namespace ToolMan.Combat.Equip
             }
             else
             {
-                transform.LookAt(_target.transform);
-                // adapting rotation after lookat target
-                //transform.Rotate();
+                transform.LookAt(_target);
             }
-            transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, Time.deltaTime * _speed);
+            transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime * _speed);
         }
 
-        private GameObject findClosestPlayer(GameObject[] players)
+        private Transform findClosestPlayer(GameObject[] players)
         {
-            if(players.Length == 1) { return players[0]; }
+            if(players.Length == 1) { return players[0].transform; }
             float minDist = float.MaxValue;
             float dist;
-            GameObject ret = null;
+            Transform ret = null;
             foreach(GameObject p in players){
                 dist = Vector3.Distance(p.transform.position, transform.position);
                 if(dist < minDist)
                 {
                     minDist = dist;
-                    ret = p;
+                    ret = p.transform;
                 }
             }
             return ret;
@@ -95,40 +97,40 @@ namespace ToolMan.Combat.Equip
             Destroy(gameObject);
         }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if(collision.gameObject == _whale)
-            {
-                if (_returning)
-                {
-                    // hit whale
-                    _whale.GetComponent<EnemyWhale>().TakeSardine();
-                    explodeOnDeath = false;
-                    Die();
-                }
-                return;
-            }
-            PlayerCombat playerCombat = collision.gameObject.GetComponent<PlayerCombat>();
-            if(playerCombat != null)
-            {
-                if (_returning) return;
-                if (!playerCombat.Vulnerable)
-                {
-                    _target = _whale;
-                    _returning = true;
-                }
-                else
-                {
-                    playerCombat.TakeDamage(_whaleCombat.Atk * _atkMultiplier, _whaleCombat);
-                    // maybe add buff?
-                    Die();
-                }
-            }
-            else
-            {
-                Die();
-            }
-        }
+        //private void OnCollisionEnter(Collision collision)
+        //{
+        //    if(collision.gameObject == _whale)
+        //    {
+        //        if (_returning)
+        //        {
+        //            // hit whale
+        //            _whale.GetComponent<EnemyWhale>().TakeSardine();
+        //            explodeOnDeath = true;
+        //            Die();
+        //        }
+        //        return;
+        //    }
+        //    PlayerCombat playerCombat = collision.gameObject.GetComponent<PlayerCombat>();
+        //    if(playerCombat != null)
+        //    {
+        //        if (_returning) return;
+        //        if (!playerCombat.Vulnerable)
+        //        {
+        //            _target = _whale;
+        //            _returning = true;
+        //        }
+        //        else
+        //        {
+        //            playerCombat.TakeDamage(_whaleCombat.Atk * _atkMultiplier, _whaleCombat);
+        //            // maybe add buff?
+        //            Die();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Die();
+        //    }
+        //}
 
         private void OnTriggerEnter(Collider other)
         {
@@ -138,29 +140,33 @@ namespace ToolMan.Combat.Equip
                 {
                     // hit whale
                     _whale.GetComponent<EnemyWhale>().TakeSardine();
-                    explodeOnDeath = false;
+                    explodeOnDeath = true;
                     Die();
                 }
                 return;
             }
+            if (!other.gameObject.CompareTag("Player")) return;
             PlayerCombat playerCombat = other.gameObject.GetComponent<PlayerCombat>();
             if (playerCombat != null)
             {
                 if (_returning) return;
                 if (!playerCombat.Vulnerable)
                 {
-                    _target = _whale;
+                    _target = _whale.transform;
                     _returning = true;
+                    DieAfterSeconds = 100;
                 }
                 else
                 {
                     playerCombat.TakeDamage(_whaleCombat.Atk * _atkMultiplier, _whaleCombat);
                     // maybe add buff?
+                    Debug.Log(other.name);
                     Die();
                 }
             }
             else
             {
+                Debug.Log(other.name);
                 Die();
             }
         }
