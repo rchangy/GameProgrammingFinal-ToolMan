@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private GameObject PostFX_Dead;
 
     public bool reset = true;
+    private bool levelComplete = false;
     private void Awake()
     {
         if (reset)
@@ -55,6 +56,19 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        if (_p1.IsDead() || _p2.IsDead())
+        {
+            StartCoroutine(PlayerLose());
+        }
+        else if (levelComplete)
+        {
+            // next level
+            SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
+        }
+    }
+
     private IEnumerator CompleteSceneObjectives()
     {
         foreach(Objective obj in _objectives)
@@ -67,8 +81,7 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
         }
-        Debug.Log("level1 complete");
-        // next scene
+        levelComplete = true;
     }
     private int FindDepth(Transform root, Transform objective)
     {
@@ -78,8 +91,12 @@ public class GameManager : MonoBehaviour
             return 1 + FindDepth(root, objective.parent);
     }
 
-    private void PlayerLose()
+    private IEnumerator PlayerLose()
     {
+        _p1.controlEnable = false;
+        _p2.controlEnable = false;
         PostFX_Dead.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
     }
 }
