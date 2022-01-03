@@ -21,6 +21,11 @@ namespace ToolMan.UI
         [SerializeField]
         private int _order;
 
+        private void Awake()
+        {
+            _locked = true;
+        }
+
         public void Unlock() { _locked = false; }
     }
 }
