@@ -59,9 +59,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d56b33b1d480411594e56e30be4833b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlowedDownEffect: {fileID: 0}
   HpMaxValue: 1
   HpInitValue: 1
-  AtkBaseValue: 1
+  AtkBaseValue: 100
   DefBaseValue: 1
   StrBaseValue: 1
   SpdBaseValue: 1
@@ -69,6 +70,7 @@ MonoBehaviour:
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
+  healthBar2: {fileID: 0}
   _targetLayers:
     serializedVersion: 2
     m_Bits: 64
