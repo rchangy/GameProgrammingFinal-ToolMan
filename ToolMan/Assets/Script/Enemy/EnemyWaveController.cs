@@ -43,16 +43,8 @@ public class EnemyWaveController : MonoBehaviour
     public void StartWave()
     {
         Init();
-        Debug.Log("startWave");
-        Debug.Log("startWave - total = " + total);
-        if (_enemies == null)
-        {
-            Debug.Log("enemies null :(((");
-        }
         if (_enemies == null) return;
-        Debug.Log("startWave2");
         gameObject.SetActive(true);
-        Debug.Log("startWave3");
         _waves.combatManager.SetHPCanvas(_enemies);
     }
 

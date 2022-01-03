@@ -63,7 +63,7 @@ public class ObjectListUI : MonoBehaviour
     public void LoadTool(int toolNum)
     {
         UnlockImageNum = toolNum;
-        SetSprites(false);
+        SetSprites(true);
     }
 
     public void SetSprites(bool reset)

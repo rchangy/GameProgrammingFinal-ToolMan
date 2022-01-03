@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 
     private EnemyWaveController _wave;
     [SerializeField] protected Animator animator;
+    [SerializeField] protected Collider collider;
     public Animator Anim
     {
         get => animator;
@@ -352,7 +353,24 @@ public class Enemy : MonoBehaviour
         if (_dest == Vector3.negativeInfinity)
             return;
         _dest.y = transform.position.y;
-        transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * _currentSpeed);
+        //transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * _currentSpeed);
+        
+        // Determine which direction to rotate towards
+        Vector3 targetDirection = _dest - transform.position;
+        // The step size is equal to speed times frame time.
+        float singleStep = speed * Time.deltaTime;
+        // Rotate the forward vector towards the target direction by one step
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+
+        RaycastHit m_Hit;
+        float m_MaxDistance;
+        bool m_HitDetect;
+        transform.rotation = Quaternion.LookRotation(newDirection);
+        float moveDis = speed * Time.deltaTime;
+        m_MaxDistance = moveDis;
+        m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
+        if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.isTrigger)
+            transform.position += moveDis * transform.forward;
     }
 
     protected virtual void ManageLookAt()

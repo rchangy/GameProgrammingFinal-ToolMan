@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
       propertyPath: m_Name
-      value: Enemy-corgi
+      value: Corgi
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7b634b68a5382e469055d32b10dc91b, type: 3}
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  collider: {fileID: 1207400449}
   GroundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -150,6 +151,7 @@ MonoBehaviour:
   MinActionTime: 0.5
   rotateSpeed: 3
   combat: {fileID: 5542827208670800066}
+  Rb: {fileID: 0}
   walkPointRange: 3
   SightRange: 10
   speed: 0
@@ -201,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80663cb3f0f9e44d88d379b9e986f57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlowedDownEffect: {fileID: 0}
   HpMaxValue: 1
   HpInitValue: 1
   AtkBaseValue: 1
