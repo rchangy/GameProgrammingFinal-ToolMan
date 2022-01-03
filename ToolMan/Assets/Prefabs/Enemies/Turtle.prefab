@@ -274,9 +274,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Name: turtle
-  AttackWeight: 3
+  AttackWeight: 5
   PatrolWeight: 1
-  IdleWeight: 0
+  IdleWeight: 1
   skillWeight: 
   MaxActionTime: 4
   MinActionTime: 2
@@ -318,8 +318,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlowedDownEffect: {fileID: 0}
-  HpMaxValue: 20
-  HpInitValue: 20
+  HpMaxValue: 1250
+  HpInitValue: 1250
   AtkBaseValue: 1
   DefBaseValue: 1
   StrBaseValue: 1
