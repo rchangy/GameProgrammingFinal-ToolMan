@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f0aea2627b9439bb7e50ee12c802f7, type: 3}
+  m_Name: Shark Missle
+  m_EditorClassIdentifier: 
+  attackDelay: 0
+  RefractoryPeriod: 0
+  Cd: 0
+  SharkPrefab: {fileID: 1174354973852146624, guid: de1c739b4551f44eaae6a32ba69dac6e, type: 3}
+  MaxWave: 5
+  TimeToNextSharkWave: 5
+  InstantiateInterval: 0.2

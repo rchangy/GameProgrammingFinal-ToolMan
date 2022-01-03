@@ -97,15 +97,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3759f2e562e4f31a9cd91d1dd152d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlowedDownEffect: {fileID: 0}
   HpMaxValue: 1
   HpInitValue: 1
-  AtkBaseValue: 20
+  AtkBaseValue: 150
   DefBaseValue: 1
   StrBaseValue: 1
+  SpdBaseValue: 1
   AttackEnableBaseValue: 1
   MovableBaseValue: 1
   VulnerableBaseValue: 1
   healthBar: {fileID: 0}
+  healthBar2: {fileID: 0}
   _hatchTime: 3
   _chickPrefab: {fileID: 1767663768970106, guid: ca9fda2f4d77c4d4f88d4ed8b939f69b, type: 3}
   _chickHatchOffset: {x: 0, y: 0, z: 0}

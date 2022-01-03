@@ -352,25 +352,27 @@ public class Enemy : MonoBehaviour
     {
         if (_dest == Vector3.negativeInfinity)
             return;
-        _dest.y = transform.position.y;
+        //_dest.y = transform.position.y;
         //transform.position = Vector3.MoveTowards(transform.position, _dest, Time.deltaTime * _currentSpeed);
-        
-        // Determine which direction to rotate towards
-        Vector3 targetDirection = _dest - transform.position;
-        // The step size is equal to speed times frame time.
-        float singleStep = speed * Time.deltaTime;
-        // Rotate the forward vector towards the target direction by one step
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
 
+        // Determine which direction to rotate towards
+        //Vector3 targetDirection = _dest - transform.position;
+        // The step size is equal to speed times frame time.
+        //float singleStep = speed * Time.deltaTime;
+        // Rotate the forward vector towards the target direction by one step
+        //Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+
+        Vector3 nextStep = Vector3.MoveTowards(transform.position, _dest, speed * combat.Spd * Time.deltaTime);
+        Vector3 nextStepDir = Vector3.Normalize(nextStep - transform.position);
         RaycastHit m_Hit;
-        float m_MaxDistance;
+        //float m_MaxDistance;
         bool m_HitDetect;
-        transform.rotation = Quaternion.LookRotation(newDirection);
-        float moveDis = speed * Time.deltaTime;
-        m_MaxDistance = moveDis;
-        m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
+        //transform.rotation = Quaternion.LookRotation(newDirection);
+        float moveDis = Vector3.Distance(nextStep, transform.position);
+        //m_MaxDistance = moveDis;
+        m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
         if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.isTrigger)
-            transform.position += moveDis * transform.forward;
+            transform.position = nextStep;
     }
 
     protected virtual void ManageLookAt()

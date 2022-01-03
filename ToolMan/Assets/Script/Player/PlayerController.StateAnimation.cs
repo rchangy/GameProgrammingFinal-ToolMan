@@ -51,11 +51,13 @@ public partial class PlayerController
     {
         animator.SetBool("isGrabbing", true);
         animator.SetBool("isGrabbing" + toolName, true);
+        anotherPlayer.animator.SetBool("Grabbed", true);
     }
     public void AnimationRelease(string toolName)
     {
         animator.SetBool("isGrabbing", false);
         animator.SetBool("isGrabbing" + toolName, false);
+        anotherPlayer.animator.SetBool("Grabbed", false);
     }
     public void AnimationUnlock(int level)
     {

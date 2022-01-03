@@ -13,6 +13,9 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Transform FollowTarget;
     private RaycastHit hit;
 
+    [SerializeField] private float _resetTime;
+    private float _timePassedToReset;
+
     public static Vector3 CamLocalPos
     {
         get => _camPosition;
@@ -32,7 +35,15 @@ public class CameraManager : MonoBehaviour
         }
         else
         {
-            MainCam.transform.localPosition = Vector3.Lerp(MainCam.transform.localPosition, _camPosition, Time.deltaTime);
+            if(_timePassedToReset >= _resetTime)
+            {
+                _timePassedToReset = 0;
+            }
+            else
+            {
+                _timePassedToReset += Time.deltaTime;
+            }
+            MainCam.transform.localPosition = Vector3.Lerp(MainCam.transform.localPosition, _camPosition, _timePassedToReset / _resetTime);
         }
     }
 

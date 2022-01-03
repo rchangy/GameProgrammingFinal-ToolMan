@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-
+using ToolMan.Combat.Equip;
 public class EnemyWhale : Enemy
 {
     // ==== Rush ====
@@ -25,9 +25,12 @@ public class EnemyWhale : Enemy
     [SerializeField] float hpBase;
     [SerializeField] float hpDicreaseThres;
     [SerializeField] float lowTimeSpan;
-    [SerializeField] private float lowTimeLeft;
+    private float lowTimeLeft;
     [SerializeField] private int nowSardines = 0;
     [SerializeField] int maxSardines;
+
+    [SerializeField] Vector3 LowestPoint = Vector3.zero;
+
     // ==== state ====
 
     // ==== effect ====
@@ -36,6 +39,16 @@ public class EnemyWhale : Enemy
 
     // ==== skill ====
     public GameObject bigSkillPrefab;
+    public Flood flood;
+
+    public Transform[] SharkPos;
+    [SerializeField] private int[] SharkNumEachWave;
+    private int _currentSharkWave;
+
+    private float _timerForSkills;
+    [SerializeField] private float _timeToStartSharkWave;
+    private bool _sharkReleased;
+
     // ==== skill ====
 
     protected override void Awake()
@@ -49,14 +62,10 @@ public class EnemyWhale : Enemy
         base.Start();
         _initY = transform.position.y;
         SetHeight(Height.High);
+
         hpBase = combat.HpMaxValue;
         lowTimeLeft = lowTimeSpan;
         SetDest(pathNodes[_currentNodeIdx].position);
-    }
-
-
-    protected override void Update()
-    {
         GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");
         int playerNum = PlayerGameObjects.Length;
 
@@ -65,61 +74,55 @@ public class EnemyWhale : Enemy
         {
             Players[i] = PlayerGameObjects[i].transform;
         }
+    }
 
-        if (!combat.Attacking)
+
+    protected override void Update()
+    {
+        if (_timerForSkills > 0)
+            _timerForSkills -= Time.deltaTime;
+        if (isAction)
         {
-            //Debug.Log("action time = " + ActionLastTime + " state = " + state + " isAction = " + isAction);
-            if (isAction)
+            ActionLastTime -= Time.deltaTime;
+            if (ActionLastTime < 0)
             {
-                //Debug.Log("isAction = true");
-                ActionLastTime -= Time.deltaTime;
-                if (ActionLastTime < 0)
-                {
-                    isAction = false;
-                }
-                switch (state)
-                {
-                    case State.Idle:
-                        Idle();
-                        break;
-                    case State.BigSkill:
-                        BigSkill();
-                        break;
-                    case State.Patrol:
-                        Patrol();
-                        break;
-                    case State.Sardine:
-                        Sardine();
-                        break;
-                    case State.Chase:
-                        ChasePlayer();
-                        break;
-                }
+                isAction = false;
             }
-            else
+            switch (state)
             {
-                //Debug.Log("isAction = false");
-                ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
-                isAction = true;
-                RandomBehavior();
+                case State.Idle:
+                    Idle();
+                    break;
+                case State.Patrol:
+                    Patrol();
+                    break;
+                case State.Chase:
+                    ChasePlayer();
+                    break;
             }
-            HeightTransition();
         }
-
-        // Hp
-        if (combat.Hp <= hpBase - combat.HpMaxValue / hpIntervals)
+        else
         {
-            hpBase -= combat.HpMaxValue / hpIntervals;
-            SetHeight(Height.High);
+            ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
+            isAction = true;
+            RandomBehavior();
         }
+        HeightTransition();
 
+    }
+
+    protected override void FixedUpdate()
+    {
+        ManageBehavior();
+        ManageLookAt();
+        ManageMovement();
     }
 
     private void HeightTransition() {
         switch (height)
         {
             case Height.High:
-                if (combat.Hp <= hpBase - hpDicreaseThres)
+                if (_sharkReleased && !combat.Attacking)
                 {
                     SetHeight(Height.Middle);
                     isAction = false;
@@ -130,7 +133,6 @@ public class EnemyWhale : Enemy
                 if (nowSardines >= maxSardines)
                 {
                     SetHeight(Height.Low);
-                    nowSardines = 0;
                     isAction = false;
                 }
                 break;
@@ -139,40 +141,62 @@ public class EnemyWhale : Enemy
                 lowTimeLeft -= Time.deltaTime;
                 if (lowTimeLeft <= 0)
                 {
-                    SetHeight(Height.Middle);
+                    SetHeight(Height.High);
                     lowTimeLeft = lowTimeSpan;
                     isAction = false;
                 }
                 break;
         }
+    }
 
-        // Move to correct height
-        if (Math.Abs(transform.position.y - getHeightValue()) > 0.3f)
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, getHeightValue(), transform.position.z), speed * Time.deltaTime);
+    private float getHeightValue()
+    {
+        switch (height)
+        {
+            case Height.High:
+                return highY + _initY;
+            case Height.Middle:
+                return middleY + _initY;
+            case Height.Low:
+                return lowY + _initY;
+            default:
+                return -1;
+        }
+    }
+
+    private void SetHeight(Height h)
+    {
+        Debug.Log("set height " + h);
+        switch (h)
+        {
+            case Height.High:
+                height = Height.High;
+                _timerForSkills = _timeToStartSharkWave;
+                _sharkReleased = false;
+                break;
+
+            case Height.Middle:
+                nowSardines = 0;
+                height = Height.Middle;
+                flood.StopFlooding();
+                break;
+
+            case Height.Low:
+                height = Height.Low;
+                break;
+        }
     }
 
     protected override void RandomBehavior()
     {
-        // High states: Idle, BigSkill, Patrol
-        // Middle states: Idle, Sardine, Chase
-        // Low states: Idle
-
-
-
-        //if (!isAction)
-        //{
-        //    act = GetRandType(weight);
-        //    if (act > 0)
-        //    {
-        //        ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
-        //        isAction = true;
-        //    }
-        //}
-
         switch (height)
         {
             case Height.High:
                 act = GetRandType(weight);
+                if(_timerForSkills <= 0 && !_sharkReleased)
+                {
+                    ReleaseSharks();
+                }
                 switch (act)
                 {
                     case 0: // attack
@@ -185,31 +209,28 @@ public class EnemyWhale : Enemy
                 break;
 
             case Height.Middle:
-                PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
-                if (PlayerInSightRange && AttackWeight > 0)
-                    Sardine();
-                else if (PatrolWeight == 0 && IdleWeight == 0)
-                    Patrol();
-                else
-                {
-                    int[] w = { PatrolWeight, IdleWeight };
-                    act = GetRandType(w);
-                    switch (act)
-                    {
-                        case 0: // attack
-                            ChasePlayer();
-                            break;
-                        case 1:
-                            Idle();
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                Sardine();
+                Patrol();
+                //else
+                //{
+                //    int[] w = { PatrolWeight, IdleWeight };
+                //    act = GetRandType(w);
+                //    switch (act)
+                //    {
+                //        case 0: // attack
+                //            ChasePlayer();
+                //            break;
+                //        case 1:
+                //            Idle();
+                //            break;
+                //        default:
+                //            break;
+                //    }
+                //}
                 break;
 
             case Height.Low:
-                Idle();
+                SetDest(LowestPoint);
                 break;
         }
     }
@@ -233,7 +254,7 @@ public class EnemyWhale : Enemy
             animator.SetBool("Swim2", true);
             tmpSpeed = speed;
             speed = rushSpeed;
-            GoToPoint(p);
+            SetDest(p);
         }
         else
         {
@@ -244,9 +265,7 @@ public class EnemyWhale : Enemy
 
     protected override void Patrol()
     {
-        Debug.Log("whale patrol");
         state = State.Patrol;
-        // follow circular path
         SetDest(pathNodes[_currentNodeIdx].position);
         Vector3 distanceToWalkPoint = transform.position - _dest;
         if (distanceToWalkPoint.magnitude < 1f)
@@ -255,95 +274,39 @@ public class EnemyWhale : Enemy
             if (_currentNodeIdx == pathNodes.Length) _currentNodeIdx = 0;
         }
     }
-    protected override void SearchWalkPoint()
-    {
-        float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
-        float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
-        _dest = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-        walkPointSet = true;
-    }
+
 
     public void BigSkill() {
-        state = State.BigSkill;
         combat.SetCurrentUsingSkill("WhaleBigSkill");
         if (!combat.Attacking)
             combat.Attack();
     }
 
+    private void ReleaseSharks()
+    {
+        flood.StartFlooding();
+        combat.SetCurrentUsingSkill("Shark Missle");
+        _sharkReleased = combat.Attack();
+    }
+
+    public int GetCurrentSharkWave()
+    {
+        int ret = SharkNumEachWave[_currentSharkWave];
+        _currentSharkWave++;
+        if (_currentSharkWave == SharkNumEachWave.Length) _currentSharkWave = 0;
+        return ret;
+    }
+
     public void Sardine()
     {
-        state = State.Sardine;
         combat.SetCurrentUsingSkill("SardineMissle");
         if (!combat.Attacking)
             combat.Attack();
     }
+
     public void TakeSardine() { nowSardines++; }
-
     public Animator GetAnimator() { return animator; }
-
-    private void GoToPoint(Vector3 point)
-    {
-        if (transform.position != point)
-        {
-            Vector3 towardDir = transform.position - point;
-            towardDir = new Vector3(towardDir.x, 0, towardDir.z); // Ignore y axis
-            Vector3 newDir = Vector3.RotateTowards(transform.forward, towardDir, Time.deltaTime * rotateSpeed, 0f);
-            
-            transform.rotation = Quaternion.LookRotation(newDir);
-        }
-        transform.position -= speed * Time.deltaTime * transform.forward;
-        Debug.Log("go to " + point);
-    }
-
-    private enum Height
-    {
-        High,
-        Middle,
-        Low
-    }
-    private float getHeightValue()
-    {
-        switch (height)
-        {
-            case Height.High:
-                return highY + _initY;
-            case Height.Middle:
-                return middleY + _initY;
-            case Height.Low:
-                return lowY + _initY;
-            default:
-                return -1;
-        }
-    }
-
-    private void SetHeight(Height h)
-    {
-        Debug.Log("set height " + h);
-        switch (h)
-        {
-            case Height.High:
-                height = Height.High;
-                break;
-
-            case Height.Middle:
-                height = Height.Middle;
-                nowSardines = 0;
-                break;
-
-            case Height.Low:
-                height = Height.Low;
-                break;
-        }
-    }
-
-    private enum State {
-        Idle,
-        BigSkill,
-        Patrol,
-        Sardine,
-        Chase
-    }
-
+    
     protected override void SetDest(Vector3 dest)
     {
         _dest = new Vector3(dest.x, transform.position.y, dest.z);
@@ -352,7 +315,7 @@ public class EnemyWhale : Enemy
     protected override void ManageLookAt()
     {
         _lookatDest = _dest;
-        if (transform.position != _lookatDest)
+        if (Vector3.Distance(transform.position, _lookatDest) >= 0.3f)
         {
             var targetDirection = _lookatDest - transform.position;
             targetDirection.x = -targetDirection.x;
@@ -361,11 +324,45 @@ public class EnemyWhale : Enemy
             var newDir = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * rotateSpeed, 0f);
 
             transform.rotation = Quaternion.LookRotation(newDir);
+
         }
+    }
+
+    protected override void ManageMovement()
+    {
+        if (_dest == Vector3.negativeInfinity)
+            return;
+
+        Vector3 nextStep = Vector3.MoveTowards(transform.position, _dest, speed * combat.Spd * Time.deltaTime);
+        // Move to correct height
+        if (Math.Abs(transform.position.y - getHeightValue()) > 0.3f)
+            nextStep = Vector3.MoveTowards(nextStep, new Vector3(nextStep.x, getHeightValue(), nextStep.z), speed * combat.Spd * Time.deltaTime);
+        Vector3 nextStepDir = Vector3.Normalize(nextStep - transform.position);
+        RaycastHit m_Hit;
+        bool m_HitDetect;
+        float moveDis = Vector3.Distance(nextStep, transform.position);
+        m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
+        if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.isTrigger)
+            transform.position = nextStep;
     }
 
     protected override void SetAllAnimationFalse()
     {
         Anim.SetBool("Swim2", false);
+    }
+
+    private enum Height
+    {
+        High,
+        Middle,
+        Low
+    }
+    private enum State
+    {
+        Idle,
+        BigSkill,
+        Patrol,
+        Sardine,
+        Chase
     }
 }
