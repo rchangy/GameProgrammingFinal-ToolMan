@@ -105,32 +105,6 @@ namespace ToolMan.Combat
         //    return false;
         //}
 
-        //private void newEnemyWave(int waveIdx)
-        //{
-        //    string enemyWaveName = string.Format("EnemyWave{0}", waveIdx);
-        //    if (currentEnemyWave != null)
-        //    {
-        //        currentEnemyWave.SetActive(false);
-        //    }
-        //    GameObject nextEnemyWave;
-        //    Transform nextEnemyWaveTrans = GameObject.Find("EnemyWaves").transform.Find(enemyWaveName);
-        //    if (nextEnemyWaveTrans != null)
-        //    {
-        //        nextEnemyWave = nextEnemyWaveTrans.gameObject;
-        //        nextEnemyWave.SetActive(true);
-        //        currentWaveIdx = waveIdx;
-        //        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        //        GameObject[] probs = GameObject.FindGameObjectsWithTag("DestroyableProb");
-        //        currentEnemyWave = nextEnemyWave;
-        //        SetHPCanvas(enemies);
-        //        SetHPCanvas(probs);
-        //    }
-        //    else
-        //    {
-        //        currentEnemyWave = null;
-        //    }
-        //}
-
         public void SetHPCanvas(List<Enemy> enemies)
         {
             foreach(var enemy in enemies)
