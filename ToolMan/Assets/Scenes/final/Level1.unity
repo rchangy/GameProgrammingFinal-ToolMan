@@ -16426,14 +16426,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 189264050945683044, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: HpMaxValue
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 189264050945683044, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: HpInitValue
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 697037005200819991, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -16538,18 +16530,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2423348877311785578, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: HpMaxValue
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423348877311785578, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: HpInitValue
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423348877448721273, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: controlEnable
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4394039214326930993, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 161.74
@@ -16588,10 +16568,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678871092492134002, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6319494748944245440, guid: d9b1f045573050749aab36f91caa872c, type: 3}
-      propertyPath: controlEnable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7248950564732607247, guid: d9b1f045573050749aab36f91caa872c, type: 3}
@@ -26686,6 +26662,10 @@ MonoBehaviour:
     follow: {fileID: 0}
     followOffset: {x: 0, y: 0, z: 0}
     animatorOverwrite: {fileID: 0}
+  - character: {fileID: 11400000, guid: 814e2ecb93c454172b465e4186d7aea2, type: 2}
+    follow: {fileID: 0}
+    followOffset: {x: 0, y: 0, z: 0}
+    animatorOverwrite: {fileID: 0}
   UIPhoto: {fileID: 1785351102}
   shouldStayOnScreen: 0
   textAudio: {fileID: 8300000, guid: 49c855462770641229c932e59dd505e5, type: 3}
@@ -35220,7 +35200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 149000810419322837, guid: 31f30c214be55ad43b97076abb939fd8, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 149000810419322837, guid: 31f30c214be55ad43b97076abb939fd8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35228,7 +35208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 149000810419322837, guid: 31f30c214be55ad43b97076abb939fd8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.438999
+      value: -9.14
       objectReference: {fileID: 0}
     - target: {fileID: 149000810419322837, guid: 31f30c214be55ad43b97076abb939fd8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51904,6 +51884,10 @@ MonoBehaviour:
     followOffset: {x: 0, y: 0, z: 0}
     animatorOverwrite: {fileID: 0}
   - character: {fileID: 11400000, guid: 2343adab4944d4ded82a15c1e28fd377, type: 2}
+    follow: {fileID: 0}
+    followOffset: {x: 0, y: 0, z: 0}
+    animatorOverwrite: {fileID: 0}
+  - character: {fileID: 11400000, guid: 5ae1d0967a19f4b858f0422c399ef1b3, type: 2}
     follow: {fileID: 0}
     followOffset: {x: 0, y: 0, z: 0}
     animatorOverwrite: {fileID: 0}
