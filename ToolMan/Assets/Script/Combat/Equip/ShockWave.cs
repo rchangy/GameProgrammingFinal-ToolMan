@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using ToolMan.Combat.Skills;
 
 namespace ToolMan.Combat.Equip
 {
     public class ShockWave : CombatUnit
     {
         private CombatUnit _combat;
+
+        [SerializeField] private Skill _skill;
 
         private Vector3 _dir;
 
@@ -47,7 +50,7 @@ namespace ToolMan.Combat.Equip
             }
         }
 
-        public override int TakeDamage(float baseDmg, CombatUnit damager)
+        public override int TakeDamage(float baseDmg, float pow, CombatUnit damager)
         {
             Debug.Log("shock wave cannot be damaged");
             return 0;
@@ -77,7 +80,7 @@ namespace ToolMan.Combat.Equip
                 {
                     PlayerCombat targetPlayer = (PlayerCombat)target;
                     if(_combat != null)
-                        targetPlayer.TakeDamage(_combat.Atk, this);
+                        targetPlayer.TakeDamage(_combat.Atk * _skill.Multiplier, _combat.Pow * _skill.PowMuliplier, this);
                 }
             }
         }

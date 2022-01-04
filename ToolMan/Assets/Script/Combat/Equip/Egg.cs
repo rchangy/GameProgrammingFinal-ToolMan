@@ -54,7 +54,7 @@ namespace ToolMan.Combat.Equip
             return false;
         }
 
-        public override int TakeDamage(float baseDmg, CombatUnit damager)
+        public override int TakeDamage(float baseDmg, float pow, CombatUnit damager)
         {
             _hp.ChangeValueBy(-1);
             return 1;
@@ -90,7 +90,7 @@ namespace ToolMan.Combat.Equip
                 CombatUnit targetCombat = target.GetComponent<CombatUnit>();
                 if (targetCombat != null)
                 {
-                    targetCombat.TakeDamage(Atk * _atkMultiplier, this);
+                    targetCombat.TakeDamage(Atk, Pow, this);
                 }
             }
             Destroy(gameObject);

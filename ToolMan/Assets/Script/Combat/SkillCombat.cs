@@ -191,10 +191,11 @@ namespace ToolMan.Combat
             _skillCoroutine = null;
         }
 
-        protected override void Interrupted(CombatUnit damager)
+        protected override void Interrupted()
         {
-            base.Interrupted(damager);
+            if (!_isInterrupted) return;
             if (Attacking) InterruptAttack();
+            base.Interrupted();
         }
 
         protected virtual void OnTriggerStay(Collider other)
@@ -211,7 +212,7 @@ namespace ToolMan.Combat
         protected virtual void Hit(CombatUnit target)
         {
             Debug.Log(name + " hit " + target.name);
-            target.TakeDamage(Atk * currentUsingSkill.Multiplier, this);
+            target.TakeDamage(Atk * currentUsingSkill.Multiplier, Pow * currentUsingSkill.PowMuliplier, this);
             if(target.Hp > 0)
                 StartCoroutine(currentUsingSkill.Hit(this, target));
         }

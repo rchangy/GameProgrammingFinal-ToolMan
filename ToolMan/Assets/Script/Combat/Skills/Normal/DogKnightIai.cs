@@ -78,14 +78,14 @@ namespace ToolMan.Combat.Skills.Normal
                         }
                         else
                         {
-                            targetCombat.TakeDamage(combat.Atk, combat);
+                            targetCombat.TakeDamage(combat.Atk * Multiplier, combat.Pow * PowMuliplier,combat);
                         }
                     }
                     else
                     {
                         if (targetCombat.Vulnerable)
                         {
-                            targetCombat.TakeDamage(combat.Atk, combat);
+                            targetCombat.TakeDamage(combat.Atk * Multiplier, combat.Pow * PowMuliplier, combat);
                         }
                     }
                 }

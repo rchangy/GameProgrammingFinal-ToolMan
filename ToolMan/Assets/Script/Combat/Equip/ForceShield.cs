@@ -7,10 +7,10 @@ namespace ToolMan.Combat.Equip
     public class ForceShield : CombatUnit
     {
         [SerializeField] string[] _collisionTag;
-        float hitTime;
-        private Material _mat;
+        //float hitTime;
+        //private Material _mat;
 
-        private bool _init = false;
+        //private bool _init = false;
 
 
         private CombatUnit _target;
@@ -33,7 +33,7 @@ namespace ToolMan.Combat.Equip
 
         public void Setup(Material mat, CombatUnit target, object src)
         {
-            _mat = mat;
+            //_mat = mat;
             _target = target;
             _target.Disable("Vulnerable");
             GetComponent<Renderer>().sharedMaterial = mat;
@@ -45,7 +45,9 @@ namespace ToolMan.Combat.Equip
             _stats.GetResourceByName("HP").Reset();
         }
 
-        public override int TakeDamage(float baseDmg, CombatUnit damager)
+        
+
+        public override int TakeDamage(float baseDmg, float pow, CombatUnit damager)
         {
             int dmg = 0;
             if (damager.gameObject.CompareTag("Player"))
@@ -54,38 +56,33 @@ namespace ToolMan.Combat.Equip
                 PlayerController player = damager.gameObject.GetComponent<PlayerController>();
                 if(player.GetAnotherPlayer().inToolState() && player.GetAnotherPlayer().getTool().getName() == "LightSaber")
                 {
-                    dmg = base.TakeDamage(baseDmg, damager);
+                    dmg = base.TakeDamage(baseDmg, pow, damager);
                 }
             }
-
-            //if (_contactPoints.ContainsKey(damager))
-            //{
-            //    ContactPoint[] contacts = _contactPoints[damager];
-            //    for (int i2 = 0; i2 < contacts.Length; i2++)
-            //    {
-            //        _mat.SetVector("_HitPosition", transform.InverseTransformPoint(contacts[i2].point));
-            //        hitTime = 500;
-            //        _mat.SetFloat("_HitTime", hitTime);
-            //    }
-            //}
 
             return dmg;
         }
 
-        private void OnCollisionEnter(Collision collision)
+        protected override void FixedUpdate() { }
+        protected override void Interrupted()
         {
-            CombatUnit combat = collision.gameObject.GetComponent<CombatUnit>();
-            if (combat == null) return;
-
-            if (_contactPoints.ContainsKey(combat))
-            {
-                _contactPoints[combat] = collision.contacts;
-            }
-            else
-            {
-                _contactPoints.Add(combat, collision.contacts);
-            }
+            Debug.Log("no interrupted action for force shield");
         }
+
+        //private void OnCollisionEnter(Collision collision)
+        //{
+        //    CombatUnit combat = collision.gameObject.GetComponent<CombatUnit>();
+        //    if (combat == null) return;
+
+        //    if (_contactPoints.ContainsKey(combat))
+        //    {
+        //        _contactPoints[combat] = collision.contacts;
+        //    }
+        //    else
+        //    {
+        //        _contactPoints.Add(combat, collision.contacts);
+        //    }
+        //}
 
         public override bool Attack()
         {

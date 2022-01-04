@@ -23,7 +23,7 @@ namespace ToolMan.Combat.Equip
             return false;
         }
 
-        public override int TakeDamage(float baseDmg, CombatUnit damager)
+        public override int TakeDamage(float baseDmg, float pow, CombatUnit damager)
         {
             Debug.Log("hit by: " + hitBy.gameObject.name);
             if (this.gameObject == null)

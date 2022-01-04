@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using ToolMan.Player;
+using ToolMan.Combat.Skills;
 using ToolMan.Util;
 using System.Collections;
+
 
 namespace ToolMan.Combat.Equip
 {
@@ -29,6 +30,7 @@ namespace ToolMan.Combat.Equip
         private BoolWrapper collisionEnable = new BoolWrapper();
 
         private SkillCombat whaleCombat;
+        [SerializeField] private Skill _skill;
 
         private Vector3 _targetDir;
 
@@ -196,7 +198,7 @@ namespace ToolMan.Combat.Equip
             if (!collisionEnable.Value) return;
             PlayerCombat playerCombat;
             if ((playerCombat = other.gameObject.GetComponent<PlayerCombat>()) == null) return;
-            playerCombat.TakeDamage(atk, whaleCombat);
+            playerCombat.TakeDamage(whaleCombat.Atk * _skill.Multiplier, whaleCombat.Pow * _skill.PowMuliplier, whaleCombat);
         }
     }
 }

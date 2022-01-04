@@ -58,6 +58,12 @@ namespace ToolMan.Combat
         {
             get => _spd.Value;
         }
+        protected Stat _pow;
+        public float Pow
+        {
+            get => _pow.Value;
+        }
+
 
         protected Ability _attackEnabled;
         public bool AttackEnabled{
@@ -98,10 +104,15 @@ namespace ToolMan.Combat
             get => _timeToStopRb > 0f;
         }
 
+        protected bool _isInterrupted = false;
+        protected CombatUnit _lastDamager;
+
 
         public Action DeadActions;
         public Action HurtActions;
 
+
+        
 
         protected virtual void Awake()
         {
@@ -113,6 +124,7 @@ namespace ToolMan.Combat
             _def = _stats.AddStat(new Stat("DEF", DefBaseValue));
             _str = _stats.AddStat(new Stat("STR", StrBaseValue));
             _spd = _stats.AddStat(new Stat("SPD", SpdBaseValue));
+            _pow = _stats.AddStat(new Stat("POW", 1));
 
             _hp = _stats.AddResource(new Resource("HP", HpMaxValue, HpInitValue));
 
@@ -175,10 +187,15 @@ namespace ToolMan.Combat
             }
         }
 
+        protected virtual void FixedUpdate()
+        {
+            Interrupted();
+        }
+
 
         public abstract bool Attack();
 
-        public virtual int TakeDamage(float baseDmg, CombatUnit damager)
+        public virtual int TakeDamage(float baseDmg, float pow, CombatUnit damager)
         {
             if (isDead) return 0;
             if (!Vulnerable) return 0;
@@ -187,18 +204,22 @@ namespace ToolMan.Combat
             dmg = Mathf.Max(dmg, 0);
             _hp.ChangeValueBy(-(int)dmg);
             Debug.Log(name + " takes " + dmg + " damage, Hp: " + Hp);
-            if (dmg > Str)
+            if (pow > Str)
             {
-                Interrupted(damager);
+                _isInterrupted = true;
+                _lastDamager = damager;
+
             }
             return (int)dmg;
         }
 
-        protected virtual void Interrupted(CombatUnit damager)
+        protected virtual void Interrupted()
         {
-            if(HurtActions != null)
+            if (!_isInterrupted) return;
+            _isInterrupted = false;
+            if (HurtActions != null)
                 HurtActions.Invoke();
-            var dir = transform.position - damager.transform.position;
+            var dir = transform.position - _lastDamager.transform.position;
             dir.y = 0f;
             dir = Vector3.Normalize(dir);
             _rb.AddForce(dir * 1000 * _rb.mass);

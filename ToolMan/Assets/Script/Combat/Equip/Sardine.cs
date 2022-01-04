@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using ToolMan.Combat.Skills;
 
 namespace ToolMan.Combat.Equip
 {
@@ -10,8 +11,8 @@ namespace ToolMan.Combat.Equip
         private CombatUnit _whaleCombat;
 
         private bool _returning = false;
-        [SerializeField]
-        private float _atkMultiplier;
+
+        [SerializeField] private Skill _skill;
 
         [SerializeField]
         private float _speed;
@@ -158,7 +159,7 @@ namespace ToolMan.Combat.Equip
                 }
                 else
                 {
-                    playerCombat.TakeDamage(_whaleCombat.Atk * _atkMultiplier, _whaleCombat);
+                    playerCombat.TakeDamage(_whaleCombat.Atk * _skill.Multiplier, _whaleCombat.Pow * _skill.PowMuliplier, _whaleCombat);
                     // maybe add buff?
                     Debug.Log(other.name);
                     Die();
