@@ -341,7 +341,7 @@ public class EnemyWhale : Enemy
         RaycastHit m_Hit;
         bool m_HitDetect;
         float moveDis = Vector3.Distance(nextStep, transform.position);
-        m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
+        m_HitDetect = Physics.BoxCast(GetComponent<Collider>().bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
         if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.isTrigger)
             transform.position = nextStep;
     }

@@ -43,7 +43,7 @@ namespace ToolMan.UI
 
             }
 
-            Debug.Log("state = " + state);
+            //Debug.Log("state = " + state);
 
             if (countingDown)
                 countDownTime -= Time.deltaTime;

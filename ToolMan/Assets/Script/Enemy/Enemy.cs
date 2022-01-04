@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 
     private EnemyWaveController _wave;
     [SerializeField] protected Animator animator;
-    [SerializeField] protected Collider collider;
+    [SerializeField] public Collider enemyCollider;
     public Animator Anim
     {
         get => animator;
@@ -371,7 +371,7 @@ public class Enemy : MonoBehaviour
         //transform.rotation = Quaternion.LookRotation(newDirection);
         float moveDis = Vector3.Distance(nextStep, transform.position);
         m_MaxDistance = moveDis;
-        m_HitDetect = Physics.BoxCast(collider.bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
+        m_HitDetect = Physics.BoxCast(enemyCollider.bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
         if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
             transform.position = nextStep;
         //else
