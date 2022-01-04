@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
+using ToolMan.Core;
 
 public class GameManager : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        
         if (_p1.IsDead() || _p2.IsDead())
         {
             StartCoroutine(PlayerLose());
@@ -67,8 +69,12 @@ public class GameManager : MonoBehaviour
         else if (levelComplete)
         {
             // next level
-            SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
+            if (CheckpointManager.GetCheckpointInfo().level < 5)
+                SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
+            else
+                SceneManager.LoadScene("MainMenu");
         }
+        Simulation.Tick();
     }
 
     private IEnumerator CompleteSceneObjectives()

@@ -4,6 +4,8 @@ using ToolMan.Combat.Skills;
 using ToolMan.Combat.Stats;
 using System.Collections.Generic;
 using ToolMan.Util;
+using ToolMan.Gameplay;
+using static ToolMan.Core.Simulation;
 
 namespace ToolMan.Combat
 {
@@ -179,6 +181,7 @@ namespace ToolMan.Combat
             }
             if (ThisPlayerController.IsGrabbed())
             {
+                Schedule<PlayerHit>().player = ThisPlayerController;
                 Debug.Log(name + " hit " + target.name);
                 target.TakeDamage(Atk * currentUsingSkill.Multiplier, Pow * currentUsingSkill.PowMuliplier,TeamMateCombat);
                 StartCoroutine(currentUsingSkill.Hit(this, target));

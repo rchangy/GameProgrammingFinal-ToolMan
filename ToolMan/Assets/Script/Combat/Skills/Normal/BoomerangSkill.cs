@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ToolMan.Util;
+using ToolMan.Gameplay;
+using static ToolMan.Core.Simulation;
 
 namespace ToolMan.Combat.Skills.Normal
 {
@@ -12,6 +14,8 @@ namespace ToolMan.Combat.Skills.Normal
         [SerializeField] private float _deformedOnAxis;
 
         [SerializeField] private float _deformingTime = 0.5f;
+
+        private PlayerController player = null;
 
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
@@ -39,7 +43,9 @@ namespace ToolMan.Combat.Skills.Normal
             _manController.GrabOrRelease();
             _tool.GetComponent<CapsuleCollider>().isTrigger = true;
             _tool.GetComponent<Rigidbody>().useGravity = false;
-            
+
+            if (player == null)
+                player = combat.gameObject.GetComponent<PlayerController>();
 
             // set target (closest enemy or something)
             Vector3 targetPos = _man.transform.position + _man.transform.forward * 10;
@@ -49,6 +55,10 @@ namespace ToolMan.Combat.Skills.Normal
             float flyingTimeLast = _flyingTime;
             while (flyingTimeLast > 0)
             {
+                // audio
+                if (player.playerAudioStat.lastAttackTime >= 0.4f)
+                    Schedule<PlayerAttack>().player = player;
+
                 _tool.transform.Rotate(0, 0, Time.deltaTime * 800);
                 _tool.transform.position = Vector3.MoveTowards(_tool.transform.position, targetPos, Time.deltaTime * 40);
                 flyingTimeLast -= Time.deltaTime;
@@ -58,6 +68,7 @@ namespace ToolMan.Combat.Skills.Normal
 
             // return
             flyingTimeLast = _flyingTime * 1.5f;
+            
             while (flyingTimeLast > 0)
             {
                 _tool.transform.Rotate(0, 0, Time.deltaTime * 800);
