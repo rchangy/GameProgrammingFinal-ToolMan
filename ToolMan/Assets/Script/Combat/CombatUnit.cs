@@ -20,6 +20,7 @@ namespace ToolMan.Combat
         public float DefBaseValue = 1f;
         public float StrBaseValue = 1f;
         public float SpdBaseValue = 1f;
+        public float PowBaseValue = 1f;
 
         public bool AttackEnableBaseValue = true;
         public bool MovableBaseValue = true;
@@ -124,7 +125,7 @@ namespace ToolMan.Combat
             _def = _stats.AddStat(new Stat("DEF", DefBaseValue));
             _str = _stats.AddStat(new Stat("STR", StrBaseValue));
             _spd = _stats.AddStat(new Stat("SPD", SpdBaseValue));
-            _pow = _stats.AddStat(new Stat("POW", 1));
+            _pow = _stats.AddStat(new Stat("POW", PowBaseValue));
 
             _hp = _stats.AddResource(new Resource("HP", HpMaxValue, HpInitValue));
 

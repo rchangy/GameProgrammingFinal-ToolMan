@@ -25,7 +25,6 @@ namespace ToolMan.Combat.Equip
         public float YAxisOffset;
         public float ForwardOffset;
 
-        [SerializeField] private float atk;
 
         private BoolWrapper collisionEnable = new BoolWrapper();
 
@@ -41,6 +40,10 @@ namespace ToolMan.Combat.Equip
         public float stepTime;
 
         private Collider _collider;
+
+        private Color _lineStartColor = new Color(1, 1, 1, 0.5f);
+
+        private Color _lineWarningColor = Color.red;
 
         private void Start()
         {
@@ -62,6 +65,8 @@ namespace ToolMan.Combat.Equip
             _linePoints.Clear();
             StartCoroutine(Attack());
             _collider = GetComponent<Collider>();
+            _line.startColor = _lineStartColor;
+            _line.endColor = _lineStartColor;
         }
 
         public void SetWhale(SkillCombat whale)
@@ -184,7 +189,15 @@ namespace ToolMan.Combat.Equip
             yield return new WaitForSeconds(_aimingTime);
             StopAiming();
             Debug.Log("Stop aiming");
-            yield return new WaitForSeconds(_waitingTime);
+            float waitingTimePassed = 0;
+
+            while(waitingTimePassed < _waitingTime)
+            {
+                _line.startColor = Color.Lerp(_lineStartColor, _lineWarningColor, waitingTimePassed / _waitingTime);
+                _line.endColor = Color.Lerp(_lineStartColor, _lineWarningColor, waitingTimePassed / _waitingTime);
+                waitingTimePassed += Time.deltaTime;
+                yield return null;
+            }
             Launch();
             Debug.Log("Launch");
             collisionEnable.Value = true;
