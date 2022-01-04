@@ -95,7 +95,7 @@ namespace ToolMan.Combat
             ThisPlayerController.Hurt();
             if(ThisPlayerController.IsGrabbing())
                 ThisPlayerController.Release();
-            var dir = transform.position - _lastDamager.transform.position;
+            var dir = transform.position - _lastDamagerPos;
             dir.y = 0f;
             dir = Vector3.Normalize(dir);
             dir.y = 2;

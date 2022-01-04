@@ -2778,6 +2778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fd85cd5e4fb4c8eb9ea0e293b710b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 10
   hintToShow: {fileID: 624219952}
   hintsToUnlock:
@@ -3379,6 +3381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 28
   playableDirector: {fileID: 1636524143}
 --- !u!114 &162338442
@@ -5727,6 +5731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fd85cd5e4fb4c8eb9ea0e293b710b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 0
   hintToShow: {fileID: 436859627}
   hintsToUnlock:
@@ -5832,6 +5838,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75f8c6d4a52e4098913c79361f3bf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 20
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -14481,6 +14489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5463f584cdad4d4e955c5863afc1309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 12
   notification: {fileID: 1533919863}
   timelineDirector: {fileID: 1027763467}
@@ -15342,6 +15352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75f8c6d4a52e4098913c79361f3bf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 30
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -15587,6 +15599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5463f584cdad4d4e955c5863afc1309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 7
   notification: {fileID: 1533919863}
   timelineDirector: {fileID: 1027763467}
@@ -16530,6 +16544,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423348877448721273, guid: d9b1f045573050749aab36f91caa872c, type: 3}
+      propertyPath: moveAngleSensitivity
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 4394039214326930993, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 161.74
@@ -16569,6 +16587,10 @@ PrefabInstance:
     - target: {fileID: 5678871092492134002, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319494748944245440, guid: d9b1f045573050749aab36f91caa872c, type: 3}
+      propertyPath: moveAngleSensitivity
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7248950564732607247, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17641,6 +17663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fd85cd5e4fb4c8eb9ea0e293b710b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 5
   hintToShow: {fileID: 795214879}
   hintsToUnlock:
@@ -18061,6 +18085,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 23
   playableDirector: {fileID: 379000432}
 --- !u!114 &758014797
@@ -27875,6 +27901,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 19
   playableDirector: {fileID: 949011211}
 --- !u!114 &969952826
@@ -28003,7 +28031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &986427379
 Transform:
   m_ObjectHideFlags: 0
@@ -28064,6 +28092,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 100
   playableDirector: {fileID: 196001271}
 --- !u!1 &986606139
@@ -33714,6 +33744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9286dac5a4f42839d2286cecfd628b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 22
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -36663,6 +36695,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 14
   playableDirector: {fileID: 1663247697}
 --- !u!114 &1247688168
@@ -36982,6 +37016,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9286dac5a4f42839d2286cecfd628b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 26
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -37521,6 +37557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9286dac5a4f42839d2286cecfd628b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 32
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -39598,6 +39636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97c1a8ca17afc84dab772ddb460abc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 31
 --- !u!1 &1382930973
 GameObject:
@@ -40466,6 +40506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75f8c6d4a52e4098913c79361f3bf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 24
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -41257,6 +41299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7ab8fce1b774972a955933b9dfbe0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 21
   combatManager: {fileID: 0}
 --- !u!1 &1530901015
@@ -51310,6 +51354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fd85cd5e4fb4c8eb9ea0e293b710b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 29
   hintToShow: {fileID: 578716538}
   hintsToUnlock:
@@ -53273,6 +53319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 27
   playableDirector: {fileID: 1642578779}
 --- !u!114 &1747431247
@@ -55256,6 +55304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5463f584cdad4d4e955c5863afc1309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 2
   notification: {fileID: 1533919863}
   timelineDirector: {fileID: 1027763467}
@@ -60313,6 +60363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9dbfc95a68247f49a6d770c42263c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 17
   notification: {fileID: 1533919863}
   timelineDirector: {fileID: 1027763467}
@@ -60846,6 +60898,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 9
   playableDirector: {fileID: 1532409289}
 --- !u!114 &1893888482
@@ -62231,6 +62285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fd85cd5e4fb4c8eb9ea0e293b710b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 15
   hintToShow: {fileID: 668638330}
   hintsToUnlock:
@@ -70060,6 +70116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7ab8fce1b774972a955933b9dfbe0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 25
   combatManager: {fileID: 0}
 --- !u!1 &2087924329
@@ -70454,6 +70512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fd85cd5e4fb4c8eb9ea0e293b710b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 33
   hintToShow: {fileID: 575653186}
   hintsToUnlock:
@@ -70875,6 +70935,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75f8c6d4a52e4098913c79361f3bf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 6
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -70953,6 +71015,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75f8c6d4a52e4098913c79361f3bf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 11
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -71000,6 +71064,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75f8c6d4a52e4098913c79361f3bf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 16
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -71016,6 +71082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75f8c6d4a52e4098913c79361f3bf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 1
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -72721,6 +72789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9286dac5a4f42839d2286cecfd628b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 3
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -72798,6 +72868,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9286dac5a4f42839d2286cecfd628b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 13
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -72844,6 +72916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9286dac5a4f42839d2286cecfd628b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 8
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -72859,6 +72933,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9286dac5a4f42839d2286cecfd628b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 18
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -72905,6 +72981,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 4
   playableDirector: {fileID: 1027763467}
 --- !u!114 &5722539099062774869
