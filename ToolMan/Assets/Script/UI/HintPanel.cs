@@ -44,7 +44,7 @@ namespace ToolMan.UI
                 Hint h = hs[i];
                 _hints.Add(h);
 
-                Debug.Log("i = " + i);
+                //Debug.Log("i = " + i);
                 Button b = bs[i];
                 b.onClick.AddListener(delegate { LoadHint(h._title); });
 

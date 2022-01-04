@@ -270,6 +270,7 @@ public class EnemyTurtle : Enemy
             return;
 
         _lookatDest = _dest;
+        _lookatDest.y = transform.position.y;
         var targetDirection = _lookatDest - transform.position;
         
         var newDir = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * rotateSpeed, 0f);
