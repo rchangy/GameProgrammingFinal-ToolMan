@@ -25,6 +25,9 @@ namespace ToolMan.UI
         [SerializeField]
         private Hint lockedHint;
 
+        [SerializeField]
+        private HintNotRead hintNotRead;
+
         private void Awake()
         {
             Init();
@@ -51,6 +54,7 @@ namespace ToolMan.UI
                 //Debug.Log("i = " + i);
                 Button b = bs[i];
                 b.onClick.AddListener(delegate { LoadHint(h._title); });
+                b.onClick.AddListener(delegate { Read(h._title); });
 
                 //Debug.Log("h = " + h._title + " b = " + b.name);
             }
@@ -78,5 +82,7 @@ namespace ToolMan.UI
         }
 
         public void UnlockHint(string hintTitle) { _hints.Find(h => h._title == hintTitle).Unlock(); }
+
+        public void Read(string title) { hintNotRead.ReadHint(title); }
     }
 }

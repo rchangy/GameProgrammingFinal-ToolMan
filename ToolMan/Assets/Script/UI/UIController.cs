@@ -7,6 +7,8 @@ public class UIController : MonoBehaviour
     public bool showingTutorialUI;
     public bool showingNotificationUI;
 
+    public HintNotRead hintNotRead;
+
     [SerializeField]
     private GameObject battleUI;
     [SerializeField]

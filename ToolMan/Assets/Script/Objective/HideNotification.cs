@@ -18,13 +18,14 @@ namespace ToolMan.UI
 
         public override void StartObjective()
         {
-            _p1.controlEnable = true;
-            _p2.controlEnable = true;
-            _uIController.SetControlEnable(true);
+            //_p1.controlEnable = true;
+            //_p2.controlEnable = true;
+            //_uIController.SetControlEnable(true);
 
             // Display notifications
             _noti1.OnComplete();
-            _noti2.OnComplete();
+            if (_noti2)
+                _noti2.OnComplete();
             _isCompleted = true;
         }
 
