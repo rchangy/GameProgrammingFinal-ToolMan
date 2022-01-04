@@ -217,9 +217,9 @@ public class Enemy : MonoBehaviour
 
     protected virtual void ChasePlayer()
     {
-        Debug.Log("Big Chase Mode");
+        //Debug.Log("Big Chase Mode");
         SetDest(closestPlayer);
-        Debug.Log("Big dest = " + _dest);
+        //Debug.Log("Big dest = " + _dest);
         _currentSpeedMul = 2;
     }
 
@@ -371,11 +371,11 @@ public class Enemy : MonoBehaviour
         //transform.rotation = Quaternion.LookRotation(newDirection);
         float moveDis = Vector3.Distance(nextStep, transform.position);
         m_MaxDistance = moveDis;
-        m_HitDetect = Physics.BoxCast(enemyCollider.bounds.center, transform.localScale, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
-        if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
+        m_HitDetect = Physics.BoxCast(enemyCollider.bounds.center + new Vector3(0, 10f, 0), transform.localScale / 3, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
+        if (!m_HitDetect || m_Hit.collider.gameObject == this || m_Hit.collider.isTrigger)
             transform.position = nextStep;
-        //else
-        //    Debug.Log(m_Hit.collider.gameObject.name);
+        else
+            Debug.Log("enemy hit " +m_Hit.collider.gameObject.name);
     }
 
     protected virtual void ManageLookAt()
@@ -383,6 +383,7 @@ public class Enemy : MonoBehaviour
         if (combat.Attacking) return;
         if (PlayerInSightRange) _lookatDest = new Vector3(closestPlayer.x, transform.position.y, closestPlayer.z);
         else _lookatDest = _dest;
+        _lookatDest.y = transform.position.y;
         var targetDirection = _lookatDest - transform.position;
         if(transform.position != _lookatDest)
         {
@@ -393,7 +394,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void SetDest(Vector3 dest)
     {
-        dest = new Vector3(dest.x, transform.position.y, dest.z);
+        //dest = new Vector3(dest.x, transform.position.y, dest.z);
+
         if (Physics.Raycast(dest, -transform.up, 10f, GroundMask))
         {
             walkPointSet = true;
@@ -412,5 +414,11 @@ public class Enemy : MonoBehaviour
     public void SetWave(EnemyWaveController wave)
     {
         _wave = wave;
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Draw a cube at the maximum distance
+        Gizmos.DrawWireCube(enemyCollider.bounds.center + new Vector3(0, 0.5f, 0), transform.localScale / 3);
     }
 }

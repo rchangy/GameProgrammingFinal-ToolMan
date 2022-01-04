@@ -114,18 +114,18 @@ public partial class PlayerController
         this.toolWave = false;
     }
 
-    private void ManageWaving()
-    {
-        if (waveEnd)
-            return;
-        if (shouldWaveBack && waveDirChange)
-        {
-            Vector3 tmp = specialToolEulerAngle;
-            specialToolEulerAngle = originalToolEulerAngle;
-            originalToolEulerAngle = tmp;
-        }
-        ComputeToolEulerAngle();
-    }
+    //private void ManageWaving()
+    //{
+    //    if (waveEnd)
+    //        return;
+    //    if (shouldWaveBack && waveDirChange)
+    //    {
+    //        Vector3 tmp = specialToolEulerAngle;
+    //        specialToolEulerAngle = originalToolEulerAngle;
+    //        originalToolEulerAngle = tmp;
+    //    }
+    //    ComputeToolEulerAngle();
+    //}
 
     private void ComputeToolEulerAngle()
     {

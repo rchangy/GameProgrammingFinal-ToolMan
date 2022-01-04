@@ -1,11 +1,14 @@
 using UnityEngine;
 using System.Collections;
+using ToolMan.Combat.Skills;
 
 namespace ToolMan.Combat.Equip
 {
     public class SlimeBall : MonoBehaviour
     {
         private CombatUnit _slimeRabbitCombat;
+        [SerializeField] private Skill _skill;
+
         [SerializeField]
         private float _atkMultiplier;
 
@@ -72,7 +75,7 @@ namespace ToolMan.Combat.Equip
                 Debug.Log("vulnerable = " + playerCombat.Vulnerable);
                 if (playerCombat.Vulnerable)
                 {
-                    playerCombat.TakeDamage(_slimeRabbitCombat.Atk * _atkMultiplier, _slimeRabbitCombat);
+                    playerCombat.TakeDamage(_slimeRabbitCombat.Atk * _skill.Multiplier, _slimeRabbitCombat.Pow * _skill.PowMuliplier,_slimeRabbitCombat);
                     Debug.Log(other.name);
                     Die();
                 }
