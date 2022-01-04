@@ -13,10 +13,17 @@ public static class CheckpointManager
     static int[] lastUnlockedHIntList = { 1, 15, 17, 20, 21 };
     public static void LoadCheckpoint()
     {
-        //StreamReader r = new StreamReader(ckptPath);
-        //string jsonString = r.ReadToEnd();
-        //ckpt = JsonUtility.FromJson<Checkpoint>(jsonString);
-        ckptInfo = new CheckpointInfo(5);
+        if (!File.Exists(ckptPath))
+        {
+            UpdateCheckpoint(1);
+        }
+        else
+        {
+            StreamReader r = new StreamReader(ckptPath);
+            string jsonString = r.ReadToEnd();
+            ckpt = JsonUtility.FromJson<Checkpoint>(jsonString);
+            ckptInfo = new CheckpointInfo(ckpt);
+        }
 
     }
 
@@ -42,7 +49,7 @@ public static class CheckpointManager
 
     public static void SaveCkeckpoint()
     {
-        //File.WriteAllText(ckptPath, JsonUtility.ToJson(ckpt));
+        File.WriteAllText(ckptPath, JsonUtility.ToJson(ckpt));
     }
     public static CheckpointInfo GetCheckpointInfo()
     {
