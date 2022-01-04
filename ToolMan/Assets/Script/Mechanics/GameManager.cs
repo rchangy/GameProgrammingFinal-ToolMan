@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private string _currentScene;
     [SerializeField] private GameObject Objectives;
     [SerializeField] private int objectivesDepth = -1;
+    private AudioSource _audioSource;
     private List<Objective> _objectives;
 
     [SerializeField]
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         {
             CheckpointManager.resetLevel();
         }
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     void Start()
@@ -75,6 +77,19 @@ public class GameManager : MonoBehaviour
         {
             while (!obj.Startup) yield return null;
             Debug.Log("obj start " + obj.gameObject.name + " , Order: " + obj.Order);
+            //if (obj.noBgm)
+            //{
+            //    _audioSource.Stop();
+            //}
+            //else
+            //{
+            //    if(obj.Bgm != null)
+            //    {
+                    
+            //        _audioSource.clip = obj.Bgm;
+            //        _audioSource.Play();
+            //    }
+            //}
             obj.StartObjective();
             while (!obj.isCompleted())
             {

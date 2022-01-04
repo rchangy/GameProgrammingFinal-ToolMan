@@ -3,6 +3,8 @@ using System.Collections;
 
 public abstract class Objective : MonoBehaviour
 {
+    public AudioClip Bgm;
+    public bool noBgm;
     public int Order;
 
     protected GameManager _manager;

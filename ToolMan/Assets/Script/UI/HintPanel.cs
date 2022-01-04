@@ -18,8 +18,7 @@ namespace ToolMan.UI
 
         [SerializeField]
         private GameObject hintsObj;
-        [SerializeField]
-        private List<Hint> _hints;
+        public List<Hint> _hints;
         [SerializeField]
         private GameObject buttonObj;
 
@@ -51,9 +50,10 @@ namespace ToolMan.UI
                 //Debug.Log("h = " + h._title + " b = " + b.name);
             }
 
-            CheckpointManager.LoadCheckpoint();
-            int lastUnlockedHint =  CheckpointManager.GetCheckpointInfo().lastUnlockedHint;
-            for (int i = 0; i < lastUnlockedHint; i++) _hints[i].Unlock();
+            //CheckpointManager.LoadCheckpoint();
+            //int lastUnlockedHint =  CheckpointManager.GetCheckpointInfo().lastUnlockedHint;
+            //for (int i = 0; i < lastUnlockedHint; i++) _hints[i].Unlock();
+            for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
         }
 
         public void LoadHint(string hintTitle) {
