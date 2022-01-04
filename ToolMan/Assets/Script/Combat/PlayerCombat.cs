@@ -87,6 +87,8 @@ namespace ToolMan.Combat
         {
             int dmg = base.TakeDamage(baseDmg, pow, damager);
             hitFeel.MakeCamShake(Mathf.Min(3, (float)dmg/(Str + 0.1f)), _playerController);
+            if (dmg > 0)
+                Schedule<PlayerHurt>().player = _playerController;
             return dmg;
         }
 

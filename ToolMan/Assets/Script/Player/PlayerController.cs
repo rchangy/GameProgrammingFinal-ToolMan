@@ -52,8 +52,14 @@ public partial class PlayerController : ToolableMan
     public AudioSource audioSource;
     public AudioClip jumpAudio;
     public AudioClip walkAudio;
+    public AudioClip toToolAudio;
+    public AudioClip hurtAudio;
+    public AudioClip addHPAudio;
     public AudioClip pickaxeHitAudio;
+    public AudioClip lightSaberHitAudio;
     public AudioClip boomerangWhirlAudio;
+    public AudioClip flashBombAttackAudio;
+    public AudioClip shieldDefendAudio;
     // ==== Audio ====
 
     // ==== Combat ====

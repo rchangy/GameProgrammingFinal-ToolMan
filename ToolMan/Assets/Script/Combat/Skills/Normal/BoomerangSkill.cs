@@ -56,7 +56,7 @@ namespace ToolMan.Combat.Skills.Normal
             while (flyingTimeLast > 0)
             {
                 // audio
-                if (player.playerAudioStat.lastAttackTime >= 0.4f)
+                if (player.playerAudioStat.lastAttackTime >= 1.1f)
                     Schedule<PlayerAttack>().player = player;
 
                 _tool.transform.Rotate(0, 0, Time.deltaTime * 800);

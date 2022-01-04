@@ -15,8 +15,12 @@ namespace ToolMan.Gameplay
         {
             if (player.audioSource)
             {
-                if (player.boomerangWhirlAudio)
+                if (player.inToolState() && player.getTool().getName().Equals("Boomerang") && player.boomerangWhirlAudio)
                     player.audioSource.PlayOneShot(player.boomerangWhirlAudio);
+                if (player.inToolState() && player.getTool().getName().Equals("FlashBomb") && player.flashBombAttackAudio)
+                    player.audioSource.PlayOneShot(player.flashBombAttackAudio);
+                if (player.inToolState() && player.getTool().getName().Equals("Shield") && player.shieldDefendAudio)
+                    player.audioSource.PlayOneShot(player.shieldDefendAudio);
                 player.playerAudioStat.lastAttackTime = 0;
             }
         }

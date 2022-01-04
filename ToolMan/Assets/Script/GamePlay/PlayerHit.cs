@@ -17,8 +17,10 @@ namespace ToolMan.Gameplay
         {
             if (player.audioSource && player.playerAudioStat.lastHitTime > waitForNext)
             {
-                if (player.getTool().getName().Equals("Pickaxe") && player.pickaxeHitAudio)
+                if (player.inToolState() && player.getTool().getName().Equals("Pickaxe") && player.pickaxeHitAudio)
                     player.audioSource.PlayOneShot(player.pickaxeHitAudio);
+                if (player.inToolState() && player.getTool().getName().Equals("LightSaber") && player.lightSaberHitAudio)
+                    player.audioSource.PlayOneShot(player.lightSaberHitAudio);
                 player.playerAudioStat.lastHitTime = 0;
             }
         }

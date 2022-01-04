@@ -2,6 +2,8 @@
 using System.Collections;
 using ToolMan.Util;
 using ToolMan.Combat.Stats.Buff;
+using ToolMan.Gameplay;
+using static ToolMan.Core.Simulation;
 
 namespace ToolMan.Combat.Skills.Normal
 {
@@ -48,6 +50,8 @@ namespace ToolMan.Combat.Skills.Normal
             {
                 if (Input.GetButtonDown("JumpOrAttack2"))
                 {
+                    // audio
+                    Schedule<PlayerAttack>().player = _toolController;
                     _toolController.AnimationAttack();
                     // vfx
                     if(_explosionVfx != null)
