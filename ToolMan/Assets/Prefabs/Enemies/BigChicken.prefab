@@ -667,9 +667,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlowedDownEffect: {fileID: 0}
-  HpMaxValue: 2500
-  HpInitValue: 2500
-  AtkBaseValue: 80
+  HpMaxValue: 3500
+  HpInitValue: 3500
+  AtkBaseValue: 120
   DefBaseValue: 0
   StrBaseValue: 1
   SpdBaseValue: 1
@@ -734,7 +734,7 @@ MonoBehaviour:
   walkPointRange: 3
   SightRange: 5
   speed: 4
-  InitAttackRange: 1
+  InitAttackRange: 3
   _crazyTime: 10
   _speedUp: 2
 --- !u!65 &1841006655
@@ -748,8 +748,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.34, y: 0.46, z: 1}
+  m_Center: {x: 0, y: 0.22, z: 0.3}
 --- !u!136 &5705157939653602017
 CapsuleCollider:
   m_ObjectHideFlags: 0
