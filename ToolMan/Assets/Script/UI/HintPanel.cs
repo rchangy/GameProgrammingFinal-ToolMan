@@ -30,6 +30,11 @@ namespace ToolMan.UI
             Init();
         }
 
+        private void Start()
+        {
+            for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
+        }
+
         private void Init() {
             _hints.Clear();
 
