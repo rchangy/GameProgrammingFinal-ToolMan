@@ -9,7 +9,6 @@ namespace ToolMan.Combat.Skills.Normal
         public Vector3 AttackPointOffset;
         public float AttackRange;
         public float AfterAttackDelay;
-        public float AtkMul;
         private EnemyDogKnight _dogKnight;
         
 
@@ -28,7 +27,7 @@ namespace ToolMan.Combat.Skills.Normal
                 CombatUnit targetCombat = target.GetComponent<CombatUnit>();
                 if (targetCombat != null)
                 {
-                    targetCombat.TakeDamage(combat.Atk * AtkMul, combat);
+                    targetCombat.TakeDamage(combat.Atk * Multiplier, combat.Pow * PowMuliplier, combat);
                 }
             }
             yield return new WaitForSeconds(AfterAttackDelay);

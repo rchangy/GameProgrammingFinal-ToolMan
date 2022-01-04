@@ -81,20 +81,21 @@ namespace ToolMan.Combat
 
         
 
-        public override int TakeDamage(float baseDmg, CombatUnit damager)
+        public override int TakeDamage(float baseDmg, float pow, CombatUnit damager)
         {
-            int dmg = base.TakeDamage(baseDmg, damager);
+            int dmg = base.TakeDamage(baseDmg, pow, damager);
             hitFeel.MakeCamShake(Mathf.Min(3, (float)dmg/(Str + 0.1f)), _playerController);
             return dmg;
         }
 
-        protected override void Interrupted(CombatUnit damager)
+        protected override void Interrupted()
         {
-            base.Interrupted(damager);
+            if (!_isInterrupted) return;
+            base.Interrupted();
             ThisPlayerController.Hurt();
             if(ThisPlayerController.IsGrabbing())
                 ThisPlayerController.Release();
-            var dir = transform.position - damager.transform.position;
+            var dir = transform.position - _lastDamager.transform.position;
             dir.y = 0f;
             dir = Vector3.Normalize(dir);
             dir.y = 2;
@@ -179,7 +180,7 @@ namespace ToolMan.Combat
             if (ThisPlayerController.IsGrabbed())
             {
                 Debug.Log(name + " hit " + target.name);
-                target.TakeDamage(Atk * currentUsingSkill.Multiplier, TeamMateCombat);
+                target.TakeDamage(Atk * currentUsingSkill.Multiplier, Pow * currentUsingSkill.PowMuliplier,TeamMateCombat);
                 StartCoroutine(currentUsingSkill.Hit(this, target));
             }
             else

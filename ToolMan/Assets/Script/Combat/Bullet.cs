@@ -12,7 +12,7 @@ namespace ToolMan.Combat
             var target = collision.gameObject.GetComponent<CombatUnit>();
             if (target != null)
             {
-                target.TakeDamage(Atk, shooter);
+                target.TakeDamage(Atk, 1, shooter);
             }
             Destroy(gameObject);
         }

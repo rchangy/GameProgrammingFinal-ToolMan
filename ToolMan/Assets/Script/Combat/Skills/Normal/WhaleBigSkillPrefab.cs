@@ -73,7 +73,7 @@ namespace ToolMan.Combat.Skills.Normal
         protected override void Hit(CombatUnit target)
         {
             Debug.Log(name + " hit " + target.name);
-            target.TakeDamage(Atk, this);
+            target.TakeDamage(Atk, Pow, this);
         }
     }
 }
