@@ -25,12 +25,10 @@ namespace ToolMan.Combat.Equip
 
         public override int TakeDamage(float baseDmg, float pow, CombatUnit damager)
         {
-            Debug.Log("hit by: " + hitBy.gameObject.name);
             if (this.gameObject == null)
                 return 0;
             if (hitBy != null)
             {
-                Debug.Log("hit tool: " + hitBy.getTool().getName());
                 if (hitBy.inToolState() && hitBy.getTool().getName().Equals("Pickaxe"))
                 {
                     hitCount += 1;

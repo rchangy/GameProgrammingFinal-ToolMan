@@ -372,7 +372,7 @@ public class Enemy : MonoBehaviour
         float moveDis = Vector3.Distance(nextStep, transform.position);
         //m_MaxDistance = moveDis;
         m_HitDetect = Physics.BoxCast(enemyCollider.bounds.center + new Vector3(0, 0.1f, 0), transform.localScale / 3, nextStepDir, out m_Hit, Quaternion.identity, moveDis);
-        if (!m_HitDetect || m_Hit.collider.isTrigger)
+        if (!m_HitDetect || m_Hit.collider.isTrigger || m_Hit.collider.gameObject == this || m_Hit.collider.tag == "Player")
             transform.position = nextStep;
         else
             Debug.Log("enemy hit " +m_Hit.collider.gameObject.name);

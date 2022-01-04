@@ -25,6 +25,9 @@ namespace ToolMan.Combat.Skills.Normal
             RaycastHit hit;
             Physics.Raycast(whale.transform.position, -Vector3.up, out hit, 100, whale.GroundLayerMask);
             warningEffect.transform.position = new Vector3(warningEffect.transform.position.x, hit.point.y + 0.5f, warningEffect.transform.position.z);
+            FixYPos f = warningEffect.GetComponent<FixYPos>();
+            f.parent = whale; f.y = hit.point.y + 0.5f;
+            Debug.Log("warning pos = " + warningEffect.transform.position);
             warningEffect.PlayEffect();
             // play warning sound
 
