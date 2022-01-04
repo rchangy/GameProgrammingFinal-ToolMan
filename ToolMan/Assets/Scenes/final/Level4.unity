@@ -265,6 +265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShowNotification
       objectReference: {fileID: 0}
+    - target: {fileID: 89566946680406249, guid: 63a1dcef364a54d49a125244022b8ad2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 89566946680406251, guid: 63a1dcef364a54d49a125244022b8ad2, type: 3}
       propertyPath: Order
       value: 3
@@ -566,6 +570,10 @@ PrefabInstance:
     - target: {fileID: 8154131085116159122, guid: 9478c0e647ea54d65a973dd9c56eaff0, type: 3}
       propertyPath: m_Name
       value: ShowHint
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154131085116159122, guid: 9478c0e647ea54d65a973dd9c56eaff0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8154131085116159123, guid: 9478c0e647ea54d65a973dd9c56eaff0, type: 3}
       propertyPath: m_RootOrder
@@ -4696,7 +4704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1001 &6197575863619994467
 PrefabInstance:
   m_ObjectHideFlags: 0
