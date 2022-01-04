@@ -32,7 +32,7 @@ namespace ToolMan.UI
 
         private void Start()
         {
-            for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
+            //for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
         }
 
         private void Init() {
@@ -55,10 +55,10 @@ namespace ToolMan.UI
                 //Debug.Log("h = " + h._title + " b = " + b.name);
             }
 
-            //CheckpointManager.LoadCheckpoint();
-            //int lastUnlockedHint =  CheckpointManager.GetCheckpointInfo().lastUnlockedHint;
-            //for (int i = 0; i < lastUnlockedHint; i++) _hints[i].Unlock();
-            for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
+            CheckpointManager.LoadCheckpoint();
+            int lastUnlockedHint = CheckpointManager.GetCheckpointInfo().lastUnlockedHint;
+            for (int i = 0; i < lastUnlockedHint; i++) _hints[i].Unlock();
+            //for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
         }
 
         public void LoadHint(string hintTitle) {
