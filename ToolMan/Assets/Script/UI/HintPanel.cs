@@ -18,8 +18,7 @@ namespace ToolMan.UI
 
         [SerializeField]
         private GameObject hintsObj;
-        [SerializeField]
-        private List<Hint> _hints;
+        public List<Hint> _hints;
         [SerializeField]
         private GameObject buttonObj;
 
