@@ -25,11 +25,12 @@ namespace ToolMan.Combat.Equip
 
         public override int TakeDamage(float baseDmg, float pow, CombatUnit damager)
         {
+            hitBy = damager.gameObject.GetComponent<PlayerController>();
             if (this.gameObject == null)
                 return 0;
             if (hitBy != null)
             {
-                if (hitBy.inToolState() && hitBy.getTool().getName().Equals("Pickaxe"))
+                if (hitBy.GetAnotherPlayer().inToolState() && hitBy.GetAnotherPlayer().getTool().getName().Equals("Pickaxe"))
                 {
                     hitCount += 1;
                     gameObject.GetComponent<Animator>().SetTrigger("hit");
@@ -61,14 +62,6 @@ namespace ToolMan.Combat.Equip
                 RM.CrystalDie();
             }
             Destroy(gameObject);
-        }
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log("crystal hit!");
-            if (other.gameObject.layer == LayerMaskUtil.LayerBitMaskToLayerNumber(_crystalTargetLayers.value))
-            {
-                hitBy = other.gameObject.GetComponent<PlayerController>();
-            }
         }
     }
 }
