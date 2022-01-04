@@ -172,6 +172,8 @@ MonoBehaviour:
   HeightSettingSpeed: 0.5
   LowestHeight: 156
   HighestHeight: 158.4
+  SpeedDownPercent: 0.5
+  plugs: []
 --- !u!1 &5432044770435930731
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,13 +223,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  waterColor: {r: 0.18431373, g: 0.666, b: 0.9921569, a: 0.4392157}
+  waterColor: {r: 0.0036044791, g: 0.1535406, b: 0.254717, a: 0.4392157}
   waterTex: {fileID: 2800000, guid: b3b93417e764a48438369dfd5de14b56, type: 3}
   waterTile: {x: 0.15, y: 0.15}
   textureVisibility: 0.463
   distortionTex: {fileID: 2800000, guid: f6acd684980920849a180e1c541fb199, type: 3}
   distortionTile: {x: 0.06, y: 0.06}
-  waterHeight: 158.4
+  waterHeight: 156
   waterDeep: 10
   waterDepthParam: 0.1
   waterMinAlpha: 0.413
