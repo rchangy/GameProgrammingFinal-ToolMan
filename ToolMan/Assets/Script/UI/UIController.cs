@@ -7,6 +7,8 @@ public class UIController : MonoBehaviour
     public bool showingTutorialUI;
     public bool showingNotificationUI;
 
+    public HintNotRead hintNotRead;
+
     [SerializeField]
     private GameObject battleUI;
     [SerializeField]
@@ -54,11 +56,11 @@ public class UIController : MonoBehaviour
     {
         if (_controlEnable && Input.GetButtonDown("Hint"))
         {
-            for (int i = 0; i < hintPanel._hints.Count; i++) {
-                Hint h = hintPanel._hints[i];
-                if (!h.locked)
-                    hintPanel.LoadHint(hintPanel._hints[i]._title);
-            }
+            //for (int i = 0; i < hintPanel._hints.Count; i++) {
+            //    Hint h = hintPanel._hints[i];
+            //    if (!h.locked)
+            //        hintPanel.LoadHint(hintPanel._hints[i]._title);
+            //}
             SetHintUI(!showingTutorialUI);
         }
     }

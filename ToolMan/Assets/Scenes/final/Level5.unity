@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20061535, g: 0.20333093, b: 0.20369384, a: 1}
+  m_IndirectSpecularColor: {r: 0.20061573, g: 0.20333138, b: 0.2036938, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4441,6 +4441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7ab8fce1b774972a955933b9dfbe0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 4
   combatManager: {fileID: 1501962627}
 --- !u!1 &1729051416 stripped
@@ -6080,7 +6082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2065818321
 Transform:
   m_ObjectHideFlags: 0
@@ -6108,6 +6110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2ab2a87013b4889b9b24fd1f15d236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 0
   targetCam: {fileID: 727410637}
   p1Cam: {fileID: 2142901054}

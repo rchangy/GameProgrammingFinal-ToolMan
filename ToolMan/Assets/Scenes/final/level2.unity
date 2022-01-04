@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44859177, g: 0.49487388, b: 0.5554284, a: 1}
+  m_IndirectSpecularColor: {r: 0.44859165, g: 0.4948734, b: 0.5554282, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -13789,6 +13789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 1
   playableDirector: {fileID: 4227763938474079117}
 --- !u!4 &353147714 stripped
@@ -23628,7 +23630,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7ab8fce1b774972a955933b9dfbe0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Order: 7
+  Bgm: {fileID: 0}
+  noBgm: 0
+  Order: 6
   combatManager: {fileID: 1822929880}
 --- !u!1001 &671312386
 PrefabInstance:
@@ -30248,6 +30252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 2
   playableDirector: {fileID: 1279839676}
 --- !u!114 &1300146308
@@ -51023,7 +51029,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7ab8fce1b774972a955933b9dfbe0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Order: 6
+  Bgm: {fileID: 0}
+  noBgm: 0
+  Order: 7
   combatManager: {fileID: 1822929880}
 --- !u!1 &1843149947
 GameObject:
@@ -55459,6 +55467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 0
   Order: 3
   playableDirector: {fileID: 776021834}
 --- !u!114 &4227763939523801279

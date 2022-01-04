@@ -25,9 +25,17 @@ namespace ToolMan.UI
         [SerializeField]
         private Hint lockedHint;
 
+        [SerializeField]
+        private HintNotRead hintNotRead;
+
         private void Awake()
         {
             Init();
+        }
+
+        private void Start()
+        {
+            //for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
         }
 
         private void Init() {
@@ -46,14 +54,15 @@ namespace ToolMan.UI
                 //Debug.Log("i = " + i);
                 Button b = bs[i];
                 b.onClick.AddListener(delegate { LoadHint(h._title); });
+                b.onClick.AddListener(delegate { Read(h._title); });
 
                 //Debug.Log("h = " + h._title + " b = " + b.name);
             }
 
-            //CheckpointManager.LoadCheckpoint();
-            //int lastUnlockedHint =  CheckpointManager.GetCheckpointInfo().lastUnlockedHint;
-            //for (int i = 0; i < lastUnlockedHint; i++) _hints[i].Unlock();
-            for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
+            CheckpointManager.LoadCheckpoint();
+            int lastUnlockedHint = CheckpointManager.GetCheckpointInfo().lastUnlockedHint;
+            for (int i = 0; i < lastUnlockedHint; i++) _hints[i].Unlock();
+            //for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
         }
 
         public void LoadHint(string hintTitle) {
@@ -73,5 +82,7 @@ namespace ToolMan.UI
         }
 
         public void UnlockHint(string hintTitle) { _hints.Find(h => h._title == hintTitle).Unlock(); }
+
+        public void Read(string title) { hintNotRead.ReadHint(title); }
     }
 }
