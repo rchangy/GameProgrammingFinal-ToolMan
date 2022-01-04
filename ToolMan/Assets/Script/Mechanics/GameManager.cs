@@ -112,6 +112,6 @@ public class GameManager : MonoBehaviour
         _p2.controlEnable = false;
         PostFX_Dead.gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
+        SceneManager.LoadScene("MainMenu");
     }
 }

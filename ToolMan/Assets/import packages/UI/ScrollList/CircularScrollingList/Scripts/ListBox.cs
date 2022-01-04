@@ -117,6 +117,11 @@ namespace AirFishLab.ScrollingList
 
         #endregion
 
+        private void Update()
+        {
+            UpdateDisplayContentPrivate();
+        }
+
         #region Position Controlling
 
         /// <summary>
