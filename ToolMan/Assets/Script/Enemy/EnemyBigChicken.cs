@@ -74,6 +74,7 @@ public class EnemyBigChicken : Enemy
 
     public void ChickKilled()
     {
-        StartCoroutine(CrazyMode());
+        if(gameObject.activeSelf)
+            StartCoroutine(CrazyMode());
     }
 }

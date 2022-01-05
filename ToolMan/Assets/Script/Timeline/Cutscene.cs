@@ -6,6 +6,7 @@ public class Cutscene : Objective
     [SerializeField]
     private PlayableDirector playableDirector;
     private bool _isCompleted;
+    private bool _started = false;
 
     public Transform cam1, cam2, AnotherCam;
     protected override void Init()
@@ -16,6 +17,7 @@ public class Cutscene : Objective
 
     public override void StartObjective()
     {
+        _started = true;
         _p1.controlEnable = false;
         _p2.controlEnable = false;
         _uIController.SetControlEnable(false);
@@ -28,7 +30,7 @@ public class Cutscene : Objective
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (_started && Input.GetKeyDown(KeyCode.Escape))
         {
             playableDirector.Stop();
             if (cam1)
@@ -41,7 +43,7 @@ public class Cutscene : Objective
         }
     }
 
-    public void Complete() { _isCompleted = true; Debug.Log("cutScene:))), p1_controlenable = " + _p1.controlEnable); }
+    public void Complete() { _isCompleted = true; Debug.Log("cutScene" + gameObject.name + " p1_controlenable = " + _p1.controlEnable); }
 
     public override bool isCompleted()
     {

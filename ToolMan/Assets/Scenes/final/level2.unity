@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44859177, g: 0.49487388, b: 0.5554284, a: 1}
+  m_IndirectSpecularColor: {r: 0.44859165, g: 0.4948734, b: 0.5554282, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -13948,7 +13948,7 @@ MonoBehaviour:
   Bgm: {fileID: 0}
   noBgm: 0
   LoopBgm: 1
-  Order: 1
+  Order: 0
   playableDirector: {fileID: 4227763938474079117}
   cam1: {fileID: 991673058}
   cam2: {fileID: 1990055037}
@@ -30511,7 +30511,7 @@ MonoBehaviour:
   Bgm: {fileID: 0}
   noBgm: 0
   LoopBgm: 1
-  Order: 2
+  Order: 1
   playableDirector: {fileID: 1279839676}
   cam1: {fileID: 991673058}
   cam2: {fileID: 1990055037}
@@ -32243,6 +32243,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 430692, guid: 46bd10ee869a1404fab181d38a994453, type: 3}
   m_PrefabInstance: {fileID: 524700249}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1423586576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1423586577}
+  - component: {fileID: 1423586578}
+  m_Layer: 0
+  m_Name: DisableJoBao
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1423586577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423586576}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1574810654}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1423586578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423586576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c93329e6eade4ccbb355922887a4c03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bgm: {fileID: 0}
+  noBgm: 1
+  LoopBgm: 0
+  Order: 3
+  objs:
+  - {fileID: 1255000106}
+  - {fileID: 2134232256}
 --- !u!4 &1423744522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 425560, guid: 645088da70d6bfe48bc0fbd587628522, type: 3}
@@ -39006,6 +39056,7 @@ Transform:
   - {fileID: 729722436}
   - {fileID: 74422076}
   - {fileID: 263580655}
+  - {fileID: 1423586577}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -55889,7 +55940,7 @@ MonoBehaviour:
   Bgm: {fileID: 0}
   noBgm: 0
   LoopBgm: 1
-  Order: 3
+  Order: 2
   playableDirector: {fileID: 776021834}
   cam1: {fileID: 991673058}
   cam2: {fileID: 1990055037}
