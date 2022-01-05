@@ -1460,12 +1460,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Name: DogKnight
-  AttackWeight: 5
-  PatrolWeight: 2
+  AttackWeight: 10
+  PatrolWeight: 1
   IdleWeight: 0
-  skillWeight: 01000000010000000100000001000000
-  MaxActionTime: 2
-  MinActionTime: 3
+  skillWeight: 05000000010000000100000003000000
+  MaxActionTime: 1
+  MinActionTime: 2
   rotateSpeed: 3
   combat: {fileID: 3259506807447701976}
   Rb: {fileID: 0}
@@ -1474,7 +1474,7 @@ MonoBehaviour:
   speed: 3
   InitAttackRange: 3
   audioSource: {fileID: 1508458402477196238}
-  hurtAudio: {fileID: 8300000, guid: 60bb2297fa05345538edfeb8ba893de9, type: 3}
+  hurtAudio: {fileID: 0}
   idleAudio: {fileID: 0}
   attackAudio: {fileID: 8300000, guid: 8cefc1bf2163a44a9b93d1f3898bc97f, type: 3}
   idleAudioWaitTime: 1
@@ -1484,10 +1484,10 @@ MonoBehaviour:
   SwordTrailVfx: {fileID: 2030150880}
   IaiSparkVfx: {fileID: 807775980579752209}
   NotifyVfx: {fileID: 8690952255197579200}
-  LongRangeAttackWeight: 1
+  LongRangeAttackWeight: 5
   LongRangePatrolWeight: 1
   LongRangeChaseWeight: 2
-  LongRangeIdleWeight: 1
+  LongRangeIdleWeight: 0
   _longRangeSkillStartIdx: 2
 --- !u!114 &5698416647293100067
 MonoBehaviour:
@@ -1515,11 +1515,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlowedDownEffect: {fileID: 6790827456252309903, guid: 48d2f3f7d17d34c388386aa0fce06eeb, type: 3}
-  HpMaxValue: 2500
-  HpInitValue: 2500
+  HpMaxValue: 5000
+  HpInitValue: 5000
   AtkBaseValue: 80
-  DefBaseValue: 1
-  StrBaseValue: 1
+  DefBaseValue: 5
+  StrBaseValue: 100
   SpdBaseValue: 1
   PowBaseValue: 1
   AttackEnableBaseValue: 1
@@ -3559,14 +3559,14 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 114000010372405708, guid: 87ad5df30712e4349b0010eb70d515a2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 87ad5df30712e4349b0010eb70d515a2, type: 3}
---- !u!1 &2614307172675183765 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100012, guid: 87ad5df30712e4349b0010eb70d515a2, type: 3}
-  m_PrefabInstance: {fileID: 2614307172675150393}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2614307172674762933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: 87ad5df30712e4349b0010eb70d515a2, type: 3}
+  m_PrefabInstance: {fileID: 2614307172675150393}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2614307172675183765 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100012, guid: 87ad5df30712e4349b0010eb70d515a2, type: 3}
   m_PrefabInstance: {fileID: 2614307172675150393}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &807775980579752209

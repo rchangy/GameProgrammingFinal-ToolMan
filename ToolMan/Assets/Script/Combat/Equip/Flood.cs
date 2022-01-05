@@ -50,7 +50,7 @@ namespace ToolMan.Combat.Equip
         public void StartFlooding()
         {
             if (_HeightSetting) return;
-            if (plugs != null && plugs.Length > 0)
+            if (plugs != null && plugs.Length > 0 && _currentPlug == null)
             {
                 int plugIdx = Random.Range(0, plugs.Length);
                 _currentPlug = plugs[plugIdx];
@@ -65,6 +65,7 @@ namespace ToolMan.Combat.Equip
             if(_currentPlug != null)
             {
                 _currentPlug.StopFlooding();
+                _currentPlug = null;
             }
             StartCoroutine(SetWaterHeight(LowestHeight));
         }

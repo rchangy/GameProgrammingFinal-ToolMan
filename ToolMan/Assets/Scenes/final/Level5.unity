@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20061573, g: 0.20333138, b: 0.2036938, a: 1}
+  m_IndirectSpecularColor: {r: 0.20061535, g: 0.20333093, b: 0.20369384, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1796,7 +1796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227763940166935918, guid: 6e8527110a00e47b2ac2dab5950abbec, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4227763940166935919, guid: 6e8527110a00e47b2ac2dab5950abbec, type: 3}
       propertyPath: m_RootOrder
@@ -4048,9 +4048,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 648794964}
     m_Modifications:
     - target: {fileID: 1807708416, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
+      propertyPath: lowY
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807708416, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
       propertyPath: flood
       value: 
       objectReference: {fileID: 74750677}
+    - target: {fileID: 1807708416, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
+      propertyPath: highY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807708416, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
+      propertyPath: middleY
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1807708416, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
       propertyPath: SharkPos.Array.data[0]
       value: 
@@ -4149,7 +4161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 568498576874944526, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 568498576874944526, guid: 637fa16e41b58734ea8643b07494530a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4443,6 +4455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 1
   Order: 4
   combatManager: {fileID: 1501962627}
 --- !u!1 &1729051416 stripped
@@ -6112,6 +6125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 1
   Order: 0
   targetCam: {fileID: 727410637}
   p1Cam: {fileID: 2142901054}

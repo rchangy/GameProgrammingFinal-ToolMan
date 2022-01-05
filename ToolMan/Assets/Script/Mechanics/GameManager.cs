@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             if (CheckpointManager.GetCheckpointInfo().level < 5)
                 SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
             else
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("Main Menu");
         }
         Simulation.Tick();
     }
@@ -83,19 +83,20 @@ public class GameManager : MonoBehaviour
         {
             while (!obj.Startup) yield return null;
             Debug.Log("obj start " + obj.gameObject.name + " , Order: " + obj.Order);
-            //if (obj.noBgm)
-            //{
-            //    _audioSource.Stop();
-            //}
-            //else
-            //{
-            //    if(obj.Bgm != null)
-            //    {
-                    
-            //        _audioSource.clip = obj.Bgm;
-            //        _audioSource.Play();
-            //    }
-            //}
+            if (obj.noBgm)
+            {
+                _audioSource.Stop();
+            }
+            else
+            {
+                if (obj.Bgm != null)
+                {
+
+                    _audioSource.clip = obj.Bgm;
+                    _audioSource.loop = obj.LoopBgm;
+                    _audioSource.Play();
+                }
+            }
             obj.StartObjective();
             while (!obj.isCompleted())
             {
@@ -118,6 +119,6 @@ public class GameManager : MonoBehaviour
         _p2.controlEnable = false;
         PostFX_Dead.gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
     }
 }
