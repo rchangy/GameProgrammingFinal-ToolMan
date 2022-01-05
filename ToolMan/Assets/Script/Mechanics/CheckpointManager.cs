@@ -35,7 +35,7 @@ public static class CheckpointManager
     {
         UpdateCheckpoint(1);
     }
-    private static void UpdateCheckpoint(int level)
+    public static void UpdateCheckpoint(int level)
     {
         if (level <= 0 || level > 5)
         {
