@@ -13,6 +13,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void ToLevel(int i)
     {
+        CheckpointManager.UpdateCheckpoint(i);
         SceneManager.LoadScene("Level" + i);
     }
 
