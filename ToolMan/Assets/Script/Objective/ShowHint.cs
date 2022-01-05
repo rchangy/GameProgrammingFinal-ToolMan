@@ -28,7 +28,11 @@ namespace ToolMan.UI
 
             // Unlock some hints
             Debug.Log("hint length = " + hintsToUnlock.Count);
-            foreach (Hint h in hintsToUnlock) { uIController.hintPanel.UnlockHint(h._title); }
+            foreach (Hint h in hintsToUnlock) {
+                uIController.hintPanel.UnlockHint(h._title);
+                if (h._title != hintToShow._title)
+                    uIController.hintNotRead.UnreadHint(h._title);
+            }
             uIController.hintPanel.LoadHint(hintToShow._title);
             uIController.SetHintUI(true);
             StartCoroutine(WaitForEsc());

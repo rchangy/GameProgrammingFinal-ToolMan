@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ToolMan.Gameplay;
+using static ToolMan.Core.Simulation;
 
 public partial class PlayerController
 {
@@ -47,6 +49,8 @@ public partial class PlayerController
             cam.EnableFreeLook();
             vertical = 0;
             horizontal = 0;
+            // audio
+            Schedule<PlayerToTool>().player = this;
             //effect
             Effect toToolEffect = effectController.effectList.Find(e => e.name == "ToToolEffect");
             toToolEffect.PlayEffect();

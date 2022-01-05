@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using static ToolMan.Core.Simulation;
+using ToolMan.Gameplay;
 using UnityEngine;
 
 public partial class PlayerController
@@ -60,6 +62,7 @@ public partial class PlayerController
         currentJumpCount++;
         if (currentJumpCount < maxJumpCount || isGrounded)
         {
+            Schedule<PlayerJumped>().player = this;
             rb.AddForce(Vector3.up * jumpForce);
         }
 

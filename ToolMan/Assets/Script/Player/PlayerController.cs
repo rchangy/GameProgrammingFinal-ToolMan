@@ -2,6 +2,8 @@ using UnityEngine;
 using ToolMan.Player;
 using ToolMan.Combat;
 using ToolMan.Util;
+using ToolMan.Gameplay;
+using static ToolMan.Core.Simulation;
 
 [RequireComponent(typeof(Animator))]
 public partial class PlayerController : ToolableMan
@@ -45,6 +47,21 @@ public partial class PlayerController : ToolableMan
     public EffectController effectController;
     // ==== Components ====
 
+    // ==== Audio ====
+    public PlayerAudioStat playerAudioStat;
+    public AudioSource audioSource;
+    public AudioClip jumpAudio;
+    public AudioClip walkAudio;
+    public AudioClip toToolAudio;
+    public AudioClip hurtAudio;
+    public AudioClip addHPAudio;
+    public AudioClip pickaxeHitAudio;
+    public AudioClip lightSaberHitAudio;
+    public AudioClip boomerangWhirlAudio;
+    public AudioClip flashBombAttackAudio;
+    public AudioClip shieldDefendAudio;
+    // ==== Audio ====
+
     // ==== Combat ====
     public PlayerCombat combat;
 
@@ -87,6 +104,7 @@ public partial class PlayerController : ToolableMan
         animator = GetComponent<Animator>();
         keyboardInputController = new KeyboardInputController();
         GetMaterial().DisableKeyword("_EMISSION");
+        playerAudioStat = new PlayerAudioStat();
     }
     override protected void Start()
     {
@@ -124,6 +142,7 @@ public partial class PlayerController : ToolableMan
             UpdateState();
             return;
         }
+        playerAudioStat.update();
         if (!isTool)
         {
             _comboSkillActivateByMan = anotherPlayer.ComboSkillCharged && keyboardInputController.JumpOrAttack(playerNum);
@@ -201,27 +220,33 @@ public partial class PlayerController : ToolableMan
         {
             return;
         }
-
-       
-        // Movement
-        transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
-        float moveDis = vertical * speed * Time.deltaTime * combat.Spd;
-        m_MaxDistance = moveDis;
-        m_HitDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
-        if (!m_HitDetect || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
-            transform.position += moveDis * transform.forward;
-        else
-        {
-            Debug.Log("Hit : " + m_Hit.collider.name);
-        }
-
-        if (!isTool && confJ!= null)
-        {
-            confJ.anchor = rightHand.transform.localPosition;
-        }
         if (beGrabbed)
         {
             beGrabbedMovement();
+            return;
+        }
+
+        // Movement
+        transform.Rotate(Vector3.up * horizontal * Time.deltaTime);
+        float moveDis = vertical * speed * Time.deltaTime * combat.Spd;
+        if (Mathf.Abs(moveDis) > 0)
+        {
+            m_MaxDistance = moveDis;
+            m_HitDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
+            if (!m_HitDetect || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
+            {
+                transform.position += moveDis * transform.forward;
+                if (playerAudioStat.lastWalkTime > 0.4f)
+                    Schedule<PlayerWalking>().player = this;
+            }
+            else
+            {
+                Debug.Log("Hit : " + m_Hit.collider.name);
+            }
+        }
+        if (!isTool && confJ != null)
+        {
+            confJ.anchor = rightHand.transform.localPosition;
         }
     }
 
