@@ -47,7 +47,7 @@ public class EnemyWavesController : Objective
         _p1.controlEnable = true;
         _p2.controlEnable = true;
         ReleaseNextWave();
-        Debug.Log("start obj");
+        //Debug.Log("start obj");
     }
 
     public override bool isCompleted()
@@ -63,15 +63,15 @@ public class EnemyWavesController : Objective
         releasingWave.StartWave();
         _activeWaves.Add(releasingWave);
         _nextWave++;
-        Debug.Log("releasing" + _nextWave);
+        //Debug.Log("releasing" + _nextWave);
     }
 
     public void WaveEnd(EnemyWaveController wave)
     {
-        Debug.Log("finish wave " + wave.name);
         if (_activeWaves.Contains(wave)){
             _activeWaves.Remove(wave);
             _completed++;
+            wave.gameObject.SetActive(false);
         }
         if(_completed == _total)
         {

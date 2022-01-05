@@ -50,13 +50,16 @@ namespace ToolMan.Combat.Equip
         public override int TakeDamage(float baseDmg, float pow, CombatUnit damager)
         {
             int dmg = 0;
+            Debug.Log("dmg 0");
             if (damager.gameObject.CompareTag("Player"))
             {
-
+                Debug.Log("dmg 1");
                 PlayerController player = damager.gameObject.GetComponent<PlayerController>();
                 if(player.GetAnotherPlayer().inToolState() && player.GetAnotherPlayer().getTool().getName() == "LightSaber")
                 {
+                    Debug.Log("dmg 2");
                     dmg = base.TakeDamage(baseDmg, pow, damager);
+                    Debug.Log(dmg);
                 }
             }
 

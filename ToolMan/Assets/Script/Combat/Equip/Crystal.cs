@@ -12,6 +12,7 @@ namespace ToolMan.Combat.Equip
         private PlayerController hitBy = null;
         private int hitCount = 0;
         private RetrieveMemory RM;
+        public int HPAdded = 300;
 
         public void setObjective(RetrieveMemory RM)
         {
@@ -54,8 +55,8 @@ namespace ToolMan.Combat.Equip
             yield return new WaitForSeconds(seconds);
             if (hitBy != null && crystalType == 0)
             {
-                hitBy.AddHP(10);
-                hitBy.GetAnotherPlayer().AddHP(10);
+                hitBy.AddHP(HPAdded);
+                hitBy.GetAnotherPlayer().AddHP(HPAdded);
             }
             if (hitBy != null && crystalType == 1)
             {

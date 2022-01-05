@@ -25,12 +25,10 @@ public class EnemyWaveController : MonoBehaviour
             }
             total = _enemies.Count;
             currentAlive = total;
-            Debug.Log("test " + currentAlive);
         }
     }
     private void Update()
     {
-        Debug.Log("alive = " + currentAlive);
         if(currentAlive == 0)
         {
             Init();
@@ -42,6 +40,7 @@ public class EnemyWaveController : MonoBehaviour
             //gameObject.SetActive(false);
         }
     }
+
 
     public void StartWave()
     {
