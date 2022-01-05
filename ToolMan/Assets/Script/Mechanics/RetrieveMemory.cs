@@ -11,6 +11,8 @@ public class RetrieveMemory : Objective
     bool crystalBroken;
     bool complete = false;
     List<PlayerController> players = new List<PlayerController>();
+
+    public float waitAfterUnlock = 5f;
     protected override void Init()
     {
         crystal = gameObject.transform.Find("MemoryCrystal").gameObject;
@@ -67,14 +69,14 @@ public class RetrieveMemory : Objective
         {
             cam.LookAtFace();
         }
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         // unlock
         CheckpointManager.NextLevel();
         players[0].UnlockTool(CheckpointManager.GetCheckpointInfo().level, CheckpointManager.GetCheckpointInfo().player1ToolNum);
         players[1].UnlockTool(CheckpointManager.GetCheckpointInfo().level, CheckpointManager.GetCheckpointInfo().player2ToolNum);
 
         // wait for seconds
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(waitAfterUnlock);
         complete = true;
     }
     public void CrystalDie()
