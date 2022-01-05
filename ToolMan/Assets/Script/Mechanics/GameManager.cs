@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         else if (levelComplete)
         {
             // next level
-            if (CheckpointManager.GetCheckpointInfo().level < 5)
+            if (CheckpointManager.GetCheckpointInfo().level <= 5)
                 SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
             else
                 SceneManager.LoadScene("Main Menu");

@@ -60,6 +60,7 @@ public partial class PlayerController : ToolableMan
     public AudioClip boomerangWhirlAudio;
     public AudioClip flashBombAttackAudio;
     public AudioClip shieldDefendAudio;
+    public AudioClip unlockToolAudio;
     // ==== Audio ====
 
     // ==== Combat ====
@@ -344,6 +345,8 @@ public partial class PlayerController : ToolableMan
         {
             unlockedToolNum = toolNum;
             AnimationUnlock(level);
+            if (audioSource && unlockToolAudio)
+                audioSource.PlayOneShot(unlockToolAudio);
         }
     }
     public void ResetToIdle()
