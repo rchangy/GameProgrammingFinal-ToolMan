@@ -106,7 +106,7 @@ namespace ToolMan.Combat
         }
 
         protected bool _isInterrupted = false;
-        protected CombatUnit _lastDamager;
+        protected Vector3 _lastDamagerPos;
 
 
         public Action DeadActions;
@@ -200,6 +200,21 @@ namespace ToolMan.Combat
         {
             if (isDead) return 0;
             if (!Vulnerable) return 0;
+            Debug.Log(":( " + gameObject.name);
+            Debug.Log("tag " + gameObject.tag);
+            if (gameObject.tag == "Enemy")
+            {
+                Enemy enemy = gameObject.GetComponent<Enemy>();
+                if (enemy.audioSource && enemy.hurtAudio && enemy.enemyAudioStat.lastHurtAudio > enemy.hurtAudioWaitTime)
+                {
+                    enemy.audioSource.PlayOneShot(enemy.hurtAudio);
+                    enemy.enemyAudioStat.lastHurtAudio = 0f;
+                }
+                else
+                {
+                    Debug.Log("tag noooo");
+                }
+            }
             float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
             float dmg = typeEffectedDmg - Def;
             dmg = Mathf.Max(dmg, 0);
@@ -208,7 +223,7 @@ namespace ToolMan.Combat
             if (pow > Str)
             {
                 _isInterrupted = true;
-                _lastDamager = damager;
+                _lastDamagerPos = damager.transform.position;
 
             }
             return (int)dmg;
@@ -220,7 +235,7 @@ namespace ToolMan.Combat
             _isInterrupted = false;
             if (HurtActions != null)
                 HurtActions.Invoke();
-            var dir = transform.position - _lastDamager.transform.position;
+            var dir = transform.position - _lastDamagerPos;
             dir.y = 0f;
             dir = Vector3.Normalize(dir);
             _rb.AddForce(dir * 1000 * _rb.mass);

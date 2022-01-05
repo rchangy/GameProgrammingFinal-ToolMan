@@ -31,6 +31,9 @@ namespace ToolMan.Combat.Equip
 
         private EnemyBigChicken bigChicken;
 
+        public AudioSource audioSource;
+        public AudioClip bombAudio;
+
         protected override void Start()
         {
             base.Start();
@@ -79,6 +82,8 @@ namespace ToolMan.Combat.Equip
             {
                 GameObject vfx = Instantiate(_explosionVfx, transform.position, Quaternion.identity);
                 Explosion explosion = vfx.GetComponent<Explosion>();
+                if (audioSource && bombAudio)
+                    audioSource.PlayOneShot(bombAudio);
                 if(explosion != null)
                 {
                     explosion.PlayEffect();

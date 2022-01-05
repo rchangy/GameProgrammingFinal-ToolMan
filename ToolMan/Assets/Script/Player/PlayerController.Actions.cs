@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ToolMan.Gameplay;
+using static ToolMan.Core.Simulation;
 
 public partial class PlayerController
 {
@@ -54,6 +56,7 @@ public partial class PlayerController
 
     public void AddHP(int hpAdd)
     {
+        Schedule<PlayerAddHP>().player = this;
         Effect addHPEffect = effectController.effectList.Find(e => e.name == "AddHPEffect");
         if (addHPEffect != null)
             addHPEffect.PlayEffect();

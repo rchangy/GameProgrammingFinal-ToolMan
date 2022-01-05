@@ -44,6 +44,9 @@ public class RetrieveMemory : Objective
 
     public override void StartObjective()
     {
+        players[0].controlEnable = true;
+        players[1].controlEnable = true;
+        uIController.SetBattleUI(true);
         memoryCrystal.gameObject.SetActive(true);
         StartCoroutine(CheckCrystal());
     }

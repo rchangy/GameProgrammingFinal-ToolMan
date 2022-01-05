@@ -2,6 +2,10 @@
 using System.Collections;
 using ToolMan.Combat.Stats.Buff;
 using ToolMan.Util;
+using ToolMan.Gameplay;
+using static ToolMan.Core.Simulation;
+
+
 namespace ToolMan.Combat.Skills.Normal
 {
     [CreateAssetMenu(menuName = "ToolMan/Skill/PlayerSkill/Shield")]
@@ -25,6 +29,7 @@ namespace ToolMan.Combat.Skills.Normal
             }
             _toolController.AnimationAttack();
             yield return new WaitForSeconds(attackDelay);
+            Schedule<PlayerAttack>().player = combat.gameObject.GetComponent<PlayerController>();
             _playerShield.Fire(_invulnerableTime);
             _playerShieldBig.Fire(0);
             _toolCombat.Disable("Vulnerable");

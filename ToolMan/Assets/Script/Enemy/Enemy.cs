@@ -106,11 +106,21 @@ public class Enemy : MonoBehaviour
 
     protected bool PlayerInAttackRange;
 
+    // audio
+    public EnemyAudioStat enemyAudioStat;
+    public AudioSource audioSource;
+    public AudioClip hurtAudio;
+    public AudioClip idleAudio;
+    public AudioClip attackAudio;
+    public float idleAudioWaitTime = 30f;
+    public float hurtAudioWaitTime = 1f;
+
     protected virtual void Awake()
     {
         Rb = gameObject.GetComponent<Rigidbody>();
         weight = new int[] { AttackWeight, PatrolWeight, IdleWeight };
         isAction = false;
+        enemyAudioStat = new EnemyAudioStat();
     }
     protected virtual void Start()
     {
@@ -159,6 +169,7 @@ public class Enemy : MonoBehaviour
         //    Die();
         //}
         // check sight and attack range
+        enemyAudioStat.update();
         PlayerInSightRange = Physics.CheckSphere(transform.position, SightRange, PlayerMask);
         PlayerInAttackRange = Physics.CheckSphere(transform.position, AttackRange, PlayerMask);
     }
@@ -212,6 +223,11 @@ public class Enemy : MonoBehaviour
     protected virtual void Idle()
     {
         //Debug.Log("Idle Mode");
+        //if (audioSource && idleAudio && enemyAudioStat.lastIdleAudio > idleAudioWaitTime)
+        //{
+        //    audioSource.PlayOneShot(idleAudio);
+        //    enemyAudioStat.lastIdleAudio = 0;
+        //}
         SetDest(transform.position);
     }
 
@@ -339,7 +355,6 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Hurt()
     {
-        
     }
     //protected void OnDrawGizmos()
     //{
@@ -420,5 +435,25 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.red;
         //Draw a cube at the maximum distance
         Gizmos.DrawWireCube(enemyCollider.bounds.center + new Vector3(0, 0.5f, 0), transform.localScale / 3);
+    }
+
+    public class EnemyAudioStat
+    {
+        public float lastIdleAudio;
+        public float lastHurtAudio;
+        public float lastAttackAudio;
+        
+        public EnemyAudioStat()
+        {
+            lastIdleAudio = float.MaxValue;
+            lastHurtAudio = float.MaxValue;
+            lastAttackAudio = float.MaxValue;
+        }
+        public void update()
+        {
+            lastIdleAudio += Time.deltaTime;
+            lastHurtAudio += Time.deltaTime;
+            lastAttackAudio += Time.deltaTime;
+        }
     }
 }

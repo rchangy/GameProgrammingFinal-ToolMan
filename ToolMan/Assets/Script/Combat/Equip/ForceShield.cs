@@ -94,7 +94,8 @@ namespace ToolMan.Combat.Equip
         {
             Debug.Log("Shield Finish");
             _target.RemoveDisable("Vulnerable");
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
