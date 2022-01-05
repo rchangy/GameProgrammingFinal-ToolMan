@@ -4,11 +4,14 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using AirFishLab.ScrollingList.Demo;
 
 namespace ToolMan.UI
 {
     public class HintPanel : MonoBehaviour
     {
+        [SerializeField]
+        private UIController _uIController;
         [SerializeField]
         private TextMeshProUGUI _title;
         [SerializeField]
@@ -35,31 +38,38 @@ namespace ToolMan.UI
 
         private void Start()
         {
+            CheckpointUnlockHints();
             //for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
         }
 
         private void Init() {
             //_hints.Clear();
 
-            Hint[] hs = _hints.ToArray();
+            //Hint[] hs = _hints.ToArray();
             //Hint[] hs = hintsObj.transform.GetComponentsInChildren<Hint>(true);
-            Debug.Log("hs len =" + hs.Length );
-            
-            Array.Sort( hs, delegate (Hint h1, Hint h2){ return h1.order.CompareTo(h2.order); } );
-            Button[] bs = buttonObj.transform.GetComponentsInChildren<Button>();
+            //Debug.Log("hs len =" + hs.Length );
+
+            //Array.Sort( hs, delegate (Hint h1, Hint h2){ return h1.order.CompareTo(h2.order); } );
+            IntListBox[] boxes = buttonObj.transform.GetComponentsInChildren<IntListBox>(true);
+            Button[] bs = buttonObj.transform.GetComponentsInChildren<Button>(true);
             Array.Sort(bs, delegate (Button b1, Button b2) { return b1.name.CompareTo(b2.name); });
-            for (int i=0; i<hs.Length; i++)
+
+            //Debug.Log("bs len = " + bs.Length);
+
+            for (int i=0; i<bs.Length; i++)
             {
                 //Hint h = hs[i];
                 //_hints.Add(h);
                 //Debug.Log("add hint " + h.name);
 
-                //Debug.Log("i = " + i);
+                //Debug.Log("bs i = " + i);
+                IntListBox box = boxes[i];
+                box.uIController = _uIController;
                 Button b = bs[i];
-                b.onClick.AddListener(delegate { LoadHint(hs[i]._title); });
-                b.onClick.AddListener(delegate { Read(hs[i]._title); });
+                b.onClick.AddListener(delegate {  box.ButtonLoadHint(); });
+                b.onClick.AddListener(delegate { Read(box.hint._title); });
 
-                CheckpointUnlockHints();
+                //CheckpointUnlockHints();
                 //Debug.Log("h = " + h._title + " b = " + b.name);
             }
 
@@ -71,7 +81,7 @@ namespace ToolMan.UI
             CheckpointManager.LoadCheckpoint();
             Debug.Log("check unlock " + CheckpointManager.GetCheckpointInfo().level);
             int lastUnlockedHint = CheckpointManager.GetCheckpointInfo().lastUnlockedHint;
-            for (int i = 0; i < lastUnlockedHint; i++) { _hints[i].Unlock(); Debug.Log("unlock hint " + _hints[i]); }
+            for (int i = 0; i < lastUnlockedHint; i++) { _hints[i].Unlock(); Debug.Log("last = " + lastUnlockedHint + "unlock hint " + _hints[i]); }
         }
 
         public void LoadHint(string hintTitle) {

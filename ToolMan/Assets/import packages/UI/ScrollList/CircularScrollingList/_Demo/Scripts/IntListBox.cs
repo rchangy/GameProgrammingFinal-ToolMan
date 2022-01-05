@@ -8,6 +8,10 @@ namespace AirFishLab.ScrollingList.Demo
 {
     public class IntListBox : ListBox
     {
+        public UIController uIController;
+        [SerializeField]
+        private Button button;
+        public Hint hint;
         private GameObject _hintObj;
         private Hint[] _hints;
         private Hint _lockedHint;
@@ -24,10 +28,13 @@ namespace AirFishLab.ScrollingList.Demo
 
         protected override void UpdateDisplayContent(object content)
         {
-            //_contentText.text = ((int) content).ToString();
-            Hint hint = _hints[(int)content - 1];
-            boxName = (hint.locked)? _lockedHint._title : _hints[(int)content-1]._title;
+           boxName = (hint.locked)? _lockedHint._title : hint._title;
             _contentText.text = boxName;
+        }
+
+        public void ButtonLoadHint() {
+            if (uIController)
+                uIController.hintPanel.LoadHint(hint._title);
         }
     }
 }
