@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
         _objectives = tmpObjectives;
         _objectives.Sort((x, y) => x.Order.CompareTo(y.Order));
 
+        _uIController.hintPanel.CheckpointUnlockHints();
+
         StartCoroutine(CompleteSceneObjectives());
 
     }
