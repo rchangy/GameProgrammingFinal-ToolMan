@@ -25,6 +25,7 @@ public class EnemyWaveController : MonoBehaviour
             }
             total = _enemies.Count;
             currentAlive = total;
+            Debug.Log("test " + currentAlive);
         }
     }
     private void Update()

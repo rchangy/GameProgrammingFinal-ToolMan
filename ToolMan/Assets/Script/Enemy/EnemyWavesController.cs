@@ -28,6 +28,7 @@ public class EnemyWavesController : Objective
         _waves = transform.GetComponentsInChildren<EnemyWaveController>(true).ToList();
         if(_waves != null)
         {
+            Debug.Log(_waves.Count);
             foreach(EnemyWaveController wave in _waves)
             {
                 wave.gameObject.SetActive(false);
@@ -45,6 +46,7 @@ public class EnemyWavesController : Objective
         _p1.controlEnable = true;
         _p2.controlEnable = true;
         ReleaseNextWave();
+        Debug.Log("start obj");
     }
 
     public override bool isCompleted()
@@ -52,7 +54,7 @@ public class EnemyWavesController : Objective
         return _isCompleted;
     }
 
-    public void ReleaseNextWave()
+    private void ReleaseNextWave()
     {
         if(_waves == null || _waves.Count <= 0) return;
         EnemyWaveController releasingWave = _waves[_nextWave];
@@ -60,10 +62,12 @@ public class EnemyWavesController : Objective
         releasingWave.StartWave();
         _activeWaves.Add(releasingWave);
         _nextWave++;
+        Debug.Log("releasing" + _nextWave);
     }
 
     public void WaveEnd(EnemyWaveController wave)
     {
+        Debug.Log("finish wave " + wave.name);
         if (_activeWaves.Contains(wave)){
             _activeWaves.Remove(wave);
             _completed++;
