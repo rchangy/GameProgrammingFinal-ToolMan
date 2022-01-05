@@ -43,6 +43,7 @@ public class EnemyWavesController : Objective
     public override void StartObjective()
     {
         uIController.SetBattleUI(true);
+        uIController.SetControlEnable(true);
         _p1.controlEnable = true;
         _p2.controlEnable = true;
         ReleaseNextWave();

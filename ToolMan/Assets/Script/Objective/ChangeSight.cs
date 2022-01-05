@@ -20,6 +20,8 @@ public class ChangeSight : Objective
 
     public override void StartObjective()
     {
+        uIController.SetBattleUI(true);
+        uIController.SetControlEnable(true);
         p1Cam.enabled = false;
         p2Cam.enabled = false;
         targetCam.enabled = true;

@@ -39,30 +39,39 @@ namespace ToolMan.UI
         }
 
         private void Init() {
-            _hints.Clear();
+            //_hints.Clear();
 
-            Hint[] hs = hintsObj.transform.GetComponentsInChildren<Hint>();
+            Hint[] hs = _hints.ToArray();
+            //Hint[] hs = hintsObj.transform.GetComponentsInChildren<Hint>(true);
+            Debug.Log("hs len =" + hs.Length );
             
             Array.Sort( hs, delegate (Hint h1, Hint h2){ return h1.order.CompareTo(h2.order); } );
             Button[] bs = buttonObj.transform.GetComponentsInChildren<Button>();
             Array.Sort(bs, delegate (Button b1, Button b2) { return b1.name.CompareTo(b2.name); });
             for (int i=0; i<hs.Length; i++)
             {
-                Hint h = hs[i];
-                _hints.Add(h);
+                //Hint h = hs[i];
+                //_hints.Add(h);
+                //Debug.Log("add hint " + h.name);
 
                 //Debug.Log("i = " + i);
                 Button b = bs[i];
-                b.onClick.AddListener(delegate { LoadHint(h._title); });
-                b.onClick.AddListener(delegate { Read(h._title); });
+                b.onClick.AddListener(delegate { LoadHint(hs[i]._title); });
+                b.onClick.AddListener(delegate { Read(hs[i]._title); });
 
+                CheckpointUnlockHints();
                 //Debug.Log("h = " + h._title + " b = " + b.name);
             }
 
-            CheckpointManager.LoadCheckpoint();
-            int lastUnlockedHint = CheckpointManager.GetCheckpointInfo().lastUnlockedHint;
-            for (int i = 0; i < lastUnlockedHint; i++) _hints[i].Unlock();
+            
             //for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
+        }
+
+        public void CheckpointUnlockHints() {
+            CheckpointManager.LoadCheckpoint();
+            Debug.Log("check unlock " + CheckpointManager.GetCheckpointInfo().level);
+            int lastUnlockedHint = CheckpointManager.GetCheckpointInfo().lastUnlockedHint;
+            for (int i = 0; i < lastUnlockedHint; i++) { _hints[i].Unlock(); Debug.Log("unlock hint " + _hints[i]); }
         }
 
         public void LoadHint(string hintTitle) {

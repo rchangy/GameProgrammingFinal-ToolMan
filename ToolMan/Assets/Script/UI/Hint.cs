@@ -23,7 +23,7 @@ namespace ToolMan.UI
 
         private void Awake()
         {
-            _locked = true;
+            //_locked = true;
         }
 
         public void Unlock() { _locked = false; }
