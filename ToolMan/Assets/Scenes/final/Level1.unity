@@ -2780,6 +2780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 10
   hintToShow: {fileID: 624219952}
   hintsToUnlock:
@@ -3383,8 +3384,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 28
   playableDirector: {fileID: 1636524143}
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  AnotherCam: {fileID: 0}
 --- !u!114 &162338442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5731,8 +5736,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fd85cd5e4fb4c8eb9ea0e293b710b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bgm: {fileID: 0}
+  Bgm: {fileID: 8300000, guid: 18f358cb812ff49219e84fd47c1066db, type: 3}
   noBgm: 0
+  LoopBgm: 1
   Order: 0
   hintToShow: {fileID: 699958836}
   hintsToUnlock:
@@ -5839,8 +5845,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75f8c6d4a52e4098913c79361f3bf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bgm: {fileID: 0}
+  Bgm: {fileID: 8300000, guid: 8a9948449b0414c2b9cdc5b5850fb40c, type: 3}
   noBgm: 0
+  LoopBgm: 1
   Order: 20
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -14492,6 +14499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 12
   notification: {fileID: 1533919863}
   timelineDirector: {fileID: 1027763467}
@@ -15355,6 +15363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 30
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -15602,6 +15611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 7
   notification: {fileID: 1533919863}
   timelineDirector: {fileID: 1027763467}
@@ -16592,6 +16602,7 @@ PrefabInstance:
     - target: {fileID: 6319494748944245440, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: moveAngleSensitivity
       value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 6771355376928982780, guid: d9b1f045573050749aab36f91caa872c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -17680,6 +17691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 5
   hintToShow: {fileID: 795214879}
   hintsToUnlock:
@@ -18102,8 +18114,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 23
   playableDirector: {fileID: 379000432}
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  AnotherCam: {fileID: 0}
 --- !u!114 &758014797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27918,8 +27934,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 19
   playableDirector: {fileID: 949011211}
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  AnotherCam: {fileID: 0}
 --- !u!114 &969952826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28109,8 +28129,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 100
   playableDirector: {fileID: 196001271}
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  AnotherCam: {fileID: 0}
 --- !u!1 &986606139
 GameObject:
   m_ObjectHideFlags: 0
@@ -33761,6 +33785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 22
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -36712,8 +36737,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 14
   playableDirector: {fileID: 1663247697}
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  AnotherCam: {fileID: 0}
 --- !u!114 &1247688168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37033,6 +37062,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 26
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -37574,6 +37604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 32
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -39651,8 +39682,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97c1a8ca17afc84dab772ddb460abc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bgm: {fileID: 0}
+  Bgm: {fileID: 8300000, guid: 3abd8b18e508c446888e6492924b7c36, type: 3}
   noBgm: 0
+  LoopBgm: 0
   Order: 31
 --- !u!1 &1382930973
 GameObject:
@@ -40523,6 +40555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 24
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -41316,6 +41349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 21
   combatManager: {fileID: 0}
 --- !u!1 &1530901015
@@ -51468,6 +51502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 29
   hintToShow: {fileID: 578716538}
   hintsToUnlock:
@@ -53433,8 +53468,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 27
   playableDirector: {fileID: 1642578779}
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  AnotherCam: {fileID: 0}
 --- !u!114 &1747431247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55418,6 +55457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 2
   notification: {fileID: 1533919863}
   timelineDirector: {fileID: 1027763467}
@@ -55442,7 +55482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1850156069
 Transform:
   m_ObjectHideFlags: 0
@@ -60477,6 +60517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 17
   notification: {fileID: 1533919863}
   timelineDirector: {fileID: 1027763467}
@@ -61012,8 +61053,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 9
   playableDirector: {fileID: 1532409289}
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  AnotherCam: {fileID: 0}
 --- !u!114 &1893888482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62399,6 +62444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 15
   hintToShow: {fileID: 668638330}
   hintsToUnlock:
@@ -70230,6 +70276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 25
   combatManager: {fileID: 0}
 --- !u!1 &2087924329
@@ -70626,6 +70673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 33
   hintToShow: {fileID: 575653186}
   hintsToUnlock:
@@ -71049,6 +71097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 6
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -71129,6 +71178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 11
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -71178,6 +71228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 16
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -71196,6 +71247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 1
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -72903,6 +72955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 3
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -72982,6 +73035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 13
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -73030,6 +73084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 8
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -73047,6 +73102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 18
   _noti1: {fileID: 1533919863}
   _noti2: {fileID: 1666684123}
@@ -73095,8 +73151,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bgm: {fileID: 0}
   noBgm: 0
+  LoopBgm: 0
   Order: 4
   playableDirector: {fileID: 1027763467}
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  AnotherCam: {fileID: 0}
 --- !u!114 &5722539099062774869
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections;
 using ToolMan.Util;
 using ToolMan.Gameplay;
 using static ToolMan.Core.Simulation;
+using ToolMan.Combat.Stats;
 
 namespace ToolMan.Combat.Skills.Normal
 {
@@ -17,9 +18,20 @@ namespace ToolMan.Combat.Skills.Normal
 
         private PlayerController player = null;
 
+        public float MaxAimingDist = 20;
+
+        public float MaxAimingAngle = 85;
+
+        private StatModifier _defStatMod = new StatModifier(1, StatModType.PercentMult);
+        private StatModifier _strStatMod = new StatModifier(100, StatModType.PercentMult);
+
+        
+
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
-            _toolCombat.Disable("Vulnerable");
+            _toolCombat.AddStatMod("DEF", _defStatMod);
+            _toolCombat.AddStatMod("STR", _strStatMod);
+            //_toolCombat.Disable("Vulnerable");
             yield return new WaitForSeconds(attackDelay);
             _tool = combat.gameObject;
             if (typeof(PlayerCombat).IsInstanceOfType(combat))
@@ -33,7 +45,9 @@ namespace ToolMan.Combat.Skills.Normal
             }
             else
             {
-                _toolCombat.RemoveDisable("Vulnerable");
+                //_toolCombat.RemoveDisable("Vulnerable");
+                _toolCombat.RemoveStatMod("DEF", _defStatMod);
+                _toolCombat.RemoveStatMod("STR", _strStatMod);
                 yield break;
             }
 
@@ -48,8 +62,33 @@ namespace ToolMan.Combat.Skills.Normal
                 player = combat.gameObject.GetComponent<PlayerController>();
 
             // set target (closest enemy or something)
+            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
             Vector3 targetPos = _man.transform.position + _man.transform.forward * 10;
+            if(enemies != null && enemies.Length > 0)
+            {
+                float minDist = float.MaxValue;
+                foreach(Enemy e in enemies)
+                {
+                    float dist = Vector3.Distance(e.transform.position, _man.transform.position);
+                    if(dist < minDist && dist < MaxAimingDist)
+                    {
+                        Vector3 dir = e.transform.position - _man.transform.position;
+                        if (Vector3.Angle(_man.transform.forward, dir) <= MaxAimingAngle)
+                        {
+                            minDist = dist;
+                            targetPos = e.transform.position;
+                        }
+                    }
+                }
+            }
+
+            if(targetPos.y < combat.transform.position.y)
+                targetPos.y = combat.transform.position.y;
+
             _tool.transform.Rotate(0, 180, 0);
+
+            
+
 
             // to target
             float flyingTimeLast = _flyingTime;
@@ -59,7 +98,7 @@ namespace ToolMan.Combat.Skills.Normal
                 if (player.playerAudioStat.lastAttackTime >= 1.1f)
                     Schedule<PlayerAttack>().player = player;
 
-                _tool.transform.Rotate(0, 0, Time.deltaTime * 800);
+                _tool.transform.Rotate(0, 0, Time.deltaTime * -800);
                 _tool.transform.position = Vector3.MoveTowards(_tool.transform.position, targetPos, Time.deltaTime * 40);
                 flyingTimeLast -= Time.deltaTime;
                 // return if collide with border 
@@ -71,7 +110,7 @@ namespace ToolMan.Combat.Skills.Normal
             
             while (flyingTimeLast > 0)
             {
-                _tool.transform.Rotate(0, 0, Time.deltaTime * 800);
+                _tool.transform.Rotate(0, 0, Time.deltaTime * -800);
                 _tool.transform.position = Vector3.MoveTowards(_tool.transform.position, _manController.GetRightHand().transform.position, Time.deltaTime * 40);
                 flyingTimeLast -= Time.deltaTime;
                 if (Vector3.Distance(_man.transform.position, _tool.transform.position) < 1.5)
@@ -81,7 +120,9 @@ namespace ToolMan.Combat.Skills.Normal
                     {
                         collisionEnable.Value = false;
                         _tool.GetComponent<Rigidbody>().useGravity = true;
-                        _toolCombat.RemoveDisable("Vulnerable");
+                        //_toolCombat.RemoveDisable("Vulnerable");
+                        _toolCombat.RemoveStatMod("DEF", _defStatMod);
+                        _toolCombat.RemoveStatMod("STR", _strStatMod);
                         yield break;
                     }
                 }
@@ -92,7 +133,7 @@ namespace ToolMan.Combat.Skills.Normal
         public override IEnumerator Hit(SkillCombat combat, CombatUnit target)
         {
             Transform targetTrans = target.gameObject.transform;
-            Debug.Log(targetTrans.name);
+            //Debug.Log(targetTrans.name);
             Vector3 originalScale = targetTrans.localScale;
 
             float targetZScale = targetTrans.localScale.z * _deformedOnAxis;

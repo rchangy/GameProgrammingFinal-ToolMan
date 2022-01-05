@@ -71,7 +71,7 @@ namespace ToolMan.Combat.Equip
             _triggerCollider.enabled = false;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (_setting) return;
             if (!other.CompareTag("Player")) return;

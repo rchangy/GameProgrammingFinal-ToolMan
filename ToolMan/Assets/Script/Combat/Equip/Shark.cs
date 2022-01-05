@@ -41,9 +41,9 @@ namespace ToolMan.Combat.Equip
 
         private Collider _collider;
 
-        private Color _lineStartColor = new Color(1, 1, 1, 0.5f);
+        //private Color _lineStartColor = new Color(1, 1, 1, 0.5f);
 
-        private Color _lineWarningColor = Color.red;
+        //private Color _lineWarningColor = Color.red;
 
         private void Start()
         {
@@ -65,8 +65,8 @@ namespace ToolMan.Combat.Equip
             _linePoints.Clear();
             StartCoroutine(Attack());
             _collider = GetComponent<Collider>();
-            _line.startColor = _lineStartColor;
-            _line.endColor = _lineStartColor;
+            //_line.startColor = _lineStartColor;
+            //_line.endColor = _lineStartColor;
         }
 
         public void SetWhale(SkillCombat whale)
@@ -193,8 +193,8 @@ namespace ToolMan.Combat.Equip
 
             while(waitingTimePassed < _waitingTime)
             {
-                _line.startColor = Color.Lerp(_lineStartColor, _lineWarningColor, waitingTimePassed / _waitingTime);
-                _line.endColor = Color.Lerp(_lineStartColor, _lineWarningColor, waitingTimePassed / _waitingTime);
+                //_line.startColor = Color.Lerp(_lineStartColor, _lineWarningColor, waitingTimePassed / _waitingTime);
+                //_line.endColor = Color.Lerp(_lineStartColor, _lineWarningColor, waitingTimePassed / _waitingTime);
                 waitingTimePassed += Time.deltaTime;
                 yield return null;
             }
