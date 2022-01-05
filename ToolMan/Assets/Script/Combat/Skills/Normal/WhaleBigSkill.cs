@@ -21,6 +21,11 @@ namespace ToolMan.Combat.Skills.Normal
                 if (_whale == null) yield break;
             }
             GameObject bigSkillObj = Instantiate(_whale.bigSkillPrefab, _whale.transform.position, Quaternion.identity);
+            if (_whale.audioSource && _whale.attackAudio)
+            {
+                _whale.audioSource.PlayOneShot(_whale.attackAudio);
+                _whale.enemyAudioStat.lastAttackAudio = 0f;
+            }
             bigSkillObj.GetComponent<WhaleBigSkillPrefab>()._Play(_whale, _warningLastingTime, attackDelay, _lastingTime);
             yield return new WaitForSeconds(_warningLastingTime + _lastingTime);
         }

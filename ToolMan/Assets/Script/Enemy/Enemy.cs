@@ -355,10 +355,6 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Hurt()
     {
-        if (audioSource && hurtAudio && enemyAudioStat.lastHurtAudio > hurtAudioWaitTime)
-        {
-            audioSource.PlayOneShot(hurtAudio);
-        }
     }
     //protected void OnDrawGizmos()
     //{
@@ -456,8 +452,8 @@ public class Enemy : MonoBehaviour
         public void update()
         {
             lastIdleAudio += Time.deltaTime;
-            lastHurtAudio = Time.deltaTime;
-            lastAttackAudio = Time.deltaTime;
+            lastHurtAudio += Time.deltaTime;
+            lastAttackAudio += Time.deltaTime;
         }
     }
 }

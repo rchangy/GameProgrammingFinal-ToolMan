@@ -200,6 +200,21 @@ namespace ToolMan.Combat
         {
             if (isDead) return 0;
             if (!Vulnerable) return 0;
+            Debug.Log(":( " + gameObject.name);
+            Debug.Log("tag " + gameObject.tag);
+            if (gameObject.tag == "Enemy")
+            {
+                Enemy enemy = gameObject.GetComponent<Enemy>();
+                if (enemy.audioSource && enemy.hurtAudio && enemy.enemyAudioStat.lastHurtAudio > enemy.hurtAudioWaitTime)
+                {
+                    enemy.audioSource.PlayOneShot(enemy.hurtAudio);
+                    enemy.enemyAudioStat.lastHurtAudio = 0f;
+                }
+                else
+                {
+                    Debug.Log("tag noooo");
+                }
+            }
             float typeEffectedDmg = damageCalculator.CalculateDmg(baseDmg, damager.GetCurrentTypes(), this.GetCurrentTypes());
             float dmg = typeEffectedDmg - Def;
             dmg = Mathf.Max(dmg, 0);
