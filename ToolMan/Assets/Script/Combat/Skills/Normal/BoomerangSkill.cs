@@ -22,7 +22,7 @@ namespace ToolMan.Combat.Skills.Normal
 
         public float MaxAimingAngle = 85;
 
-        private StatModifier _defStatMod = new StatModifier(1, StatModType.PercentMult);
+        private StatModifier _defStatMod = new StatModifier(20, StatModType.PercentMult);
         private StatModifier _strStatMod = new StatModifier(100, StatModType.PercentMult);
 
         
