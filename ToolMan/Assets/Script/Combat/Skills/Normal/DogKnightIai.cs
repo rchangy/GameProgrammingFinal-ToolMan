@@ -51,6 +51,11 @@ namespace ToolMan.Combat.Skills.Normal
                 _dogKnight.transform.position = Vector3.MoveTowards(_dogKnight.transform.position, targetPos, _rushSpeed * Time.deltaTime);
                 yield return null;
             }
+            if (_dogKnight.audioSource && _dogKnight.attackAudio)
+            {
+                Debug.Log("should play dog attack");
+                _dogKnight.audioSource.PlayOneShot(_dogKnight.attackAudio);
+            }
             _dogKnight.Anim.SetTrigger("Attack2");
             // animation
             yield return new WaitForSeconds(attackDelay);

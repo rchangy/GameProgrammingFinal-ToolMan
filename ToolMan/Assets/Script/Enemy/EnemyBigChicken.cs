@@ -41,6 +41,10 @@ public class EnemyBigChicken : Enemy
 
     protected override void Hurt()
     {
+        if (audioSource && hurtAudio && enemyAudioStat.lastHurtAudio > hurtAudioWaitTime)
+        {
+            audioSource.PlayOneShot(hurtAudio);
+        }
         animator.SetTrigger("Hurt");
     }
 
