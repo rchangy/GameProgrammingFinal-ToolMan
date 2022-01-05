@@ -222,6 +222,5 @@ namespace ToolMan.Combat
             return CurrentUsingSkillSet;
         }
 
-
     }
 }
