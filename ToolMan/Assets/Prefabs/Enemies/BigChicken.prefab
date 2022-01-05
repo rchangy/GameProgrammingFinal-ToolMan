@@ -669,8 +669,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlowedDownEffect: {fileID: 2611813696320454077}
-  HpMaxValue: 3500
-  HpInitValue: 3500
+  HpMaxValue: 2000
+  HpInitValue: 2000
   AtkBaseValue: 120
   DefBaseValue: 0
   StrBaseValue: 1
@@ -740,7 +740,7 @@ MonoBehaviour:
   InitAttackRange: 3
   audioSource: {fileID: -7677223826216825703}
   hurtAudio: {fileID: 8300000, guid: 56cd6fe5016fe48bbb1c5c47bc6c6c71, type: 3}
-  idlelAudio: {fileID: 8300000, guid: 60dbe00bb49f34da69091383203c63a7, type: 3}
+  idleAudio: {fileID: 0}
   attackAudio: {fileID: 0}
   idleAudioWaitTime: 1
   hurtAudioWaitTime: 0.5
@@ -1782,6 +1782,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48d2f3f7d17d34c388386aa0fce06eeb, type: 3}
+--- !u!4 &286570672588143482 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8788987624655451976, guid: 48d2f3f7d17d34c388386aa0fce06eeb, type: 3}
+  m_PrefabInstance: {fileID: 8791830419911560242}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2611813696320454077 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6790827456252309903, guid: 48d2f3f7d17d34c388386aa0fce06eeb, type: 3}
@@ -1793,8 +1798,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a75f1fb10f74564ad34fc107f630ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &286570672588143482 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8788987624655451976, guid: 48d2f3f7d17d34c388386aa0fce06eeb, type: 3}
-  m_PrefabInstance: {fileID: 8791830419911560242}
-  m_PrefabAsset: {fileID: 0}

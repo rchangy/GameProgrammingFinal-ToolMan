@@ -53,7 +53,7 @@ public class Tool
         // when a tool transform to a man, it may stuck into ground and fall down, this may need to be adjusted (position.y)
         float newY;
         if (!player.IsGrabbed())
-            newY = player.transform.position.y - player.GetCollider().bounds.extents.y + player.distToGround;
+            newY = player.transform.position.y - player.GetCollider().bounds.extents.y + player.distToGround + 0.2f;
         else
             newY = player.GetAnotherPlayer().transform.position.y;
         player.gameObject.transform.position = new Vector3(player.gameObject.transform.position.x, newY, player.gameObject.transform.position.z);
