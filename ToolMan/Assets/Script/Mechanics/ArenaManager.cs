@@ -8,8 +8,8 @@ public class ArenaManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        CheckpointManager.UpdateCheckpoint(5);
-        _combatManager.LoadTool();
+        //CheckpointManager.UpdateCheckpoint(5);
+        //_combatManager.LoadTool();
     }
 
     //// Update is called once per frame
