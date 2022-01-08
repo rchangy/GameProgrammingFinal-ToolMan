@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ToolMan.Player;
+using ToolMan.Util;
 
 [RequireComponent(typeof(Animator))]
 public abstract class ToolableMan : MonoBehaviour
 {
-    protected bool isTool = false;
+    protected BoolWrapper isTool = new BoolWrapper();
     protected List<Tool> tools = new List<Tool>();
-    protected int toolIdx;
+    protected IntegerWrapper toolIdx = new IntegerWrapper();
     protected bool beGrabbed = false;
+
+    [SerializeField] protected ObjectListUI toolListUI;
 
     [SerializeField] protected GameObject grabbedPoint;
 
     virtual protected void Awake() {}
 
-    virtual protected void Start() {}
-
+    virtual protected void Start() { }
     virtual protected void Update() {}
 
     abstract public void ToolableManTransform();
@@ -25,16 +27,21 @@ public abstract class ToolableMan : MonoBehaviour
 
     abstract public void BeReleased();
 
+    public void SetUpToolList()
+    {
+        toolListUI.SetUp(toolIdx, isTool);
+    }
+
     // ==== getters ====
 
     public Tool getTool()
     {
-        return tools[toolIdx];
+        return tools[toolIdx.Value];
     }
 
     public bool inToolState()
     {
-        return isTool;
+        return isTool.Value;
     }
     public GameObject GetGrabbedPoint()
     {

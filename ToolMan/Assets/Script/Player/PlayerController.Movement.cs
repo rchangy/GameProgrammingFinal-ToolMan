@@ -79,12 +79,12 @@ public partial class PlayerController
         //    ManageWaving();
         //}
         //transform.eulerAngles = anotherPlayer.transform.eulerAngles + toolEulerAngle;
-        toolEulerAngle = tools[toolIdx].getTheToolEulerAngle();
-        if (tools[toolIdx].getName().Equals("Shield") || tools[toolIdx].getName().Equals("FlashBomb"))
+        toolEulerAngle = tools[toolIdx.Value].getTheToolEulerAngle();
+        if (tools[toolIdx.Value].getName().Equals("Shield") || tools[toolIdx.Value].getName().Equals("FlashBomb"))
         {
             transform.eulerAngles = anotherPlayer.transform.eulerAngles + toolEulerAngle;
         }
-        else if (tools[toolIdx].getName().Equals("Pickaxe"))
+        else if (tools[toolIdx.Value].getName().Equals("Pickaxe"))
         {
             transform.eulerAngles = anotherPlayer.GetForearm().transform.eulerAngles;
             transform.Rotate(new Vector3(0f, -90f, 0f), Space.Self);
@@ -109,7 +109,7 @@ public partial class PlayerController
         this.waveEnd = false;
         this.toolWave = true;
         this.specialToolEulerAngle = specialToolEulerAngle;
-        originalToolEulerAngle = tools[toolIdx].getTheToolEulerAngle();
+        originalToolEulerAngle = tools[toolIdx.Value].getTheToolEulerAngle();
     }
 
     public void ResetToolWave()

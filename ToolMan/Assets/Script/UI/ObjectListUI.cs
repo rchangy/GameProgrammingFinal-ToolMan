@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using ToolMan.Util;
 
 public class ObjectListUI : MonoBehaviour
 {
@@ -14,10 +15,22 @@ public class ObjectListUI : MonoBehaviour
 
     public int currentIdx;
     private bool[] chosenImages;
+    
 
     public int unchoose = -1;
 
     public Dictionary<string, Sprite> spriteMap;
+
+    private Color _normalCol = new Color(1, 1, 1, 0.5f);
+    private Color _pointingCol = Color.white;
+    private Color _choosingCol = new Color(0, 1, 1, 1);
+
+    private bool _isSet;
+    private IntegerWrapper _currentIdx;
+    private BoolWrapper _isChosen;
+
+    private int _lastIdx = -1;
+    private bool _isLastUpdateChoosing = false;
 
     private void Awake()
     {
@@ -58,6 +71,18 @@ public class ObjectListUI : MonoBehaviour
             UnchooseByIdx(unchoose);
             unchoose = -1;
         }
+        if (!_isSet) return;
+
+        Manage();
+
+    }
+
+    public void SetUp(IntegerWrapper integerWrapper, BoolWrapper boolWrapper)
+    {
+        if (integerWrapper == null) return;
+        _currentIdx = integerWrapper;
+        _isChosen = boolWrapper;
+        _isSet = true;
     }
 
     public void LoadTool(int toolNum)
@@ -71,7 +96,7 @@ public class ObjectListUI : MonoBehaviour
         List<string> keys = new List<string>(Keys);
         if (keys.Count > MaxImageNum) Debug.Log("Too much sprites, only " + MaxImageNum + "will be shown.");
         CurrentActiveImageNum = Mathf.Min(keys.Count, UnlockImageNum);
-        int i = 0, j = 0;
+        int i, j;
         for(i = 0, j = 0; i < UnlockImageNum && j < keys.Count; i++, j++)
         {
             if (spriteMap.ContainsKey(keys[j]))
@@ -170,5 +195,44 @@ public class ObjectListUI : MonoBehaviour
     public virtual void UnpointByIdx(int idx)
     {
         if (!chosenImages[idx]) Images[idx].color = new Color(255, 255, 255, .5f);
+    }
+
+
+
+    private void Manage()
+    {
+        if (_lastIdx == _currentIdx.Value && _isLastUpdateChoosing == _isChosen.Value) return;
+        else if(_lastIdx != _currentIdx.Value && _isLastUpdateChoosing == _isChosen.Value)
+        {
+            if(_lastIdx != -1)
+            {
+                Images[_lastIdx].color = _normalCol;
+            }
+            if (_isChosen.Value)
+                Images[_currentIdx.Value].color = _choosingCol;
+            else
+                Images[_currentIdx.Value].color = _pointingCol;
+        }
+        else if(_lastIdx == _currentIdx.Value && _isLastUpdateChoosing != _isChosen.Value)
+        {
+            if(_isChosen.Value)
+                Images[_currentIdx.Value].color = _choosingCol;
+            else
+                Images[_currentIdx.Value].color = _pointingCol;
+        }
+        else if(_lastIdx == _currentIdx.Value && _isLastUpdateChoosing != _isChosen.Value)
+        {
+            if(_lastIdx != -1)
+            {
+                Images[_lastIdx].color = _normalCol;
+            }
+            if (_isChosen.Value)
+                Images[_currentIdx.Value].color = _choosingCol;
+            else
+                Images[_currentIdx.Value].color = _pointingCol;
+        }
+
+        _lastIdx = _currentIdx.Value;
+        _isLastUpdateChoosing = _isChosen.Value;
     }
 }
