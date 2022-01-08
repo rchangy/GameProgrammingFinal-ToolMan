@@ -85,7 +85,7 @@ public static class CheckpointManager
             this.level = level;
             this.player1ToolNum = player1ToolNums[level - 1];
             this.player2ToolNum = player2ToolNums[level - 1];
-            this.lastUnlockedHint = lastUnlockedHIntList[level - 1]; 
+            this.lastUnlockedHint = lastUnlockedHIntList[level - 1];
         }
         public Checkpoint ToCheckpoint()
         {
