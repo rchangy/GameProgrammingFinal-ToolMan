@@ -14,6 +14,10 @@ public abstract class TutorialController : Objective
 
     public override void StartObjective()
     {
+        _p1.controlEnable = true;
+        _p2.controlEnable = true;
+        uIController.SetControlEnable(true);
+
         if (timelineDirector != null)
         {
             timelineDirector.Pause();
