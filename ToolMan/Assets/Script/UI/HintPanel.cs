@@ -39,42 +39,22 @@ namespace ToolMan.UI
         private void Start()
         {
             CheckpointUnlockHints();
-            //for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
         }
 
         private void Init() {
-            //_hints.Clear();
-
-            //Hint[] hs = _hints.ToArray();
-            //Hint[] hs = hintsObj.transform.GetComponentsInChildren<Hint>(true);
-            //Debug.Log("hs len =" + hs.Length );
-
-            //Array.Sort( hs, delegate (Hint h1, Hint h2){ return h1.order.CompareTo(h2.order); } );
             IntListBox[] boxes = buttonObj.transform.GetComponentsInChildren<IntListBox>(true);
             Button[] bs = buttonObj.transform.GetComponentsInChildren<Button>(true);
             Array.Sort(bs, delegate (Button b1, Button b2) { return b1.name.CompareTo(b2.name); });
 
-            //Debug.Log("bs len = " + bs.Length);
-
+           
             for (int i=0; i<bs.Length; i++)
             {
-                //Hint h = hs[i];
-                //_hints.Add(h);
-                //Debug.Log("add hint " + h.name);
-
-                //Debug.Log("bs i = " + i);
                 IntListBox box = boxes[i];
                 box.uIController = _uIController;
                 Button b = bs[i];
                 b.onClick.AddListener(delegate {  box.ButtonLoadHint(); });
                 b.onClick.AddListener(delegate { Read(box.hint._title); });
-
-                //CheckpointUnlockHints();
-                //Debug.Log("h = " + h._title + " b = " + b.name);
             }
-
-            
-            //for (int i = 0; i < _hints.Count; i++) _hints[i].Unlock();
         }
 
         public void CheckpointUnlockHints() {
