@@ -17,7 +17,7 @@ public class Boomerang : Tool
     public override void toTool()
     {
         base.toTool();
-        animator.SetBool("isBoomerang", true);
+        animator.SetTrigger("toBoomerang");
         grabbedPoint.transform.localPosition = new Vector3(-0.46f, -1f, 0f);
         point = new Vector3(-0.46f, -1f, 0f);
     }

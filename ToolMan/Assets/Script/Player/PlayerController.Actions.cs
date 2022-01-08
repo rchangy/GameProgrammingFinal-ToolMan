@@ -52,6 +52,7 @@ public partial class PlayerController
             AnimationRelease(anotherPlayer.getTool().getName());
         grabPoint.Release();
         this.confJ = null;
+        Debug.Log("release!!!!!!!!!!");
     }
 
     public void AddHP(int hpAdd)

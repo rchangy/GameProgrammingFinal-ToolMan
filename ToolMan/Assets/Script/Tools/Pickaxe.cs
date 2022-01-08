@@ -17,7 +17,7 @@ public class Pickaxe : Tool
     public override void toTool()
     {
         base.toTool();
-        animator.SetBool("isPickaxe", true);
+        animator.SetTrigger("toPickaxe");
         grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.48f, 0.0f);
         point = new Vector3(0.0f, -1.48f, 0.0f);
     }

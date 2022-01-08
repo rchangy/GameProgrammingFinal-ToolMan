@@ -49,15 +49,28 @@ public partial class PlayerController
 
     public void AnimationGrab(string toolName)
     {
+        ResetAnimationGrab();
+        animator.SetTrigger("Grab");
+        animator.ResetTrigger("Release");
         animator.SetBool("isGrabbing", true);
         animator.SetBool("isGrabbing" + toolName, true);
         anotherPlayer.animator.SetBool("Grabbed", true);
     }
     public void AnimationRelease(string toolName)
     {
+        animator.ResetTrigger("Grab");
+        animator.SetTrigger("Release");
         animator.SetBool("isGrabbing", false);
-        animator.SetBool("isGrabbing" + toolName, false);
+        ResetAnimationGrab();
         anotherPlayer.animator.SetBool("Grabbed", false);
+    }
+    public void ResetAnimationGrab()
+    {
+        animator.SetBool("isGrabbingPickaxe", false);
+        animator.SetBool("isGrabbingBoomerang", false);
+        animator.SetBool("isGrabbingShield", false);
+        animator.SetBool("isGrabbingLightSaber", false);
+        animator.SetBool("isGrabbingFlashBomb", false);
     }
     public void AnimationUnlock(int level)
     {

@@ -16,7 +16,7 @@ public class LightSaber : Tool
     public override void toTool()
     {
         base.toTool();
-        animator.SetBool("isLightSaber", true);
+        animator.SetTrigger("toLightSaber");
         grabbedPoint.transform.localPosition = new Vector3(0.0f, -1.3f, 0f);
         point = new Vector3(0.0f, -1.3f, 0.0f);
         player.setEmission(true);

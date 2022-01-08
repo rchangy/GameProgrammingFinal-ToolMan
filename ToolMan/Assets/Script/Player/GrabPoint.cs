@@ -82,11 +82,12 @@ namespace ToolMan.Player
                 Vector3 grabbedPointLocalPosition = anotherPlayer.GetGrabbedPoint().transform.localPosition;
                 Vector3 anotherPlayerNewPosition = player.GetRightHand().transform.position - grabbedPointLocalPosition;
                 anotherPlayer.transform.position = anotherPlayerNewPosition;
-
+                Debug.Log("tool name = " + anotherPlayer.getTool().getName());
                 ConfigurableJoint confJ = player.gameObject.AddComponent<ConfigurableJoint>();
                 confJ.connectedBody = anotherPlayer.getRigidbody();
                 confJ.autoConfigureConnectedAnchor = false;
                 confJ.anchor = player.GetRightHand().transform.localPosition;
+                Debug.Log("connected anchor = " + anotherPlayer.getTool().getPoint());
                 confJ.connectedAnchor = anotherPlayer.getTool().getPoint();
                 confJ.enableCollision = false;
                 confJ.xMotion = ConfigurableJointMotion.Locked;

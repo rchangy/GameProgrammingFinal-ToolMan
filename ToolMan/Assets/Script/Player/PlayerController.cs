@@ -255,9 +255,8 @@ public partial class PlayerController : ToolableMan
     {
         if (keyboardInputController.NextTool(playerNum))
         {
-            //toolListUI.Next();
             toolIdx.Value++;
-            if (toolIdx.Value >= tools.Count) toolIdx.Value = 0;
+            if (toolIdx.Value >= unlockedToolNum) toolIdx.Value = 0;
             if (isTool.Value)
             {
                 ToAnotherTool();
@@ -266,7 +265,7 @@ public partial class PlayerController : ToolableMan
         if (keyboardInputController.PrevTool(playerNum))
         {
             toolIdx.Value--;
-            if (toolIdx.Value < 0) toolIdx.Value = tools.Count -1;
+            if (toolIdx.Value < 0) toolIdx.Value = unlockedToolNum - 1;
             if (isTool.Value)
             {
                 ToAnotherTool();
