@@ -70,8 +70,9 @@ public class GameManager : MonoBehaviour
         }
         else if (levelComplete)
         {
+            int level = CheckpointManager.GetCheckpointInfo().level;
             // next level
-            if (CheckpointManager.GetCheckpointInfo().level <= 5)
+            if (1 <= level && level <= 5)
                 SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
             else
                 SceneManager.LoadScene("Main Menu");
@@ -93,7 +94,6 @@ public class GameManager : MonoBehaviour
             {
                 if (obj.Bgm != null)
                 {
-
                     _audioSource.clip = obj.Bgm;
                     _audioSource.loop = obj.LoopBgm;
                     _audioSource.Play();
@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
         }
+
         levelComplete = true;
     }
     private int FindDepth(Transform root, Transform objective)
