@@ -147,6 +147,8 @@ namespace ToolMan.Combat.Equip
                 return;
             }
             if (!other.gameObject.CompareTag("Player")) return;
+
+            Debug.Log(other.name);
             PlayerCombat playerCombat = other.gameObject.GetComponent<PlayerCombat>();
             if (playerCombat != null)
             {

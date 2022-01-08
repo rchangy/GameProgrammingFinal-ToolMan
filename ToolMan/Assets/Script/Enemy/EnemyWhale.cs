@@ -61,7 +61,7 @@ public class EnemyWhale : Enemy
     {
         base.Start();
         _initY = transform.position.y;
-        SetHeight(Height.High);
+        SetHeight(Height.Middle);
 
         hpBase = combat.HpMaxValue;
         lowTimeLeft = lowTimeSpan;
@@ -178,7 +178,7 @@ public class EnemyWhale : Enemy
             case Height.Middle:
                 nowSardines = 0;
                 height = Height.Middle;
-                flood.StopFlooding();
+                //flood.StopFlooding();
                 break;
 
             case Height.Low:

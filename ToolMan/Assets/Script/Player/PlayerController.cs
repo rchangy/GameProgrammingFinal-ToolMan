@@ -38,7 +38,6 @@ public partial class PlayerController : ToolableMan
     [SerializeField] private GrabPoint grabPoint;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private GameObject Forearm;
-    [SerializeField] private ObjectListUI toolListUI;
     [SerializeField] private PlayerController anotherPlayer;
     [SerializeField] private Material playerMaterial;
     [SerializeField] private Material EmissionMaterial;
@@ -130,6 +129,7 @@ public partial class PlayerController : ToolableMan
         {
             _comboChargeProgress.Setup(_attackCharging, _comboSkillChargeTime, _attackChargingTime);
         }
+        
     }
 
     override protected void Update()
@@ -144,7 +144,7 @@ public partial class PlayerController : ToolableMan
             return;
         }
         playerAudioStat.update();
-        if (!isTool)
+        if (!isTool.Value)
         {
             _comboSkillActivateByMan = anotherPlayer.ComboSkillCharged && keyboardInputController.JumpOrAttack(playerNum);
             if (combat.Movable)
@@ -209,7 +209,7 @@ public partial class PlayerController : ToolableMan
         CheckToolSelecting();
 
         // Grab Or Release
-        if (!isTool && keyboardInputController.GrabOrRelease(playerNum))
+        if (!isTool.Value && keyboardInputController.GrabOrRelease(playerNum))
         {
             GrabOrRelease();
         }
@@ -245,7 +245,7 @@ public partial class PlayerController : ToolableMan
                 Debug.Log("Hit : " + m_Hit.collider.name);
             }
         }
-        if (!isTool && confJ != null)
+        if (!isTool.Value && confJ != null)
         {
             confJ.anchor = rightHand.transform.localPosition;
         }
@@ -253,13 +253,25 @@ public partial class PlayerController : ToolableMan
 
     private void CheckToolSelecting()
     {
-        if (toolListUI.canChoose() && keyboardInputController.NextTool(playerNum))
+        if (keyboardInputController.NextTool(playerNum))
         {
-            toolListUI.Next();
+            //toolListUI.Next();
+            toolIdx.Value++;
+            if (toolIdx.Value >= tools.Count) toolIdx.Value = 0;
+            if (isTool.Value)
+            {
+                ToAnotherTool();
+            }
         }
-        if (toolListUI.canChoose() && keyboardInputController.PrevTool(playerNum))
+        if (keyboardInputController.PrevTool(playerNum))
         {
-            toolListUI.Previous();
+            toolIdx.Value--;
+            if (toolIdx.Value < 0) toolIdx.Value = tools.Count -1;
+            if (isTool.Value)
+            {
+                ToAnotherTool();
+            }
+            //toolListUI.Previous();
         }
         if (keyboardInputController.Choose(playerNum))
         {
@@ -338,6 +350,7 @@ public partial class PlayerController : ToolableMan
     {
         unlockedToolNum = toolNum;
         toolListUI.LoadTool(toolNum);
+        SetUpToolList();
     }
     public void UnlockTool(int level, int toolNum)
     {
@@ -352,11 +365,11 @@ public partial class PlayerController : ToolableMan
     public void ResetToIdle()
     {
         controlEnable = false;
-        if (isTool && IsGrabbed())
+        if (isTool.Value && IsGrabbed())
         {
             anotherPlayer.Release();
         }
-        if (isTool)
+        if (isTool.Value)
         {
             ToolableManTransform();
         }

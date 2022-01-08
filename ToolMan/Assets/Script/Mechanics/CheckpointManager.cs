@@ -11,18 +11,22 @@ public static class CheckpointManager
     static int[] player1ToolNums = { 1, 1, 2, 2, 2 };
     static int[] player2ToolNums = { 1, 2, 2, 3, 3 };
     static int[] lastUnlockedHIntList = { 1, 15, 17, 20, 21 };
+    static int current_level = -1;
     public static void LoadCheckpoint()
     {
-        if (!File.Exists(ckptPath))
+        if (!File.Exists(ckptPath) || current_level == -1)
         {
             UpdateCheckpoint(1);
         }
-        else
+        else if (current_level != -1)
         {
-            StreamReader r = new StreamReader(ckptPath);
-            string jsonString = r.ReadToEnd();
-            ckpt = JsonUtility.FromJson<Checkpoint>(jsonString);
-            ckptInfo = new CheckpointInfo(ckpt);
+            Debug.Log("load checkpoint exist!");
+            //StreamReader r = new StreamReader(ckptPath);
+            //string jsonString = r.ReadToEnd();
+            //Debug.Log("jsonString " + jsonString);
+            //Debug.Log(jsonString);
+            //ckpt = JsonUtility.FromJson<Checkpoint>(jsonString);
+            ckptInfo = new CheckpointInfo(current_level);
         }
 
     }
@@ -37,6 +41,7 @@ public static class CheckpointManager
     }
     public static void UpdateCheckpoint(int level)
     {
+        current_level = level;
         if (level <= 0 || level > 5)
         {
             Debug.Log("Error: Level is not in range of (1, 5).");
@@ -49,7 +54,16 @@ public static class CheckpointManager
 
     public static void SaveCkeckpoint()
     {
-        File.WriteAllText(ckptPath, JsonUtility.ToJson(ckpt));
+        //if (!File.Exists(ckptPath))
+        //{
+        //    Debug.Log("create!");
+        //    File.Create(ckptPath).Close();
+        //}
+        //else
+        //{
+        //    Debug.Log("in save, exist!");
+        //    File.WriteAllText(ckptPath, JsonUtility.ToJson(ckpt));
+        //}
     }
     public static CheckpointInfo GetCheckpointInfo()
     {

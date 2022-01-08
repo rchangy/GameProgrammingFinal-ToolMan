@@ -22,7 +22,7 @@ public partial class PlayerController
         transform.position = toolPosition;
         anotherPlayer.transform.position = manPosition;
         anotherPlayer.ToolableManTransform(); // Tool to Man
-        toolIdx = 0;
+        toolIdx.Value = 0;
         ToolableManTransform(); // Man to Tool
 
         if (!anotherPlayer.IsGrabbing())
@@ -36,16 +36,26 @@ public partial class PlayerController
         this.changeable = changeable;
     }
 
+    private void ToAnotherTool()
+    {
+        tools[toolIdx.Value].toTool();
+        combat.SetCurrentUsingSkill(tools[toolIdx.Value].getName());
+        combat.AddType(tools[toolIdx.Value].getName());
+        Effect toToolEffect = effectController.effectList.Find(e => e.name == "ToToolEffect");
+        toToolEffect.PlayEffect();
+        Schedule<PlayerToTool>().player = this;
+    }
+
     override public void ToolableManTransform()
     {
-        if (!isTool && !IsGrabbing())
+        if (!isTool.Value && !IsGrabbing())
         {
             // To Tool
-            toolListUI.Choose();
-            toolIdx = toolListUI.GetComponent<ObjectListUI>().currentIdx;
-            tools[toolIdx].toTool();
-            combat.SetCurrentUsingSkill(tools[toolIdx].getName());
-            combat.AddType(tools[toolIdx].getName());
+            //toolListUI.Choose();
+            //toolIdx.Value = toolListUI.GetComponent<ObjectListUI>().currentIdx;
+            tools[toolIdx.Value].toTool();
+            combat.SetCurrentUsingSkill(tools[toolIdx.Value].getName());
+            combat.AddType(tools[toolIdx.Value].getName());
             cam.EnableFreeLook();
             vertical = 0;
             horizontal = 0;
@@ -58,23 +68,21 @@ public partial class PlayerController
             animator.SetTrigger("changeToTool");
             // grab hint
             grabPoint.TeammateGrabHint(false);
-
-            isTool = !isTool;
         }
-        else if (isTool && !beGrabbed)
+        else if (isTool.Value && !beGrabbed)
         {
             // To Man
-            tools[toolIdx].toMan();
-            toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx;
-            toolListUI.Unchoose();
-            combat.RemoveType(tools[toolIdx].getName());
+            tools[toolIdx.Value].toMan();
+            //toolListUI.GetComponent<ObjectListUI>().unchoose = toolIdx.Value;
+            //toolListUI.Unchoose();
+            combat.RemoveType(tools[toolIdx.Value].getName());
             cam.EnableMain();
 
             //effect
             Effect toManEffect = effectController.effectList.Find(e => e.name == "ToManEffect");
             toManEffect.PlayEffect();
-            isTool = !isTool;
         }
+        isTool.Value = !isTool.Value;
     }
 
     // ==== grab/grabbed ====

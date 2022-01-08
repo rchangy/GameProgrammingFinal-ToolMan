@@ -17,14 +17,10 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("Level" + i);
     }
 
-    public void StoryMode()
-    {
-
-    }
-
     public void ArenaMode()
     {
-
+        CheckpointManager.UpdateCheckpoint(5);
+        SceneManager.LoadScene("Arena");
     }
     public void QuitGame()
     {
