@@ -6,11 +6,11 @@ using UnityEngine;
 public static class CheckpointManager
 {
     //static Checkpoint ckpt;
-    static CheckpointInfo ckptInfo = null;
+    static CheckpointInfo ckptInfo;
     //static string ckptPath = "Assets/Script/Mechanics/checkpoint.json";
-    static int[] player1ToolNums = { 1, 1, 2, 2, 2 };
-    static int[] player2ToolNums = { 1, 2, 2, 3, 3 };
-    static int[] lastUnlockedHIntList = { 1, 15, 17, 20, 21 };
+    static int[] player1ToolNums = { 1, 1, 1, 2, 2, 2 };
+    static int[] player2ToolNums = { 1, 1, 2, 2, 3, 3 };
+    static int[] lastUnlockedHIntList = { 1, 7, 12, 14, 17, 18 };
     public static void LoadCheckpoint()
     {
         if (ckptInfo == null)
@@ -34,9 +34,9 @@ public static class CheckpointManager
     }
     public static void UpdateCheckpoint(int level)
     {
-        if (level <= 0 || level > 5)
+        if (level < 0 || level > 5)
         {
-            Debug.Log("Error: Level is not in range of (1, 5).");
+            Debug.Log("Error: Level is not in range of (0, 5).");
             return;
         }
         ckptInfo = new CheckpointInfo(level);
@@ -83,9 +83,9 @@ public static class CheckpointManager
         void setByLevel(int level)
         {
             this.level = level;
-            this.player1ToolNum = player1ToolNums[level - 1];
-            this.player2ToolNum = player2ToolNums[level - 1];
-            this.lastUnlockedHint = lastUnlockedHIntList[level - 1];
+            this.player1ToolNum = player1ToolNums[level];
+            this.player2ToolNum = player2ToolNums[level];
+            this.lastUnlockedHint = lastUnlockedHIntList[level];
         }
         public Checkpoint ToCheckpoint()
         {
