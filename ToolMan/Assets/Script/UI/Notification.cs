@@ -21,7 +21,8 @@ namespace ToolMan.UI
             state = State.Idle;
             countingDown = false;
             countDownTime = fadingTime;
-            checkMark.SetActive(false);
+            if (checkMark)
+                checkMark.SetActive(false);
             canvasGroup.alpha = 0;
         }
 
@@ -82,7 +83,8 @@ namespace ToolMan.UI
             countDownTime = fadingTime;
             countingDown = true;
             canvasGroup.alpha = 0;
-            checkMark.SetActive(false);
+            if (checkMark)
+                checkMark.SetActive(false);
         }
 
         public void OnComplete()
@@ -91,7 +93,8 @@ namespace ToolMan.UI
             countDownTime = fadingTime;
             countingDown = true;
             canvasGroup.alpha = 1;
-            checkMark.SetActive(true);
+            if (checkMark)
+                checkMark.SetActive(true);
         }
 
         private enum State
