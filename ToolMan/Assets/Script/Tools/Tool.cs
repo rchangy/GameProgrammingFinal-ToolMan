@@ -32,6 +32,7 @@ public class Tool
         animator.SetBool("isTool", true);
         playerRB.constraints = RigidbodyConstraints.None;
         player.resetRigidBody();
+        player.setEmission(false);
     }
 
     public void toMan()
