@@ -247,6 +247,7 @@ namespace ToolMan.Combat
 
         protected virtual void Die()
         {
+            if (DeadActions == null) return;
             DeadActions.Invoke();
         }
 

@@ -33,6 +33,7 @@ namespace ToolMan.Combat.Skills
                 if (!skillSet.ContainsKey(s.getName()))
                 {
                     skillSet.Add(s.getName(), s);
+                    s.ResetObject();
                 }
             }
         }

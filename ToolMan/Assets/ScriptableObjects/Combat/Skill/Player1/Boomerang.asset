@@ -15,7 +15,7 @@ MonoBehaviour:
   attackDelay: 0
   RefractoryPeriod: 0.2
   Cd: 0
-  Multiplier: 5
+  Multiplier: 0.1
   PowMuliplier: 1
   UsingHitFeel: 0
   HitFeelMul: 1
@@ -24,3 +24,9 @@ MonoBehaviour:
   _deformingTime: 0.1
   MaxAimingDist: 30
   MaxAimingAngle: 85
+  MaxShake: 3
+  MaxMultiplier: 5
+  MinMultiplier: 0.1
+  MultDecrease: 0.5
+  MultRevertDelay: 5
+  MultRevertSpd: 0.5

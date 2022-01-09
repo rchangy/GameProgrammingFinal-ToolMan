@@ -2,9 +2,10 @@
 using System.Collections;
 using System;
 
+
 namespace ToolMan.Combat.Equip
 {
-    public class Plug : MonoBehaviour
+    public class Plug : CombatUnit
     {
         [SerializeField] private Flood _flood;
         private bool _pushed;
@@ -18,12 +19,12 @@ namespace ToolMan.Combat.Equip
 
         [SerializeField] private Collider _triggerCollider;
 
-        private void Start()
+        override protected void Start()
         {
             moveVec = new Vector3(0, speed, 0);
             _triggerCollider.enabled = false;
         }
-        private void Update()
+        override protected void Update()
         {
             if (_setting)
             {
@@ -54,6 +55,8 @@ namespace ToolMan.Combat.Equip
             }
         }
 
+        protected override void FixedUpdate() { }
+
         public void SetFlood(Flood flood)
         {
             _flood = flood;
@@ -71,16 +74,24 @@ namespace ToolMan.Combat.Equip
             _triggerCollider.enabled = false;
         }
 
-        private void OnTriggerStay(Collider other)
+        public override bool Attack()
         {
-            if (_setting) return;
-            if (!other.CompareTag("Player")) return;
-            PlayerController player = other.gameObject.GetComponent<PlayerController>();
-            if (player.inToolState()) return;
-            _pushed = true;
-            _triggerCollider.enabled = false;
+            Debug.Log("no attck action for plug");
+            return false;
         }
 
+        public override int TakeDamage(float baseDmg, float pow, CombatUnit damager)
+        {
+            if (damager.gameObject.CompareTag("Player"))
+            {
+                _pushed = true;
+            }
+            return 0;
+        }
+
+
+        protected override void Die() { }
+        protected override void Interrupted() { }
     }
 }
 
