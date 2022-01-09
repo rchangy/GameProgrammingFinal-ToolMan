@@ -83,5 +83,12 @@ namespace ToolMan.UI
         public void UnlockHint(string hintTitle) { _hints.Find(h => h._title == hintTitle).Unlock(); }
 
         public void Read(string title) { hintNotRead.ReadHint(title); }
+
+        //public void OnSetActive(bool val) {
+        //    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //    foreach (GameObject e in enemies) {
+
+        //    }
+        //}
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6846164586838842652}
   m_Layer: 0
   m_Name: SharkMissle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,6 @@ MonoBehaviour:
   _timeToDie: 5
   YAxisOffset: 3
   ForwardOffset: 15
-  atk: 5
   _skill: {fileID: 11400000, guid: 536ce621d366c4b1da0ccb81df3d24be, type: 2}
   _line: {fileID: 6854971834147497467}
   _maxLineSegments: 30

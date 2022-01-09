@@ -25,6 +25,12 @@ public class UIController : MonoBehaviour
     private PlayerController p2;
     private bool _controlEnable;
 
+    private float originalTimeScale;
+
+    private void Awake()
+    {
+        originalTimeScale = Time.timeScale;
+    }
     private void Start()
     {
         SetBattleUI(true);
@@ -41,9 +47,19 @@ public class UIController : MonoBehaviour
     public void SetHintUI(bool val)
     {
         hintUI.SetActive(val);
-        //p1.controlEnable = !val;
-        //p2.controlEnable = !val;
+        p1.controlEnable = !val;
+        p2.controlEnable = !val;
         showingTutorialUI = val;
+
+        if (val)
+        {
+            //Debug.Log("true, time = " + originalTimeScale);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = originalTimeScale;
+        }
     }
 
     public void SetNotificationUI(bool val)
@@ -56,11 +72,6 @@ public class UIController : MonoBehaviour
     {
         if (_controlEnable && Input.GetButtonDown("Hint"))
         {
-            //for (int i = 0; i < hintPanel._hints.Count; i++) {
-            //    Hint h = hintPanel._hints[i];
-            //    if (!h.locked)
-            //        hintPanel.LoadHint(hintPanel._hints[i]._title);
-            //}
             SetHintUI(!showingTutorialUI);
         }
     }
