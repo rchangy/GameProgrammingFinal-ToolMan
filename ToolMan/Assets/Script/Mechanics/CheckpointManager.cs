@@ -10,7 +10,7 @@ public static class CheckpointManager
     //static string ckptPath = "Assets/Script/Mechanics/checkpoint.json";
     static int[] player1ToolNums = { 1, 1, 1, 2, 2, 2 };
     static int[] player2ToolNums = { 1, 1, 2, 2, 3, 3 };
-    static int[] lastUnlockedHIntList = { 1, 7, 12, 14, 17, 18 };
+    static int[] lastUnlockedHIntList = { 1, 1, 12, 14, 17, 18 };
     public static void LoadCheckpoint()
     {
         if (ckptInfo == null)
