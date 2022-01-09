@@ -14,7 +14,7 @@ public partial class PlayerController
         anotherPlayer.changeable = false;
 
         // cache position
-        Vector3 manPosition = this.transform.position;
+        Vector3 manPosition = transform.position;
         Vector3 toolPosition = anotherPlayer.transform.position;
 
         // Release & Transform

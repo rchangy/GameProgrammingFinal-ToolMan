@@ -53,7 +53,8 @@ namespace ToolMan.Combat.Stats
         public void AddModifier(StatModifier mod)
         {
             isDirty = true;
-            statModifiers.Add(mod);
+            if(!statModifiers.Contains(mod))
+                statModifiers.Add(mod);
             statModifiers.Sort(CompareModifierOrder);
         }
 

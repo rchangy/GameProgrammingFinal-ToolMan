@@ -75,6 +75,7 @@ namespace ToolMan.Combat.Skills.Normal
                         CombatUnit targetCombat = target.GetComponent<CombatUnit>();
                         if (targetCombat != null)
                         {
+                            targetCombat.TakeDamage(0, 0, combat);
                             targetCombat.AddBuff(_buff);
                         }
                     }

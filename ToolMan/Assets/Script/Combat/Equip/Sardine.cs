@@ -37,6 +37,7 @@ namespace ToolMan.Combat.Equip
             if (players.Length > 0)
             {
                 _target = findClosestPlayer(players);
+                //Debug.Log("sardine target: " + _target.name);
             }
             if(_target == null)
             {
@@ -82,6 +83,7 @@ namespace ToolMan.Combat.Equip
                 transform.LookAt(_target);
             }
             transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime * _speed);
+
         }
 
         private Transform findClosestPlayer(GameObject[] players)
@@ -126,6 +128,7 @@ namespace ToolMan.Combat.Equip
         
         private void OnTriggerStay(Collider other)
         {
+            if (_whale == null) return;
             if (other.gameObject == _whale)
             {
                 if (_returning)

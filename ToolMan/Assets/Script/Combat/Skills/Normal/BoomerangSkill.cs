@@ -157,7 +157,7 @@ namespace ToolMan.Combat.Skills.Normal
                 m_HitDetect = Physics.BoxCast(_tool.transform.position, _tool.transform.localScale/3, _tool.transform.forward, out m_Hit, _tool.transform.rotation, Vector3.Distance(nextStepPos, _tool.transform.position));
                 if (m_HitDetect && !m_Hit.collider.gameObject.CompareTag("Player") && !m_Hit.collider.isTrigger)
                 {
-                    //nextStepPos -= 2 * shakeRange * nextStepDir;
+                    nextStepPos -= 2 * shakeRange * nextStepDir;
                     break;
                 }
                 _tool.transform.position = nextStepPos;
@@ -177,9 +177,9 @@ namespace ToolMan.Combat.Skills.Normal
                 m_HitDetect = Physics.BoxCast(_tool.transform.position, _tool.transform.localScale / 3, _tool.transform.forward, out m_Hit, _tool.transform.rotation, Vector3.Distance(nextStepPos, _tool.transform.position));
                 if (!m_HitDetect || m_Hit.collider.gameObject.CompareTag("Player") || m_Hit.collider.isTrigger)
                 {
+                    _tool.transform.position = nextStepPos;
                     //break;
                 }
-                _tool.transform.position = nextStepPos;
                 _tool.transform.Rotate(0, 0, Time.deltaTime * -800);
                 flyingTimeLast -= Time.deltaTime;
                 yield return null;

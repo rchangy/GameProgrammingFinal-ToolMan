@@ -13,7 +13,10 @@ GameObject:
   - component: {fileID: 2380934}
   - component: {fileID: 6439168}
   - component: {fileID: 9540592}
-  m_Layer: 0
+  - component: {fileID: 2794301686897681053}
+  - component: {fileID: 1636159429}
+  - component: {fileID: 4471359723392938601}
+  m_Layer: 12
   m_Name: C_Monument_1_New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,13 +30,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112984}
-  m_LocalRotation: {x: -0.7071069, y: 0, z: -0, w: 0.70710677}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 182.31804, y: 2.252585, z: 436.00955}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &3393606
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -61,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e9310c3a85232b3468eec9f98db6acea, type: 2}
+  - {fileID: 2100000, guid: 0705ce3b993a4405e9681dae105f30d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -116,3 +119,59 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &2794301686897681053
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112984}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.0557313, y: 7.482953, z: 5.160002}
+  m_Center: {x: -0.0025408268, y: -0.028153896, z: 0.32740235}
+--- !u!114 &1636159429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72d973f187e24eacb514b619f0d9053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlowedDownEffect: {fileID: 0}
+  HpMaxValue: 1
+  HpInitValue: 1
+  AtkBaseValue: 1
+  DefBaseValue: 1
+  StrBaseValue: 1
+  SpdBaseValue: 1
+  PowBaseValue: 1
+  AttackEnableBaseValue: 1
+  MovableBaseValue: 1
+  VulnerableBaseValue: 1
+  healthBar: {fileID: 0}
+  healthBar2: {fileID: 0}
+  _flood: {fileID: 0}
+  MaxHeight: 158
+  MinHeight: 152
+  speed: 6
+  _triggerCollider: {fileID: 2794301686897681053}
+--- !u!114 &4471359723392938601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42d4048d51594d52bc8a2be5a45853d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inherentTypes: []

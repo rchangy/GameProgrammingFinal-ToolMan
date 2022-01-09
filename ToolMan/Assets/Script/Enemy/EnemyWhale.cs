@@ -21,9 +21,9 @@ public class EnemyWhale : Enemy
     [SerializeField] Height height;
     [SerializeField] float highY, middleY, lowY;
     [SerializeField] State state = State.Idle;
-    [SerializeField] int hpIntervals = 3;
-    [SerializeField] float hpBase;
-    [SerializeField] float hpDicreaseThres;
+    //[SerializeField] int hpIntervals = 3;
+    //[SerializeField] float hpBase;
+    //[SerializeField] float hpDicreaseThres;
     [SerializeField] float lowTimeSpan;
     private float lowTimeLeft;
     [SerializeField] private int nowSardines = 0;
@@ -61,9 +61,9 @@ public class EnemyWhale : Enemy
     {
         base.Start();
         _initY = transform.position.y;
-        SetHeight(Height.Middle);
+        SetHeight(Height.High);
 
-        hpBase = combat.HpMaxValue;
+        //hpBase = combat.HpMaxValue; 
         lowTimeLeft = lowTimeSpan;
         SetDest(pathNodes[_currentNodeIdx].position);
         GameObject[] PlayerGameObjects = GameObject.FindGameObjectsWithTag("Player");

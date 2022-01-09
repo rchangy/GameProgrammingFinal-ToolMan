@@ -27,6 +27,7 @@ namespace ToolMan.Combat.Skills.Normal
                 _whale = combat.gameObject.GetComponent<EnemyWhale>();
                 if (_whale == null) yield break;
             }
+            yield return new WaitForSeconds(1f);
             for(int wave = 0; wave < MaxWave; wave++)
             {
                 int sharkNum = _whale.GetCurrentSharkWave();

@@ -94,6 +94,7 @@ namespace ToolMan.Combat.Equip
             PlayerCombat playerCombat;
             if ((playerCombat = other.GetComponent<PlayerCombat>()) != null)
             {
+                Debug.Log(other.name + " enter flood");
                 playerCombat.AddStatMod("SPD", _statMod);
             }
         }
@@ -102,6 +103,7 @@ namespace ToolMan.Combat.Equip
             PlayerCombat playerCombat;
             if ((playerCombat = other.GetComponent<PlayerCombat>()) != null)
             {
+                Debug.Log(other.name + " exit flood");
                 playerCombat.RemoveStatMod("SPD", _statMod);
             }
         }

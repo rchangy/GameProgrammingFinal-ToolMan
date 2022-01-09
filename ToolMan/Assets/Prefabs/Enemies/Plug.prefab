@@ -16,18 +16,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 415002, guid: 2fa775ad257eea5419e49bfea56459f7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 415002, guid: 2fa775ad257eea5419e49bfea56459f7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 415002, guid: 2fa775ad257eea5419e49bfea56459f7, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 415002, guid: 2fa775ad257eea5419e49bfea56459f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.6
       objectReference: {fileID: 0}
@@ -67,48 +55,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6439168, guid: 2fa775ad257eea5419e49bfea56459f7, type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6439168, guid: 2fa775ad257eea5419e49bfea56459f7, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fa775ad257eea5419e49bfea56459f7, type: 3}
---- !u!1 &8492783713516325727 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 112984, guid: 2fa775ad257eea5419e49bfea56459f7, type: 3}
-  m_PrefabInstance: {fileID: 8492783713516302855}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1636159428
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8492783713516325727}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.649893, y: 5.4743667, z: 0.0564823}
-  m_Center: {x: 0.01860714, y: 0.005338788, z: 2.8791785}
---- !u!114 &1636159429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8492783713516325727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72d973f187e24eacb514b619f0d9053, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flood: {fileID: 0}
-  MaxHeight: 158
-  MinHeight: 152
-  speed: 6
-  _triggerCollider: {fileID: 1636159428}

@@ -64,6 +64,7 @@ namespace ToolMan.Combat.Equip
 
         public void StartFlooding()
         {
+            Debug.Log("plug start");
             _setting = true;
         }
 
@@ -82,6 +83,7 @@ namespace ToolMan.Combat.Equip
 
         public override int TakeDamage(float baseDmg, float pow, CombatUnit damager)
         {
+
             if (damager.gameObject.CompareTag("Player"))
             {
                 _pushed = true;

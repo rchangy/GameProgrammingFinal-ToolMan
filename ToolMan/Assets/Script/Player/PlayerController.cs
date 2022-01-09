@@ -234,16 +234,16 @@ public partial class PlayerController : ToolableMan
         {
             m_MaxDistance = moveDis;
             m_HitDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward, out m_Hit, transform.rotation, moveDis);
-            if (!m_HitDetect || m_Hit.collider.gameObject.tag == "Player" || m_Hit.collider.isTrigger)
+            if (!m_HitDetect || m_Hit.collider.gameObject.CompareTag("Player") || m_Hit.collider.isTrigger)
             {
                 transform.position += moveDis * transform.forward;
                 if (playerAudioStat.lastWalkTime > 0.4f)
                     Schedule<PlayerWalking>().player = this;
             }
-            else
-            {
-                Debug.Log("Hit : " + m_Hit.collider.name);
-            }
+            //else
+            //{
+            //    Debug.Log("Hit : " + m_Hit.collider.name);
+            //}
         }
         if (!isTool.Value && confJ != null)
         {
