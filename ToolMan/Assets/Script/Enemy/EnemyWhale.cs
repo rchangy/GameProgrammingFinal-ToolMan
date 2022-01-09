@@ -192,11 +192,14 @@ public class EnemyWhale : Enemy
         switch (height)
         {
             case Height.High:
-                act = GetRandType(weight);
                 if(_timerForSkills <= 0 && !_sharkReleased)
                 {
                     ReleaseSharks();
                 }
+                break;
+
+            case Height.Middle:
+                act = GetRandType(weight);
                 switch (act)
                 {
                     case 0: // attack
@@ -206,27 +209,7 @@ public class EnemyWhale : Enemy
                         Patrol();
                         break;
                 }
-                break;
-
-            case Height.Middle:
                 Sardine();
-                Patrol();
-                //else
-                //{
-                //    int[] w = { PatrolWeight, IdleWeight };
-                //    act = GetRandType(w);
-                //    switch (act)
-                //    {
-                //        case 0: // attack
-                //            ChasePlayer();
-                //            break;
-                //        case 1:
-                //            Idle();
-                //            break;
-                //        default:
-                //            break;
-                //    }
-                //}
                 break;
 
             case Height.Low:
@@ -274,7 +257,6 @@ public class EnemyWhale : Enemy
             if (_currentNodeIdx == pathNodes.Length) _currentNodeIdx = 0;
         }
     }
-
 
     public void BigSkill() {
         combat.SetCurrentUsingSkill("WhaleBigSkill");

@@ -31,5 +31,15 @@ namespace ToolMan.Combat.Skills
         {
             return name;
         }
+
+        public virtual void ResetCombatAttribute(SkillCombat combat)
+        {
+
+        }
+
+        public virtual void ResetObject()
+        {
+
+        }
     }
 }

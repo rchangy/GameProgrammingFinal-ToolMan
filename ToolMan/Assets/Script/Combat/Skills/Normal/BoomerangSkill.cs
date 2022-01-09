@@ -18,20 +18,58 @@ namespace ToolMan.Combat.Skills.Normal
 
         private PlayerController player = null;
 
-        public float MaxAimingDist = 20;
+        public float MaxAimingDist = 10;
 
         public float MaxAimingAngle = 85;
 
-        private StatModifier _defStatMod = new StatModifier(20, StatModType.PercentMult);
-        private StatModifier _strStatMod = new StatModifier(100, StatModType.PercentMult);
+        private readonly StatModifier _defStatMod = new StatModifier(20, StatModType.PercentMult);
+        private readonly StatModifier _strStatMod = new StatModifier(100, StatModType.PercentMult);
+
+
+        public float MaxShake;
+
+        public float MaxMultiplier;
+        public float MinMultiplier;
+        public float MultDecrease;
+        public float MultRevertDelay;
+        public float MultRevertSpd;
+        private float _lastTime = 0;
+
+        //private float _currentMult;
 
         
 
+
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
+            var passedTime = Time.time - _lastTime;
+            _lastTime = Time.time;
+            if (passedTime < MultRevertDelay)
+            {
+                if(Multiplier > MinMultiplier)
+                {
+                    Multiplier -= MultDecrease;
+                    if (Multiplier < MinMultiplier) Multiplier = MinMultiplier;
+                }
+                
+            }
+            else
+            {
+                if(Multiplier < MaxMultiplier)
+                {
+                    var revertTime = passedTime - MultRevertDelay;
+                    if(revertTime > 0)
+                    {
+                        Multiplier += MultRevertSpd * revertTime;
+                        if (Multiplier > MaxMultiplier) Multiplier = MaxMultiplier;
+                    }
+                }
+            }
+            var shakeRange = MaxShake * (1 - ((Multiplier - MinMultiplier) / (MaxMultiplier - MinMultiplier)) );
+            
+            Debug.Log(Multiplier + " " + shakeRange);
             _toolCombat.AddStatMod("DEF", _defStatMod);
             _toolCombat.AddStatMod("STR", _strStatMod);
-            //_toolCombat.Disable("Vulnerable");
             yield return new WaitForSeconds(attackDelay);
             _tool = combat.gameObject;
             if (typeof(PlayerCombat).IsInstanceOfType(combat))
@@ -45,7 +83,6 @@ namespace ToolMan.Combat.Skills.Normal
             }
             else
             {
-                //_toolCombat.RemoveDisable("Vulnerable");
                 _toolCombat.RemoveStatMod("DEF", _defStatMod);
                 _toolCombat.RemoveStatMod("STR", _strStatMod);
                 yield break;
@@ -87,21 +124,64 @@ namespace ToolMan.Combat.Skills.Normal
 
             _tool.transform.Rotate(0, 180, 0);
 
-            
-
-
             // to target
             float flyingTimeLast = _flyingTime;
-            while (flyingTimeLast > 0)
+            Vector3 nextStepPos;
+            Vector3 nextStepDir;
+            float tmp;
+            RaycastHit m_Hit;
+            bool m_HitDetect;
+            float curShakeRange;
+
+            while (flyingTimeLast > 0 && Vector3.Distance(combat.transform.position, targetPos) > 0.1f)
             {
                 // audio
                 if (player.playerAudioStat.lastAttackTime >= 1.1f)
                     Schedule<PlayerAttack>().player = player;
 
                 _tool.transform.Rotate(0, 0, Time.deltaTime * -800);
-                _tool.transform.position = Vector3.MoveTowards(_tool.transform.position, targetPos, Time.deltaTime * 40);
+                nextStepPos = Vector3.MoveTowards(_tool.transform.position, targetPos, Time.deltaTime * 40);
+                //m_HitDetect = Physics.BoxCast(combat.transform.position, combat.transform.localScale, combat.transform.forward, out m_Hit, combat.transform.rotation, Vector3.Distance(nextStepPos, combat.transform.position));
+                //if (m_HitDetect && !(m_Hit.collider.gameObject.CompareTag("Player")) && !m_Hit.collider.isTrigger)
+                //{
+                //    break;
+                //}
+                nextStepDir = Vector3.Normalize(nextStepPos - _tool.transform.position);
+                tmp = nextStepDir.x;
+                nextStepDir.x = nextStepDir.z;
+                nextStepDir.z = -tmp;
+                nextStepDir *= Random.Range(-1f, 1f);
+                nextStepDir.y = Random.Range(-1f, 1f);
+                curShakeRange = Random.Range(0, shakeRange);
+                nextStepPos += nextStepDir * curShakeRange;
+                m_HitDetect = Physics.BoxCast(_tool.transform.position, _tool.transform.localScale/3, _tool.transform.forward, out m_Hit, _tool.transform.rotation, Vector3.Distance(nextStepPos, _tool.transform.position));
+                if (m_HitDetect && !m_Hit.collider.gameObject.CompareTag("Player") && !m_Hit.collider.isTrigger)
+                {
+                    //nextStepPos -= 2 * shakeRange * nextStepDir;
+                    break;
+                }
+                _tool.transform.position = nextStepPos;
                 flyingTimeLast -= Time.deltaTime;
-                // return if collide with border 
+                yield return null;
+            }
+
+            flyingTimeLast = 1;
+
+            while(flyingTimeLast > 0)
+            {
+                nextStepDir.x = Random.Range(-1f, 1f);
+                nextStepDir.z = Random.Range(-1f, 1f);
+                nextStepDir.y = Random.Range(-1f, 1f);
+                curShakeRange = Random.Range(0, shakeRange);
+                nextStepPos = _tool.transform.position + nextStepDir * curShakeRange;
+                m_HitDetect = Physics.BoxCast(_tool.transform.position, _tool.transform.localScale / 3, _tool.transform.forward, out m_Hit, _tool.transform.rotation, Vector3.Distance(nextStepPos, _tool.transform.position));
+                if (!m_HitDetect || m_Hit.collider.gameObject.CompareTag("Player") || m_Hit.collider.isTrigger)
+                {
+                    //break;
+                }
+                _tool.transform.position = nextStepPos;
+                _tool.transform.Rotate(0, 0, Time.deltaTime * -800);
+                flyingTimeLast -= Time.deltaTime;
                 yield return null;
             }
 
@@ -111,8 +191,23 @@ namespace ToolMan.Combat.Skills.Normal
             while (flyingTimeLast > 0)
             {
                 _tool.transform.Rotate(0, 0, Time.deltaTime * -800);
-                _tool.transform.position = Vector3.MoveTowards(_tool.transform.position, _manController.GetRightHand().transform.position, Time.deltaTime * 40);
-                flyingTimeLast -= Time.deltaTime;
+                //_tool.transform.position = Vector3.MoveTowards(_tool.transform.position, _manController.GetRightHand().transform.position, Time.deltaTime * 40);
+                nextStepPos = Vector3.MoveTowards(_tool.transform.position, _manController.GetRightHand().transform.position, Time.deltaTime * 40);
+                nextStepDir = Vector3.Normalize(nextStepPos - _tool.transform.position);
+                tmp = nextStepDir.x;
+                nextStepDir.x = nextStepDir.z;
+                nextStepDir.z = -tmp;
+                nextStepDir *= Random.Range(-1f, 1f);
+                nextStepDir.y = Random.Range(-1f, 1f);
+                curShakeRange = Random.Range(0, shakeRange);
+                nextStepPos += nextStepDir * curShakeRange;
+                m_HitDetect = Physics.BoxCast(_tool.transform.position, _tool.transform.localScale / 3, _tool.transform.forward, out m_Hit, _tool.transform.rotation, Vector3.Distance(nextStepPos, _tool.transform.position));
+                if (m_HitDetect && !m_Hit.collider.gameObject.CompareTag("Player") && !m_Hit.collider.isTrigger)
+                {
+                    nextStepPos -= curShakeRange * nextStepDir;
+                    //break;
+                }
+                _tool.transform.position = nextStepPos;
                 if (Vector3.Distance(_man.transform.position, _tool.transform.position) < 1.5)
                 {
                     _manController.forceGrabbing();
@@ -120,12 +215,12 @@ namespace ToolMan.Combat.Skills.Normal
                     {
                         collisionEnable.Value = false;
                         _tool.GetComponent<Rigidbody>().useGravity = true;
-                        //_toolCombat.RemoveDisable("Vulnerable");
                         _toolCombat.RemoveStatMod("DEF", _defStatMod);
                         _toolCombat.RemoveStatMod("STR", _strStatMod);
                         yield break;
                     }
                 }
+                flyingTimeLast -= Time.deltaTime;
                 yield return null;
             }
             _tool.GetComponent<Rigidbody>().useGravity = true;
@@ -133,7 +228,6 @@ namespace ToolMan.Combat.Skills.Normal
         public override IEnumerator Hit(SkillCombat combat, CombatUnit target)
         {
             Transform targetTrans = target.gameObject.transform;
-            //Debug.Log(targetTrans.name);
             Vector3 originalScale = targetTrans.localScale;
 
             float targetZScale = targetTrans.localScale.z * _deformedOnAxis;
@@ -145,7 +239,6 @@ namespace ToolMan.Combat.Skills.Normal
             while (targetTrans.localScale.z >= targetZScale)
             {
                 targetTrans.localScale -= deform * Time.deltaTime;
-                //Debug.Log(targetTrans.localScale);
                 yield return null;
             }
 
@@ -156,5 +249,14 @@ namespace ToolMan.Combat.Skills.Normal
             }
             targetTrans.localScale = originalScale;
         }
+
+
+        public override void ResetObject()
+        {
+            _lastTime = 0;
+            Multiplier = MaxMultiplier;
+        }
     }
+
+
 }

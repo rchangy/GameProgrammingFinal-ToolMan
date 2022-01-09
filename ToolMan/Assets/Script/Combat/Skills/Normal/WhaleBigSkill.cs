@@ -27,7 +27,8 @@ namespace ToolMan.Combat.Skills.Normal
                 _whale.enemyAudioStat.lastAttackAudio = 0f;
             }
             bigSkillObj.GetComponent<WhaleBigSkillPrefab>()._Play(_whale, _warningLastingTime, attackDelay, _lastingTime);
-            yield return new WaitForSeconds(_warningLastingTime + _lastingTime);
+            //yield return new WaitForSeconds(_warningLastingTime + _lastingTime);
+            yield return null;
         }
     }
 }
