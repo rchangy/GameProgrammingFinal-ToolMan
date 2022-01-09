@@ -38,7 +38,9 @@ public class Tool
     {
         // release
         if (player.IsGrabbed())
+        {
             player.GetAnotherPlayer().Release();
+        }
         // reset parameters of animator
         animator.SetBool("isTool", false);
         animator.SetTrigger("toMan");

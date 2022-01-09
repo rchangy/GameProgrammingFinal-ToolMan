@@ -55,6 +55,13 @@ public class EnemyWaveController : MonoBehaviour
         currentAlive--;
     }
 
+    public void AddEnemy(Enemy newEnemy)
+    {
+        currentAlive++;
+        newEnemy.SetWave(this);
+        _waves.combatManager.SetHPCanvas(newEnemy);
+    }
+
     public void SetWaves(EnemyWavesController waves)
     {
         _waves = waves;

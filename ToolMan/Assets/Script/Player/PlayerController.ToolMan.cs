@@ -74,6 +74,7 @@ public partial class PlayerController
             toToolEffect.PlayEffect();
             // grab hint
             grabPoint.TeammateGrabHint(false);
+            isTool.Value = !isTool.Value;
         }
         else if (isTool.Value && !beGrabbed)
         {
@@ -87,8 +88,8 @@ public partial class PlayerController
             //effect
             Effect toManEffect = effectController.effectList.Find(e => e.name == "ToManEffect");
             toManEffect.PlayEffect();
+            isTool.Value = !isTool.Value;
         }
-        isTool.Value = !isTool.Value;
     }
 
     // ==== grab/grabbed ====

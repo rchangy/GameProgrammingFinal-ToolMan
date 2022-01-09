@@ -157,6 +157,10 @@ public class EnemyChick : EnemyNormalChicken
     public void setMom(EnemyBigChicken Mom)
     {
         this.Mom = Mom;
+        if (Mom != null)
+        {
+            Mom.GetWave().AddEnemy(this);
+        }
     }
 
     override protected void Die()

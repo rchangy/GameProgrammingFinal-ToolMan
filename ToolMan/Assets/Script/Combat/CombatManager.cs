@@ -105,6 +105,13 @@ namespace ToolMan.Combat
         //    return false;
         //}
 
+        public void SetHPCanvas(Enemy enemy)
+        {
+            List<Enemy> enemies = new List<Enemy>();
+            enemies.Add(enemy);
+            SetHPCanvas(enemies);
+        }
+
         public void SetHPCanvas(List<Enemy> enemies)
         {
             foreach(var enemy in enemies)

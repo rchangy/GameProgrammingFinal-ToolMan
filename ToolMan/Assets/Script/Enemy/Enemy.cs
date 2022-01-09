@@ -426,6 +426,11 @@ public class Enemy : MonoBehaviour
     {
 
     }
+
+    public EnemyWaveController GetWave()
+    {
+        return _wave;
+    }
     public void SetWave(EnemyWaveController wave)
     {
         _wave = wave;
