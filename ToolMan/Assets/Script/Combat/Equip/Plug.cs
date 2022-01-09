@@ -51,6 +51,7 @@ namespace ToolMan.Combat.Equip
                 if(transform.position.y <= MinHeight)
                 {
                     _flood.StopFlooding();
+                    _pushed = false;
                 }
             }
         }
