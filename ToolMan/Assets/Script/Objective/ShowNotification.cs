@@ -8,8 +8,7 @@ namespace ToolMan.UI
         private Notification _noti1;
         [SerializeField]
         private Notification _noti2;
-        [SerializeField]
-        string content;
+        public string content;
 
         private bool _isCompleted;
 
