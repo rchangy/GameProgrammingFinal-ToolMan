@@ -17,7 +17,6 @@ namespace ToolMan.Combat.Equip
 
         private object _source;
 
-
         Dictionary<CombatUnit, ContactPoint[]> _contactPoints = new Dictionary<CombatUnit, ContactPoint[]>();
 
         protected override void Start()
@@ -99,6 +98,13 @@ namespace ToolMan.Combat.Equip
             _target.RemoveDisable("Vulnerable");
             //Destroy(gameObject);
             gameObject.SetActive(false);
+
+            TurtleSkillCombat t = gameObject.transform.GetComponentInParent<TurtleSkillCombat>();
+            if (t)
+            {
+                t.ResetForceShieldCd();
+                //Debug.Log("turtle:)))");
+            }
         }
     }
 }

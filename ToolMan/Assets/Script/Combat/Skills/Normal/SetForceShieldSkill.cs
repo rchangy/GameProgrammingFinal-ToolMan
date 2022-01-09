@@ -12,7 +12,7 @@ namespace ToolMan.Combat.Skills.Normal
         private GameObject shieldPrefab;
         [SerializeField]
         private Material mat;
-        
+
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
             yield return new WaitForSeconds(attackDelay);
@@ -33,6 +33,7 @@ namespace ToolMan.Combat.Skills.Normal
                 var newShield = Instantiate(shieldPrefab, combat.gameObject.transform);
                 ForceShield s = newShield.GetComponent<ForceShield>();
                 s.Setup(mat, combat, this);
+                //s.SetOwner(collisionEnable);
             }
         }
     }

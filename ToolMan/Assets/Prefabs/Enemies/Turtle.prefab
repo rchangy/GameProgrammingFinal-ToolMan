@@ -287,6 +287,12 @@ MonoBehaviour:
   SightRange: 20
   speed: 2.5
   InitAttackRange: 10
+  audioSource: {fileID: 0}
+  hurtAudio: {fileID: 0}
+  idleAudio: {fileID: 0}
+  attackAudio: {fileID: 0}
+  idleAudioWaitTime: 30
+  hurtAudioWaitTime: 1
   followTarget: {fileID: 0}
   targetInSightRange: 0
   _escaping: 0
@@ -324,6 +330,7 @@ MonoBehaviour:
   DefBaseValue: 1
   StrBaseValue: 1
   SpdBaseValue: 1
+  PowBaseValue: 1
   AttackEnableBaseValue: 1
   MovableBaseValue: 1
   VulnerableBaseValue: 1

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ToolMan.Combat
 {
@@ -83,5 +84,9 @@ namespace ToolMan.Combat
             //StartCoroutine(currentUsingSkill.Hit(this, target));
         }
 
+        public void ResetForceShieldCd() {
+            _skillCd["TurtleShield"] = availableSkillSet.GetSkillbyName("TurtleShield").Cd;
+            Debug.Log("turtle:)) cd = " + _skillCd["TurtleShield"]);
+        }
     }
 }
