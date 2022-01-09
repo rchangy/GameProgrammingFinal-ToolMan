@@ -38,12 +38,20 @@ public partial class PlayerController
 
     private void ToAnotherTool()
     {
+        bool toForceGrab = false;
+        if (IsGrabbed())
+        {
+            toForceGrab = true;
+            GetAnotherPlayer().Release();
+        }
         tools[toolIdx.Value].toTool();
         combat.SetCurrentUsingSkill(tools[toolIdx.Value].getName());
         combat.AddType(tools[toolIdx.Value].getName());
         Effect toToolEffect = effectController.effectList.Find(e => e.name == "ToToolEffect");
         toToolEffect.PlayEffect();
         Schedule<PlayerToTool>().player = this;
+        if (toForceGrab)
+            GetAnotherPlayer().forceGrabbing();
     }
 
     override public void ToolableManTransform()
@@ -64,10 +72,9 @@ public partial class PlayerController
             //effect
             Effect toToolEffect = effectController.effectList.Find(e => e.name == "ToToolEffect");
             toToolEffect.PlayEffect();
-            // animator
-            animator.SetTrigger("changeToTool");
             // grab hint
             grabPoint.TeammateGrabHint(false);
+            isTool.Value = !isTool.Value;
         }
         else if (isTool.Value && !beGrabbed)
         {
@@ -81,8 +88,8 @@ public partial class PlayerController
             //effect
             Effect toManEffect = effectController.effectList.Find(e => e.name == "ToManEffect");
             toManEffect.PlayEffect();
+            isTool.Value = !isTool.Value;
         }
-        isTool.Value = !isTool.Value;
     }
 
     // ==== grab/grabbed ====

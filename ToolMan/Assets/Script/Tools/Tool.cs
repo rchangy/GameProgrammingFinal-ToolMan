@@ -27,6 +27,8 @@ public class Tool
 
     public virtual void toTool()
     {
+        animator.ResetTrigger("toMan");
+        animator.SetTrigger("toTool");
         animator.SetBool("isTool", true);
         playerRB.constraints = RigidbodyConstraints.None;
         player.resetRigidBody();
@@ -34,13 +36,20 @@ public class Tool
 
     public void toMan()
     {
+        // release
+        if (player.IsGrabbed())
+        {
+            player.GetAnotherPlayer().Release();
+        }
         // reset parameters of animator
         animator.SetBool("isTool", false);
-        animator.SetBool("isShield", false);
-        animator.SetBool("isFlashBomb", false);
-        animator.SetBool("isLightSaber", false);
-        animator.SetBool("isBoomerang", false);
-        animator.SetBool("isPickaxe", false);
+        animator.SetTrigger("toMan");
+        animator.ResetTrigger("toTool");
+        animator.ResetTrigger("toPickaxe");
+        animator.ResetTrigger("toBoomerang");
+        animator.ResetTrigger("toShield");
+        animator.ResetTrigger("toFlashBomb");
+        animator.ResetTrigger("toLightSaber");
         animator.ResetTrigger("Attack");
 
         // reset grabbed point (need to fix this part if changing animation)

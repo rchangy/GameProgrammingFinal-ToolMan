@@ -16,7 +16,7 @@ public class FlashBomb : Tool
     public override void toTool()
     {
         base.toTool();
-        animator.SetBool("isFlashBomb", true);
+        animator.SetTrigger("toFlashBomb");
         grabbedPoint.transform.localPosition = new Vector3(0.0f, 0.2f, 0.6f);
         point = new Vector3(0.0f, 0.2f, 0.6f);
     }
