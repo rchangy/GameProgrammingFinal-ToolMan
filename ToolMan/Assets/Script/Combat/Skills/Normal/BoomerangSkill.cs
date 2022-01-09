@@ -67,7 +67,7 @@ namespace ToolMan.Combat.Skills.Normal
             }
             var shakeRange = MaxShake * (1 - ((Multiplier - MinMultiplier) / (MaxMultiplier - MinMultiplier)) );
             
-            Debug.Log(Multiplier + " " + shakeRange);
+            //Debug.Log(Multiplier + " " + shakeRange);
             _toolCombat.AddStatMod("DEF", _defStatMod);
             _toolCombat.AddStatMod("STR", _strStatMod);
             yield return new WaitForSeconds(attackDelay);

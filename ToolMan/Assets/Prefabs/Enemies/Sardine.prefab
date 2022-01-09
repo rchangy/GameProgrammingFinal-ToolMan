@@ -1375,9 +1375,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skill: {fileID: 11400000, guid: 671f4bd27999b4d0bbb9ec0aa6c61ac2, type: 2}
   _speed: 10
-  effectController: {fileID: 1962144632817642460}
   _explosionPrefab: {fileID: 319803370290364408, guid: a7724e5f07b7a43818dc4dc2105698d4, type: 3}
+  _explosionRange: 5
   DieAfterSeconds: 5
+  _collisionTime: 0.5
 --- !u!136 &2514947215839314380
 CapsuleCollider:
   m_ObjectHideFlags: 0

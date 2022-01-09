@@ -8,7 +8,7 @@ namespace ToolMan.Combat.Equip
     {
         private Transform _target;
         private GameObject _whale;
-        private CombatUnit _whaleCombat;
+        private SkillCombat _whaleCombat;
 
         private bool _returning = false;
 
@@ -17,15 +17,17 @@ namespace ToolMan.Combat.Equip
         [SerializeField]
         private float _speed;
 
-        [SerializeField]
-        private EffectController effectController;
 
         [SerializeField]
         private GameObject _explosionPrefab;
-
-        private bool explodeOnDeath;
+        [SerializeField] private float _explosionRange;
 
         [SerializeField] private float DieAfterSeconds = 5f;
+
+        [SerializeField] private float _collisionTime;
+        private bool _startCollision;
+
+        private PlayerCombat _collidingPlayer;
 
         protected void Start()
         {
@@ -40,7 +42,16 @@ namespace ToolMan.Combat.Equip
             {
                 Destroy(gameObject);
             }
-            explodeOnDeath = true;
+        }
+
+        private void Update()
+        {
+            if (!_startCollision || _returning) return;
+            if (_collisionTime > 0) _collisionTime -= Time.deltaTime;
+            else
+            {
+                Die();
+            }
         }
 
         private void FixedUpdate()
@@ -52,8 +63,12 @@ namespace ToolMan.Combat.Equip
 
         public void SetWhale(CombatUnit whaleCombat)
         {
+            if (typeof(SkillCombat).IsInstanceOfType(whaleCombat))
+            {
+                _whaleCombat = (SkillCombat)whaleCombat;
+            }
             _whale = whaleCombat.gameObject;
-            _whaleCombat = whaleCombat;
+            //_whaleCombat = whaleCombat;
         }
 
         private void MoveTowardTarget()
@@ -89,51 +104,27 @@ namespace ToolMan.Combat.Equip
         private void Die()
         {
             // Explosion effect
-            if (explodeOnDeath)
-            {
-                Effect effect = Instantiate(_explosionPrefab, transform.position, Quaternion.identity).GetComponent<Effect>();
-                effect.PlayEffect();
-            }
+            Effect effect = Instantiate(_explosionPrefab, transform.position, Quaternion.identity).GetComponent<Effect>();
+            effect.PlayEffect();
+            Explode();
 
             Destroy(gameObject);
         }
 
-        //private void OnCollisionEnter(Collision collision)
-        //{
-        //    if(collision.gameObject == _whale)
-        //    {
-        //        if (_returning)
-        //        {
-        //            // hit whale
-        //            _whale.GetComponent<EnemyWhale>().TakeSardine();
-        //            explodeOnDeath = true;
-        //            Die();
-        //        }
-        //        return;
-        //    }
-        //    PlayerCombat playerCombat = collision.gameObject.GetComponent<PlayerCombat>();
-        //    if(playerCombat != null)
-        //    {
-        //        if (_returning) return;
-        //        if (!playerCombat.Vulnerable)
-        //        {
-        //            _target = _whale;
-        //            _returning = true;
-        //        }
-        //        else
-        //        {
-        //            playerCombat.TakeDamage(_whaleCombat.Atk * _atkMultiplier, _whaleCombat);
-        //            // maybe add buff?
-        //            Die();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Die();
-        //    }
-        //}
-
-        private void OnTriggerEnter(Collider other)
+        private void Explode()
+        {
+            Collider[] hitTargets = Physics.OverlapSphere(transform.position, _explosionRange, _whaleCombat.TargetLayers);
+            foreach (Collider target in hitTargets)
+            {
+                CombatUnit targetCombat = target.GetComponent<CombatUnit>();
+                if (targetCombat != null)
+                {
+                    targetCombat.TakeDamage(_whaleCombat.Atk * _skill.Multiplier, _whaleCombat.Pow * _skill.PowMuliplier, _whaleCombat);
+                }
+            }
+        }
+        
+        private void OnTriggerStay(Collider other)
         {
             if (other.gameObject == _whale)
             {
@@ -141,36 +132,30 @@ namespace ToolMan.Combat.Equip
                 {
                     // hit whale
                     _whale.GetComponent<EnemyWhale>().TakeSardine();
-                    explodeOnDeath = true;
                     Die();
                 }
                 return;
             }
-            if (!other.gameObject.CompareTag("Player")) return;
-
-            Debug.Log(other.name);
-            PlayerCombat playerCombat = other.gameObject.GetComponent<PlayerCombat>();
-            if (playerCombat != null)
+            if (!other.gameObject.CompareTag("Player"))
             {
-                if (_returning) return;
-                if (!playerCombat.Vulnerable)
+                Debug.Log("sardine hits " + other.name);
+                Die();
+                return;
+            }
+
+            //Debug.Log(other.name);
+            if (_returning) return;
+            _startCollision = true;
+            if(_collidingPlayer == null || _collidingPlayer.gameObject != other.gameObject)
+                _collidingPlayer = other.gameObject.GetComponent<PlayerCombat>();
+            if (_collidingPlayer != null)
+            {
+                if (!_collidingPlayer.Vulnerable)
                 {
                     _target = _whale.transform;
                     _returning = true;
                     DieAfterSeconds = 100;
                 }
-                else
-                {
-                    playerCombat.TakeDamage(_whaleCombat.Atk * _skill.Multiplier, _whaleCombat.Pow * _skill.PowMuliplier, _whaleCombat);
-                    // maybe add buff?
-                    Debug.Log(other.name);
-                    Die();
-                }
-            }
-            else
-            {
-                Debug.Log(other.name);
-                Die();
             }
         }
     }
