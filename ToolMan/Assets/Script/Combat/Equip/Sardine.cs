@@ -82,7 +82,9 @@ namespace ToolMan.Combat.Equip
             {
                 transform.LookAt(_target);
             }
-            transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime * _speed);
+            Vector3 colliderPos = _target.GetComponent<Collider>().bounds.center;
+            //transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime * _speed);
+            transform.position = Vector3.MoveTowards(transform.position, colliderPos, Time.deltaTime * _speed);
 
         }
 
