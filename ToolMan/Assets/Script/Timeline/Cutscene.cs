@@ -18,9 +18,10 @@ public class Cutscene : Objective
     public override void StartObjective()
     {
         _started = true;
+        _uIController.SetControlEnable(false);
         _p1.controlEnable = false;
         _p2.controlEnable = false;
-        _uIController.SetControlEnable(false);
+        
 
         uIController.SetBattleUI(false);
         uIController.SetHintUI(false);
