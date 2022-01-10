@@ -24,6 +24,8 @@ public class EnemyDogKnight : Enemy
     private int[] _meleeSkillWeight;
     private int[] _longRangeSKillWeight;
 
+    public GameObject dynamicNoti;
+
     protected override void Awake()
     {
         base.Awake();

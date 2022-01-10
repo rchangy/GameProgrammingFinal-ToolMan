@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ToolMan.Util;
-using System;
+using ToolMan.UI;
 
 namespace ToolMan.Combat.Skills.Normal
 {
@@ -31,6 +31,12 @@ namespace ToolMan.Combat.Skills.Normal
                     yield break;
                 }
             }
+
+            // Dynamic notification
+            _dogKnight.dynamicNoti.GetComponent<ShowNotification>().StartObjective();
+            _dogKnight.dynamicNoti.GetComponent<HideNotification>().StartObjective();
+
+
             _dogKnight.Anim.SetBool("Defend", true);
             _dogKnight.SwordTrailVfx.PlayEffect();
             _dogKnight.ChargingVfx.PlayEffect();

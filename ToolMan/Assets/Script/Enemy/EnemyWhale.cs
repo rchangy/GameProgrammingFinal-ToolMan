@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 using ToolMan.Combat.Equip;
+using ToolMan.UI;
+
 public class EnemyWhale : Enemy
 {
     // ==== Rush ====
@@ -49,6 +51,8 @@ public class EnemyWhale : Enemy
     [SerializeField] private float _timeToStartSharkWave;
     private bool _sharkReleased;
 
+    public GameObject plugNotification;
+    public GameObject sardineNotification;
     // ==== skill ====
 
     protected override void Awake()
@@ -126,6 +130,8 @@ public class EnemyWhale : Enemy
                 {
                     SetHeight(Height.Middle);
                     isAction = false;
+                    sardineNotification.GetComponent<ShowNotification>().StartObjective();
+                    sardineNotification.GetComponent<HideNotification>().StartObjective();
                 }
                 break;
 
@@ -266,6 +272,10 @@ public class EnemyWhale : Enemy
 
     private void ReleaseSharks()
     {
+        // Notification
+        plugNotification.GetComponent<ShowNotification>().StartObjective();
+        plugNotification.GetComponent<HideNotification>().StartObjective();
+
         flood.StartFlooding();
         combat.SetCurrentUsingSkill("Shark Missle");
         _sharkReleased = combat.Attack();
