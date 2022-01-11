@@ -1,5 +1,45 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8154384069524433585
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 1.15
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: c4ef7adbd9391ba4ca440c66931da244, type: 2}
+--- !u!114 &-6871675138770682976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46e36075dd1c124a8422c228e75e1fb, type: 3}
+  m_Name: Signal Track
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects:
+    - {fileID: -8154384069524433585}
 --- !u!114 &-6540286991324756743
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15,7 +55,7 @@ MonoBehaviour:
   template:
     txtToParse: {fileID: 4900000, guid: 43f5a712140d542799e5cb665ad5ad4c, type: 3}
     lineToStart: 74
-    lineToBreak: 89
+    lineToBreak: 90
     textSpeed: 30
     pauseUntilTalkEnd: 1
     autoPass: 0
@@ -35,28 +75,13 @@ MonoBehaviour:
   m_Version: 0
   m_Tracks:
   - {fileID: 4880761364624017371}
+  - {fileID: -6871675138770682976}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 8633785691501608379}
---- !u!114 &1349496516643806216
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
-  m_Name: Signal Emitter
-  m_EditorClassIdentifier: 
-  m_Time: 1.0833333333333333
-  m_Retroactive: 0
-  m_EmitOnce: 0
-  m_Asset: {fileID: 11400000, guid: c4ef7adbd9391ba4ca440c66931da244, type: 2}
 --- !u!114 &4880761364624017371
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,8 +173,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: RPGTalkCinematicClip
   m_Markers:
-    m_Objects:
-    - {fileID: 1349496516643806216}
+    m_Objects: []
 --- !u!114 &8633785691501608379
 MonoBehaviour:
   m_ObjectHideFlags: 1
