@@ -99851,8 +99851,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.17867218, y: 0.14999998, z: 0.11999999}
-  m_Center: {x: 1.3881481, y: 0.7397287, z: 0.019377347}
+  m_Size: {x: 0.17867206, y: 0.38144588, z: 0.24000001}
+  m_Center: {x: 1.3881756, y: 0.6240058, z: 0.019379709}
 --- !u!135 &2423348877496031023
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -102970,7 +102970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -123, y: -420}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7076938611630625863
@@ -131994,6 +131994,14 @@ PrefabInstance:
     - target: {fileID: 7901181868127855945, guid: 09a42bb1c13cb41f9b2d0a3d9b971a8f, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901181868127855945, guid: 09a42bb1c13cb41f9b2d0a3d9b971a8f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901181868127855945, guid: 09a42bb1c13cb41f9b2d0a3d9b971a8f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09a42bb1c13cb41f9b2d0a3d9b971a8f, type: 3}
