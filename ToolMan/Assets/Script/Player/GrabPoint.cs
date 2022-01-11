@@ -69,6 +69,7 @@ namespace ToolMan.Player
 
         public void TeammateGrabHint(bool InRange)
         {
+            if (player.grabHint == null) return;
             player.grabHint.SetActive(InRange);
         }
 
