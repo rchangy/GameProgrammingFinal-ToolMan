@@ -9,6 +9,8 @@ public class MainMenuManager : MonoBehaviour
     public float height;
     public float speed;
 
+    [SerializeField] GameObject[] levelButtons;
+
 
 
     public void ToLevel(int i)
@@ -50,4 +52,19 @@ public class MainMenuManager : MonoBehaviour
         }
     }
     
+    public void DisplayButtons()
+    {
+        if (levelButtons.Length == 5)
+        {
+            CheckpointManager.LoadCheckpoint();
+            int currentLevel = CheckpointManager.GetCheckpointInfo().level;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i >= currentLevel)
+                    levelButtons[i].gameObject.SetActive(false);
+                else
+                    levelButtons[i].gameObject.SetActive(true);
+            }
+        }
+    }
 }
