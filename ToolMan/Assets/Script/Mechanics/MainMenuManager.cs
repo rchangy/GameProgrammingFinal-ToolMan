@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class MainMenuManager : MonoBehaviour
     public float height;
     public float speed;
 
-    [SerializeField] GameObject[] levelButtons;
+    [SerializeField] GameObject[] levelButtonTexts;
 
 
 
@@ -54,16 +55,21 @@ public class MainMenuManager : MonoBehaviour
     
     public void DisplayButtons()
     {
-        if (levelButtons.Length == 5)
+        if (levelButtonTexts.Length == 5)
         {
             CheckpointManager.LoadCheckpoint();
             int currentLevel = CheckpointManager.GetCheckpointInfo().level;
             for (int i = 0; i < 5; i++)
             {
+                Text levelText = levelButtonTexts[i].GetComponent<Text>();
                 if (i >= currentLevel)
-                    levelButtons[i].gameObject.SetActive(false);
+                {
+                    levelText.text = "???";
+                }
                 else
-                    levelButtons[i].gameObject.SetActive(true);
+                {
+                    levelText.text = "Level " + currentLevel.ToString();
+                }
             }
         }
     }
