@@ -11,10 +11,13 @@ public class RetrieveMemory : Objective
     bool crystalBroken;
     bool complete = false;
     List<PlayerController> players = new List<PlayerController>();
+    private AudioSource _audioSource;
 
     public float waitAfterUnlock = 5f;
     protected override void Init()
     {
+        _audioSource = gameObject.GetComponent<AudioSource>();
+        _audioSource.clip = Bgm;
         crystal = gameObject.transform.Find("MemoryCrystal").gameObject;
         if (crystal != null)
         {
@@ -76,7 +79,12 @@ public class RetrieveMemory : Objective
         players[1].UnlockTool(CheckpointManager.GetCheckpointInfo().level, CheckpointManager.GetCheckpointInfo().player2ToolNum);
 
         // wait for seconds
+        _audioSource.Play();
         yield return new WaitForSeconds(waitAfterUnlock);
+        foreach (var cam in cams)
+        {
+            cam.ResetCam();
+        }
         complete = true;
     }
     public void CrystalDie()
