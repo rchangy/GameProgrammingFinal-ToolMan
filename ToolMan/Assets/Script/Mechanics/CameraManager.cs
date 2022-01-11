@@ -65,4 +65,11 @@ public class CameraManager : MonoBehaviour
         MainCam.transform.eulerAngles = new Vector3(MainCam.transform.eulerAngles.x, MainCam.transform.eulerAngles.y + 180f, MainCam.transform.eulerAngles.z);
         _camPosition = new Vector3(0, 3, 10);
     }
+    public void ResetCam()
+    {
+        //EnableMain();
+        //Debug.Log("main cam: " + MainCam.gameObject.name);
+        MainCam.transform.eulerAngles = new Vector3(MainCam.transform.eulerAngles.x, MainCam.transform.eulerAngles.y + 180f, MainCam.transform.eulerAngles.z);
+        _camPosition = new Vector3(0, 3, -10);
+    }
 }

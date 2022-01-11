@@ -124,4 +124,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         SceneManager.LoadScene("Main Menu");
     }
+
+    public void StopBgm()
+    {
+        _audioSource.Stop();
+    }
+    public void PlayBgm()
+    {
+        _audioSource.Play();
+    }
 }
