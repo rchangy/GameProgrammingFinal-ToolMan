@@ -16,8 +16,11 @@ public class RetrieveMemory : Objective
     public float waitAfterUnlock = 5f;
     protected override void Init()
     {
-        _audioSource = gameObject.GetComponent<AudioSource>();
-        _audioSource.clip = Bgm;
+        if (_audioSource)
+        {
+            _audioSource = gameObject.GetComponent<AudioSource>();
+            _audioSource.clip = Bgm;
+        }
         crystal = gameObject.transform.Find("MemoryCrystal").gameObject;
         if (crystal != null)
         {
@@ -79,7 +82,8 @@ public class RetrieveMemory : Objective
         players[1].UnlockTool(CheckpointManager.GetCheckpointInfo().level, CheckpointManager.GetCheckpointInfo().player2ToolNum);
 
         // wait for seconds
-        _audioSource.Play();
+        if (_audioSource)
+            _audioSource.Play();
         yield return new WaitForSeconds(waitAfterUnlock);
         foreach (var cam in cams)
         {
