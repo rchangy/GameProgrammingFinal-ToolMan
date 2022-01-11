@@ -134,7 +134,6 @@ public partial class PlayerController : ToolableMan
 
     override protected void Update()
     {
-        Debug.Log("update: collider enable = " + playerCollider.enabled);
         if (isDead)
             return;
         if (!controlEnable)
@@ -348,6 +347,7 @@ public partial class PlayerController : ToolableMan
     public void LoadTool(int toolNum)
     {
         unlockedToolNum = toolNum;
+        if (toolListUI == null) return;
         toolListUI.LoadTool(toolNum);
         SetUpToolList();
     }

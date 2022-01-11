@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class MainMenuManager : MonoBehaviour
     public Transform Cam;
     public float height;
     public float speed;
+
+    [SerializeField] GameObject[] levelButtonTexts;
 
 
 
@@ -50,4 +53,24 @@ public class MainMenuManager : MonoBehaviour
         }
     }
     
+    public void DisplayButtons()
+    {
+        if (levelButtonTexts.Length == 5)
+        {
+            CheckpointManager.LoadCheckpoint();
+            int currentLevel = CheckpointManager.GetCheckpointInfo().level;
+            for (int i = 0; i < 5; i++)
+            {
+                Text levelText = levelButtonTexts[i].GetComponent<Text>();
+                if (i >= currentLevel)
+                {
+                    levelText.text = "???";
+                }
+                else
+                {
+                    levelText.text = "Level " + currentLevel.ToString();
+                }
+            }
+        }
+    }
 }
