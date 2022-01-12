@@ -7,16 +7,28 @@ public class Cutscene : Objective
     private PlayableDirector playableDirector;
     private bool _isCompleted;
     private bool _started = false;
+    [SerializeField] private Transform[] InactiveBeforeStart;
+
+    public bool _skipEnable = true;
 
     public Transform cam1, cam2, AnotherCam;
     protected override void Init()
     {
         _isCompleted = false;
         playableDirector.Stop();
+        foreach (var obj in InactiveBeforeStart)
+        {
+            obj.gameObject.SetActive(false);
+        }
     }
 
     public override void StartObjective()
     {
+        foreach (var obj in InactiveBeforeStart)
+        {
+            obj.gameObject.SetActive(true);
+        }
+
         _started = true;
         _uIController.SetControlEnable(false);
         _p1.controlEnable = false;
@@ -25,13 +37,19 @@ public class Cutscene : Objective
 
         uIController.SetBattleUI(false);
         uIController.SetHintUI(false);
-        
+
+        if (cam1 && cam2 && AnotherCam)
+        {
+            cam1.gameObject.SetActive(false);
+            cam2.gameObject.SetActive(false);
+            AnotherCam.gameObject.SetActive(true);
+        }
         playableDirector.Play();
     }
 
     private void Update()
     {
-        if (_started && Input.GetKeyDown(KeyCode.Escape))
+        if (_started && Input.GetKeyDown(KeyCode.Escape) && _skipEnable)
         {
             playableDirector.Stop();
             if (cam1)
@@ -44,7 +62,15 @@ public class Cutscene : Objective
         }
     }
 
-    public void Complete() { _isCompleted = true; Debug.Log("cutScene" + gameObject.name + " p1_controlenable = " + _p1.controlEnable); }
+    public void Complete() {
+        if (cam1 && cam2 && AnotherCam) {
+            cam1.gameObject.SetActive(true);
+            cam2.gameObject.SetActive(true);
+            AnotherCam.gameObject.SetActive(false);
+        }
+
+        _isCompleted = true;
+    }
 
     public override bool isCompleted()
     {

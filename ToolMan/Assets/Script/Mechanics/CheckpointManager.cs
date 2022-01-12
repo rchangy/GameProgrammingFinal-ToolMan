@@ -5,23 +5,26 @@ using UnityEngine;
 
 public static class CheckpointManager
 {
-    //static Checkpoint ckpt;
+    static Checkpoint ckpt;
     static CheckpointInfo ckptInfo;
-    //static string ckptPath = "Assets/Script/Mechanics/checkpoint.json";
+    static string DataDirectory = Application.streamingAssetsPath + "/GameData";
+    static string ckptPath = Application.streamingAssetsPath + "/GameData" + "/checkpoint.json";
     static int[] player1ToolNums = { 1, 1, 1, 2, 2, 2 };
     static int[] player2ToolNums = { 1, 1, 2, 2, 3, 3 };
     static int[] lastUnlockedHIntList = { 1, 1, 12, 14, 17, 18 };
     public static void LoadCheckpoint()
     {
-        if (ckptInfo == null)
+        if (!Directory.Exists(DataDirectory) || !File.Exists(ckptPath))
         {
             UpdateCheckpoint(1);
         }
-        //else
-        //{
-        //    Debug.Log("load checkpoint exist!");
-        //    ckptInfo = new CheckpointInfo(current_level);
-        //}
+        else
+        {
+            StreamReader r = new StreamReader(ckptPath);
+            string jsonString = r.ReadToEnd();
+            ckpt = JsonUtility.FromJson<Checkpoint>(jsonString);
+            ckptInfo = new CheckpointInfo(ckpt);
+        }
     }
 
     public static void NextLevel()
@@ -40,21 +43,23 @@ public static class CheckpointManager
             return;
         }
         ckptInfo = new CheckpointInfo(level);
-        //ckpt = ckptInfo.ToCheckpoint();
+        ckpt = ckptInfo.ToCheckpoint();
         SaveCkeckpoint();
     }
 
     public static void SaveCkeckpoint()
     {
+        if (!Directory.Exists(DataDirectory))
+            Directory.CreateDirectory(DataDirectory);
+        File.WriteAllText(ckptPath, JsonUtility.ToJson(ckpt));
         //if (!File.Exists(ckptPath))
         //{
-        //    Debug.Log("create!");
         //    File.Create(ckptPath).Close();
         //}
         //else
         //{
         //    Debug.Log("in save, exist!");
-        //    File.WriteAllText(ckptPath, JsonUtility.ToJson(ckpt));
+            
         //}
     }
     public static CheckpointInfo GetCheckpointInfo()
@@ -68,10 +73,10 @@ public static class CheckpointManager
         public int player1ToolNum;
         public int player2ToolNum;
         public int lastUnlockedHint;
-        //public CheckpointInfo(Checkpoint newCkpt)
-        //{
-        //    setByLevel(int.Parse(newCkpt.level));
-        //}
+        public CheckpointInfo(Checkpoint newCkpt)
+        {
+            setByLevel(int.Parse(newCkpt.level));
+        }
         public CheckpointInfo(string level)
         {
             setByLevel(int.Parse(level));

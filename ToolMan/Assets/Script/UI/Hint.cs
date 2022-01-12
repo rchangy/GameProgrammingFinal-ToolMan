@@ -17,15 +17,16 @@ namespace ToolMan.UI
         }
 
         [SerializeField]
-        private bool _locked;
+        private bool _locked = true;
         [SerializeField]
         private int _order;
 
         private void Awake()
         {
             _locked = true;
+            Debug.Log("unlock:( locked, title = " + _title);
         }
 
-        public void Unlock() { _locked = false; }
+        public void Unlock() { _locked = false; Debug.Log("unlock:( hint = " + _title + " locked = " + locked); }
     }
 }

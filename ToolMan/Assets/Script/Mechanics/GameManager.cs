@@ -15,12 +15,17 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private UIController _uIController;
+    public UIController uIController { get => _uIController; }
     [SerializeField]
     private PlayerController _p1;
     [SerializeField]
     private PlayerController _p2;
     [SerializeField]
     private GameObject PostFX_Dead;
+
+    [SerializeField]
+    private Objective _currentObjective = null;
+    public Objective currentObjective { get => _currentObjective; }
 
     public bool reset = true;
     private bool levelComplete = false;
@@ -35,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //_currentScene = SceneManager.GetActiveScene().name;
+        _currentScene = SceneManager.GetActiveScene().name;
         if (Objectives != null)
         {
             _objectives = Objectives.GetComponentsInChildren<Objective>().ToList();
@@ -70,12 +75,17 @@ public class GameManager : MonoBehaviour
         }
         else if (levelComplete)
         {
-            int level = CheckpointManager.GetCheckpointInfo().level;
-            // next level
-            if (1 <= level && level <= 5)
-                SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
-            else
+            if (_currentScene.Equals("Level5"))
                 SceneManager.LoadScene("Main Menu");
+            else
+            {
+                int level = CheckpointManager.GetCheckpointInfo().level;
+                // next level
+                if (1 <= level && level <= 5)
+                    SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
+                else
+                    SceneManager.LoadScene("Main Menu");
+            }
         }
         Simulation.Tick();
     }
@@ -86,6 +96,8 @@ public class GameManager : MonoBehaviour
         {
             while (!obj.Startup) yield return null;
             Debug.Log("obj start " + obj.gameObject.name + " , Order: " + obj.Order);
+            _currentObjective = obj;
+
             if (obj.noBgm)
             {
                 _audioSource.Stop();
