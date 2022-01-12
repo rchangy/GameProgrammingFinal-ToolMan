@@ -59,7 +59,7 @@ public class Tool
 
         // ==== reset player ==== //
         playerRB.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-        player.gameObject.transform.rotation = Quaternion.identity;
+        player.gameObject.transform.eulerAngles = new Vector3(0f, player.gameObject.transform.eulerAngles.y, 0f);
         // when a tool transform to a man, it may stuck into ground and fall down, this may need to be adjusted (position.y)
         float newY;
         if (!player.IsGrabbed())
