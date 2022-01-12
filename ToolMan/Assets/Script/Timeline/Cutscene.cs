@@ -10,6 +10,7 @@ public class Cutscene : Objective
     private bool _started = false;
     [SerializeField] private List<Transform> InactiveBeforeStart = new List<Transform>();
 
+    [SerializeField] private List<Transform> activeWhenSkip = new List<Transform>();
     public bool _skipEnable = true;
 
     public Transform cam1, cam2, AnotherCam;
@@ -65,6 +66,10 @@ public class Cutscene : Objective
                 cam2.gameObject.SetActive(true);
             if (AnotherCam)
                 AnotherCam.gameObject.SetActive(false);
+            foreach(Transform t in activeWhenSkip)
+            {
+                t.gameObject.SetActive(true);
+            }
             Complete();
         }
     }

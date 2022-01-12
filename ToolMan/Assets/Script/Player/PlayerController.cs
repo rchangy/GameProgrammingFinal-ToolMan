@@ -347,8 +347,9 @@ public partial class PlayerController : ToolableMan
     public void LoadTool(int toolNum)
     {
         unlockedToolNum = toolNum;
+        Debug.Log("loading Tool" + toolListUI.name);
         if (toolListUI == null) return;
-        toolListUI.LoadTool(toolNum);
+        toolListUI.LoadTool(toolNum, gameObject);
         SetUpToolList();
     }
     public void UnlockTool(int level, int toolNum)

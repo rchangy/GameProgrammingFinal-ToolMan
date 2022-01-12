@@ -85,8 +85,9 @@ public class ObjectListUI : MonoBehaviour
         _isSet = true;
     }
 
-    public void LoadTool(int toolNum)
+    public void LoadTool(int toolNum, GameObject src)
     {
+        Debug.Log(src.name);
         UnlockImageNum = toolNum;
         SetSprites(true);
     }

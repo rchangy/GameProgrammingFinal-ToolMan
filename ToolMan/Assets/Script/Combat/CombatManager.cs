@@ -25,6 +25,14 @@ namespace ToolMan.Combat
         {
             Model.DmgCalculator.Load();
             Model.ComboSkills.Load();
+            //GameObject[] playerGameObjects;
+            //playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
+            //foreach (var playerGameObject in playerGameObjects)
+            //{
+            //    players.Add(playerGameObject.GetComponent<PlayerController>());
+            //}
+            //players.Sort((x, y) => { return x.playerNum.CompareTo(y.playerNum); });
+            //LoadTool();
         }
 
         private void Start()
