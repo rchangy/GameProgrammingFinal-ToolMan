@@ -15,9 +15,12 @@ MonoBehaviour:
   attackDelay: 0
   RefractoryPeriod: 0
   Cd: 0
+  Multiplier: 1
+  PowMuliplier: 1
   UsingHitFeel: 0
   HitFeelMul: 4
   _force: 400
   _explosionRange: 10
   _explosionVfx: {fileID: 100006, guid: a038130c73d5446b2bc28240dfe9c71d, type: 3}
-  _buff: {fileID: 11400000, guid: f59b9248bc4e0416eb31d60707814cb2, type: 2}
+  _spdBuff: {fileID: 11400000, guid: f59b9248bc4e0416eb31d60707814cb2, type: 2}
+  _atkBuff: {fileID: 11400000, guid: 9aa805d2f4d52442c96b1d96f2c2a034, type: 2}

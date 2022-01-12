@@ -10,6 +10,8 @@ public class UIController : MonoBehaviour
     public HintNotRead hintNotRead;
 
     [SerializeField]
+    private GameManager gameManager;
+    [SerializeField]
     private GameObject battleUI;
     [SerializeField]
     private GameObject hintPanelObj;
@@ -24,6 +26,7 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private PlayerController p2;
     private bool _controlEnable;
+    public bool controlEnalbe { get => _controlEnable; }
 
     private float originalTimeScale;
 
@@ -47,10 +50,13 @@ public class UIController : MonoBehaviour
     public void SetHintUI(bool val)
     {
         hintPanelObj.SetActive(val);
-        //p1.controlEnable = !val;
-        //p2.controlEnable = !val;
         showingTutorialUI = val;
-
+        Objective o = gameManager.currentObjective;
+        if (o) {
+            Cutscene c = o.GetComponent<Cutscene>();
+            if (c) c._skipEnable = !val;
+        }
+        
         if (val)
         {
             //Debug.Log("true, time = " + originalTimeScale);

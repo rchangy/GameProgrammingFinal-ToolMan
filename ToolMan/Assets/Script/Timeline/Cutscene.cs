@@ -8,6 +8,8 @@ public class Cutscene : Objective
     private bool _isCompleted;
     private bool _started = false;
 
+    public bool _skipEnable = true;
+
     public Transform cam1, cam2, AnotherCam;
     protected override void Init()
     {
@@ -31,7 +33,7 @@ public class Cutscene : Objective
 
     private void Update()
     {
-        if (_started && Input.GetKeyDown(KeyCode.Escape))
+        if (_started && Input.GetKeyDown(KeyCode.Escape) && _skipEnable)
         {
             playableDirector.Stop();
             if (cam1)

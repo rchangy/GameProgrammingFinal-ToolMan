@@ -15,12 +15,17 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private UIController _uIController;
+    public UIController uIController { get => _uIController; }
     [SerializeField]
     private PlayerController _p1;
     [SerializeField]
     private PlayerController _p2;
     [SerializeField]
     private GameObject PostFX_Dead;
+
+    [SerializeField]
+    private Objective _currentObjective = null;
+    public Objective currentObjective { get => _currentObjective; }
 
     public bool reset = true;
     private bool levelComplete = false;
@@ -86,6 +91,8 @@ public class GameManager : MonoBehaviour
         {
             while (!obj.Startup) yield return null;
             Debug.Log("obj start " + obj.gameObject.name + " , Order: " + obj.Order);
+            _currentObjective = obj;
+
             if (obj.noBgm)
             {
                 _audioSource.Stop();
