@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 714ea524dc3fe4ae7afeb94f35062c73, type: 3}
-  m_Name: Iai
+  m_Script: {fileID: 11500000, guid: 78f0f844333854a21be272074e3aa349, type: 3}
+  m_Name: LowAtk
   m_EditorClassIdentifier: 
-  attackDelay: 0.35
-  RefractoryPeriod: 0
-  Cd: 5
-  Multiplier: 4
-  PowMuliplier: 10000
-  ChargingTime: 7
-  _rushSpeed: 200
-  DizzyTime: 8
-  NotifyTime: 0.5
-  _attackRange: 4
+  Target: SPD
+  Duration: 10
+  IsDurationStacked: 0
+  MaxDuration: 10
+  ModType: 200
+  Value: -0.9
+  IsEffectStacked: 0
+  MaxEffectStack: 0

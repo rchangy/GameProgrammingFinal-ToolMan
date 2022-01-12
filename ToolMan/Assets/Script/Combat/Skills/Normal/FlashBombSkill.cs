@@ -31,7 +31,8 @@ namespace ToolMan.Combat.Skills.Normal
 
         [SerializeField] private GameObject _explosionVfx;
 
-        [SerializeField] private ScriptableBuff _buff;
+        [SerializeField] private ScriptableBuff _spdBuff;
+        [SerializeField] private ScriptableBuff _atkBuff;
 
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
@@ -63,20 +64,19 @@ namespace ToolMan.Combat.Skills.Normal
                             vfx.PlayEffect();
                         }
                     }
-                    Debug.Log("Explosion");
                     // Check collisions
                     _toolCombat.HitFeel.MakeCamShake(HitFeelMul, _toolController);
                     _manCombat.HitFeel.MakeCamShake(HitFeelMul, _manController);
-                    if (_buff == null) yield break;
+                    if (_spdBuff == null || _atkBuff == null) yield break;
                     Collider[] hitTargets = Physics.OverlapSphere(_rb.gameObject.transform.position, _explosionRange, combat.TargetLayers);
                     foreach (Collider target in hitTargets)
                     {
-                        Debug.Log("flash bomb hit " + target.name);
                         CombatUnit targetCombat = target.GetComponent<CombatUnit>();
                         if (targetCombat != null)
                         {
                             targetCombat.TakeDamage(0, 0, combat);
-                            targetCombat.AddBuff(_buff);
+                            targetCombat.AddBuff(_spdBuff);
+                            targetCombat.AddBuff(_atkBuff);
                         }
                     }
                     break;
