@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject battleUI;
     [SerializeField]
-    private GameObject hintUI;
+    private GameObject hintPanelObj;
     [SerializeField]
     private HintPanel _hintPanel;
     public HintPanel hintPanel { get => _hintPanel; }
@@ -46,7 +46,7 @@ public class UIController : MonoBehaviour
 
     public void SetHintUI(bool val)
     {
-        hintUI.SetActive(val);
+        hintPanelObj.SetActive(val);
         //p1.controlEnable = !val;
         //p2.controlEnable = !val;
         showingTutorialUI = val;
