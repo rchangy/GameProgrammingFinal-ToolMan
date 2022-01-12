@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44859195, g: 0.49487418, b: 0.55542886, a: 1}
+  m_IndirectSpecularColor: {r: 0.44859165, g: 0.4948734, b: 0.5554282, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -14065,14 +14065,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bgm: {fileID: 0}
+  Bgm: {fileID: 8300000, guid: 18f358cb812ff49219e84fd47c1066db, type: 3}
   noBgm: 0
   LoopBgm: 1
   Order: 0
   playableDirector: {fileID: 4227763938474079117}
-  cam1: {fileID: 991673058}
-  cam2: {fileID: 1990055037}
-  AnotherCam: {fileID: 460039539}
+  _skipEnable: 1
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
+  AnotherCam: {fileID: 0}
 --- !u!4 &353147714 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 477970, guid: d5b2d8647d5d4224ea14500eae7f905a, type: 3}
@@ -31009,12 +31010,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bgm: {fileID: 0}
+  Bgm: {fileID: 8300000, guid: 91e5a2d1aef3744edb60592e9b5a9338, type: 3}
   noBgm: 0
   LoopBgm: 1
   Order: 1
   playableDirector: {fileID: 1279839676}
-  cam1: {fileID: 991673058}
+  _skipEnable: 1
+  cam1: {fileID: 0}
   cam2: {fileID: 1990055037}
   AnotherCam: {fileID: 460039539}
 --- !u!114 &1300146308
@@ -32716,7 +32718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8921592606019553432, guid: aab4032213c324279a64d22e7bc31859, type: 3}
       propertyPath: m_text
-      value: "\u4E00\u884C\u4EBA\u4F86\u5230\u4E86\u65CF\u90B8\u9BE8\u9B54\u95BB\u7684"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8921592606019553432, guid: aab4032213c324279a64d22e7bc31859, type: 3}
       propertyPath: m_Enabled
@@ -56628,11 +56630,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c38752caddc433bb217b9f32ad5237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bgm: {fileID: 0}
+  Bgm: {fileID: 8300000, guid: 89a5c1a59e46c4d36a55c5c153dcef5e, type: 3}
   noBgm: 0
   LoopBgm: 1
   Order: 2
   playableDirector: {fileID: 776021834}
+  _skipEnable: 1
   cam1: {fileID: 991673058}
   cam2: {fileID: 1990055037}
   AnotherCam: {fileID: 460039539}

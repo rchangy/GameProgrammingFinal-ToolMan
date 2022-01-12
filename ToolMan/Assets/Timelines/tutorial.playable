@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 1.1666666666666667
+  m_Time: 1.3666666666666667
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: c4ef7adbd9391ba4ca440c66931da244, type: 2}
@@ -242,10 +242,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.5
+    m_Start: 0.7166666666666667
     m_ClipIn: 0
-    m_Asset: {fileID: 8858557117077160748}
-    m_Duration: 0.5833333333333334
+    m_Asset: {fileID: 7533669016648784425}
+    m_Duration: 0.6499999999999999
     m_TimeScale: 1
     m_ParentTrack: {fileID: 809357490669330540}
     m_EaseInDuration: 0
@@ -441,6 +441,26 @@ MonoBehaviour:
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: c4ef7adbd9391ba4ca440c66931da244, type: 2}
+--- !u!114 &7533669016648784425
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479ec74219d674ef8b34abb60a3e4c46, type: 3}
+  m_Name: RPGTalkCinematicClip
+  m_EditorClassIdentifier: 
+  template:
+    txtToParse: {fileID: 4900000, guid: 43f5a712140d542799e5cb665ad5ad4c, type: 3}
+    lineToStart: 39
+    lineToBreak: 40
+    textSpeed: 30
+    pauseUntilTalkEnd: 1
+    autoPass: 0
+    secondsAutoPass: 0
 --- !u!114 &7598984085886076168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -457,23 +477,3 @@ MonoBehaviour:
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: c4ef7adbd9391ba4ca440c66931da244, type: 2}
---- !u!114 &8858557117077160748
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 479ec74219d674ef8b34abb60a3e4c46, type: 3}
-  m_Name: RPGTalkCinematicClip
-  m_EditorClassIdentifier: 
-  template:
-    txtToParse: {fileID: 4900000, guid: 43f5a712140d542799e5cb665ad5ad4c, type: 3}
-    lineToStart: 35
-    lineToBreak: 35
-    textSpeed: 30
-    pauseUntilTalkEnd: 1
-    autoPass: 0
-    secondsAutoPass: 0
