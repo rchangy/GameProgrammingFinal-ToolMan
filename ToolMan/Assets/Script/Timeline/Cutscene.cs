@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -7,7 +8,7 @@ public class Cutscene : Objective
     private PlayableDirector playableDirector;
     private bool _isCompleted;
     private bool _started = false;
-    [SerializeField] private Transform[] InactiveBeforeStart;
+    [SerializeField] private List<Transform> InactiveBeforeStart = new List<Transform>();
 
     public bool _skipEnable = true;
 
@@ -16,17 +17,23 @@ public class Cutscene : Objective
     {
         _isCompleted = false;
         playableDirector.Stop();
-        foreach (var obj in InactiveBeforeStart)
+        if (InactiveBeforeStart.Count != 0)
         {
-            obj.gameObject.SetActive(false);
+            foreach (var obj in InactiveBeforeStart)
+            {
+                obj.gameObject.SetActive(false);
+            }
         }
     }
 
     public override void StartObjective()
     {
-        foreach (var obj in InactiveBeforeStart)
+        if (InactiveBeforeStart.Count != 0)
         {
-            obj.gameObject.SetActive(true);
+            foreach (var obj in InactiveBeforeStart)
+            {
+                obj.gameObject.SetActive(true);
+            }
         }
 
         _started = true;
