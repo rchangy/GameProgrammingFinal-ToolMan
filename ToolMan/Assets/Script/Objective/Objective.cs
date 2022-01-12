@@ -6,7 +6,7 @@ public abstract class Objective : MonoBehaviour
     public AudioClip Bgm;
     public bool noBgm;
     public bool LoopBgm = true;
-    public int Order;
+    public float Order;
 
     protected GameManager _manager;
 
