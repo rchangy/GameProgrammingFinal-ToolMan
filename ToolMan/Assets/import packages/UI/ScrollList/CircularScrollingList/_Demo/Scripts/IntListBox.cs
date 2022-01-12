@@ -30,6 +30,7 @@ namespace AirFishLab.ScrollingList.Demo
         {
            boxName = (hint.locked)? _lockedHint._title : hint._title;
             _contentText.text = boxName;
+            //Debug.Log("hint " + hint._title + "update content = " + boxName);
         }
 
         public void ButtonLoadHint() {
