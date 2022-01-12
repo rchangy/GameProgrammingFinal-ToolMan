@@ -7,16 +7,26 @@ public class Cutscene : Objective
     private PlayableDirector playableDirector;
     private bool _isCompleted;
     private bool _started = false;
+    [SerializeField] private Transform[] InactiveBeforeStart;
 
     public Transform cam1, cam2, AnotherCam;
     protected override void Init()
     {
         _isCompleted = false;
         playableDirector.Stop();
+        foreach (var obj in InactiveBeforeStart)
+        {
+            obj.gameObject.SetActive(false);
+        }
     }
 
     public override void StartObjective()
     {
+        foreach (var obj in InactiveBeforeStart)
+        {
+            obj.gameObject.SetActive(true);
+        }
+
         _started = true;
         _uIController.SetControlEnable(false);
         _p1.controlEnable = false;

@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //_currentScene = SceneManager.GetActiveScene().name;
+        _currentScene = SceneManager.GetActiveScene().name;
         if (Objectives != null)
         {
             _objectives = Objectives.GetComponentsInChildren<Objective>().ToList();
@@ -70,12 +70,17 @@ public class GameManager : MonoBehaviour
         }
         else if (levelComplete)
         {
-            int level = CheckpointManager.GetCheckpointInfo().level;
-            // next level
-            if (1 <= level && level <= 5)
-                SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
-            else
+            if (_currentScene.Equals("Level5"))
                 SceneManager.LoadScene("Main Menu");
+            else
+            {
+                int level = CheckpointManager.GetCheckpointInfo().level;
+                // next level
+                if (1 <= level && level <= 5)
+                    SceneManager.LoadScene("Level" + CheckpointManager.GetCheckpointInfo().level);
+                else
+                    SceneManager.LoadScene("Main Menu");
+            }
         }
         Simulation.Tick();
     }
