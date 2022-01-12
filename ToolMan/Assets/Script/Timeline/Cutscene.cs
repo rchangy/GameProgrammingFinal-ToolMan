@@ -27,7 +27,13 @@ public class Cutscene : Objective
 
         uIController.SetBattleUI(false);
         uIController.SetHintUI(false);
-        
+
+        if (cam1 && cam2 && AnotherCam)
+        {
+            cam1.gameObject.SetActive(false);
+            cam2.gameObject.SetActive(false);
+            AnotherCam.gameObject.SetActive(true);
+        }
         playableDirector.Play();
     }
 
@@ -46,7 +52,15 @@ public class Cutscene : Objective
         }
     }
 
-    public void Complete() { _isCompleted = true; Debug.Log("cutScene" + gameObject.name + " p1_controlenable = " + _p1.controlEnable); }
+    public void Complete() {
+        if (cam1 && cam2 && AnotherCam) {
+            cam1.gameObject.SetActive(true);
+            cam2.gameObject.SetActive(true);
+            AnotherCam.gameObject.SetActive(false);
+        }
+
+        _isCompleted = true;
+    }
 
     public override bool isCompleted()
     {
