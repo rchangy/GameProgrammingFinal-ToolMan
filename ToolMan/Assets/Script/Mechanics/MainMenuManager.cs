@@ -55,22 +55,22 @@ public class MainMenuManager : MonoBehaviour
     
     public void DisplayButtons()
     {
-        if (levelButtonTexts.Length == 5)
-        {
-            CheckpointManager.LoadCheckpoint();
-            int currentLevel = CheckpointManager.GetCheckpointInfo().level;
-            for (int i = 0; i < 5; i++)
-            {
-                Text levelText = levelButtonTexts[i].GetComponent<Text>();
-                if (i >= currentLevel)
-                {
-                    levelText.text = "???";
-                }
-                else
-                {
-                    levelText.text = "Level " + (i + 1).ToString();
-                }
-            }
-        }
+        //if (levelButtonTexts.Length == 5)
+        //{
+        //    CheckpointManager.LoadCheckpoint();
+        //    int currentLevel = CheckpointManager.GetCheckpointInfo().level;
+        //    for (int i = 0; i < 5; i++)
+        //    {
+        //        Text levelText = levelButtonTexts[i].GetComponent<Text>();
+        //        if (i >= currentLevel)
+        //        {
+        //            levelText.text = "???";
+        //        }
+        //        else
+        //        {
+        //            levelText.text = "Level " + (i + 1).ToString();
+        //        }
+        //    }
+        //}
     }
 }
