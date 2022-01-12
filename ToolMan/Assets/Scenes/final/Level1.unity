@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.8671513, g: 0.6724056, b: 0.5176858, a: 1}
+  m_IndirectSpecularColor: {r: 0.8607854, g: 0.67005444, b: 0.5165041, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15123,6 +15123,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: RPGTalk Holder (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7615106305790778300, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
+      propertyPath: characters.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615106305790778300, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
+      propertyPath: characters.Array.data[3].character
+      value: 
+      objectReference: {fileID: 11400000, guid: afb8ff50d749d478f9d6ec6b1978b805, type: 2}
+    - target: {fileID: 7615106305790778300, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
+      propertyPath: characters.Array.data[4].character
+      value: 
+      objectReference: {fileID: 11400000, guid: afb8ff50d749d478f9d6ec6b1978b805, type: 2}
     - target: {fileID: 7615106305790778302, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
       propertyPath: timelineDirector
       value: 
@@ -33129,6 +33141,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: RPGTalk Holder (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7615106305790778300, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
+      propertyPath: characters.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615106305790778300, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
+      propertyPath: characters.Array.data[3].character
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ae1d0967a19f4b858f0422c399ef1b3, type: 2}
+    - target: {fileID: 7615106305790778300, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
+      propertyPath: characters.Array.data[4].character
+      value: 
+      objectReference: {fileID: 11400000, guid: afb8ff50d749d478f9d6ec6b1978b805, type: 2}
+    - target: {fileID: 7615106305790778300, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
+      propertyPath: characters.Array.data[5].character
+      value: 
+      objectReference: {fileID: 11400000, guid: afb8ff50d749d478f9d6ec6b1978b805, type: 2}
     - target: {fileID: 7615106305790778302, guid: 59c7524d9b9944b038d404d3ff0e9104, type: 3}
       propertyPath: timelineDirector
       value: 

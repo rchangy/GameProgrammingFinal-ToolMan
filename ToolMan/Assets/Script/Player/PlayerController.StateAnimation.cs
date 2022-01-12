@@ -77,4 +77,9 @@ public partial class PlayerController
         animator.SetTrigger("unlock");
         animator.SetInteger("unlockIdx", level);
     }
+    public void AnimtationForceToMan()
+    {
+        animator.SetTrigger("toMan");
+        animator.SetBool("isTool", false);
+    }
 }
