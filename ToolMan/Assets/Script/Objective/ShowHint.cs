@@ -21,13 +21,11 @@ namespace ToolMan.UI
 
         public override void StartObjective()
         {
-            Debug.Log("Start objective: " + gameObject.name);
             _p1.controlEnable = false;
             _p2.controlEnable = false;
             _uIController.SetControlEnable(true);
 
             // Unlock some hints
-            Debug.Log("hint length = " + hintsToUnlock.Count);
             foreach (Hint h in hintsToUnlock) {
                 uIController.hintPanel.UnlockHint(h._title);
                 if (h._title != hintToShow._title)

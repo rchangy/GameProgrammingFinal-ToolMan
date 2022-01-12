@@ -61,7 +61,7 @@ namespace ToolMan.UI
             CheckpointManager.LoadCheckpoint();
             Debug.Log("check unlock " + CheckpointManager.GetCheckpointInfo().level);
             int lastUnlockedHint = CheckpointManager.GetCheckpointInfo().lastUnlockedHint;
-            for (int i = 0; i < lastUnlockedHint; i++) { _hints[i].Unlock(); Debug.Log("last = " + lastUnlockedHint + "unlock hint " + _hints[i]); }
+            for (int i = 0; i < lastUnlockedHint; i++) { _hints[i].Unlock(); }
         }
 
         public void LoadHint(string hintTitle) {
@@ -80,7 +80,7 @@ namespace ToolMan.UI
             }   
         }
 
-        public void UnlockHint(string hintTitle) { _hints.Find(h => h._title == hintTitle).Unlock(); }
+        public void UnlockHint(string hintTitle) { _hints.Find(h => h._title == hintTitle).Unlock(); Debug.Log("unlock:( " + _hints.Find(h => h._title == hintTitle)); }
 
         public void Read(string title) { hintNotRead.ReadHint(title); }
 
