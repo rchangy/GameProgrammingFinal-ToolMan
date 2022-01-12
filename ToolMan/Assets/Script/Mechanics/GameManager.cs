@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         }
         else if (levelComplete)
         {
-            if (_currentScene.Equals("Level5"))
+            if (_currentScene.Equals("Level5") || _currentScene.Equals("Arena"))
                 SceneManager.LoadScene("Main Menu");
             else
             {
