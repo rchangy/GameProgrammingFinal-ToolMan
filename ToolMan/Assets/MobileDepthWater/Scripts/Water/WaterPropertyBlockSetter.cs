@@ -64,7 +64,7 @@ namespace Assets.Scripts.Water
             }
         }
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
         public void OnEnable()
         {
             materialPropertyBlock = new MaterialPropertyBlock();
@@ -83,7 +83,7 @@ namespace Assets.Scripts.Water
                 }
             }
         }
-#endif
+//#endif
 
         private void SetUpPropertyBlock(MaterialPropertyBlock propertyBlock)
         {
