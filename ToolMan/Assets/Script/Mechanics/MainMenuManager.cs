@@ -68,7 +68,7 @@ public class MainMenuManager : MonoBehaviour
         //        }
         //        else
         //        {
-        //            levelText.text = "Level " + (i+1).ToString();
+        //            levelText.text = "Level " + (i + 1).ToString();
         //        }
         //    }
         //}
