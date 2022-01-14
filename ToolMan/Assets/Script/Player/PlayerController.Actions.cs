@@ -35,6 +35,7 @@ public partial class PlayerController
 
     public void Grab()
     {
+        animator.ResetTrigger("Attack");
         this.confJ = grabPoint.Grab();
         if (this.confJ != null)
             AnimationGrab(anotherPlayer.getTool().getName());
@@ -52,7 +53,7 @@ public partial class PlayerController
             AnimationRelease(anotherPlayer.getTool().getName());
         grabPoint.Release();
         this.confJ = null;
-        Debug.Log("release!!!!!!!!!!");
+        animator.ResetTrigger("Attack");
     }
 
     public void AddHP(int hpAdd)

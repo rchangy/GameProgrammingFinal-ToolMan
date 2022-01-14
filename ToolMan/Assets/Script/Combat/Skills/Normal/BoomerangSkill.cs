@@ -70,7 +70,6 @@ namespace ToolMan.Combat.Skills.Normal
             //Debug.Log(Multiplier + " " + shakeRange);
             _toolCombat.AddStatMod("DEF", _defStatMod);
             _toolCombat.AddStatMod("STR", _strStatMod);
-            yield return new WaitForSeconds(attackDelay);
             _tool = combat.gameObject;
             if (typeof(PlayerCombat).IsInstanceOfType(combat))
             {
@@ -80,6 +79,8 @@ namespace ToolMan.Combat.Skills.Normal
 
                 _manController = _man.GetComponent<PlayerController>();
                 _toolController = _tool.GetComponent<PlayerController>();
+                _manController.getAnimator().SetTrigger("Attack");
+                yield return new WaitForSeconds(attackDelay);
             }
             else
             {

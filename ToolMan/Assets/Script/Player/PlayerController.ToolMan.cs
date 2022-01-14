@@ -113,7 +113,8 @@ public partial class PlayerController
     {
         rb.mass = 1;
         rb.constraints = RigidbodyConstraints.None;
-        
+
+        animator.ResetTrigger("Attack");
         grabbedPoint.gameObject.GetComponent<Collider>().isTrigger = false;
         playerCollider.isTrigger = false;
         beGrabbed = false;

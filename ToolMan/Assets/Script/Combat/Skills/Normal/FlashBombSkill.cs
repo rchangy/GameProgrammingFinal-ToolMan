@@ -37,9 +37,10 @@ namespace ToolMan.Combat.Skills.Normal
         public override IEnumerator Attack(SkillCombat combat, BoolWrapper collisionEnable)
         {
             _rb = _tool.GetComponent<Rigidbody>();
-
+            _manController.getAnimator().SetTrigger("Attack");
             yield return new WaitForSeconds(attackDelay);
             //Debug.Log(_manController.gameObject.name);
+            
             _manController.Release();
             var dir = _man.transform.forward;
             dir.y = 0;
@@ -49,6 +50,8 @@ namespace ToolMan.Combat.Skills.Normal
             yield return new WaitForSeconds(0.3f);
             while (true)
             {
+                if (_toolController.IsGrabbed())
+                    break;
                 if (Input.GetButtonDown("JumpOrAttack2"))
                 {
                     // audio
