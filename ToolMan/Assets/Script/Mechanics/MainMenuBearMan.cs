@@ -11,21 +11,28 @@ public class MainMenuBearMan : MonoBehaviour
     public int GoToCameight;
     public int PatrolWeight;
     public int IdleWeight;
+    public int SpinWeight;
     public Transform Cam;
     public Transform AnotherBearMan;
     private int[] weight;
     private bool isAction;
     public float MaxActionTime;
     public float MinActionTime;
+    public float SocialDistance;
+    public float LookCamTime;
 
     private float ActionLastTime;
     private int act;
+    public string Acttt;
 
     public float walkPointRange;
     private bool walkPointSet;
 
     private Vector3 _dest;
     private Vector3 _lookatDest;
+    private Vector3 _camPosition;
+    private float _currentLookCamTime;
+    private bool isSpinning = false;
 
 
     public float Spd;
@@ -33,8 +40,9 @@ public class MainMenuBearMan : MonoBehaviour
 
     protected void Awake()
     {
-        weight = new int[] { GoToAnotherBearManWeight, GoToCameight, PatrolWeight, IdleWeight };
+        weight = new int[] { GoToAnotherBearManWeight, GoToCameight, PatrolWeight, SpinWeight, IdleWeight };
         isAction = false;
+        _camPosition = transform.position;
     }
     protected void FixedUpdate()
     {
@@ -45,13 +53,15 @@ public class MainMenuBearMan : MonoBehaviour
 
     protected void ManageBehavior()
     {
-        if (isAction && act == 3)
+        if (isAction && (act == 3 || act == 4))
         {
             ActionLastTime -= Time.deltaTime;
             if (ActionLastTime <= 0)
             {
                 isAction = false;
                 walkPointSet = false;
+                isSpinning = false;
+                animator.SetBool("isSpinning", false);
             }
             else
             {
@@ -68,7 +78,8 @@ public class MainMenuBearMan : MonoBehaviour
         if (!isAction)
         {
             act = GetRandType(weight);
-            if(act == 3)
+            _currentLookCamTime = 0f;
+            if(act == 3 || act == 4)
                 ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
             isAction = true;
         }
@@ -84,6 +95,9 @@ public class MainMenuBearMan : MonoBehaviour
             case 2:
                 Patrol();
                 break;
+            case 3:
+                Spin();
+                break;
             default:
                 Idle();
                 break;
@@ -92,28 +106,41 @@ public class MainMenuBearMan : MonoBehaviour
 
     private void GoToAnotherBearMan()
     {
-        if(Vector3.Distance(transform.position, AnotherBearMan.position) < 0.8f)
+        Acttt = "GoToAnotherBearMan";
+        if (Vector3.Distance(transform.position, AnotherBearMan.position) < SocialDistance)
         {
             isAction = false;
         }
-        SetDest(AnotherBearMan.position);
+        else
+        {
+            SetDest(AnotherBearMan.position);
+        }
     }
 
     private void GoToCam()
     {
-        if (Vector3.Distance(transform.position, Cam.position) < 0.8f)
+        Acttt = "GoToCam";
+        if (Vector3.Distance(transform.position, _camPosition) < 0.8f)
         {
-            isAction = false;
+            SetDest(transform.position);
+            if (_currentLookCamTime >= LookCamTime)
+                isAction = false;
+            else
+            {
+                _currentLookCamTime += Time.deltaTime;
+            }
         }
-        SetDest(Cam.position);
+        else
+            SetDest(_camPosition);
     }
 
     protected virtual void Patrol()
     {
+        Acttt = "Patrol";
         if (walkPointSet)
         {
             Vector3 distanceToDest = transform.position - _dest;
-            if (distanceToDest.magnitude < 0.8f)
+            if (distanceToDest.magnitude < SocialDistance)
             {
                 walkPointSet = false;
                 isAction = false;
@@ -124,7 +151,19 @@ public class MainMenuBearMan : MonoBehaviour
 
     protected virtual void Idle()
     {
+        Acttt = "Idle";
         SetDest(transform.position);
+    }
+
+    protected virtual void Spin()
+    {
+        Acttt = "Spin";
+        SetDest(transform.position);
+        if (isSpinning)
+            return;
+        isSpinning = true;
+        animator.SetTrigger("startSpinning");
+        animator.SetBool("isSpinning", true);
     }
 
     protected virtual void SearchWalkPoint()
@@ -174,8 +213,9 @@ public class MainMenuBearMan : MonoBehaviour
         }
         else
         {
-            Debug.Log("enemy hit " + m_Hit.collider.gameObject.name);
+            //Debug.Log("hit " + m_Hit.collider.gameObject.name);
             animator.SetFloat("verticalVelocity", 0);
+            SetDest(transform.position);
         }
 
 
