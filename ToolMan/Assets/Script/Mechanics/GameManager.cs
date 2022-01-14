@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
                     _audioSource.clip = obj.Bgm;
                     _audioSource.loop = obj.LoopBgm;
                     _audioSource.Play();
+                    Debug.Log("bgm = " + obj.Bgm);
                 }
             }
             obj.StartObjective();
