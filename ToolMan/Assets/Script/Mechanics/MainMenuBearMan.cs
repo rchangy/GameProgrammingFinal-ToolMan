@@ -23,7 +23,7 @@ public class MainMenuBearMan : MonoBehaviour
 
     private float ActionLastTime;
     private int act;
-    public string Acttt;
+    public string Action;
 
     public float walkPointRange;
     private bool walkPointSet;
@@ -81,7 +81,6 @@ public class MainMenuBearMan : MonoBehaviour
             _currentLookCamTime = 0f;
             if(act == 3 || act == 4)
                 ActionLastTime = UnityEngine.Random.Range(MinActionTime, MaxActionTime);
-            isAction = true;
         }
 
         switch (act)
@@ -106,8 +105,15 @@ public class MainMenuBearMan : MonoBehaviour
 
     private void GoToAnotherBearMan()
     {
-        Acttt = "GoToAnotherBearMan";
-        if (Vector3.Distance(transform.position, AnotherBearMan.position) < SocialDistance)
+        if (!isAction)
+        {
+            SetDest(AnotherBearMan.position);
+            isAction = true;
+            Action = "GoToAnotherBearMan";
+        }
+        
+
+        if (Vector3.Distance(transform.position, _dest) < SocialDistance)
         {
             isAction = false;
         }
@@ -119,8 +125,14 @@ public class MainMenuBearMan : MonoBehaviour
 
     private void GoToCam()
     {
-        Acttt = "GoToCam";
-        if (Vector3.Distance(transform.position, _camPosition) < 0.8f)
+        if (!isAction)
+        {
+            SetDest(_camPosition);
+            isAction = true;
+            Action = "GoToCam";
+        }
+
+        if (Vector3.Distance(transform.position, _dest) < 0.8f)
         {
             SetDest(transform.position);
             if (_currentLookCamTime >= LookCamTime)
@@ -136,11 +148,16 @@ public class MainMenuBearMan : MonoBehaviour
 
     protected virtual void Patrol()
     {
-        Acttt = "Patrol";
+        if (!isAction)
+        {
+            isAction = true;
+            Action = "Patrol";
+        }
+
         if (walkPointSet)
         {
             Vector3 distanceToDest = transform.position - _dest;
-            if (distanceToDest.magnitude < SocialDistance)
+            if (Vector3.Distance(transform.position, _dest) < 0.8f)
             {
                 walkPointSet = false;
                 isAction = false;
@@ -151,13 +168,15 @@ public class MainMenuBearMan : MonoBehaviour
 
     protected virtual void Idle()
     {
-        Acttt = "Idle";
+        isAction = true;
+        Action = "Idle";
         SetDest(transform.position);
     }
 
     protected virtual void Spin()
     {
-        Acttt = "Spin";
+        isAction = true;
+        Action = "Spin";
         SetDest(transform.position);
         if (isSpinning)
             return;

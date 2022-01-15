@@ -451,17 +451,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   GoToAnotherBearManWeight: 4
-  GoToCameight: 4
+  GoToCameight: 2
   PatrolWeight: 10
   IdleWeight: 4
-  SpinWeight: 0
+  SpinWeight: 1
   Cam: {fileID: 2098826130}
   AnotherBearMan: {fileID: 1977986140}
   MaxActionTime: 2
   MinActionTime: 1
   SocialDistance: 1
   LookCamTime: 3
-  Acttt: 
+  Action: 
   walkPointRange: 8
   Spd: 5
   RotateSpd: 10
@@ -475,7 +475,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -3219,17 +3219,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   GoToAnotherBearManWeight: 4
-  GoToCameight: 4
+  GoToCameight: 2
   PatrolWeight: 10
   IdleWeight: 4
-  SpinWeight: 0
+  SpinWeight: 1
   Cam: {fileID: 2098826130}
   AnotherBearMan: {fileID: 178408486}
   MaxActionTime: 2
   MinActionTime: 1
   SocialDistance: 1
   LookCamTime: 3
-  Acttt: 
+  Action: 
   walkPointRange: 8
   Spd: 5
   RotateSpd: 10
@@ -3243,7 +3243,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
