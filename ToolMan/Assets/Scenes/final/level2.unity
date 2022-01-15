@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44859165, g: 0.4948734, b: 0.5554282, a: 1}
+  m_IndirectSpecularColor: {r: 0.44859195, g: 0.49487418, b: 0.55542886, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -14070,6 +14070,8 @@ MonoBehaviour:
   LoopBgm: 1
   Order: 0
   playableDirector: {fileID: 4227763938474079117}
+  InactiveBeforeStart: []
+  activeWhenSkip: []
   _skipEnable: 1
   cam1: {fileID: 0}
   cam2: {fileID: 0}
@@ -24808,6 +24810,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 670417508551672587, guid: b48be251490c3da49a9bdc5682340330, type: 3}
+      propertyPath: Order
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 670417508551672587, guid: b48be251490c3da49a9bdc5682340330, type: 3}
+      propertyPath: noBgm
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 818694564901207500, guid: b48be251490c3da49a9bdc5682340330, type: 3}
       propertyPath: m_LocalPosition.x
       value: 55.6
@@ -31015,6 +31025,8 @@ MonoBehaviour:
   LoopBgm: 1
   Order: 1
   playableDirector: {fileID: 1279839676}
+  InactiveBeforeStart: []
+  activeWhenSkip: []
   _skipEnable: 1
   cam1: {fileID: 0}
   cam2: {fileID: 1990055037}
@@ -56635,6 +56647,8 @@ MonoBehaviour:
   LoopBgm: 1
   Order: 2
   playableDirector: {fileID: 776021834}
+  InactiveBeforeStart: []
+  activeWhenSkip: []
   _skipEnable: 1
   cam1: {fileID: 991673058}
   cam2: {fileID: 1990055037}

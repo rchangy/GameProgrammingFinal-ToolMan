@@ -16,10 +16,11 @@ public class RetrieveMemory : Objective
     public float waitAfterUnlock = 5f;
     protected override void Init()
     {
+        _audioSource = gameObject.GetComponent<AudioSource>();
         if (_audioSource)
         {
-            _audioSource = gameObject.GetComponent<AudioSource>();
             _audioSource.clip = Bgm;
+            _audioSource.loop = LoopBgm;
         }
         crystal = gameObject.transform.Find("MemoryCrystal").gameObject;
         if (crystal != null)
@@ -83,7 +84,9 @@ public class RetrieveMemory : Objective
 
         // wait for seconds
         if (_audioSource)
+        {
             _audioSource.Play();
+        }
         yield return new WaitForSeconds(waitAfterUnlock);
         foreach (var cam in cams)
         {
